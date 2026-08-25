@@ -165,6 +165,35 @@ from the remote, but no such ref was fetched.
 [2026-08-25 17:36:32] [doc_finder] Aucun changement détecté.
 [2026-08-25 17:36:32] [compresseur] Aucun changement détecté.
 [2026-08-25 17:36:32] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 17:36:32] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-25_17-36-32.txt (44.4 Ko)
+[2026-08-25 17:36:32] [partage_QR] Aucun changement détecté.
+[2026-08-25 17:36:32] [%] Dossier introuvable, ignoré : C:Users/Oniix/Desktop/mes prog/html_et_css/%
+[2026-08-25 17:36:32] [entrainement_tactique] Aucun changement détecté.
+[2026-08-25 17:36:32] [Network] Aucun changement détecté.
+[2026-08-25 17:36:34] Poussé sur Git.
+[2026-08-25 17:37:31] [doc_finder] Aucun changement détecté.
+[2026-08-25 17:37:31] [compresseur] Aucun changement détecté.
+[2026-08-25 17:37:31] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 17:37:31] Ancienne version supprimée : compresseur_auto_2026-08-25_16-57-47.txt
+[2026-08-25 17:37:31] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-25_17-37-31.txt (45.2 Ko)
+[2026-08-25 17:37:31] [partage_QR] Aucun changement détecté.
+[2026-08-25 17:37:31] [%brgnbrgn] Dossier introuvable, ignoré : C:Users/Oniix/Desktop/mes prog/html_et_css/%
+[2026-08-25 17:37:31] [entrainement_tactique] Aucun changement détecté.
+[2026-08-25 17:37:31] [Network] Aucun changement détecté.
+[2026-08-25 17:37:35] Poussé sur Git.
+[2026-08-25 17:38:37] [doc_finder] Aucun changement détecté.
+[2026-08-25 17:38:37] [compresseur] Aucun changement détecté.
+[2026-08-25 17:38:37] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 17:38:37] Ancienne version supprimée : compresseur_auto_2026-08-25_17-00-45.txt
+[2026-08-25 17:38:37] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-25_17-38-37.txt (46.0 Ko)
+[2026-08-25 17:38:37] [partage_QR] Aucun changement détecté.
+[2026-08-25 17:38:37] [%] Dossier introuvable, ignoré : C:Users/Oniix/Desktop/mes prog/html_et_css/%
+[2026-08-25 17:38:37] [entrainement_tactique] Aucun changement détecté.
+[2026-08-25 17:38:37] [Network] Aucun changement détecté.
+[2026-08-25 17:38:39] Poussé sur Git.
+[2026-08-25 17:39:44] [doc_finder] Aucun changement détecté.
+[2026-08-25 17:39:44] [compresseur] Aucun changement détecté.
+[2026-08-25 17:39:44] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -522,7 +551,7 @@ if __name__ == "__main__":
     },
     {
       "name": "%",
-      "path": "C:Users/Oniix/Desktop/mes prog/html_et_css/%"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/%"
     },
     {
       "name": "entrainement_tactique",
@@ -647,12 +676,12 @@ planificateur de tâches
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "3baf70c0a6998bc7b74af8753bf75f348668aaa2d47eaa4f5f694686bd5c9941",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "d47ecd2474a2b5f33fd8f9d51bf17558b44b70b9e855e3f8f33275ea8fc445a6",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "0c8e9ac7a580809b4ed3f334a27f206e537cd4473a0b349effeeb947d2f1ce6f",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\pour des modif sur l'automatisation.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "3ceb4c797a9eb963bcf3350d4b432bcb416ada22c5bd3b26fee9411aa5e54e97"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "c7770caf60d994c105e85d3ba4cca3b790c514eb9d7b010f1033554628420f31"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
