@@ -1,0 +1,685 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto
+  ├── README.md
+  ├── auto_context_sync.log
+  ├── auto_context_sync.py
+  ├── config.json
+  ├── lancer_sync.bat
+  ├── pour des modif sur l'automatisation.txt
+  ├── state.json
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\README.md ---
+# Auto Context Sync
+
+Surveille tes projets, régénère le fichier de contexte (format blinder) uniquement
+pour les projets modifiés, et le pousse sur Git en gardant les 3 dernières versions.
+
+## 1. Installation
+
+1. Installe Git si ce n'est pas déjà fait, et vérifie que la commande `git` fonctionne
+   dans un terminal (`git --version`).
+2. Configure l'accès à ton dépôt distant sans mot de passe à chaque fois :
+   - soit via une clé SSH liée à ton compte GitHub,
+   - soit via le Git Credential Manager (Windows le propose automatiquement au
+     premier push, il retient ensuite tes identifiants).
+3. Crée un dépôt GitHub vide (ex: `context-sync-repo`), qui ne contiendra QUE les
+   fichiers texte générés, jamais ton code source.
+4. Copie ce dossier `auto_context_sync` où tu veux sur ton PC.
+5. Ouvre `config.json` et adapte :
+   - `repo_local_path` : où le dépôt sera cloné localement sur ton PC
+   - `repo_remote_url` : l'URL de ton dépôt GitHub
+   - `projects` : la liste de tes projets à surveiller (nom + chemin du dossier)
+
+## 2. Test manuel
+
+Dans un terminal, à la racine du dossier :
+
+```
+python auto_context_sync.py
+```
+
+Premier lancement : le dépôt est cloné, tous les projets sont considérés comme
+"changés" (pas d'état précédent), donc tout est généré et poussé une première fois.
+Les lancements suivants ne régénèrent que ce qui a réellement changé.
+
+## 3. Lancement automatique au démarrage de Windows
+
+1. Ouvre le "Planificateur de tâches" Windows (rechercher "Planificateur de tâches"
+   dans le menu Démarrer).
+2. "Créer une tâche" (pas "tâche de base", pour avoir plus d'options).
+3. Onglet Général : nom "AutoContextSync", coche "Exécuter même si l'utilisateur
+   n'est pas connecté" si tu veux que ça marche sans être ouvert de session,
+   sinon laisse par défaut.
+4. Onglet Déclencheurs : Nouveau -> "Au démarrage de l'ordinateur" (ou "À l'ouverture
+   de session" si tu préfères que ça se lance à ta connexion).
+5. Onglet Actions : Nouveau -> Programme : chemin vers `lancer_sync.bat` (ou vers
+   `python.exe` avec comme argument `auto_context_sync.py --watch --interval 300`
+   si tu veux qu'il tourne en continu en tâche de fond plutôt qu'une passe unique).
+6. Valide.
+
+## 4. Passage supplémentaire avant extinction (optionnel)
+
+Windows n'a pas de déclencheur "avant extinction" direct, mais on peut se brancher
+sur l'événement système qui apparaît quand une extinction est demandée :
+
+1. Dans le Planificateur de tâches, crée une nouvelle tâche "AutoContextSync-Shutdown".
+2. Onglet Déclencheurs : Nouveau -> "Lors d'un événement" -> Personnalisé ->
+   Journal : `System`, Source : `User32`, ID de l'événement : `1074`.
+3. Onglet Actions : même action que ci-dessus, mais sans `--watch` (une passe unique
+   suffit, il faut que ce soit rapide).
+
+C'est une astuce reposant sur un événement Windows standard, pas une garantie à 100%
+si l'extinction est très brutale, mais ça couvre les extinctions normales.
+
+## 5. Mode surveillance continue (alternative plus simple)
+
+Plutôt que de gérer démarrage + extinction séparément, tu peux simplement lancer :
+
+```
+python auto_context_sync.py --watch --interval 300
+```
+
+au démarrage de Windows (étape 3), et le laisser tourner en fond. Il revérifie tous
+les projets toutes les 300 secondes (5 min, ajustable) et pousse dès qu'il détecte un
+changement, sans que tu aies à y penser.
+
+## 6. Logs
+
+Toutes les actions sont journalisées dans `auto_context_sync.log`, à côté du script.
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\README.md ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
+[2026-08-24 22:22:07] Dépôt absent, clonage de https://github.com/OnixNever/projet_en_cours.git dans C:/Users/Oniix/Desktop/mes prog/context-sync-repo
+[2026-08-24 22:22:07] [test] Changement détecté (20 fichier(s)), régénération du contexte...
+[2026-08-24 22:22:07] [test] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\test\test_2026-08-24_22-22-07.txt (81.6 Ko)
+[2026-08-24 22:22:07] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:24:07] Erreur git ['pull', '--rebase'] : Your configuration specifies to merge with the ref 'refs/heads/main'
+from the remote, but no such ref was fetched.
+[2026-08-24 22:24:07] [test] Changement détecté (20 fichier(s)), régénération du contexte...
+[2026-08-24 22:24:07] [test] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\test\test_2026-08-24_22-24-07.txt (81.6 Ko)
+[2026-08-24 22:24:07] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:25:11] Poussé sur Git.
+[2026-08-24 22:27:51] [test] Aucun changement détecté.
+[2026-08-24 22:27:51] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:27:51] Aucun projet modifié, rien à pousser.
+[2026-08-24 22:28:22] [test] Aucun changement détecté.
+[2026-08-24 22:28:22] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:28:22] Aucun projet modifié, rien à pousser.
+[2026-08-24 22:45:19] Mode surveillance actif (vérification toutes les 300 s). Ctrl+C pour arrêter.
+[2026-08-24 22:45:20] [test] Aucun changement détecté.
+[2026-08-24 22:45:20] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:45:20] Aucun projet modifié, rien à pousser.
+[2026-08-24 22:48:27] Mode surveillance actif (vérification toutes les 300 s). Ctrl+C pour arrêter.
+[2026-08-24 22:48:28] Erreur git ['pull', '--rebase'] : remote: Repository not found.
+fatal: repository 'https://github.com/OnixNever/projet_en_cours.git/' not found
+[2026-08-24 22:48:28] [test] Aucun changement détecté.
+[2026-08-24 22:48:28] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:48:28] Aucun projet modifié, rien à pousser.
+[2026-08-24 22:49:15] Erreur git ['pull', '--rebase'] : remote: Repository not found.
+fatal: repository 'https://github.com/OnixNever/projet_en_cours.git/' not found
+[2026-08-24 22:49:15] [test] Aucun changement détecté.
+[2026-08-24 22:49:15] [routeur-recherche] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/code/routeur-recherche
+[2026-08-24 22:49:15] Aucun projet modifié, rien à pousser.
+[2026-08-24 22:52:07] Erreur git ['pull', '--rebase'] : Your configuration specifies to merge with the ref 'refs/heads/main'
+from the remote, but no such ref was fetched.
+[2026-08-24 22:52:07] [doc_finder] Changement détecté (20 fichier(s)), régénération du contexte...
+[2026-08-24 22:52:07] [doc_finder] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\doc_finder\doc_finder_2026-08-24_22-52-07.txt (81.6 Ko)
+[2026-08-24 22:52:07] [pdf_to_audio] Changement détecté (46 fichier(s)), régénération du contexte...
+[2026-08-24 22:52:07] [pdf_to_audio] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio_2026-08-24_22-52-07.txt (184.7 Ko)
+[2026-08-24 22:52:09] Poussé sur Git.
+[2026-08-25 07:06:50] Mode surveillance actif (vérification toutes les 300 s). Ctrl+C pour arrêter.
+[2026-08-25 07:06:52] [doc_finder] Aucun changement détecté.
+[2026-08-25 07:06:52] [pdf_to_audio] Aucun changement détecté.
+[2026-08-25 07:06:52] Aucun projet modifié, rien à pousser.
+[2026-08-25 16:57:47] [doc_finder] Aucun changement détecté.
+[2026-08-25 16:57:47] [compresseur] Changement détecté (1 fichier(s)), régénération du contexte...
+[2026-08-25 16:57:47] [compresseur] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur\compresseur_2026-08-25_16-57-47.txt (18.8 Ko)
+[2026-08-25 16:57:47] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 16:57:47] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-25_16-57-47.txt (37.9 Ko)
+[2026-08-25 16:57:47] [partage_QR] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 16:57:47] [partage_QR] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\partage_QR\partage_QR_2026-08-25_16-57-47.txt (45.9 Ko)
+[2026-08-25 16:57:47] [%] Dossier introuvable, ignoré : C:Users/Oniix/Desktop/mes prog/html_et_css/%
+[2026-08-25 16:57:47] [entrainement_tactique] Changement détecté (1 fichier(s)), régénération du contexte...
+[2026-08-25 16:57:47] [entrainement_tactique] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\entrainement_tactique\entrainement_tactique_2026-08-25_16-57-47.txt (65.8 Ko)
+[2026-08-25 16:57:47] [Network] Changement détecté (12 fichier(s)), régénération du contexte...
+[2026-08-25 16:57:47] [Network] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\Network\Network_2026-08-25_16-57-47.txt (458.0 Ko)
+[2026-08-25 16:57:50] Poussé sur Git.
+[2026-08-25 17:00:45] [doc_finder] Aucun changement détecté.
+[2026-08-25 17:00:45] [compresseur] Aucun changement détecté.
+[2026-08-25 17:00:45] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-25 17:00:45] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-25_17-00-45.txt (43.7 Ko)
+[2026-08-25 17:00:45] [partage_QR] Aucun changement détecté.
+[2026-08-25 17:00:45] [%] Dossier introuvable, ignoré : C:Users/Oniix/Desktop/mes prog/html_et_css/%
+[2026-08-25 17:00:45] [entrainement_tactique] Aucun changement détecté.
+[2026-08-25 17:00:45] [Network] Aucun changement détecté.
+[2026-08-25 17:00:49] Poussé sur Git.
+[2026-08-25 17:36:32] [doc_finder] Aucun changement détecté.
+[2026-08-25 17:36:32] [compresseur] Aucun changement détecté.
+[2026-08-25 17:36:32] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.py ---
+"""
+Auto Context Sync
+------------------
+Surveille des projets de code, régénère automatiquement un fichier de contexte
+(au format "blinder" : arborescence + contenu complet des fichiers) dès qu'un
+fichier a été modifié, puis pousse ce fichier texte sur un dépôt Git en ne
+gardant que les 3 dernières versions par projet.
+
+Ne pousse JAMAIS le code source lui-même : seuls les fichiers .txt générés
+sont envoyés sur Git.
+
+Dépendances :
+    - Python 3.9+
+    - Git installé et accessible dans le PATH, avec accès en écriture au
+      dépôt distant déjà configuré (SSH ou credential manager Windows)
+
+Utilisation :
+    python auto_context_sync.py            -> passe unique (scan + push si besoin)
+    python auto_context_sync.py --watch     -> reste actif et surveille en continu
+
+Configuration : voir config.json à côté de ce script.
+"""
+
+import os
+import sys
+import json
+import time
+import hashlib
+import shutil
+import subprocess
+import argparse
+from datetime import datetime
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(SCRIPT_DIR, "config.json")
+STATE_PATH = os.path.join(SCRIPT_DIR, "state.json")
+LOG_PATH = os.path.join(SCRIPT_DIR, "auto_context_sync.log")
+
+# ---------------------------------------------------------------------------
+# Reprend les règles de filtrage de blinder.py pour rester cohérent avec
+# le format que tu utilises déjà.
+# ---------------------------------------------------------------------------
+IGNORE_DIRS = {
+    ".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build",
+    ".idea", ".vscode", ".mypy_cache", ".pytest_cache", "target", ".next",
+    "coverage", ".tox", "egg-info",
+}
+IGNORE_EXTS = {
+    ".exe", ".dll", ".so", ".dylib", ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+    ".ico", ".webp", ".zip", ".tar", ".gz", ".7z", ".rar", ".pyc", ".pyo",
+    ".class", ".jar", ".pdf", ".mp3", ".mp4", ".mov", ".avi", ".woff",
+    ".woff2", ".ttf", ".eot", ".lock", ".db", ".sqlite", ".bin",
+}
+MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 Mo, comme dans blinder
+VERSIONS_TO_KEEP = 3
+
+
+def log(message: str):
+    stamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    line = f"[{stamp}] {message}"
+    print(line)
+    try:
+        with open(LOG_PATH, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except OSError:
+        pass
+
+
+def human_size(n: int) -> str:
+    size = float(n)
+    for unit in ("o", "Ko", "Mo", "Go"):
+        if size < 1024:
+            return f"{size:.0f} {unit}" if unit == "o" else f"{size:.1f} {unit}"
+        size /= 1024
+    return f"{size:.1f} To"
+
+
+# ---------------------------------------------------------------------------
+# Config / état
+# ---------------------------------------------------------------------------
+def load_config() -> dict:
+    if not os.path.exists(CONFIG_PATH):
+        log(f"Fichier de config introuvable : {CONFIG_PATH}")
+        sys.exit(1)
+    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_state() -> dict:
+    if os.path.exists(STATE_PATH):
+        with open(STATE_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+
+def save_state(state: dict):
+    with open(STATE_PATH, "w", encoding="utf-8") as f:
+        json.dump(state, f, indent=2, ensure_ascii=False)
+
+
+# ---------------------------------------------------------------------------
+# Scan d'un projet : liste des fichiers pertinents + hash de chacun
+# ---------------------------------------------------------------------------
+def hash_file(path: str) -> str:
+    h = hashlib.sha256()
+    try:
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(65536), b""):
+                h.update(chunk)
+        return h.hexdigest()
+    except OSError:
+        return ""
+
+
+def scan_project(project_path: str):
+    """Retourne (liste des fichiers retenus dans l'ordre, dict chemin->hash)."""
+    files_to_read = []
+    hashes = {}
+
+    for root, dirs, files in os.walk(project_path):
+        dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS)
+        for f in sorted(files):
+            ext = os.path.splitext(f)[1].lower()
+            if ext in IGNORE_EXTS:
+                continue
+            full_path = os.path.join(root, f)
+            try:
+                if os.path.getsize(full_path) > MAX_FILE_SIZE:
+                    continue
+            except OSError:
+                continue
+            file_hash = hash_file(full_path)
+            if not file_hash:
+                continue
+            files_to_read.append(full_path)
+            hashes[full_path] = file_hash
+
+    return files_to_read, hashes
+
+
+def project_changed(previous_hashes: dict, current_hashes: dict) -> bool:
+    """True si un fichier a été ajouté, supprimé ou modifié depuis le dernier scan."""
+    if previous_hashes.keys() != current_hashes.keys():
+        return True
+    for path, h in current_hashes.items():
+        if previous_hashes.get(path) != h:
+            return True
+    return False
+
+
+# ---------------------------------------------------------------------------
+# Génération du bundle, au même format que blinder.py
+# ---------------------------------------------------------------------------
+def generate_bundle_text(project_name: str, project_path: str, files_to_read: list) -> str:
+    lines = []
+    lines.append("=========================================\n")
+    lines.append("STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS\n")
+    lines.append("=========================================\n\n")
+    lines.append(f"[DOSSIER] {project_path}\n")
+    for full_path in files_to_read:
+        rel = os.path.relpath(full_path, project_path)
+        lines.append(f"  ├── {rel}\n")
+
+    lines.append("\n\n=========================================\n")
+    lines.append("CONTENU COMPLET DES FICHIERS\n")
+    lines.append("=========================================\n\n")
+
+    for file_path in files_to_read:
+        lines.append(f"--- DEBUT FICHIER: {file_path} ---\n")
+        try:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+                lines.append(f.read())
+        except Exception as e:
+            lines.append(f"[Erreur de lecture: {e}]\n")
+        lines.append(f"\n--- FIN FICHIER: {file_path} ---\n\n")
+
+    return "".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Git : rotation des versions + commit/push
+# ---------------------------------------------------------------------------
+def run_git(repo_path: str, args: list, check=True):
+    result = subprocess.run(
+        ["git"] + args, cwd=repo_path,
+        capture_output=True, text=True
+    )
+    if check and result.returncode != 0:
+        log(f"Erreur git {args} : {result.stderr.strip()}")
+    return result
+
+
+def ensure_repo(repo_path: str, remote_url: str):
+    if not os.path.exists(os.path.join(repo_path, ".git")):
+        os.makedirs(repo_path, exist_ok=True)
+        log(f"Dépôt absent, clonage de {remote_url} dans {repo_path}")
+        result = subprocess.run(
+            ["git", "clone", remote_url, repo_path],
+            capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            log(f"Échec du clonage : {result.stderr.strip()}")
+            sys.exit(1)
+    else:
+        run_git(repo_path, ["pull", "--rebase"])
+
+
+def rotate_and_write(repo_path: str, project_name: str, bundle_text: str):
+    """Écrit la nouvelle version horodatée et supprime les plus anciennes
+    au-delà de VERSIONS_TO_KEEP pour ce projet."""
+    project_dir = os.path.join(repo_path, project_name)
+    os.makedirs(project_dir, exist_ok=True)
+
+    stamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    new_file = os.path.join(project_dir, f"{project_name}_{stamp}.txt")
+    with open(new_file, "w", encoding="utf-8") as f:
+        f.write(bundle_text)
+
+    existing = sorted(
+        [f for f in os.listdir(project_dir) if f.startswith(project_name + "_") and f.endswith(".txt")]
+    )
+    while len(existing) > VERSIONS_TO_KEEP:
+        oldest = existing.pop(0)
+        try:
+            os.remove(os.path.join(project_dir, oldest))
+            log(f"Ancienne version supprimée : {oldest}")
+        except OSError:
+            pass
+
+    return new_file
+
+
+def git_commit_and_push(repo_path: str, project_name: str):
+    run_git(repo_path, ["add", "."])
+    result = run_git(repo_path, ["diff", "--cached", "--quiet"], check=False)
+    if result.returncode == 0:
+        log(f"[{project_name}] Rien à committer.")
+        return
+    msg = f"Mise à jour contexte {project_name} - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    run_git(repo_path, ["commit", "-m", msg])
+    push_result = run_git(repo_path, ["push"], check=False)
+    if push_result.returncode != 0:
+        log(f"Échec du push, on retente après un pull --rebase : {push_result.stderr.strip()}")
+        run_git(repo_path, ["pull", "--rebase"])
+        run_git(repo_path, ["push"])
+    log(f"[{project_name}] Poussé sur Git.")
+
+
+# ---------------------------------------------------------------------------
+# Boucle principale
+# ---------------------------------------------------------------------------
+def sync_once(config: dict):
+    state = load_state()
+    repo_path = config["repo_local_path"]
+    remote_url = config["repo_remote_url"]
+
+    ensure_repo(repo_path, remote_url)
+
+    any_change = False
+
+    for project in config["projects"]:
+        name = project["name"]
+        path = project["path"]
+
+        if not os.path.isdir(path):
+            log(f"[{name}] Dossier introuvable, ignoré : {path}")
+            continue
+
+        files_to_read, current_hashes = scan_project(path)
+        previous_hashes = state.get(name, {})
+
+        if not project_changed(previous_hashes, current_hashes):
+            log(f"[{name}] Aucun changement détecté.")
+            continue
+
+        log(f"[{name}] Changement détecté ({len(files_to_read)} fichier(s)), régénération du contexte...")
+        bundle_text = generate_bundle_text(name, path, files_to_read)
+        out_file = rotate_and_write(repo_path, name, bundle_text)
+        log(f"[{name}] Fichier généré : {out_file} ({human_size(os.path.getsize(out_file))})")
+
+        state[name] = current_hashes
+        any_change = True
+
+    if any_change:
+        # Un seul commit/push groupé pour tous les projets modifiés dans ce passage
+        run_git(repo_path, ["add", "."])
+        result = run_git(repo_path, ["diff", "--cached", "--quiet"], check=False)
+        if result.returncode != 0:
+            msg = f"Mise à jour contexte - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+            run_git(repo_path, ["commit", "-m", msg])
+            push_result = run_git(repo_path, ["push"], check=False)
+            if push_result.returncode != 0:
+                log("Échec du push, tentative de pull --rebase puis nouveau push...")
+                run_git(repo_path, ["pull", "--rebase"])
+                run_git(repo_path, ["push"])
+            log("Poussé sur Git.")
+        save_state(state)
+    else:
+        log("Aucun projet modifié, rien à pousser.")
+
+
+def watch_mode(config: dict, interval_seconds: int):
+    log(f"Mode surveillance actif (vérification toutes les {interval_seconds} s). Ctrl+C pour arrêter.")
+    while True:
+        try:
+            sync_once(config)
+        except Exception as e:
+            log(f"Erreur pendant la synchronisation : {e}")
+        time.sleep(interval_seconds)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Synchronisation automatique de contexte de projets vers Git")
+    parser.add_argument("--watch", action="store_true", help="Reste actif et vérifie périodiquement au lieu de faire une seule passe")
+    parser.add_argument("--interval", type=int, default=300, help="Intervalle en secondes en mode --watch (défaut : 300)")
+    args = parser.parse_args()
+
+    config = load_config()
+
+    if args.watch:
+        watch_mode(config, args.interval)
+    else:
+        sync_once(config)
+
+
+if __name__ == "__main__":
+    main()
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.py ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\config.json ---
+{
+  "repo_local_path": "C:/Users/Oniix/Desktop/mes prog/context-sync-repo",
+  "repo_remote_url": "https://github.com/OnixNever/projet_en_cours.git",
+  "projects": [
+    {
+      "name": "doc_finder",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder"
+    },
+    {
+      "name": "compresseur",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur"
+    },
+    {
+      "name": "compresseur_auto",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto"
+    },
+    {
+      "name": "partage_QR",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR"
+    },
+    {
+      "name": "%",
+      "path": "C:Users/Oniix/Desktop/mes prog/html_et_css/%"
+    },
+    {
+      "name": "entrainement_tactique",
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique"
+    },
+    {
+      "name": "Network",
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local"
+    }
+  ]
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\config.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\lancer_sync.bat ---
+@echo off
+cd /d "%~dp0"
+python auto_context_sync.py
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\lancer_sync.bat ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\pour des modif sur l'automatisation.txt ---
+planificateur de tâches
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\pour des modif sur l'automatisation.txt ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\state.json ---
+{
+  "test": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\README.md": "2d45965d0f36bde39bf7611d53a2120d3aadd3ab59a32dc7f5ec0c4c30efe971",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\app.py": "4f3e281de33f34f13a66bdaa1b19f3affd42279698f5ea232b6b5eb32615ffc1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\requirements.txt": "09721ecb6d0151460f7f4fa6356620d4f69b186aeb4daedad2bf6d41023eb722",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\security.py": "9af19f6e39a1251cded56e5b5cb247643709339dd842d34281a126bb9f8e436a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\sources.py": "7fc1762df33e3d743ce15def427338ccb93f5a1c58d50b9ac8c302fa73b926e0",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\static\\app.js": "b51a35dcfe86aaf8b7ac3081635f513d5c5a00d2ac644a7ede4615f9f6c05065",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\static\\style.css": "c6a9f22306922bb35c1dbede3d086f08b023c3ec595f34c0a2759cb1be834014",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\templates\\index.html": "ac3adb7ad1d718ba797135d78aa1532cc7d7973ae8a98ed58a1ca36431002299",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\README.md": "5e01dd79f3bb9c4dc747a6343aee27854f76129352d32840d60b6dbc81076b82",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\app.py": "ab6067681ada326e5ec7dfc4571bc299de5242b4e1d32f4542d646e7b95eab4d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\requirements.txt": "09721ecb6d0151460f7f4fa6356620d4f69b186aeb4daedad2bf6d41023eb722",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\starter.bat": "bc4613a21e2af77efb79b97f6f8f1a4c4ede306c3372a6923d419d56df46f8df",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\relevance.py": "7efaea1c2bf2f042e8f8f634b271a03035f35e5a660d365bae4b20628eb2d4da",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\security.py": "9af19f6e39a1251cded56e5b5cb247643709339dd842d34281a126bb9f8e436a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\sources.py": "f2e613c81fcf7322ed3bbbad59d0d266312461b075c2aabd1291821a67d1ade7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\static\\app.js": "e56913debe65078c96fcf7a8ad417cd2cb032d0d206843f2eeef960be85a54f1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\static\\style.css": "2f4d8c8a82016cf5dc0830c8c7f36773bb7da001e3d95fb8a6177c09788df31d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\templates\\index.html": "84342e88fbd133db6d894544c5cad3a937298fb12acaf6855ca1c95af06bc78d"
+  },
+  "doc_finder": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\README.md": "2d45965d0f36bde39bf7611d53a2120d3aadd3ab59a32dc7f5ec0c4c30efe971",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\app.py": "4f3e281de33f34f13a66bdaa1b19f3affd42279698f5ea232b6b5eb32615ffc1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\requirements.txt": "09721ecb6d0151460f7f4fa6356620d4f69b186aeb4daedad2bf6d41023eb722",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\security.py": "9af19f6e39a1251cded56e5b5cb247643709339dd842d34281a126bb9f8e436a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\connectors\\sources.py": "7fc1762df33e3d743ce15def427338ccb93f5a1c58d50b9ac8c302fa73b926e0",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\static\\app.js": "b51a35dcfe86aaf8b7ac3081635f513d5c5a00d2ac644a7ede4615f9f6c05065",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\static\\style.css": "c6a9f22306922bb35c1dbede3d086f08b023c3ec595f34c0a2759cb1be834014",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder\\doc-finder\\templates\\index.html": "ac3adb7ad1d718ba797135d78aa1532cc7d7973ae8a98ed58a1ca36431002299",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\README.md": "5e01dd79f3bb9c4dc747a6343aee27854f76129352d32840d60b6dbc81076b82",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\app.py": "ab6067681ada326e5ec7dfc4571bc299de5242b4e1d32f4542d646e7b95eab4d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\requirements.txt": "09721ecb6d0151460f7f4fa6356620d4f69b186aeb4daedad2bf6d41023eb722",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\starter.bat": "bc4613a21e2af77efb79b97f6f8f1a4c4ede306c3372a6923d419d56df46f8df",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\relevance.py": "7efaea1c2bf2f042e8f8f634b271a03035f35e5a660d365bae4b20628eb2d4da",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\security.py": "9af19f6e39a1251cded56e5b5cb247643709339dd842d34281a126bb9f8e436a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\connectors\\sources.py": "f2e613c81fcf7322ed3bbbad59d0d266312461b075c2aabd1291821a67d1ade7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\static\\app.js": "e56913debe65078c96fcf7a8ad417cd2cb032d0d206843f2eeef960be85a54f1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\static\\style.css": "2f4d8c8a82016cf5dc0830c8c7f36773bb7da001e3d95fb8a6177c09788df31d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\templates\\index.html": "84342e88fbd133db6d894544c5cad3a937298fb12acaf6855ca1c95af06bc78d"
+  },
+  "pdf_to_audio": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\1_installer.bat": "cdaa7b6f703ee4a222c0dd36eb758e33fe8e76183151fb8b6e9c953c6be7c892",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\2_lancer.bat": "7aecc6de302b1f71811ba1ce8a9f77cdc23692f292fd7c1105d354ac99c00b86",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\README.md": "ee9e8c507f7ecbab2ad2aa044715ca1a56376aa3d026106d58527ce795c75e7c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\main.py": "b7527d89924b07ddf05a7a34222d708433a4915fb971ba60e0dac9b383c53b2f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\requirements.txt": "fc8fb3a42b25e74f89f905dc4445904d52f71be4e8c82bd8939ecf0587094eec",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\streamlit_app.py": "ba6c210e0ff27536bb87593e91239914bf0644904f2dfd7dc52d4c0e8dcdee94",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\__init__.py": "42db7052a7efe22cf1a77729be53615f4ec1c5c36333d8bd8f2334b82437f9c7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\audio_merger.py": "6ce066804d7b14eed45d7005541b458ca34c02b0ee1df9040a6b3a579e6b2c4a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\config.py": "a557de325531b258cc067f6824b8a271b4e10d43ec777bff1ceb42a18ec39a87",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\image_describer.py": "4d09ca12d314024b49a667e72e4f585ce4843d60071b65b161e8be19431ad40e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\ollama_client.py": "3c567ee8aef87ff1750a7834028421e46dc99fce6019ba2d4e829ec21bde4bae",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\pdf_extractor.py": "b15a20c59cb2510d2e2b496e255f4a7fe8540166c35ddd610bde41f52b4faa25",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\pipeline.py": "a0e0b5a5dc2d414ba338d5896d5f206736fda71bfa72cbf2b0124eaffb2e8452",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\text_cleaner.py": "dfb32cc988db00dce5717166650de32851ef54aace9b490e822ba5e0bd35a389",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\tts_engine.py": "a2513f5893ed2f9e7433d1bc4979bd50c5f2ab530409665e7309fc214e25cc5b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\1_installer.bat": "cdaa7b6f703ee4a222c0dd36eb758e33fe8e76183151fb8b6e9c953c6be7c892",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\2_lancer.bat": "7aecc6de302b1f71811ba1ce8a9f77cdc23692f292fd7c1105d354ac99c00b86",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\README.md": "ee9e8c507f7ecbab2ad2aa044715ca1a56376aa3d026106d58527ce795c75e7c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\main.py": "b7527d89924b07ddf05a7a34222d708433a4915fb971ba60e0dac9b383c53b2f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\requirements.txt": "fc8fb3a42b25e74f89f905dc4445904d52f71be4e8c82bd8939ecf0587094eec",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\streamlit_app.py": "e1da20a9aee505a444fb72299efcaf7d81597b11073c8498a3591501ce2d8b34",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\__init__.py": "42db7052a7efe22cf1a77729be53615f4ec1c5c36333d8bd8f2334b82437f9c7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\audio_merger.py": "6ce066804d7b14eed45d7005541b458ca34c02b0ee1df9040a6b3a579e6b2c4a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\config.py": "e99bbe8146fdf0bca2808e5fba292cd3ffe39c19a3ca5c872671312a01f19dc9",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\image_describer.py": "4d09ca12d314024b49a667e72e4f585ce4843d60071b65b161e8be19431ad40e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\ollama_client.py": "25e92de883209b376a7e8a489bfc5a5a067ec2a759fda72c404cbfc308e512ce",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\pdf_extractor.py": "b15a20c59cb2510d2e2b496e255f4a7fe8540166c35ddd610bde41f52b4faa25",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\pipeline.py": "a0e0b5a5dc2d414ba338d5896d5f206736fda71bfa72cbf2b0124eaffb2e8452",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\text_cleaner.py": "dfb32cc988db00dce5717166650de32851ef54aace9b490e822ba5e0bd35a389",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\tts_engine.py": "a2513f5893ed2f9e7433d1bc4979bd50c5f2ab530409665e7309fc214e25cc5b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\1_installer.bat": "b8fd060575d08b98d7bf67a782138814fe0f46477cadb95924e8bb67c4829360",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\2_lancer.bat": "c0da9a8260dc9a28eb77473b69cb1a5bccf6464f9787a9e83be9fff7ea6112a9",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\README.md": "575ac52e661f580746cff3210bdb22c5da38cbdd71fb9f7baf12f0f547da5811",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\main.py": "5693431d38ff960ecc59c53408133153c453cfdc6b12e0d6f5441a8d4c7d3f0d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\requirements.txt": "36aa73c029d6023d9b413ae0c81ca41495d047da644a3a855e08c56e376e4f7b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\streamlit_app.py": "34b7bfc73c1be143ceffe63c80ce2254211efd65cf8ff30670cb52b165b44f88",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\.pdf2audio_sessions\\55ca71e1d35f776d\\tmp\\manifest.json": "95eb51c437d4d6346ee035708947e8bd6000118a4eccd18e4727904925fbce3d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\__init__.py": "ff81a7bd728ca1c349f8ce99effc527e4a8b5e29540247e518acb14720da6c39",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\audio_merger.py": "c43c63dedcd4d200ce3371a3822b0173b64beb3c69b3093a4f1a374a58a68973",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\config.py": "132f8a2be3b7b552fe954c0840b2818d2d3cee5d5ac59f9522434a41b30519a8",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\image_describer.py": "f9b85c4a72b7e98f8de96f1a705016d2ae1d297be7159cecb67190d69f356e6c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\ollama_client.py": "9644d02abe6596a600ea1470281fdbfe064b5f9ece08f1baf5ef7e5717bee088",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\pdf_extractor.py": "0684a151c5e3d2403ef5f7415e7e5c83e252fb6c4765d5da09e049b316767ada",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\pipeline.py": "84c5595cd4858484d4cc9c843c794c09ddf6c1fa14b11ac3d4c03a68df301256",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\text_cleaner.py": "c2a133b5d53afb06e418230c98f315daac089dab24158bda8519889ab3dda961",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\tts_engine.py": "2ff165ce0e6c7973fe54b19a35b8b7b4e35e19462b3d2e69d796b2adfeb591e5"
+  },
+  "compresseur": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\\compresseur.py": "9f8f734909fad87d07c0c49d3f8227fdad8bdeebcf9856b266677e3e85f41d0a"
+  },
+  "compresseur_auto": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "3baf70c0a6998bc7b74af8753bf75f348668aaa2d47eaa4f5f694686bd5c9941",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "0c8e9ac7a580809b4ed3f334a27f206e537cd4473a0b349effeeb947d2f1ce6f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\pour des modif sur l'automatisation.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "3ceb4c797a9eb963bcf3350d4b432bcb416ada22c5bd3b26fee9411aa5e54e97"
+  },
+  "partage_QR": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.log": "113aad1d2e5f4957b46b60a83cad164477b61d5a51d6e67073acfaf225a89fba",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.py": "19795084740fee35b3a07d83fdcf32667f8556813434c513bc47c7b89669625b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\lancer_app.bat": "01c09c0f2732331b88a0a74cacac597cc41dd7a8ab6285d187836c331521830a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\requirements.txt": "8da32ff3885e816bbe0bcdc19747e7fa3b8cf2c2ae89d30e30964e7783d97eb7"
+  },
+  "entrainement_tactique": {
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique\\entrainement-tactique.html": "51e493b9aea31a2f93835b551113dd12e01b31d2577299d0f64025dd9c40b892"
+  },
+  "Network": {
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\gestion_serveur.html": "b8a12f17c0d61280b02a860fe63bf4ab8de52718449fb82b36f2723f48a88780",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\serveur.py": "804d1aeb013cfb8e695aee1944a34898cea4e5d4db6577a1890c551b052088f4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\start tout.bat": "b0fd751601a3e469af4ece86a0e1b2b893d635c7b3aa65e1d37cc57127d2eedf",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\start.bat": "62d573206b51cc889ee8afd726b24f17d1f356bee7880c1d41f489cbc078aec8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\utilisateur.html": "437e4743d973db4c009355bfca7e08ffe8c36afd40651de26c10764e5c93539a",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\config.json": "79bd4e0d65a9ab937d4fda9e8b3d20f057a689c7878fc1be154b3023f14848a8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\messages.json": "1e05ce8cd553b4228c10098e89606d793214b47ec933d30d7ba34c039a1b2f79",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\users.json": "3cb1721cb324c22af42bb234cf86ee08b4742b7981877a0b889d8c312f875dbf",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\backups\\backup_20260125_100547\\users.json": "b83b111a0ba65422153b028513852bd91a915a84072549b6c1420fc102b096c8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\15bfd783-41ee-4d9e-972d-6264253f74c7.html": "b6acad946d9526d9a98b99a3fe1eb3d97038fa1e2d34f9682b3ac9d56d7965a4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\9411b3fc-c219-443e-95d6-eff33512c175.html": "d2b46521a9623cbe2a4e54d53897e87847fca91b93505e2a0d57fbd029ceb8e4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\9b634073-6627-4b4b-9a19-b9dd72b02b65.html": "933d9384a5f1894f10d08287702ab48d8f71e8863c10bb4efa2fac5291902967"
+  }
+}
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\state.json ---
+
