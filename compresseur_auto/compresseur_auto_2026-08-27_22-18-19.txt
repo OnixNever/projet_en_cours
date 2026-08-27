@@ -218,6 +218,37 @@ from the remote, but no such ref was fetched.
 [2026-08-27 06:53:14] [compresseur] Changement détecté (1 fichier(s)), régénération du contexte...
 [2026-08-27 06:53:14] [compresseur] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur\compresseur_2026-08-27_06-53-14.txt (19.9 Ko)
 [2026-08-27 06:53:14] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-27 06:53:14] Ancienne version supprimée : compresseur_auto_2026-08-25_17-38-37.txt
+[2026-08-27 06:53:14] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-27_06-53-14.txt (56.1 Ko)
+[2026-08-27 06:53:14] [partage_QR] Aucun changement détecté.
+[2026-08-27 06:53:14] [%] Aucun changement détecté.
+[2026-08-27 06:53:14] [entrainement_tactique] Aucun changement détecté.
+[2026-08-27 06:53:14] [Network] Aucun changement détecté.
+[2026-08-27 06:53:16] Poussé sur Git.
+[2026-08-27 22:16:46] [recherche] Changement détecté (29 fichier(s)), régénération du contexte...
+[2026-08-27 22:16:46] [recherche] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\recherche\recherche_2026-08-27_22-16-46.txt (225.2 Ko)
+[2026-08-27 22:16:46] [compresseur] Aucun changement détecté.
+[2026-08-27 22:16:46] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-27 22:16:46] Ancienne version supprimée : compresseur_auto_2026-08-25_17-39-44.txt
+[2026-08-27 22:16:46] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-27_22-16-46.txt (58.5 Ko)
+[2026-08-27 22:16:46] [partage_QR] Aucun changement détecté.
+[2026-08-27 22:16:47] [%] Aucun changement détecté.
+[2026-08-27 22:16:47] [entrainement_tactique] Aucun changement détecté.
+[2026-08-27 22:16:47] [Network] Aucun changement détecté.
+[2026-08-27 22:16:49] Poussé sur Git.
+[2026-08-27 22:17:16] [recherche] Aucun changement détecté.
+[2026-08-27 22:17:16] [compresseur] Aucun changement détecté.
+[2026-08-27 22:17:16] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-27 22:17:16] Ancienne version supprimée : compresseur_auto_2026-08-26_17-46-43.txt
+[2026-08-27 22:17:16] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-27_22-17-16.txt (59.3 Ko)
+[2026-08-27 22:17:16] [partage_QR] Aucun changement détecté.
+[2026-08-27 22:17:16] [%] Aucun changement détecté.
+[2026-08-27 22:17:16] [entrainement_tactique] Aucun changement détecté.
+[2026-08-27 22:17:16] [Network] Aucun changement détecté.
+[2026-08-27 22:17:18] Poussé sur Git.
+[2026-08-27 22:18:19] [recherche] Aucun changement détecté.
+[2026-08-27 22:18:19] [compresseur] Aucun changement détecté.
+[2026-08-27 22:18:19] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -696,16 +727,16 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\tts_engine.py": "2ff165ce0e6c7973fe54b19a35b8b7b4e35e19462b3d2e69d796b2adfeb591e5"
   },
   "compresseur": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\\compresseur.py": "9f8f734909fad87d07c0c49d3f8227fdad8bdeebcf9856b266677e3e85f41d0a"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\\compresseur.py": "75c2c2d1734e158e38e26404b007635404adbf1144591c896d1c27d9bcd4094f"
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "23134d303a173b4d6aae94168bbc85023e7382d0fae5312522b88591d596d890",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "b8773d828883595b4397a17940fa490506a0e5fc2521f8b4bc96a5f27fd34858",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "6e601eea9c8187c908f8f01b3fcf367365c9a19c4aebf4e50f0275758dda70d8",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\pour des modif sur l'automatisation.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "9edd7f5987338c7baad4b2079cc4a29b6cf6484766bf5b3f6f0894c0ae6c1b45"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\planificateur de tâches.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "491a258d27d79c62dc09f53a37b92978bfdc097eb272e4154ff81c88eeb315e8"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
@@ -782,7 +813,16 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_02\\recherche\\connectors\\sources.py": "f2e613c81fcf7322ed3bbbad59d0d266312461b075c2aabd1291821a67d1ade7",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_02\\recherche\\static\\app.js": "e56913debe65078c96fcf7a8ad417cd2cb032d0d206843f2eeef960be85a54f1",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_02\\recherche\\static\\style.css": "2f4d8c8a82016cf5dc0830c8c7f36773bb7da001e3d95fb8a6177c09788df31d",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_02\\recherche\\templates\\index.html": "84342e88fbd133db6d894544c5cad3a937298fb12acaf6855ca1c95af06bc78d"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_02\\recherche\\templates\\index.html": "84342e88fbd133db6d894544c5cad3a937298fb12acaf6855ca1c95af06bc78d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\README.md": "e229abfb9883a006eb3c7037e01450373471ee327a1e9bb3058aa9f77562b336",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\app.js": "9f3b756b556df40b058b9e8c7df6d9b56667cee91d9f12379e739df2fd7b87d6",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\app.py": "d3f85bbc15f64f3f9d8e7ab55b6ef9d5ebbe0abafc4e364f8c0b3275ea4f279e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\cache.json": "6439d5a98c24a928b8d0ea50d56506dc24eeb482de483e8002de72bc14e189d9",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\data.json": "0b6768087f445475a5a87a68e0c7b1cb8361a2cc14cbe9a84311ec85a9870d02",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\index.html": "a94a953a0969cd87431a22226dedb319450b26df718754e4227ef122130b36e7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\requirements.txt": "d2eaa345eec408e0cc882f7f0973af5d04cf3b6da531e3e50d6579e82e0d2c6a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\settings.json": "9b110e68425b94199a144b4da29575281eda9b55d11cb1515f4fae8e9e226134",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\style.css": "7dcda7d59ca2480adb05fab1d35cba9f5649cd3574f4781028e4f5d595687a7d"
   }
 }
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\state.json ---
