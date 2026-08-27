@@ -1,0 +1,505 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur
+  ├── compresseur.py
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\compresseur.py ---
+"""
+Context Bundler — LLM Collector
+--------------------------------
+Regroupe des dossiers et/ou fichiers individuels dans un seul fichier texte
+(structure + contenu), prêt à être collé dans un LLM.
+
+Dépendances :
+    pip install customtkinter
+    pip install tkinterdnd2      (optionnel, active le glisser-déposer)
+"""
+
+import os
+import threading
+import queue
+import customtkinter as ctk
+from tkinter import filedialog, messagebox
+
+try:
+    from tkinterdnd2 import DND_FILES, TkinterDnD
+    DND_AVAILABLE = True
+except ImportError:
+    DND_AVAILABLE = False
+
+
+# ---------------------------------------------------------------------------
+# Thème
+# ---------------------------------------------------------------------------
+ctk.set_appearance_mode("Dark")
+ctk.set_default_color_theme("blue")
+
+COLORS = {
+    "bg": "#11111B",
+    "card": "#1E1E2E",
+    "card_alt": "#181825",
+    "border": "#313244",
+    "border_active": "#A6E3A1",
+    "accent": "#89B4FA",
+    "accent_hover": "#74A8F8",
+    "success": "#A6E3A1",
+    "warning": "#F9E2AF",
+    "error": "#F38BA8",
+    "muted": "#7F849C",
+    "text": "#CDD6F4",
+}
+
+IGNORE_DIRS = {
+    ".git", "node_modules", "__pycache__", ".venv", "venv", "dist", "build",
+    ".idea", ".vscode", ".mypy_cache", ".pytest_cache", "target", ".next",
+    "coverage", ".tox", "egg-info",
+}
+IGNORE_EXTS = {
+    ".exe", ".dll", ".so", ".dylib", ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+    ".ico", ".webp", ".zip", ".tar", ".gz", ".7z", ".rar", ".pyc", ".pyo",
+    ".class", ".jar", ".pdf", ".mp3", ".mp4", ".mov", ".avi", ".woff",
+    ".woff2", ".ttf", ".eot", ".lock", ".db", ".sqlite", ".bin",
+}
+MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 Mo : au-delà, fichier probablement binaire -> ignoré
+
+
+def human_size(n: int) -> str:
+    size = float(n)
+    for unit in ("o", "Ko", "Mo", "Go"):
+        if size < 1024:
+            return f"{size:.0f} {unit}" if unit == "o" else f"{size:.1f} {unit}"
+        size /= 1024
+    return f"{size:.1f} To"
+
+
+def base_name_for_items(items) -> str:
+    """Détermine le nom de base du fichier texte à générer :
+    - un seul élément sélectionné -> on reprend son nom (sans extension pour un fichier)
+    - plusieurs éléments -> nom générique
+    """
+    if len(items) == 1:
+        p = items[0].rstrip(os.sep)
+        name = os.path.basename(p) or p
+        if os.path.isfile(p):
+            name = os.path.splitext(name)[0]
+        return name
+    return "bundle_context"
+
+
+def get_unique_filepath(directory: str, base_name: str, ext: str = ".txt") -> str:
+    """Renvoie un chemin de fichier unique dans `directory`.
+    Si `base_name + ext` existe déjà, on ajoute un numéro incrémental
+    (ex: nom (1).txt, nom (2).txt, ...) jusqu'à trouver un nom libre.
+    """
+    candidate = os.path.join(directory, f"{base_name}{ext}")
+    if not os.path.exists(candidate):
+        return candidate
+
+    counter = 1
+    while True:
+        candidate = os.path.join(directory, f"{base_name} ({counter}){ext}")
+        if not os.path.exists(candidate):
+            return candidate
+        counter += 1
+
+
+# ---------------------------------------------------------------------------
+# Fenêtre racine : on choisit la classe de base UNE FOIS, proprement,
+# et on ne lui applique jamais d'options CustomTkinter directement
+# (c'est la source du crash précédent). Tout le style visuel passe par
+# un CTkFrame interne qui, lui, comprend fg_color/corner_radius/etc.
+# ---------------------------------------------------------------------------
+if DND_AVAILABLE:
+    _RootBase = TkinterDnD.Tk
+else:
+    _RootBase = ctk.CTk
+
+
+class RowItem(ctk.CTkFrame):
+    """Une ligne représentant un élément sélectionné (dossier ou fichier)."""
+
+    def __init__(self, master, path, on_remove, **kwargs):
+        super().__init__(master, fg_color=COLORS["card_alt"], corner_radius=8, **kwargs)
+        is_dir = os.path.isdir(path)
+        icon = "📁" if is_dir else "📄"
+        name = os.path.basename(path.rstrip(os.sep)) or path
+
+        self.grid_columnconfigure(1, weight=1)
+
+        ctk.CTkLabel(self, text=icon, font=ctk.CTkFont(size=15), width=24).grid(
+            row=0, column=0, padx=(10, 4), pady=8
+        )
+
+        text_box = ctk.CTkFrame(self, fg_color="transparent")
+        text_box.grid(row=0, column=1, sticky="w", pady=6)
+        ctk.CTkLabel(
+            text_box, text=name, font=ctk.CTkFont(size=12, weight="bold"),
+            text_color=COLORS["text"], anchor="w"
+        ).pack(anchor="w")
+        ctk.CTkLabel(
+            text_box, text=path, font=ctk.CTkFont(size=10),
+            text_color=COLORS["muted"], anchor="w"
+        ).pack(anchor="w")
+
+        ctk.CTkButton(
+            self, text="✕", width=26, height=26, corner_radius=13,
+            fg_color="transparent", hover_color="#45475A",
+            text_color=COLORS["muted"], font=ctk.CTkFont(size=12, weight="bold"),
+            command=lambda: on_remove(path)
+        ).grid(row=0, column=2, padx=(4, 10))
+
+
+class ModernBundler(_RootBase):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Context Bundler — LLM Collector")
+        self.geometry("680x680")
+        self.minsize(600, 560)
+
+        # Conteneur principal : c'est LUI qui porte le style visuel,
+        # jamais la fenêtre racine directement.
+        self.container = ctk.CTkFrame(self, fg_color=COLORS["bg"], corner_radius=0)
+        self.container.pack(fill="both", expand=True)
+
+        self.items_to_process = []  # chemins uniques, ordre d'ajout préservé
+        self.ui_queue = queue.Queue()
+        self.worker_thread = None
+
+        self._build_header()
+        self._build_drop_zone()
+        self._build_buttons_row()
+        self._build_items_list()
+        self._build_footer()
+
+        self._poll_queue()
+
+    # ------------------------------------------------------------------
+    # Construction UI (tout est ancré dans self.container)
+    # ------------------------------------------------------------------
+    def _build_header(self):
+        header = ctk.CTkFrame(self.container, fg_color="transparent")
+        header.pack(fill="x", padx=30, pady=(25, 10))
+
+        ctk.CTkLabel(
+            header, text="⚡ Context Bundler",
+            font=ctk.CTkFont(size=23, weight="bold"),
+            text_color=COLORS["text"]
+        ).pack(anchor="w")
+
+        ctk.CTkLabel(
+            header,
+            text="Regroupez des dossiers ou fichiers en un seul contexte texte, prêt pour un LLM.",
+            font=ctk.CTkFont(size=12),
+            text_color=COLORS["muted"]
+        ).pack(anchor="w", pady=(2, 0))
+
+    def _build_drop_zone(self):
+        self.drop_card = ctk.CTkFrame(
+            self.container, corner_radius=14, fg_color=COLORS["card"],
+            border_width=2, border_color=COLORS["border"], height=120
+        )
+        self.drop_card.pack(fill="x", padx=30, pady=15)
+        self.drop_card.pack_propagate(False)
+
+        inner = ctk.CTkFrame(self.drop_card, fg_color="transparent")
+        inner.place(relx=0.5, rely=0.5, anchor="center")
+
+        self.drop_icon = ctk.CTkLabel(inner, text="📁  📄", font=ctk.CTkFont(size=30))
+        self.drop_icon.pack()
+
+        self.lbl_drop = ctk.CTkLabel(
+            inner,
+            text="Glissez vos fichiers ou dossiers ici — ou cliquez pour parcourir",
+            font=ctk.CTkFont(size=13, weight="bold"),
+            text_color=COLORS["accent"]
+        )
+        self.lbl_drop.pack(pady=(6, 0))
+
+        for widget in (self.drop_card, inner, self.drop_icon, self.lbl_drop):
+            widget.bind("<Button-1>", lambda e: self.browse_folder())
+            widget.bind("<Enter>", lambda e: self._set_drop_hover(True))
+            widget.bind("<Leave>", lambda e: self._set_drop_hover(False))
+
+        if DND_AVAILABLE:
+            try:
+                self.drop_card.drop_target_register(DND_FILES)
+                self.drop_card.dnd_bind("<<Drop>>", self.on_drop)
+            except Exception:
+                # Si l'enregistrement DND échoue pour une raison quelconque,
+                # l'appli reste utilisable via les boutons "Parcourir".
+                pass
+
+    def _set_drop_hover(self, hovering: bool):
+        if not self.items_to_process:
+            self.drop_card.configure(
+                border_color=COLORS["accent"] if hovering else COLORS["border"]
+            )
+
+    def _build_buttons_row(self):
+        btn_box = ctk.CTkFrame(self.container, fg_color="transparent")
+        btn_box.pack(fill="x", padx=30, pady=(0, 10))
+        btn_box.grid_columnconfigure((0, 1, 2), weight=1)
+
+        ctk.CTkButton(
+            btn_box, text="+ Dossier", command=self.browse_folder,
+            fg_color=COLORS["border"], hover_color="#45475A", height=32
+        ).grid(row=0, column=0, sticky="ew", padx=(0, 5))
+
+        ctk.CTkButton(
+            btn_box, text="+ Fichiers", command=self.browse_files,
+            fg_color=COLORS["border"], hover_color="#45475A", height=32
+        ).grid(row=0, column=1, sticky="ew", padx=5)
+
+        ctk.CTkButton(
+            btn_box, text="🗑 Tout effacer", command=self.clear_all,
+            fg_color="transparent", hover_color="#45475A",
+            text_color=COLORS["muted"], height=32,
+            border_width=1, border_color=COLORS["border"]
+        ).grid(row=0, column=2, sticky="ew", padx=(5, 0))
+
+    def _build_items_list(self):
+        list_header = ctk.CTkFrame(self.container, fg_color="transparent")
+        list_header.pack(fill="x", padx=30)
+        self.lbl_summary = ctk.CTkLabel(
+            list_header, text="Aucun élément sélectionné",
+            font=ctk.CTkFont(size=12, slant="italic"),
+            text_color=COLORS["muted"]
+        )
+        self.lbl_summary.pack(anchor="w")
+
+        self.scroll_frame = ctk.CTkScrollableFrame(
+            self.container, fg_color="transparent", height=200
+        )
+        self.scroll_frame.pack(fill="both", expand=True, padx=30, pady=(8, 10))
+
+    def _build_footer(self):
+        footer = ctk.CTkFrame(self.container, fg_color="transparent")
+        footer.pack(fill="x", padx=30, pady=(0, 20))
+
+        self.btn_generate = ctk.CTkButton(
+            footer, text="⚡ Générer le fichier texte",
+            command=self.start_generate,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            height=42, corner_radius=8, state="disabled"
+        )
+        self.btn_generate.pack(fill="x")
+
+        self.progress = ctk.CTkProgressBar(footer, height=6)
+        self.progress.set(0)
+        # masquée tant qu'aucune génération n'est en cours
+        self._progress_visible = False
+
+        self.lbl_status = ctk.CTkLabel(
+            footer, text="", font=ctk.CTkFont(size=12), text_color=COLORS["muted"]
+        )
+        self.lbl_status.pack(anchor="w", pady=(8, 0))
+
+    def _show_progress(self, show: bool):
+        if show and not self._progress_visible:
+            self.progress.pack(fill="x", pady=(10, 0), before=self.lbl_status)
+            self._progress_visible = True
+        elif not show and self._progress_visible:
+            self.progress.pack_forget()
+            self._progress_visible = False
+
+    # ------------------------------------------------------------------
+    # Gestion des éléments sélectionnés
+    # ------------------------------------------------------------------
+    def on_drop(self, event):
+        raw_paths = self.tk.splitlist(event.data)
+        added = False
+        for p in raw_paths:
+            clean_path = p.strip("{}'\"")
+            if os.path.exists(clean_path) and clean_path not in self.items_to_process:
+                self.items_to_process.append(clean_path)
+                added = True
+        if added:
+            self.refresh_list()
+
+    def browse_folder(self):
+        folder = filedialog.askdirectory()
+        if folder and folder not in self.items_to_process:
+            self.items_to_process.append(folder)
+            self.refresh_list()
+
+    def browse_files(self):
+        files = filedialog.askopenfilenames()
+        added = False
+        for f in files:
+            if f and f not in self.items_to_process:
+                self.items_to_process.append(f)
+                added = True
+        if added:
+            self.refresh_list()
+
+    def remove_item(self, path):
+        if path in self.items_to_process:
+            self.items_to_process.remove(path)
+            self.refresh_list()
+
+    def clear_all(self):
+        self.items_to_process.clear()
+        self.refresh_list()
+
+    def refresh_list(self):
+        for child in self.scroll_frame.winfo_children():
+            child.destroy()
+
+        for path in self.items_to_process:
+            row = RowItem(self.scroll_frame, path, self.remove_item)
+            row.pack(fill="x", pady=3)
+
+        count = len(self.items_to_process)
+        if count > 0:
+            self.lbl_summary.configure(
+                text=f"{count} élément(s) sélectionné(s)",
+                text_color=COLORS["success"]
+            )
+            self.drop_card.configure(border_color=COLORS["border_active"])
+            self.btn_generate.configure(state="normal")
+        else:
+            self.lbl_summary.configure(text="Aucun élément sélectionné", text_color=COLORS["muted"])
+            self.drop_card.configure(border_color=COLORS["border"])
+            self.btn_generate.configure(state="disabled")
+
+    # ------------------------------------------------------------------
+    # Génération (dans un thread séparé pour ne pas geler l'UI)
+    # ------------------------------------------------------------------
+    def start_generate(self):
+        if not self.items_to_process:
+            return
+        if self.worker_thread and self.worker_thread.is_alive():
+            return
+
+        dest_dir = filedialog.askdirectory(title="Choisir le dossier de destination")
+        if not dest_dir:
+            return
+
+        base_name = base_name_for_items(self.items_to_process)
+        out_file = get_unique_filepath(dest_dir, base_name, ".txt")
+
+        self.btn_generate.configure(state="disabled", text="⏳ Génération en cours...")
+        self._show_progress(True)
+        self.progress.set(0)
+        self.lbl_status.configure(text="Analyse des fichiers…", text_color=COLORS["warning"])
+
+        items_snapshot = list(self.items_to_process)
+        self.worker_thread = threading.Thread(
+            target=self._generate_worker, args=(items_snapshot, out_file), daemon=True
+        )
+        self.worker_thread.start()
+
+    def _generate_worker(self, items, out_file):
+        try:
+            files_to_read = []
+            structure_lines = []
+
+            for item in items:
+                if os.path.isdir(item):
+                    structure_lines.append(f"[DOSSIER] {item}\n")
+                    for root, dirs, files in os.walk(item):
+                        dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS)
+                        for f in sorted(files):
+                            ext = os.path.splitext(f)[1].lower()
+                            if ext in IGNORE_EXTS:
+                                continue
+                            full_path = os.path.join(root, f)
+                            try:
+                                if os.path.getsize(full_path) > MAX_FILE_SIZE:
+                                    continue
+                            except OSError:
+                                continue
+                            files_to_read.append(full_path)
+                            rel = os.path.relpath(full_path, item)
+                            structure_lines.append(f"  ├── {rel}\n")
+                elif os.path.isfile(item):
+                    structure_lines.append(f"[FICHIER ISOLÉ] {os.path.basename(item)}\n")
+                    files_to_read.append(item)
+
+            files_to_read = list(dict.fromkeys(files_to_read))  # dédoublonnage, ordre conservé
+            total = max(len(files_to_read), 1)
+            total_chars = 0
+
+            with open(out_file, "w", encoding="utf-8") as out:
+                out.write("=========================================\n")
+                out.write("STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS\n")
+                out.write("=========================================\n\n")
+                out.writelines(structure_lines)
+
+                out.write("\n\n=========================================\n")
+                out.write("CONTENU COMPLET DES FICHIERS\n")
+                out.write("=========================================\n\n")
+
+                for i, file_path in enumerate(files_to_read, start=1):
+                    out.write(f"--- DEBUT FICHIER: {file_path} ---\n")
+                    try:
+                        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+                            content = f.read()
+                            total_chars += len(content)
+                            out.write(content)
+                    except Exception as e:
+                        out.write(f"[Erreur de lecture: {e}]\n")
+                    out.write(f"\n--- FIN FICHIER: {file_path} ---\n\n")
+
+                    self.ui_queue.put(("progress", i / total))
+
+            out_size = os.path.getsize(out_file)
+            approx_tokens = total_chars // 4  # estimation grossière (~4 caractères/token)
+            self.ui_queue.put((
+                "done",
+                {
+                    "count": len(files_to_read),
+                    "size": human_size(out_size),
+                    "tokens": approx_tokens,
+                    "path": out_file,
+                },
+            ))
+        except Exception as e:
+            self.ui_queue.put(("error", str(e)))
+
+    def _poll_queue(self):
+        try:
+            while True:
+                kind, payload = self.ui_queue.get_nowait()
+                if kind == "progress":
+                    self.progress.set(payload)
+                elif kind == "done":
+                    self.progress.set(1.0)
+                    tokens_str = f"{payload['tokens']:,}".replace(",", " ")
+                    self.lbl_status.configure(
+                        text=f"✨ {payload['count']} fichier(s) — {payload['size']} — ≈{tokens_str} tokens",
+                        text_color=COLORS["success"]
+                    )
+                    self.btn_generate.configure(state="normal", text="⚡ Générer le fichier texte")
+                    messagebox.showinfo(
+                        "Succès",
+                        f"Fichier de contexte généré :\n{payload['path']}\n\n"
+                        f"{payload['count']} fichier(s), {payload['size']}, "
+                        f"≈{tokens_str} tokens estimés."
+                    )
+                    self.items_to_process.clear()
+                    self.refresh_list()
+                    self._show_progress(False)
+                elif kind == "error":
+                    self.lbl_status.configure(text="Erreur lors de la génération.", text_color=COLORS["error"])
+                    self.btn_generate.configure(state="normal", text="⚡ Générer le fichier texte")
+                    self._show_progress(False)
+                    messagebox.showerror("Erreur", payload)
+        except queue.Empty:
+            pass
+        self.after(80, self._poll_queue)
+
+
+if __name__ == "__main__":
+    app = ModernBundler()
+    app.mainloop()
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\compresseur.py ---
+
