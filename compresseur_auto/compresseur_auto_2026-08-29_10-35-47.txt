@@ -249,6 +249,40 @@ from the remote, but no such ref was fetched.
 [2026-08-27 22:18:19] [recherche] Aucun changement détecté.
 [2026-08-27 22:18:19] [compresseur] Aucun changement détecté.
 [2026-08-27 22:18:19] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-27 22:18:19] Ancienne version supprimée : compresseur_auto_2026-08-27_06-53-14.txt
+[2026-08-27 22:18:19] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-27_22-18-19.txt (60.0 Ko)
+[2026-08-27 22:18:19] [partage_QR] Aucun changement détecté.
+[2026-08-27 22:18:19] [%] Aucun changement détecté.
+[2026-08-27 22:18:19] [entrainement_tactique] Aucun changement détecté.
+[2026-08-27 22:18:19] [Network] Aucun changement détecté.
+[2026-08-27 22:18:21] Poussé sur Git.
+[2026-08-27 22:20:44] [recherche] Aucun changement détecté.
+[2026-08-27 22:20:44] [compresseur] Aucun changement détecté.
+[2026-08-27 22:20:44] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-27 22:20:44] Ancienne version supprimée : compresseur_auto_2026-08-27_22-16-46.txt
+[2026-08-27 22:20:44] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-27_22-20-44.txt (61.0 Ko)
+[2026-08-27 22:20:44] [partage_QR] Aucun changement détecté.
+[2026-08-27 22:20:44] [%] Aucun changement détecté.
+[2026-08-27 22:20:44] [entrainement_tactique] Aucun changement détecté.
+[2026-08-27 22:20:44] [pdf_to_audio] Changement détecté (134 fichier(s)), régénération du contexte...
+[2026-08-27 22:20:44] [pdf_to_audio] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio_2026-08-27_22-20-44.txt (709.3 Ko)
+[2026-08-27 22:20:44] [Network] Aucun changement détecté.
+[2026-08-27 22:20:46] Poussé sur Git.
+[2026-08-28 06:02:34] [recherche] Aucun changement détecté.
+[2026-08-28 06:02:34] [compresseur] Aucun changement détecté.
+[2026-08-28 06:02:34] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-08-28 06:02:34] Ancienne version supprimée : compresseur_auto_2026-08-27_22-17-16.txt
+[2026-08-28 06:02:34] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-08-28_06-02-34.txt (79.2 Ko)
+[2026-08-28 06:02:34] [partage_QR] Aucun changement détecté.
+[2026-08-28 06:02:34] [%] Aucun changement détecté.
+[2026-08-28 06:02:34] [entrainement_tactique] Aucun changement détecté.
+[2026-08-28 06:02:34] [pdf_to_audio] Changement détecté (45 fichier(s)), régénération du contexte...
+[2026-08-28 06:02:34] [pdf_to_audio] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio_2026-08-28_06-02-34.txt (243.3 Ko)
+[2026-08-28 06:02:34] [Network] Aucun changement détecté.
+[2026-08-28 06:02:37] Poussé sur Git.
+[2026-08-29 10:35:47] [recherche] Aucun changement détecté.
+[2026-08-29 10:35:47] [compresseur] Aucun changement détecté.
+[2026-08-29 10:35:47] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -613,6 +647,10 @@ if __name__ == "__main__":
       "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique"
     },
     {
+      "name": "pdf_to_audio",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project"
+    },
+    {
       "name": "Network",
       "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local"
     }
@@ -679,36 +717,6 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/doc-finder\\doc-finder (1)\\doc-finder\\templates\\index.html": "84342e88fbd133db6d894544c5cad3a937298fb12acaf6855ca1c95af06bc78d"
   },
   "pdf_to_audio": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\1_installer.bat": "cdaa7b6f703ee4a222c0dd36eb758e33fe8e76183151fb8b6e9c953c6be7c892",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\2_lancer.bat": "7aecc6de302b1f71811ba1ce8a9f77cdc23692f292fd7c1105d354ac99c00b86",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\README.md": "ee9e8c507f7ecbab2ad2aa044715ca1a56376aa3d026106d58527ce795c75e7c",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\main.py": "b7527d89924b07ddf05a7a34222d708433a4915fb971ba60e0dac9b383c53b2f",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\requirements.txt": "fc8fb3a42b25e74f89f905dc4445904d52f71be4e8c82bd8939ecf0587094eec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\streamlit_app.py": "ba6c210e0ff27536bb87593e91239914bf0644904f2dfd7dc52d4c0e8dcdee94",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\__init__.py": "42db7052a7efe22cf1a77729be53615f4ec1c5c36333d8bd8f2334b82437f9c7",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\audio_merger.py": "6ce066804d7b14eed45d7005541b458ca34c02b0ee1df9040a6b3a579e6b2c4a",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\config.py": "a557de325531b258cc067f6824b8a271b4e10d43ec777bff1ceb42a18ec39a87",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\image_describer.py": "4d09ca12d314024b49a667e72e4f585ce4843d60071b65b161e8be19431ad40e",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\ollama_client.py": "3c567ee8aef87ff1750a7834028421e46dc99fce6019ba2d4e829ec21bde4bae",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\pdf_extractor.py": "b15a20c59cb2510d2e2b496e255f4a7fe8540166c35ddd610bde41f52b4faa25",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\pipeline.py": "a0e0b5a5dc2d414ba338d5896d5f206736fda71bfa72cbf2b0124eaffb2e8452",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\text_cleaner.py": "dfb32cc988db00dce5717166650de32851ef54aace9b490e822ba5e0bd35a389",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_01\\pdf2audio\\tts_engine.py": "a2513f5893ed2f9e7433d1bc4979bd50c5f2ab530409665e7309fc214e25cc5b",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\1_installer.bat": "cdaa7b6f703ee4a222c0dd36eb758e33fe8e76183151fb8b6e9c953c6be7c892",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\2_lancer.bat": "7aecc6de302b1f71811ba1ce8a9f77cdc23692f292fd7c1105d354ac99c00b86",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\README.md": "ee9e8c507f7ecbab2ad2aa044715ca1a56376aa3d026106d58527ce795c75e7c",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\main.py": "b7527d89924b07ddf05a7a34222d708433a4915fb971ba60e0dac9b383c53b2f",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\requirements.txt": "fc8fb3a42b25e74f89f905dc4445904d52f71be4e8c82bd8939ecf0587094eec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\streamlit_app.py": "e1da20a9aee505a444fb72299efcaf7d81597b11073c8498a3591501ce2d8b34",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\__init__.py": "42db7052a7efe22cf1a77729be53615f4ec1c5c36333d8bd8f2334b82437f9c7",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\audio_merger.py": "6ce066804d7b14eed45d7005541b458ca34c02b0ee1df9040a6b3a579e6b2c4a",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\config.py": "e99bbe8146fdf0bca2808e5fba292cd3ffe39c19a3ca5c872671312a01f19dc9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\image_describer.py": "4d09ca12d314024b49a667e72e4f585ce4843d60071b65b161e8be19431ad40e",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\ollama_client.py": "25e92de883209b376a7e8a489bfc5a5a067ec2a759fda72c404cbfc308e512ce",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\pdf_extractor.py": "b15a20c59cb2510d2e2b496e255f4a7fe8540166c35ddd610bde41f52b4faa25",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\pipeline.py": "a0e0b5a5dc2d414ba338d5896d5f206736fda71bfa72cbf2b0124eaffb2e8452",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\text_cleaner.py": "dfb32cc988db00dce5717166650de32851ef54aace9b490e822ba5e0bd35a389",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_02\\pdf2audio\\tts_engine.py": "a2513f5893ed2f9e7433d1bc4979bd50c5f2ab530409665e7309fc214e25cc5b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\1_installer.bat": "b8fd060575d08b98d7bf67a782138814fe0f46477cadb95924e8bb67c4829360",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\2_lancer.bat": "c0da9a8260dc9a28eb77473b69cb1a5bccf6464f9787a9e83be9fff7ea6112a9",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\README.md": "575ac52e661f580746cff3210bdb22c5da38cbdd71fb9f7baf12f0f547da5811",
@@ -724,19 +732,48 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\pdf_extractor.py": "0684a151c5e3d2403ef5f7415e7e5c83e252fb6c4765d5da09e049b316767ada",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\pipeline.py": "84c5595cd4858484d4cc9c843c794c09ddf6c1fa14b11ac3d4c03a68df301256",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\text_cleaner.py": "c2a133b5d53afb06e418230c98f315daac089dab24158bda8519889ab3dda961",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\tts_engine.py": "2ff165ce0e6c7973fe54b19a35b8b7b4e35e19462b3d2e69d796b2adfeb591e5"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_03\\pdf2audio\\tts_engine.py": "2ff165ce0e6c7973fe54b19a35b8b7b4e35e19462b3d2e69d796b2adfeb591e5",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\1_installer.bat": "d88a7a5092a0af11df23428402ed69c00ebddf741fad6e3fe6156923205ef2f2",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\2_lancer.bat": "7aecc6de302b1f71811ba1ce8a9f77cdc23692f292fd7c1105d354ac99c00b86",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\3_lancer_maitre_distribue.bat": "1a0c493cbadecf6526d70b675a0c6f09901d985b53145aecd6cd8e2cb2dc200f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\4_lancer_pc_secondaire.bat": "a95513ab9778541ee89f74f70ff331a5dadacd7d7fdb1b9a5162444c8e7e4495",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\README.md": "1d74d3bf66cd34c178d8cbbfdf6b052f3523513c46112db6d71ce23776f03b6f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\README_DISTRIBUE.md": "4402a3df8d99d9e9ecce4ac56f3a970f259c1ec0b5037c14c6e6ec5e5c535266",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\main.py": "b7527d89924b07ddf05a7a34222d708433a4915fb971ba60e0dac9b383c53b2f",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\main_distribue.py": "96b5ef394b546472bbd7504316866627eecb16f82a403b81686ffc892c75db68",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pc_slave_worker.py": "552e1f3b3da3ce23a6ff7ef62498512fd14e0fe4a62a7d126933ea3718715f54",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\requirements.txt": "7713934146fbf891e9bce0630113bf8e63416a4aced6d00490d95b4f47b7e804",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\streamlit_app.py": "24325ca0f4baa771130d9b4812a8b52a35887741eb7eba776558b576717d8946",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\__init__.py": "42db7052a7efe22cf1a77729be53615f4ec1c5c36333d8bd8f2334b82437f9c7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\audio_merger.py": "6ce066804d7b14eed45d7005541b458ca34c02b0ee1df9040a6b3a579e6b2c4a",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\config.py": "1e2f679ab54197d2c682c1dddd02ea6f2700b51f8ecdab2e843728c534af779e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\image_describer.py": "4d09ca12d314024b49a667e72e4f585ce4843d60071b65b161e8be19431ad40e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\ollama_client.py": "25e92de883209b376a7e8a489bfc5a5a067ec2a759fda72c404cbfc308e512ce",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\pdf_extractor.py": "b15a20c59cb2510d2e2b496e255f4a7fe8540166c35ddd610bde41f52b4faa25",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\pipeline.py": "a0e0b5a5dc2d414ba338d5896d5f206736fda71bfa72cbf2b0124eaffb2e8452",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\text_cleaner.py": "dfb32cc988db00dce5717166650de32851ef54aace9b490e822ba5e0bd35a389",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\tts_engine.py": "480054ba15f16c690405f725090ece60fbaecec4b843b9a9c7e111f55380e5e0",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\__init__.py": "6ace074097d5334776ac5734d7a88708c3a82b82cbf0318641112205ebc81828",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\device.py": "106d8847e9e32f7cc44ad703e07437906cf136c2fab38b3cbf79f4dea317f438",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\master_server.py": "050c0163c53dd056c1bc4bdd9fb7c3d5050f7fc3106e4035ee521db79e43cafa",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\master_state.py": "ddec023dafc9ecab2e46a7ea26eacac53d61fa918ac8eca1f4dd78926d9708e5",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\pipeline_distributed.py": "f08dbe2952f7b02fdb8f0b29b0edd0bb68790c8c25aed1803e926a8a420add19",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\segment.py": "162057dda0fe8e018dcbb11b5145ac9a06071014647d6381336602589f785455",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\task_manager.py": "00a282e317a0b6dd70682aa5e896f02b7b4f6f6892bcfe61374cc9b4881a2d2d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\templates\\client.html": "56211b96627b00cd25e78f75638c45c9cf0623ec3104e03749492af350e30fc6",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project\\pdf2audio_gpu_06_segmentation_globale\\pdf2audio\\distributed\\templates\\master.html": "8aafb718cf60bdcb92bf9dc1bb598191b0e887c8e09f12720a39311aa9d419da"
   },
   "compresseur": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur\\compresseur.py": "75c2c2d1734e158e38e26404b007635404adbf1144591c896d1c27d9bcd4094f"
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "b8773d828883595b4397a17940fa490506a0e5fc2521f8b4bc96a5f27fd34858",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "d3cfcd06314586afc301b5e18068327a6b02c1c239cf24eeb69719bebf67bc3b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "6e601eea9c8187c908f8f01b3fcf367365c9a19c4aebf4e50f0275758dda70d8",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "ec6974564b8e2af472f03c7ec5aa083cc24f2d324d2acf8dda1930aa9e73b70b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\planificateur de tâches.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "491a258d27d79c62dc09f53a37b92978bfdc097eb272e4154ff81c88eeb315e8"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "3a81d78f5193d69566980b3fb2dd0666a48ef104a5180b98ef06fa9c41cf9074"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
