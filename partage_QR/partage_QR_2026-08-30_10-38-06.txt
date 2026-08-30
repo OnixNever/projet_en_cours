@@ -1,0 +1,1152 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR
+  ├── files\README.md
+  ├── files\app.log
+  ├── files\app.py
+  ├── files\install.bat
+  ├── files\install.ps1
+  ├── files\lancer_app.bat
+  ├── files\requirements.txt
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\README.md ---
+# Partage PC → Téléphone
+
+Petite application de bureau pour partager des fichiers de ton PC vers ton smartphone
+par QR code, sans installation compliquée côté téléphone (juste scanner avec l'appareil
+photo ou un lecteur QR — aucune appli à installer sur le mobile).
+
+## Installation automatique (Windows)
+
+Double-clique simplement sur **`install.bat`**. Le script :
+
+1. Vérifie si Python 3.10 ou supérieur est déjà installé (dans le PATH, via le
+   lanceur `py`, ou à l'emplacement d'installation standard).
+2. S'il est absent ou trop ancien, télécharge et installe automatiquement
+   Python 3.10 en mode silencieux, en l'ajoutant au PATH — aucune fenêtre
+   d'installation à valider manuellement.
+3. Crée l'environnement virtuel dans `venv/` à côté du script.
+4. Installe toutes les dépendances de `requirements.txt` dans cet environnement.
+
+`install.bat` et `install.ps1` doivent rester dans le même dossier que `app.py`
+et `requirements.txt` (c'est ce dossier qui sert de "dossier du projet").
+
+Une fois l'installation terminée, lance l'application en double-cliquant sur
+**`lancer_app.bat`**. Il utilise `pythonw.exe` (au lieu de `python.exe`), donc
+aucune fenêtre d'invite de commande ne reste ouverte en arrière-plan pendant
+que l'application tourne.
+
+> **Où passent les erreurs ?** Comme `pythonw.exe` n'a pas de console, `app.py`
+> détecte ce cas et redirige automatiquement les messages (démarrage du
+> serveur, éventuelles erreurs) vers un fichier `app.log` créé à côté du
+> script. En cas de souci (l'application ne s'ouvre pas), consulte ce fichier
+> en premier.
+
+Pour lancer l'application avec une console visible (utile pour le débogage,
+avec les messages affichés en direct au lieu d'aller dans `app.log`) :
+
+```
+venv\Scripts\python.exe app.py
+```
+
+> **Remarque** : `install.bat` appelle `install.ps1` via
+> `powershell -ExecutionPolicy Bypass`, donc aucune modification permanente
+> de la politique d'exécution PowerShell de ta machine n'est nécessaire.
+> Le téléchargement de Python se fait depuis `python.org` — une connexion
+> Internet est requise uniquement si Python 3.10+ n'est pas déjà présent.
+
+## Installation manuelle (Windows, macOS, Linux)
+
+Il te faut Python 3.10+ installé. Ensuite, dans un terminal :
+
+```bash
+cd pc2phone
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+## Lancer l'application
+
+```bash
+python app.py
+```
+
+Une fenêtre s'ouvre avec :
+1. Une **zone de glisser-déposer** (ou clic pour parcourir) pour ajouter des fichiers.
+2. La **liste des fichiers** ajoutés — un clic dessus génère instantanément le QR code.
+3. Un **menu déroulant "Réseau à utiliser"** listant toutes les adresses IP locales
+   disponibles sur le PC, mis à jour automatiquement.
+4. Le **QR code**, à scanner avec le téléphone.
+
+Scanner le code avec l'appareil photo du téléphone ouvre directement le lien de
+téléchargement dans le navigateur mobile, et le téléchargement démarre tout de suite
+(le fichier est envoyé en pièce jointe, pas juste affiché).
+
+### Sélection multiple
+
+- **Ctrl-clic** (ou **Cmd-clic** sur Mac) / **Shift-clic** sur plusieurs fichiers de la
+  liste, ou bouton **"☑ Tout sélectionner"**, pour choisir plusieurs fichiers à la fois.
+- Un seul QR code est alors généré, pointant vers une **archive ZIP** créée à la volée
+  par le serveur — le téléphone télécharge un unique fichier `partage.zip` contenant
+  tous les fichiers sélectionnés.
+
+### Supprimer des fichiers de la liste
+
+- Sélectionner un ou plusieurs fichiers puis bouton **"🗑 Supprimer la sélection"**
+  (ou touche `Suppr`/`Retour arrière`).
+- Ou **clic droit sur un fichier précis** → "🗑 Supprimer ce fichier" pour une
+  suppression individuelle rapide, sans toucher au reste de la sélection.
+- La suppression ne touche qu'à la liste de partage : le fichier original reste
+  intact sur le disque.
+
+### Mise à jour automatique du réseau
+
+Un thread d'arrière-plan vérifie les interfaces réseau toutes les 2 secondes. Si une
+nouvelle adresse IP apparaît (par exemple juste après avoir activé un point d'accès
+mobile), elle est ajoutée automatiquement au menu déroulant et un message
+"Réseaux mis à jour ✓" s'affiche brièvement. Le choix déjà fait par l'utilisateur est
+conservé tant que cette adresse reste valide — inutile de cliquer sur quoi que ce soit.
+
+## Cas 1 — Même Wi-Fi (PC et téléphone sur le même routeur)
+
+C'est le cas par défaut : choisis simplement l'IP correspondant à ta carte Wi-Fi/Ethernet
+dans le menu déroulant (généralement affichée `Wi-Fi — 192.168.x.x` ou similaire).
+
+## Cas 2 — Le PC crée son propre point d'accès ("wifi direct")
+
+Il n'y a pas besoin d'implémenter du vrai Wi-Fi Direct (protocole fragile et très
+dépendant du pilote réseau) : le plus simple et le plus fiable est d'utiliser la
+fonctionnalité **native** de point d'accès mobile de ton OS :
+
+- **Windows** : bouton *"📶 Activer le point d'accès"* dans l'application (ouvre
+  directement `Réglages > Réseau > Point d'accès mobile`), ou manuellement via
+  `Paramètres > Réseau et Internet > Point d'accès mobile`.
+- **macOS** : `Réglages système > Général > Partage > Partage Internet`.
+- **Linux (GNOME)** : `Paramètres > Wi-Fi > menu ⋮ > Point d'accès Wi-Fi`.
+
+Une fois le point d'accès activé et le téléphone connecté dessus, la nouvelle IP
+(souvent de la forme `192.168.137.x` sur Windows) apparaît **automatiquement** dans
+le menu déroulant en quelques secondes — pas besoin de rafraîchir manuellement.
+Sélectionne-la, le QR code se met à jour aussitôt.
+
+## Notes
+
+- Le serveur écoute sur le port `8000`. Si un pare-feu bloque les connexions entrantes,
+  autorise Python (ou le port 8000) sur les réseaux privés.
+- Serveur de développement Flask utilisé volontairement pour rester léger — parfait pour
+  un usage ponctuel entre deux appareils personnels, à ne pas exposer sur Internet.
+- Les fichiers restent sur le disque du PC ; l'app ne fait que les servir tant qu'elle
+  tourne.
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\README.md ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\app.log ---
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [16/Aug/2026 17:38:52] "GET /download/4 HTTP/1.1" 404 -
+192.168.129.27 - - [16/Aug/2026 17:38:52] "GET /download/4 HTTP/1.1" 404 -
+192.168.129.27 - - [16/Aug/2026 17:38:53] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [16/Aug/2026 17:38:53] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.129.27 - - [16/Aug/2026 17:38:54] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+ * Serving Flask app 'app'
+ * Serving Flask app 'app'
+ * Debug mode: off
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [16/Aug/2026 21:37:08] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [16/Aug/2026 21:37:11] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [16/Aug/2026 21:38:54] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.15 - - [16/Aug/2026 21:40:16] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quitPress CTRL+C to quit
+
+ * Serving Flask app 'app'
+ * Debug mode: off
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+ * Serving Flask app 'app'
+ * Debug mode: off
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+ * Serving Flask app 'app'
+ * Debug mode: off
+Une tentative d’accès à un socket de manière interdite par ses autorisations d’accès a été tentée
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [17/Aug/2026 18:39:57] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [18/Aug/2026 07:37:40] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [19/Aug/2026 21:28:15] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [19/Aug/2026 21:28:16] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [22/Aug/2026 16:33:43] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [22/Aug/2026 16:33:44] "GET /download/1 HTTP/1.1" 200 -
+192.168.137.253 - - [22/Aug/2026 16:35:03] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [23/Aug/2026 21:21:57] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [23/Aug/2026 21:22:59] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [23/Aug/2026 21:23:02] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+192.168.129.27 - - [29/Aug/2026 12:33:38] "GET /download-batch/a225bf6489df HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:34:03] "GET /download-batch/a225bf6489df HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:34:35] "GET /download/2 HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:34:36] "GET /download/2 HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:34:56] "GET /download/2 HTTP/1.1" 206 -
+192.168.129.27 - - [29/Aug/2026 12:34:56] "GET /download/2 HTTP/1.1" 206 -
+192.168.129.27 - - [29/Aug/2026 12:35:27] "GET /download/2 HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:35:44] "GET /download/1 HTTP/1.1" 200 -
+192.168.129.27 - - [29/Aug/2026 12:35:45] "GET /download/1 HTTP/1.1" 200 -
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8000
+ * Running on http://192.168.129.5:8000
+Press CTRL+C to quit
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\app.log ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\app.py ---
+"""
+Partage PC -> Téléphone
+------------------------
+Petite application de bureau légère permettant de partager des fichiers
+depuis un PC vers un smartphone via QR code, sans installation compliquée.
+
+Fonctionnement :
+1. Un serveur HTTP local (Flask) tourne en arrière-plan sur le PC.
+2. Une fenêtre tkinter propose une zone de glisser-déposer pour ajouter des fichiers.
+3. Un clic sur un fichier (ou plusieurs, en Ctrl/Shift-clic) génère un QR code :
+   - un seul fichier sélectionné -> lien de téléchargement direct de ce fichier.
+   - plusieurs fichiers sélectionnés -> lien vers une archive ZIP générée à la volée.
+4. En scannant le QR code avec un smartphone connecté au même réseau (wifi du routeur,
+   OU point d'accès mobile lancé depuis le PC), le téléchargement démarre instantanément
+   dans le navigateur du téléphone.
+5. La liste des interfaces réseau/IP se met à jour automatiquement en arrière-plan
+   (utile quand on active un point d'accès mobile en cours de route). Par défaut,
+   l'IP du Wi-Fi local est sélectionnée automatiquement au démarrage. Et quand on
+   active le point d'accès mobile depuis l'application, la sélection bascule
+   automatiquement sur l'IP du point d'accès dès qu'elle apparaît.
+
+Dépendances : voir requirements.txt
+"""
+
+import sys
+import os
+
+# Quand ce script est lance avec pythonw.exe (aucune console attachee, par
+# exemple via un raccourci ou un .bat utilisant "start ... pythonw.exe"),
+# sys.stdout et sys.stderr valent None. Or Flask/Werkzeug ecrivent dans ces
+# flux au demarrage (banniere, logs de requetes) : sans ce garde-fou, le
+# programme plante immediatement et silencieusement (aucune fenetre pour
+# voir l'erreur). On redirige donc vers un fichier journal a cote du script.
+if sys.stdout is None or sys.stderr is None:
+    _log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.log")
+    _log_file = open(_log_path, "a", buffering=1, encoding="utf-8")
+    sys.stdout = _log_file
+    sys.stderr = _log_file
+
+import io
+import platform
+import socket
+import threading
+import time
+import uuid
+import zipfile
+from pathlib import Path
+
+import psutil
+import qrcode
+from flask import Flask, abort, send_file
+from PIL import ImageTk
+import tkinter as tk
+from tkinter import filedialog, ttk
+from tkinterdnd2 import DND_FILES, TkinterDnD
+
+# --------------------------------------------------------------------------
+# Serveur HTTP (Flask) — sert les fichiers partagés
+# --------------------------------------------------------------------------
+
+SERVER_PORT = 8000
+SHARED_FILES: dict[str, Path] = {}     # id -> chemin du fichier
+BATCHES: dict[str, list[str]] = {}     # batch_id -> liste d'ids de fichiers
+
+flask_app = Flask(__name__)
+
+
+@flask_app.route("/download/<file_id>")
+def download(file_id):
+    path = SHARED_FILES.get(file_id)
+    if not path or not path.exists():
+        abort(404)
+    return send_file(path, as_attachment=True, download_name=path.name)
+
+
+@flask_app.route("/download-batch/<batch_id>")
+def download_batch(batch_id):
+    file_ids = BATCHES.get(batch_id)
+    if not file_ids:
+        abort(404)
+
+    paths = [SHARED_FILES[fid] for fid in file_ids if fid in SHARED_FILES and SHARED_FILES[fid].exists()]
+    if not paths:
+        abort(404)
+
+    buffer = io.BytesIO()
+    used_names: dict[str, int] = {}
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED) as zf:
+        for path in paths:
+            name = path.name
+            if name in used_names:
+                used_names[name] += 1
+                stem, suffix = os.path.splitext(name)
+                name = f"{stem} ({used_names[name]}){suffix}"
+            else:
+                used_names[name] = 0
+            zf.write(path, arcname=name)
+    buffer.seek(0)
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name="partage.zip",
+        mimetype="application/zip",
+    )
+
+
+@flask_app.route("/")
+def index():
+    return "Serveur de partage actif. Scannez un QR code depuis l'application."
+
+
+def run_server():
+    # use_reloader=False est indispensable : le reloader Flask relance le
+    # process et casse tout quand on l'appelle depuis un thread.
+    flask_app.run(host="0.0.0.0", port=SERVER_PORT, threaded=True, use_reloader=False)
+
+
+# --------------------------------------------------------------------------
+# Détection des IP locales (routeur wifi, point d'accès mobile, Ethernet, ...)
+# --------------------------------------------------------------------------
+
+def get_local_ips() -> list[tuple[str, str]]:
+    """Retourne la liste (nom_interface, adresse_ip) pour toutes les IPv4 non-loopback."""
+    ips = []
+    for iface, addrs in psutil.net_if_addrs().items():
+        for addr in addrs:
+            if addr.family == socket.AF_INET and not addr.address.startswith("127."):
+                ips.append((iface, addr.address))
+    return sorted(ips)
+
+
+def is_wifi_iface(iface: str) -> bool:
+    """Heuristique : repère la carte Wi-Fi 'normale' (le vrai adaptateur qui se
+    connecte au routeur), en excluant l'adaptateur virtuel que Windows crée
+    pour le point d'accès mobile (souvent nommé 'Wi-Fi Direct' ou 'Virtual')."""
+    name = iface.lower()
+    if "direct" in name or "virtual" in name or "hotspot" in name:
+        return False
+    return "wi-fi" in name or "wifi" in name or "wlan" in name or "airport" in name
+
+
+def is_hotspot_candidate(iface: str, ip: str) -> bool:
+    """Heuristique : repère l'interface/IP créée par le point d'accès mobile.
+    Sous Windows, l'adaptateur virtuel du point d'accès distribue en général
+    des IP en 192.168.137.x, avec un nom du type 'Local Area Connection* n'
+    ou 'Microsoft Wi-Fi Direct Virtual Adapter'."""
+    name = iface.lower()
+    if ip.startswith("192.168.137."):
+        return True
+    return "direct" in name or "virtual" in name or "hotspot" in name or "local area connection*" in name
+
+
+def open_windows_hotspot_settings():
+    """Ouvre directement le panneau 'Point d'accès mobile' de Windows."""
+    if platform.system() == "Windows":
+        os.startfile("ms-settings:network-mobilehotspot")
+
+
+# --------------------------------------------------------------------------
+# Interface graphique
+# --------------------------------------------------------------------------
+
+IP_WATCH_INTERVAL_SEC = 2
+
+
+class App(TkinterDnD.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Partage PC → Téléphone")
+        self.geometry("680x640")
+        self.minsize(600, 850)
+
+        self.files: dict[str, Path] = {}
+        self.listbox_ids: list[str] = []
+        self.next_id = 1
+        self.selected_file_ids: list[str] = []
+        self.current_batch_id: str | None = None
+        self._ip_map: dict[str, str] = {}
+        self._last_ips: list[tuple[str, str]] = []
+        self._stop_watcher = threading.Event()
+        # True juste après un clic sur "Activer le point d'accès" : la
+        # prochaine IP qui ressemble à un point d'accès sera sélectionnée
+        # automatiquement dès qu'elle apparaît dans la liste.
+        self._awaiting_hotspot = False
+
+        self._build_ui()
+        self._start_server()
+        self._apply_ip_list(get_local_ips())
+        self._start_ip_watcher()
+
+        self.protocol("WM_DELETE_WINDOW", self._on_close)
+
+    # ---- Construction de l'interface -----------------------------------
+
+    def _build_ui(self):
+        # Zone de glisser-déposer
+        self.drop_frame = tk.Frame(self, bg="#e8edf7", height=100, relief="ridge", bd=2)
+        self.drop_frame.pack(fill="x", padx=12, pady=12)
+        self.drop_frame.pack_propagate(False)
+        self.drop_label = tk.Label(
+            self.drop_frame,
+            text="⬇  Glissez-déposez vos fichiers ici\nou cliquez pour parcourir",
+            bg="#e8edf7",
+            font=("Segoe UI", 12),
+            justify="center",
+        )
+        self.drop_label.pack(expand=True, fill="both")
+        self.drop_frame.drop_target_register(DND_FILES)
+        self.drop_frame.dnd_bind("<<Drop>>", self.on_drop)
+        self.drop_label.bind("<Button-1>", lambda e: self.browse_files())
+
+        # Liste des fichiers partagés
+        list_frame = tk.Frame(self)
+        list_frame.pack(fill="both", expand=True, padx=12)
+
+        header = tk.Frame(list_frame)
+        header.pack(fill="x")
+        tk.Label(header, text="Fichiers partagés (Ctrl/Shift-clic pour sélection multiple) :",
+                 font=("Segoe UI", 10, "bold")).pack(side="left", anchor="w")
+
+        inner = tk.Frame(list_frame)
+        inner.pack(fill="both", expand=True, pady=(4, 0))
+        self.listbox = tk.Listbox(
+            inner, font=("Segoe UI", 11), activestyle="dotbox", selectmode="extended", exportselection=False
+        )
+        self.listbox.pack(side="left", fill="both", expand=True)
+        self.listbox.bind("<<ListboxSelect>>", self.on_select)
+        self.listbox.bind("<Delete>", lambda e: self.delete_selected())
+        self.listbox.bind("<BackSpace>", lambda e: self.delete_selected())
+        # Clic droit -> menu contextuel (Button-3 : Windows/Linux, Button-2 : certains Mac,
+        # Control-clic : trackpad Mac sans bouton droit)
+        self.listbox.bind("<Button-3>", self.show_context_menu)
+        self.listbox.bind("<Button-2>", self.show_context_menu)
+        self.listbox.bind("<Control-Button-1>", self.show_context_menu)
+        scrollbar = tk.Scrollbar(inner, command=self.listbox.yview)
+        scrollbar.pack(side="right", fill="y")
+        self.listbox.config(yscrollcommand=scrollbar.set)
+
+        # Actions sur la liste
+        list_actions = tk.Frame(list_frame)
+        list_actions.pack(fill="x", pady=(6, 0))
+        tk.Button(list_actions, text="☑ Tout sélectionner", command=self.select_all).pack(side="left")
+        tk.Button(list_actions, text="☐ Désélectionner", command=self.deselect_all).pack(side="left", padx=6)
+        tk.Button(list_actions, text="🗑 Supprimer la sélection", command=self.delete_selected).pack(side="left")
+
+        # Sélecteur de réseau / interface
+        net_frame = tk.Frame(self)
+        net_frame.pack(fill="x", padx=12, pady=(12, 0))
+        tk.Label(net_frame, text="Réseau à utiliser :").pack(side="left")
+        self.ip_var = tk.StringVar()
+        self.ip_combo = ttk.Combobox(net_frame, textvariable=self.ip_var, state="readonly", width=34)
+        self.ip_combo.pack(side="left", padx=6)
+        self.ip_combo.bind("<<ComboboxSelected>>", lambda e: self.update_qr())
+        self.ip_status_label = tk.Label(net_frame, text="", fg="#888", font=("Segoe UI", 8))
+        self.ip_status_label.pack(side="left", padx=4)
+
+        if platform.system() == "Windows":
+            tk.Button(
+                net_frame,
+                text="📶 Activer le point d'accès",
+                command=self.activate_hotspot,
+            ).pack(side="right", padx=4)
+
+        # QR code
+        qr_frame = tk.Frame(self)
+        qr_frame.pack(pady=14)
+        self.qr_label = tk.Label(qr_frame, text="Sélectionnez un ou plusieurs fichiers ci-dessus", fg="#888")
+        self.qr_label.pack()
+
+        self.info_label = tk.Label(self, text="", font=("Segoe UI", 10, "bold"))
+        self.info_label.pack()
+        self.url_label = tk.Label(self, text="", font=("Segoe UI", 9), fg="#555")
+        self.url_label.pack()
+
+        tk.Button(self, text="📋 Copier le lien", command=self.copy_url).pack(pady=(4, 12))
+
+        # Menu contextuel (clic droit sur un fichier)
+        self.context_menu = tk.Menu(self, tearoff=0)
+        self.context_menu.add_command(label="🗑 Supprimer ce fichier", command=self.delete_selected)
+
+    # ---- Gestion des fichiers --------------------------------------------
+
+    def browse_files(self):
+        paths = filedialog.askopenfilenames(title="Choisir des fichiers à partager")
+        for p in paths:
+            self.add_file(Path(p))
+
+    def on_drop(self, event):
+        for p in self.tk.splitlist(event.data):
+            self.add_file(Path(p))
+
+    def add_file(self, path: Path):
+        if not path.exists() or not path.is_file():
+            return
+        file_id = str(self.next_id)
+        self.next_id += 1
+        self.files[file_id] = path
+        SHARED_FILES[file_id] = path
+        self.listbox.insert("end", path.name)
+        self.listbox_ids.append(file_id)
+        # Sélectionne automatiquement le fichier qu'on vient d'ajouter
+        self.listbox.selection_clear(0, "end")
+        self.listbox.selection_set("end")
+        self.on_select(None)
+
+    def delete_selected(self):
+        sel = list(self.listbox.curselection())
+        if not sel:
+            return
+        for idx in sorted(sel, reverse=True):
+            file_id = self.listbox_ids[idx]
+            self.files.pop(file_id, None)
+            SHARED_FILES.pop(file_id, None)
+            self.listbox.delete(idx)
+            del self.listbox_ids[idx]
+
+        self.selected_file_ids = []
+        self.current_batch_id = None
+        self.qr_label.config(image="", text="Sélectionnez un ou plusieurs fichiers ci-dessus")
+        self.info_label.config(text="")
+        self.url_label.config(text="")
+
+    def select_all(self):
+        if self.listbox.size() == 0:
+            return
+        self.listbox.selection_set(0, "end")
+        self.on_select(None)
+
+    def deselect_all(self):
+        self.listbox.selection_clear(0, "end")
+        self.selected_file_ids = []
+        self.current_batch_id = None
+        self.qr_label.config(image="", text="Sélectionnez un ou plusieurs fichiers ci-dessus")
+        self.info_label.config(text="")
+        self.url_label.config(text="")
+
+    def show_context_menu(self, event):
+        idx = self.listbox.nearest(event.y)
+        if idx < 0 or idx >= self.listbox.size():
+            return
+        # Si l'élément cliqué n'est pas déjà dans la sélection courante,
+        # on remplace la sélection par ce seul élément (clic droit "individuel").
+        if idx not in self.listbox.curselection():
+            self.listbox.selection_clear(0, "end")
+            self.listbox.selection_set(idx)
+            self.on_select(None)
+        self.context_menu.post(event.x_root, event.y_root)
+
+    def on_select(self, event):
+        sel = list(self.listbox.curselection())
+        if not sel:
+            self.selected_file_ids = []
+            self.current_batch_id = None
+            return
+        self.selected_file_ids = [self.listbox_ids[i] for i in sel]
+        if len(self.selected_file_ids) > 1:
+            batch_id = uuid.uuid4().hex[:12]
+            BATCHES[batch_id] = list(self.selected_file_ids)
+            self.current_batch_id = batch_id
+        else:
+            self.current_batch_id = None
+        self.update_qr()
+
+    # ---- Serveur -------------------------------------------------------
+
+    def _start_server(self):
+        threading.Thread(target=run_server, daemon=True).start()
+
+    # ---- Réseau : détection + rafraîchissement automatique ---------------
+
+    def activate_hotspot(self):
+        """Ouvre les réglages du point d'accès mobile Windows, et arme la
+        bascule automatique : dès que la nouvelle IP du point d'accès sera
+        détectée par le watcher, elle sera sélectionnée sans action manuelle."""
+        self._awaiting_hotspot = True
+        self.ip_status_label.config(text="En attente du point d'accès…")
+        open_windows_hotspot_settings()
+
+    def _start_ip_watcher(self):
+        """Thread d'arrière-plan qui détecte les changements d'IP (ex: activation
+        d'un point d'accès mobile) et met à jour l'interface en temps réel."""
+        def watch():
+            while not self._stop_watcher.is_set():
+                time.sleep(IP_WATCH_INTERVAL_SEC)
+                current = get_local_ips()
+                if current != self._last_ips:
+                    # self.after() : on repasse par la boucle d'événements tkinter
+                    # car les widgets ne doivent être touchés que depuis le thread principal.
+                    self.after(0, self._apply_ip_list, current)
+
+        threading.Thread(target=watch, daemon=True).start()
+
+    def _apply_ip_list(self, ips: list[tuple[str, str]]):
+        previous_ips = self._last_ips
+        changed = ips != previous_ips
+        self._last_ips = ips
+
+        display = [f"{iface} — {ip}" for iface, ip in ips]
+        previous_selection = self.ip_var.get()
+        self.ip_combo["values"] = display
+        self._ip_map = {f"{iface} — {ip}": ip for iface, ip in ips}
+
+        # IP apparues depuis le dernier passage (utile pour repérer le point d'accès
+        # au moment où il vient de s'activer, sans confondre avec une IP déjà connue).
+        new_entries = [entry for entry in ips if entry not in previous_ips]
+
+        target_display = None
+
+        # Cas 1 : on attend le point d'accès (bouton cliqué récemment) et une
+        # nouvelle IP qui y ressemble vient d'apparaître -> bascule automatique.
+        if self._awaiting_hotspot:
+            hotspot_candidates = [
+                (iface, ip) for iface, ip in new_entries if is_hotspot_candidate(iface, ip)
+            ]
+            if hotspot_candidates:
+                iface, ip = hotspot_candidates[0]
+                target_display = f"{iface} — {ip}"
+                self._awaiting_hotspot = False
+
+        # Cas 2 : pas de bascule vers le point d'accès -> on garde le choix
+        # actuel de l'utilisateur s'il est toujours valide.
+        if target_display is None and previous_selection in display:
+            target_display = previous_selection
+
+        # Cas 3 : aucun choix valide encore fait (typiquement au démarrage) ->
+        # on sélectionne l'IP du Wi-Fi local par défaut si elle existe, sinon
+        # la première IP disponible.
+        if target_display is None and display:
+            wifi_candidates = [(iface, ip) for iface, ip in ips if is_wifi_iface(iface)]
+            if wifi_candidates:
+                iface, ip = wifi_candidates[0]
+                target_display = f"{iface} — {ip}"
+            else:
+                target_display = display[0]
+
+        if target_display:
+            self.ip_var.set(target_display)
+        else:
+            self.ip_var.set("")
+
+        if changed:
+            self.ip_status_label.config(text="Réseaux mis à jour ✓")
+            self.after(2000, lambda: self.ip_status_label.config(text=""))
+
+        self.update_qr()
+
+    def _on_close(self):
+        self._stop_watcher.set()
+        self.destroy()
+
+    # ---- QR code ------------------------------------------------------------
+
+    def update_qr(self):
+        if not self.selected_file_ids:
+            return
+        ip = self._ip_map.get(self.ip_var.get())
+        if not ip:
+            return
+
+        if self.current_batch_id:
+            url = f"http://{ip}:{SERVER_PORT}/download-batch/{self.current_batch_id}"
+            count = len(self.selected_file_ids)
+            info_text = f"{count} fichiers sélectionnés — archive ZIP"
+        else:
+            file_id = self.selected_file_ids[0]
+            url = f"http://{ip}:{SERVER_PORT}/download/{file_id}"
+            info_text = self.files[file_id].name
+
+        img = qrcode.make(url).resize((260, 260))
+        self.qr_photo = ImageTk.PhotoImage(img)
+        self.qr_label.config(image=self.qr_photo, text="")
+        self.info_label.config(text=info_text)
+        self.url_label.config(text=url)
+        self.current_url = url
+
+    def copy_url(self):
+        if hasattr(self, "current_url"):
+            self.clipboard_clear()
+            self.clipboard_append(self.current_url)
+
+
+if __name__ == "__main__":
+    App().mainloop()
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\app.py ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\install.bat ---
+@echo off
+setlocal
+
+set "SCRIPT_DIR=%~dp0"
+set "PS1=%SCRIPT_DIR%install.ps1"
+
+if not exist "%PS1%" (
+    echo [ERREUR] Fichier install.ps1 introuvable a cote de install.bat.
+    echo Les deux fichiers doivent rester dans le meme dossier.
+    pause
+    exit /b 1
+)
+
+echo ============================================
+echo   Installation automatique de l'environnement
+echo ============================================
+echo.
+
+powershell -NoProfile -ExecutionPolicy Bypass -File "%PS1%"
+set "RESULT=%ERRORLEVEL%"
+
+echo.
+if not "%RESULT%"=="0" (
+    echo ERREUR : l'installation a echoue - code %RESULT%
+    echo Consultez les messages ci-dessus pour le detail.
+) else (
+    echo Installation terminee avec succes.
+)
+
+echo.
+pause
+exit /b %RESULT%
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\install.bat ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\install.ps1 ---
+<#
+.SYNOPSIS
+    Installe automatiquement l'environnement Python du projet.
+
+.DESCRIPTION
+    1. Verifie si Python 3.10 ou superieur est installe (PATH, lanceur 'py',
+       ou emplacement d'installation standard).
+    2. S'il est absent ou trop ancien, telecharge et installe automatiquement
+       Python 3.10 en mode silencieux, en l'ajoutant au PATH.
+    3. Cree un environnement virtuel dans le dossier du projet (./venv).
+    4. Installe les dependances listees dans requirements.txt.
+
+    Ce script est appele par install.bat, qui est le fichier a double-cliquer.
+#>
+
+$ErrorActionPreference = 'Stop'
+
+$MinMajor = 3
+$MinMinor = 10
+$PythonVersionToInstall = '3.10.11'
+$InstallerUrl = "https://www.python.org/ftp/python/$PythonVersionToInstall/python-$PythonVersionToInstall-amd64.exe"
+
+$ProjectDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$VenvDir = Join-Path $ProjectDir 'venv'
+$RequirementsFile = Join-Path $ProjectDir 'requirements.txt'
+
+function Write-Step {
+    param([string]$Message)
+    Write-Host ""
+    Write-Host "==> $Message" -ForegroundColor Cyan
+}
+
+function Test-PythonVersion {
+    <# Retourne $true si l'executable donne rapporte une version >= MinMajor.MinMinor #>
+    param([string]$ExePath)
+    try {
+        $output = & $ExePath --version 2>&1 | Out-String
+        if ($output -match '(\d+)\.(\d+)') {
+            $major = [int]$Matches[1]
+            $minor = [int]$Matches[2]
+            if (($major -gt $MinMajor) -or ($major -eq $MinMajor -and $minor -ge $MinMinor)) {
+                return $true
+            }
+        }
+    } catch {
+        return $false
+    }
+    return $false
+}
+
+function Find-SuitablePython {
+    <#
+    Cherche un interpreteur Python >= MinMajor.MinMinor deja installe.
+    Retourne soit un chemin d'executable direct, soit "py|-3.X" pour indiquer
+    qu'il faut passer par le lanceur 'py' avec cet argument de version.
+    #>
+
+    # 1) 'python' dans le PATH (en excluant le stub Microsoft Store, qui ne
+    #    correspond pas a une vraie installation)
+    $cmd = Get-Command python -ErrorAction SilentlyContinue
+    if ($cmd -and $cmd.Source -notlike '*WindowsApps*' -and (Test-PythonVersion $cmd.Source)) {
+        return $cmd.Source
+    }
+
+    # 2) Le lanceur 'py', installe par defaut avec Python sous Windows,
+    #    qui peut donner acces a une version specifique meme si 'python'
+    #    seul ne pointe pas vers elle.
+    $py = Get-Command py -ErrorAction SilentlyContinue
+    if ($py) {
+        foreach ($minor in 13..$MinMinor) {
+            try {
+                $output = & $py.Source "-3.$minor" --version 2>&1 | Out-String
+                if ($output -match '(\d+)\.(\d+)') {
+                    $major = [int]$Matches[1]
+                    $minorFound = [int]$Matches[2]
+                    if (($major -gt $MinMajor) -or ($major -eq $MinMajor -and $minorFound -ge $MinMinor)) {
+                        return "$($py.Source)|-3.$minor"
+                    }
+                }
+            } catch {
+                continue
+            }
+        }
+    }
+
+    # 3) Emplacement d'installation utilisateur standard, au cas ou le PATH
+    #    de la session actuelle ne serait pas encore a jour.
+    $userInstall = Join-Path $env:LOCALAPPDATA "Programs\Python\Python$MinMajor$MinMinor\python.exe"
+    if ((Test-Path $userInstall -PathType Leaf) -and (Test-PythonVersion $userInstall)) {
+        return $userInstall
+    }
+
+    return $null
+}
+
+function Install-Python {
+    Write-Step "Python $MinMajor.$MinMinor+ introuvable. Telechargement de Python $PythonVersionToInstall..."
+    $installerPath = Join-Path $env:TEMP "python-$PythonVersionToInstall-amd64.exe"
+    Invoke-WebRequest -Uri $InstallerUrl -OutFile $installerPath -UseBasicParsing
+
+    Write-Step "Installation silencieuse de Python (ajout automatique au PATH)..."
+    $arguments = @(
+        '/quiet',
+        'InstallAllUsers=0',
+        'PrependPath=1',
+        'Include_launcher=1',
+        'Include_test=0'
+    )
+    $process = Start-Process -FilePath $installerPath -ArgumentList $arguments -Wait -PassThru
+    Remove-Item $installerPath -Force -ErrorAction SilentlyContinue
+
+    if ($process.ExitCode -ne 0) {
+        throw "L'installateur Python a echoue avec le code $($process.ExitCode)."
+    }
+
+    # Le PATH systeme/utilisateur est mis a jour dans le registre par
+    # l'installateur, mais cette session PowerShell deja ouverte ne le
+    # voit pas. On localise donc directement l'executable installe.
+    $installedExe = Join-Path $env:LOCALAPPDATA "Programs\Python\Python$MinMajor$MinMinor\python.exe"
+    if (-not (Test-Path $installedExe -PathType Leaf)) {
+        throw "Python semble installe mais l'executable est introuvable a l'emplacement attendu : $installedExe"
+    }
+
+    Write-Step "Python $PythonVersionToInstall installe avec succes."
+    return $installedExe
+}
+
+function Invoke-Python {
+    <# Execute l'executable/lanceur Python retourne par Find-SuitablePython ou Install-Python #>
+    param(
+        [Parameter(Mandatory)][string]$PythonRef,
+        [Parameter(ValueFromRemainingArguments)][string[]]$Arguments
+    )
+    if ($PythonRef -like '*|*') {
+        $parts = $PythonRef -split '\|', 2
+        & $parts[0] $parts[1] @Arguments
+    } else {
+        & $PythonRef @Arguments
+    }
+}
+
+# ---------------------------------------------------------------------------
+# 1. Detection / installation de Python
+# ---------------------------------------------------------------------------
+
+Write-Step "Recherche d'une installation Python $MinMajor.$MinMinor ou superieure..."
+$pythonRef = Find-SuitablePython
+
+if (-not $pythonRef) {
+    $pythonRef = Install-Python
+} else {
+    Write-Host "Python trouve : $pythonRef"
+}
+
+# ---------------------------------------------------------------------------
+# 2. Creation de l'environnement virtuel
+# ---------------------------------------------------------------------------
+
+if (-not (Test-Path $RequirementsFile -PathType Leaf)) {
+    throw "Fichier requirements.txt introuvable : $RequirementsFile"
+}
+
+Write-Step "Creation de l'environnement virtuel dans '$VenvDir'..."
+if (Test-Path $VenvDir) {
+    Write-Host "Un environnement virtuel existe deja, il sera reutilise."
+} else {
+    Invoke-Python -PythonRef $pythonRef -m venv $VenvDir
+    if ($LASTEXITCODE -ne 0) {
+        throw "Echec de la creation de l'environnement virtuel (code $LASTEXITCODE)."
+    }
+}
+
+$venvPython = Join-Path $VenvDir 'Scripts\python.exe'
+if (-not (Test-Path $venvPython -PathType Leaf)) {
+    throw "Environnement virtuel invalide : $venvPython introuvable."
+}
+
+# ---------------------------------------------------------------------------
+# 3. Installation des dependances
+# ---------------------------------------------------------------------------
+
+Write-Step "Mise a jour de pip..."
+& $venvPython -m pip install --upgrade pip
+if ($LASTEXITCODE -ne 0) {
+    throw "Echec de la mise a jour de pip (code $LASTEXITCODE)."
+}
+
+Write-Step "Installation des dependances depuis requirements.txt..."
+& $venvPython -m pip install -r $RequirementsFile
+if ($LASTEXITCODE -ne 0) {
+    throw "Echec de l'installation des dependances (code $LASTEXITCODE)."
+}
+
+Write-Step "Installation terminee avec succes !"
+Write-Host ""
+Write-Host "Pour activer l'environnement virtuel manuellement :" -ForegroundColor Green
+Write-Host "  $VenvDir\Scripts\activate.bat" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "Pour lancer l'application :" -ForegroundColor Green
+Write-Host "  $venvPython app.py" -ForegroundColor Yellow
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\install.ps1 ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\lancer_app.bat ---
+@echo off
+setlocal
+
+set "SCRIPT_DIR=%~dp0"
+set "PYTHONW=%SCRIPT_DIR%venv\Scripts\pythonw.exe"
+set "APP=%SCRIPT_DIR%app.py"
+
+if not exist "%PYTHONW%" (
+    echo [ERREUR] pythonw.exe introuvable dans l'environnement virtuel.
+    echo Lancez d'abord install.bat pour creer l'environnement.
+    pause
+    exit /b 1
+)
+
+if not exist "%APP%" (
+    echo [ERREUR] app.py introuvable dans %SCRIPT_DIR%
+    pause
+    exit /b 1
+)
+
+rem "start" detache le processus : la fenetre cmd de ce script se ferme
+rem immediatement, et pythonw.exe ne cree lui-meme aucune fenetre de console.
+start "" "%PYTHONW%" "%APP%"
+exit
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\lancer_app.bat ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\requirements.txt ---
+Flask==3.0.3
+qrcode[pil]==7.4.2
+Pillow==10.4.0
+psutil==6.0.0
+tkinterdnd2==0.4.2
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\files\requirements.txt ---
+
