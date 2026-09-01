@@ -1,0 +1,143 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/code/py_to_starter
+  ├── creer_lanceur.py
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/py_to_starter\creer_lanceur.py ---
+"""
+Créateur de lanceur pour scripts Python (Windows)
+----------------------------------------------------
+Ce programme :
+1. Te permet de choisir un fichier .py (via une fenêtre de sélection, ou en glissant
+   le chemin du fichier dans le terminal si tu préfères).
+2. Crée un fichier .bat à côté du script, qui le lance sans passer par le terminal.
+3. Crée automatiquement un raccourci sur le Bureau qui pointe vers ce .bat.
+
+Utilisation :
+    python creer_lanceur.py
+    (ou directement : python creer_lanceur.py "C:\chemin\vers\mon_script.py")
+"""
+
+import os
+import sys
+import subprocess
+
+try:
+    import tkinter as tk
+    from tkinter import filedialog
+    TK_AVAILABLE = True
+except ImportError:
+    TK_AVAILABLE = False
+
+
+def choisir_fichier_python():
+    """Ouvre une fenêtre de sélection de fichier pour choisir un script .py"""
+    if not TK_AVAILABLE:
+        chemin = input("Chemin complet du fichier .py à utiliser : ").strip('"')
+        return chemin
+
+    root = tk.Tk()
+    root.withdraw()  # cache la fenêtre principale, on veut juste la boîte de dialogue
+    chemin = filedialog.askopenfilename(
+        title="Choisis le script Python à lancer",
+        filetypes=[("Fichiers Python", "*.py")]
+    )
+    root.destroy()
+    return chemin
+
+
+def creer_bat(chemin_py):
+    """Crée un fichier .bat à côté du script Python, qui le lance sans terminal visible."""
+    dossier = os.path.dirname(chemin_py)
+    nom_base = os.path.splitext(os.path.basename(chemin_py))[0]
+    chemin_bat = os.path.join(dossier, f"{nom_base}.bat")
+
+    # pythonw.exe = exécute sans ouvrir de console noire
+    # Si le script a besoin d'afficher des choses (print, input...), on utilise python.exe classique
+    contenu_bat = (
+        f'@echo off\n'
+        f'cd /d "{dossier}"\n'
+        f'python "{chemin_py}"\n'
+        f'pause\n'
+    )
+
+    with open(chemin_bat, "w", encoding="utf-8") as f:
+        f.write(contenu_bat)
+
+    return chemin_bat
+
+
+def creer_raccourci_bureau(chemin_bat, nom_raccourci=None):
+    """Crée un raccourci sur le Bureau Windows pointant vers le .bat, via un script VBS temporaire."""
+    bureau = os.path.join(os.path.join(os.environ["USERPROFILE"]), "Desktop")
+    if not os.path.isdir(bureau):
+        # certains comptes ont le Bureau redirigé (OneDrive, etc.)
+        bureau = os.path.join(os.environ["USERPROFILE"], "OneDrive", "Bureau")
+
+    if nom_raccourci is None:
+        nom_raccourci = os.path.splitext(os.path.basename(chemin_bat))[0]
+
+    chemin_lnk = os.path.join(bureau, f"{nom_raccourci}.lnk")
+
+    # On génère un petit script VBS qui crée le raccourci (pas besoin d'installer pywin32)
+    vbs_contenu = f'''
+Set oWS = WScript.CreateObject("WScript.Shell")
+sLinkFile = "{chemin_lnk}"
+Set oLink = oWS.CreateShortcut(sLinkFile)
+oLink.TargetPath = "{chemin_bat}"
+oLink.WorkingDirectory = "{os.path.dirname(chemin_bat)}"
+oLink.Description = "Lanceur pour {os.path.basename(chemin_bat)}"
+oLink.Save
+'''
+
+    chemin_vbs_temp = os.path.join(os.environ["TEMP"], "creer_raccourci_temp.vbs")
+    with open(chemin_vbs_temp, "w", encoding="utf-8") as f:
+        f.write(vbs_contenu)
+
+    subprocess.run(["cscript", "//nologo", chemin_vbs_temp], check=True)
+    os.remove(chemin_vbs_temp)
+
+    return chemin_lnk
+
+
+def main():
+    print("=== Créateur de lanceur pour script Python ===\n")
+
+    if len(sys.argv) > 1:
+        chemin_py = sys.argv[1]
+    else:
+        chemin_py = choisir_fichier_python()
+
+    if not chemin_py:
+        print("Aucun fichier sélectionné, on arrête là.")
+        return
+
+    chemin_py = os.path.abspath(chemin_py)
+
+    if not os.path.isfile(chemin_py):
+        print(f"Le fichier n'existe pas : {chemin_py}")
+        return
+
+    print(f"Script choisi : {chemin_py}")
+
+    chemin_bat = creer_bat(chemin_py)
+    print(f"Fichier .bat créé : {chemin_bat}")
+
+    chemin_lnk = creer_raccourci_bureau(chemin_bat)
+    print(f"Raccourci créé sur le Bureau : {chemin_lnk}")
+
+    print("\nC'est prêt ! Double-clique sur le raccourci pour lancer ton script.")
+
+
+if __name__ == "__main__":
+    main()
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/py_to_starter\creer_lanceur.py ---
+

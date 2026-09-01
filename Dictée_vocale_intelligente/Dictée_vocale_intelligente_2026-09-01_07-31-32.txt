@@ -1,0 +1,2230 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente
+  ├── Dictée_vocale_intelligente.html
+  ├── V1.html
+  ├── V2.html
+  ├── V3.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\Dictée_vocale_intelligente.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictée Vocale Ultra-Fluide</title>
+    <style>
+        :root { --primary: #4f46e5; --success: #10b981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: #f1f5f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 800px; padding: 20px; }
+        
+        /* Zone de texte optimisée */
+        .text-area-wrapper { position: relative; border: 2px solid #e2e8f0; border-radius: 12px; min-height: 300px; margin-bottom: 20px; transition: border 0.3s; }
+        .text-area-wrapper:focus-within { border-color: var(--primary); }
+        
+        #textDisplay { 
+            padding: 20px; min-height: 300px; font-size: 1.15rem; line-height: 1.6; 
+            outline: none; white-space: pre-wrap; word-wrap: break-word;
+        }
+        
+        /* Style pour le texte en cours de traitement */
+        .interim { color: #94a3b8; font-style: italic; }
+
+        .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-start { background: var(--primary); color: white; }
+        .btn-start.active { background: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        
+        /* Styles pour les nouveaux boutons */
+        .secondary-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-secondary { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-clear { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .btn-clear:hover { background: #fee2e2; }
+        .btn-copy { background: #f0f9ff; color: #0369a1; border: 1px solid #7dd3fc; }
+        .btn-copy:hover { background: #e0f2fe; }
+        
+        .status-bar { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls">
+        <select id="langSelect" style="flex: 0.5; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            <option value="fr-FR">Français 🇫🇷</option>
+            <option value="en-US">English 🇺🇸</option>
+            <option value="ar-SA">العربية 🇸🇦</option>
+        </select>
+        <button id="mainBtn" class="btn-start">Démarrer la dictée</button>
+    </div>
+
+    <div class="text-area-wrapper">
+        <div id="textDisplay" contenteditable="true" spellcheck="true"></div>
+    </div>
+
+    <!-- Nouveaux boutons ajoutés -->
+    <div class="secondary-buttons">
+        <button id="clearTextBtn" class="btn-clear">Vider le texte</button>
+        <button id="copyContentBtn" class="btn-copy">Copier le contenu</button>
+    </div>
+
+    <div class="status-bar">
+        <span id="status">Prêt</span>
+        <span id="stats">0 mots</span>
+    </div>
+</div>
+
+<script>
+    const mainBtn = document.getElementById('mainBtn');
+    const textDisplay = document.getElementById('textDisplay');
+    const status = document.getElementById('status');
+    const langSelect = document.getElementById('langSelect');
+    const clearTextBtn = document.getElementById('clearTextBtn');
+    const copyContentBtn = document.getElementById('copyContentBtn');
+
+    let recognition;
+    let isListening = false;
+    let finalTranscript = '';
+
+    // Initialisation
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true; // LA CLÉ POUR LA FLUIDITÉ
+
+        recognition.onstart = () => {
+            isListening = true;
+            mainBtn.textContent = "Arrêter la dictée";
+            mainBtn.classList.add('active');
+            status.textContent = "Je vous écoute...";
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    insertAtCursor(event.results[i][0].transcript + ' ');
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+            
+            // Affichage temporaire du texte "en cours"
+            updateInterimDisplay(interimTranscript);
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Erreur:", event.error);
+            stopDictation();
+        };
+
+        recognition.onend = () => {
+            if (isListening) recognition.start(); // Auto-restart pour ne jamais couper
+        };
+    }
+
+    function insertAtCursor(text) {
+        // Supprime l'affichage intérimaire avant d'insérer le texte final
+        removeInterim();
+        
+        const sel = window.getSelection();
+        if (sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const node = document.createTextNode(text);
+            range.insertNode(node);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+        updateStats();
+    }
+
+    function updateInterimDisplay(text) {
+        removeInterim();
+        if (text) {
+            const span = document.createElement('span');
+            span.id = 'interim-span';
+            span.className = 'interim';
+            span.textContent = text;
+            
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                range.insertNode(span);
+            }
+        }
+    }
+
+    function removeInterim() {
+        const existing = document.getElementById('interim-span');
+        if (existing) existing.remove();
+    }
+
+    function toggleDictation() {
+        if (isListening) {
+            stopDictation();
+        } else {
+            startDictation();
+        }
+    }
+
+    function startDictation() {
+        recognition.lang = langSelect.value;
+        recognition.start();
+        textDisplay.focus();
+    }
+
+    function stopDictation() {
+        isListening = false;
+        recognition.stop();
+        mainBtn.textContent = "Démarrer la dictée";
+        mainBtn.classList.remove('active');
+        status.textContent = "Arrêté";
+        removeInterim();
+    }
+
+    function updateStats() {
+        const words = textDisplay.innerText.trim().split(/\s+/).length;
+        document.getElementById('stats').textContent = `${textDisplay.innerText.trim() ? words : 0} mots`;
+    }
+
+    // Fonction pour vider le texte - SIMPLIFIÉE
+    function clearText() {
+        // Effacer le contenu directement
+        textDisplay.innerHTML = '';
+        
+        // Mettre à jour les statistiques
+        updateStats();
+        
+        // Donner le focus à la zone de texte
+        textDisplay.focus();
+        
+        // Afficher un message de confirmation
+        status.textContent = "Texte effacé";
+        clearTextBtn.textContent = "Texte effacé !";
+        clearTextBtn.style.background = "#dcfce7";
+        clearTextBtn.style.color = "#166534";
+        
+        setTimeout(() => {
+            clearTextBtn.textContent = "Vider le texte";
+            clearTextBtn.style.background = "";
+            clearTextBtn.style.color = "";
+            if (!isListening) status.textContent = "Prêt";
+        }, 1500);
+    }
+
+    // Fonction pour copier le contenu
+    function copyContent() {
+        const textToCopy = textDisplay.innerText.trim();
+        
+        if (!textToCopy) {
+            status.textContent = "Aucun texte à copier";
+            setTimeout(() => {
+                if (!isListening) status.textContent = "Prêt";
+            }, 2000);
+            return;
+        }
+        
+        // Utiliser l'API Clipboard moderne
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                status.textContent = "Texte copié dans le presse-papiers !";
+                copyContentBtn.textContent = "Copié !";
+                copyContentBtn.style.background = "#d1fae5";
+                copyContentBtn.style.color = "#065f46";
+                
+                setTimeout(() => {
+                    copyContentBtn.textContent = "Copier le contenu";
+                    copyContentBtn.style.background = "";
+                    copyContentBtn.style.color = "";
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Erreur lors de la copie: ', err);
+                status.textContent = "Erreur lors de la copie";
+                
+                // Méthode de secours pour les anciens navigateurs
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                status.textContent = "Texte copié (méthode de secours)";
+                setTimeout(() => {
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            });
+    }
+
+    // Événements des boutons
+    mainBtn.addEventListener('click', toggleDictation);
+    clearTextBtn.addEventListener('click', clearText);
+    copyContentBtn.addEventListener('click', copyContent);
+    
+    // Sauvegarde auto de la langue
+    langSelect.value = localStorage.getItem('pref_lang') || 'fr-FR';
+    langSelect.onchange = () => localStorage.setItem('pref_lang', langSelect.value);
+
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\Dictée_vocale_intelligente.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V1.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictée Vocale - Micro Automatique</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        /* Bannière de permission */
+        .permission-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #f59e0b;
+            display: none;
+        }
+
+        .permission-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .permission-text {
+            flex: 1;
+        }
+
+        .permission-text h3 {
+            color: #92400e;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .permission-text p {
+            color: #92400e;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .permission-btn {
+            padding: 12px 24px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .permission-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Mode de contrôle */
+        .mode-control {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .mode-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .mode-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            background: #e2e8f0;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .mode-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #64748b;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: #4f46e5;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Réglages manuels */
+        .manual-settings {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .setting-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .setting-label {
+            font-size: 0.85rem;
+            color: #475569;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .setting-value {
+            font-size: 0.85rem;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4f46e5;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .range-indicators {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        /* Indicateur auto */
+        .auto-indicator {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .auto-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .auto-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Barre de ponctuation */
+        .ponctuation-bar {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .ponctuation-title {
+            color: #475569;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ponctuation-buttons {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .ponctuation-buttons {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .manual-settings {
+                grid-template-columns: 1fr;
+            }
+            
+            .permission-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ponctuation-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .ponctuation-btn {
+            padding: 12px 8px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            color: #475569;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            min-height: 60px;
+        }
+
+        .ponctuation-btn:hover {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .ponctuation-btn:active {
+            transform: translateY(0);
+        }
+
+        .ponctuation-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-top: 2px;
+        }
+
+        /* Contrôles principaux */
+        .main-controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .main-btn {
+            padding: 16px 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 60px;
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-stop {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            grid-column: span 2;
+        }
+
+        .btn-clear {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .main-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Zone de texte */
+        .text-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 5px;
+            margin-bottom: 20px;
+            min-height: 300px;
+            position: relative;
+        }
+
+        .text-display {
+            padding: 20px;
+            min-height: 280px;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            overflow-y: auto;
+            background: white;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .text-display.arabic {
+            direction: rtl;
+            text-align: right;
+            font-size: 1.4rem;
+            font-family: 'Segoe UI', Tahoma, 'Arial', sans-serif;
+        }
+
+        .text-placeholder {
+            color: #94a3b8;
+            font-style: italic;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            text-align: center;
+            width: 80%;
+        }
+
+        /* Options rapides */
+        .quick-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .option-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: white;
+            color: #475569;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        /* Indicateurs */
+        .indicators {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .indicator {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .indicator-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4f46e5;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .indicator-label {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* Animation microphone */
+        .mic-animation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 15px;
+            height: 40px;
+        }
+
+        .mic-bar {
+            width: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mic-bar.active {
+            background: #10b981;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 350px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Instructions */
+        .instructions {
+            font-size: 0.8rem;
+            color: #64748b;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 1.5;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+
+        /* Pour mobile */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 15px;
+                margin: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .main-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-start, .btn-stop {
+                grid-column: span 1;
+            }
+            
+            .indicators {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .indicators {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎤 Dictée Vocale Intelligente</h1>
+            <p>Microphone automatique - Pas de pop-up intrusif</p>
+        </div>
+        
+        <div class="content">
+            <!-- Bannière de permission (seulement si nécessaire) -->
+            <div class="permission-banner" id="permissionBanner">
+                <div class="permission-content">
+                    <div class="permission-text">
+                        <h3><span class="icon">🎤</span> Permission microphone</h3>
+                        <p>Pour utiliser la dictée vocale, autorisez l'accès au microphone. Cliquez sur "Activer le microphone" une seule fois.</p>
+                    </div>
+                    <button class="permission-btn" id="enableMicBtn">
+                        <span class="icon">✅</span> Activer le microphone
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Options rapides -->
+            <div class="quick-options">
+                <div class="option-group">
+                    <select id="languageSelect">
+                        <option value="fr-FR">Français</option>
+                        <option value="ar-SA">Arabe</option>
+                        <option value="en-US">English</option>
+                        <option value="es-ES">Español</option>
+                        <option value="de-DE">Deutsch</option>
+                        <option value="it-IT">Italiano</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Animation microphone -->
+            <div class="mic-animation" id="micAnimation">
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+                <div class="mic-bar"></div>
+            </div>
+            
+            <!-- Mode de contrôle -->
+            <div class="mode-control">
+                <div class="mode-header">
+                    <div class="mode-title">
+                        <span class="icon">⚙️</span> Mode de reconnaissance
+                    </div>
+                    <div class="mode-toggle">
+                        <button class="mode-btn active" data-mode="auto" id="autoModeBtn">
+                            Auto
+                        </button>
+                        <button class="mode-btn" data-mode="manual" id="manualModeBtn">
+                            Manuel
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Mode Auto -->
+                <div class="auto-indicator" id="autoIndicator">
+                    <div class="auto-status">
+                        <span class="icon">🤖</span>
+                        Mode Automatique activé
+                        <span class="auto-badge" id="adaptationLevel">Adaptation élevée</span>
+                    </div>
+                </div>
+                
+                <!-- Réglages Manuels -->
+                <div class="manual-settings" id="manualSettings" style="display: none;">
+                    <div class="setting-group">
+                        <div class="setting-label">
+                            Sensibilité
+                            <span class="setting-value" id="sensitivityValue">70%</span>
+                        </div>
+                        <input type="range" id="sensitivitySlider" min="10" max="100" value="70">
+                        <div class="range-indicators">
+                            <span>Faible</span>
+                            <span>Forte</span>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="setting-label">
+                            Seuil de confiance
+                            <span class="setting-value" id="confidenceValue">75%</span>
+                        </div>
+                        <input type="range" id="confidenceSlider" min="10" max="100" value="75">
+                        <div class="range-indicators">
+                            <span>Bas</span>
+                            <span>Haut</span>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <div class="setting-label">
+                            Temps de pause
+                            <span class="setting-value" id="pauseValue">2.0s</span>
+                        </div>
+                        <input type="range" id="pauseSlider" min="500" max="5000" value="2000" step="100">
+                        <div class="range-indicators">
+                            <span>Court</span>
+                            <span>Long</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Zone de texte -->
+            <div class="text-container">
+                <div class="text-display" id="textDisplay" contenteditable="true"></div>
+                <div class="text-placeholder" id="textPlaceholder">
+                    Votre texte apparaîtra ici...<br>
+                    Cliquez sur Démarrer pour dicter
+                </div>
+            </div>
+            
+            <!-- Barre de ponctuation -->
+            <div class="ponctuation-bar">
+                <div class="ponctuation-title">
+                    <span class="icon">🔤</span> Ponctuation rapide
+                </div>
+                <div class="ponctuation-buttons">
+                    <button class="ponctuation-btn" data-char=".">
+                        <span>.</span>
+                        <span class="ponctuation-label">Point</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char=",">
+                        <span>,</span>
+                        <span class="ponctuation-label">Virgule</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char=";">
+                        <span>;</span>
+                        <span class="ponctuation-label">Point-virgule</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char=":">
+                        <span>:</span>
+                        <span class="ponctuation-label">Deux-points</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char="?">
+                        <span>?</span>
+                        <span class="ponctuation-label">Point d'interrogation</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char="!">
+                        <span>!</span>
+                        <span class="ponctuation-label">Point d'exclamation</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char="⏎">
+                        <span>↵</span>
+                        <span class="ponctuation-label">Retour à la ligne</span>
+                    </button>
+                    <button class="ponctuation-btn" data-char=" ">
+                        <span>␣</span>
+                        <span class="ponctuation-label">Espace</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Boutons principaux -->
+            <div class="main-controls">
+                <button id="startBtn" class="main-btn btn-start">
+                    <span class="icon">🎤</span> Démarrer la dictée
+                </button>
+                <button id="stopBtn" class="main-btn btn-stop" disabled>
+                    <span class="icon">⏹️</span> Arrêter la dictée
+                </button>
+                <button id="clearBtn" class="main-btn btn-clear">
+                    <span class="icon">🗑️</span> Effacer tout
+                </button>
+                <button id="copyBtn" class="main-btn btn-copy">
+                    <span class="icon">📋</span> Copier le texte
+                </button>
+            </div>
+            
+            <!-- Indicateurs -->
+            <div class="indicators">
+                <div class="indicator">
+                    <span class="indicator-value" id="wordCount">0</span>
+                    <span class="indicator-label">Mots</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-value" id="charCount">0</span>
+                    <span class="indicator-label">Caractères</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-value" id="wpmValue">0</span>
+                    <span class="indicator-label">Mots/min</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-value" id="accuracyValue">85%</span>
+                    <span class="indicator-label">Précision</span>
+                </div>
+            </div>
+            
+            <!-- Instructions -->
+            <p class="instructions">
+                <strong>🎯 Fonctionnement automatique :</strong> Pas de pop-up, le microphone s'active uniquement quand vous cliquez sur "Démarrer"
+            </p>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <span class="icon" id="notificationIcon">📋</span>
+        <span id="notificationText">Prêt à dicter</span>
+    </div>
+
+    <script>
+        // Éléments du DOM
+        const elements = {
+            textDisplay: document.getElementById('textDisplay'),
+            textPlaceholder: document.getElementById('textPlaceholder'),
+            startBtn: document.getElementById('startBtn'),
+            stopBtn: document.getElementById('stopBtn'),
+            clearBtn: document.getElementById('clearBtn'),
+            copyBtn: document.getElementById('copyBtn'),
+            languageSelect: document.getElementById('languageSelect'),
+            wordCount: document.getElementById('wordCount'),
+            charCount: document.getElementById('charCount'),
+            wpmValue: document.getElementById('wpmValue'),
+            accuracyValue: document.getElementById('accuracyValue'),
+            notification: document.getElementById('notification'),
+            notificationIcon: document.getElementById('notificationIcon'),
+            notificationText: document.getElementById('notificationText'),
+            micAnimation: document.getElementById('micAnimation'),
+            autoModeBtn: document.getElementById('autoModeBtn'),
+            manualModeBtn: document.getElementById('manualModeBtn'),
+            autoIndicator: document.getElementById('autoIndicator'),
+            manualSettings: document.getElementById('manualSettings'),
+            adaptationLevel: document.getElementById('adaptationLevel'),
+            sensitivitySlider: document.getElementById('sensitivitySlider'),
+            confidenceSlider: document.getElementById('confidenceSlider'),
+            pauseSlider: document.getElementById('pauseSlider'),
+            sensitivityValue: document.getElementById('sensitivityValue'),
+            confidenceValue: document.getElementById('confidenceValue'),
+            pauseValue: document.getElementById('pauseValue'),
+            permissionBanner: document.getElementById('permissionBanner'),
+            enableMicBtn: document.getElementById('enableMicBtn')
+        };
+
+        // Variables d'état
+        const state = {
+            isListening: false,
+            isAutoMode: true,
+            recognition: null,
+            textContent: '',
+            speechStartTime: null,
+            totalWords: 0,
+            confidenceScores: [],
+            speechPatterns: {
+                wordsPerMinute: 0,
+                avgConfidence: 0.85,
+                pauseDuration: 2000,
+                sensitivity: 0.7,
+                adaptationLevel: 'high'
+            },
+            micBars: null,
+            micInterval: null,
+            micPermissionGranted: false,
+            micTested: false
+        };
+
+        // Initialisation
+        init();
+
+        function init() {
+            setupEventListeners();
+            setupPonctuationButtons();
+            initMicBars();
+            updatePlaceholder();
+            updateSliderDisplays();
+            
+            // Vérifier la permission du microphone au chargement
+            checkMicrophonePermission();
+        }
+
+        function setupEventListeners() {
+            // Boutons principaux
+            elements.startBtn.addEventListener('click', startListening);
+            elements.stopBtn.addEventListener('click', stopListening);
+            elements.clearBtn.addEventListener('click', clearText);
+            elements.copyBtn.addEventListener('click', copyToClipboard);
+            
+            // Mode de contrôle
+            elements.autoModeBtn.addEventListener('click', () => setMode('auto'));
+            elements.manualModeBtn.addEventListener('click', () => setMode('manual'));
+            
+            // Sliders manuels
+            elements.sensitivitySlider.addEventListener('input', updateSensitivity);
+            elements.confidenceSlider.addEventListener('input', updateConfidence);
+            elements.pauseSlider.addEventListener('input', updatePauseThreshold);
+            
+            // Langue
+            elements.languageSelect.addEventListener('change', updateLanguage);
+            
+            // Zone de texte
+            elements.textDisplay.addEventListener('input', () => {
+                updatePlaceholder();
+                updateStats();
+            });
+            
+            // Bouton d'activation du microphone
+            elements.enableMicBtn.addEventListener('click', requestMicrophonePermission);
+            
+            // Raccourcis clavier
+            document.addEventListener('keydown', handleKeyboardShortcuts);
+            
+            // Sauvegarder l'état de permission dans localStorage
+            window.addEventListener('beforeunload', () => {
+                localStorage.setItem('micPermissionGranted', state.micPermissionGranted);
+            });
+        }
+
+        function checkMicrophonePermission() {
+            // Vérifier si la permission a déjà été accordée (stockée en localStorage)
+            const savedPermission = localStorage.getItem('micPermissionGranted');
+            
+            if (savedPermission === 'true') {
+                state.micPermissionGranted = true;
+                elements.permissionBanner.style.display = 'none';
+                initSpeechRecognition();
+            } else {
+                // Tester silencieusement l'accès au microphone
+                testMicrophoneSilently();
+            }
+        }
+
+        function testMicrophoneSilently() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                // L'API n'est pas disponible
+                showPermissionBanner();
+                return;
+            }
+            
+            // Tester l'accès au microphone sans demander de permission
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    // Permission déjà accordée
+                    state.micPermissionGranted = true;
+                    localStorage.setItem('micPermissionGranted', 'true');
+                    elements.permissionBanner.style.display = 'none';
+                    
+                    // Arrêter le stream immédiatement
+                    stream.getTracks().forEach(track => track.stop());
+                    
+                    // Initialiser la reconnaissance vocale
+                    initSpeechRecognition();
+                })
+                .catch(error => {
+                    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+                        // Permission refusée précédemment
+                        showPermissionBanner();
+                    } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+                        // Pas de microphone disponible
+                        showNotification("❌ Aucun microphone détecté", "#ef4444", "❌");
+                        elements.startBtn.disabled = true;
+                    } else {
+                        // Autre erreur
+                        showPermissionBanner();
+                    }
+                });
+        }
+
+        function showPermissionBanner() {
+            elements.permissionBanner.style.display = 'block';
+            elements.startBtn.disabled = true;
+        }
+
+        function requestMicrophonePermission() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showNotification("❌ L'API microphone n'est pas disponible", "#ef4444", "❌");
+                return;
+            }
+            
+            // Demander la permission explicitement
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    // Permission accordée
+                    state.micPermissionGranted = true;
+                    localStorage.setItem('micPermissionGranted', 'true');
+                    elements.permissionBanner.style.display = 'none';
+                    elements.startBtn.disabled = false;
+                    
+                    // Arrêter le stream
+                    stream.getTracks().forEach(track => track.stop());
+                    
+                    // Initialiser la reconnaissance vocale
+                    initSpeechRecognition();
+                    
+                    showNotification("✅ Microphone activé", "#10b981", "✅");
+                })
+                .catch(error => {
+                    if (error.name === 'NotAllowedError' || error.name === 'PermissionDeniedError') {
+                        showNotification("❌ Permission refusée", "#ef4444", "❌");
+                    } else if (error.name === 'NotFoundError') {
+                        showNotification("❌ Microphone non trouvé", "#ef4444", "❌");
+                    } else {
+                        showNotification("❌ Erreur d'accès au microphone", "#ef4444", "❌");
+                    }
+                });
+        }
+
+        function setupPonctuationButtons() {
+            const buttons = document.querySelectorAll('.ponctuation-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const char = button.getAttribute('data-char');
+                    insertPonctuation(char);
+                });
+            });
+        }
+
+        function initMicBars() {
+            elements.micAnimation.innerHTML = '';
+            state.micBars = [];
+            for (let i = 0; i < 7; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'mic-bar';
+                bar.style.height = '10px';
+                elements.micAnimation.appendChild(bar);
+                state.micBars.push(bar);
+            }
+        }
+
+        function updateMicAnimation(level) {
+            if (!state.isListening) return;
+            
+            const activeBars = Math.min(Math.floor(level * 7), 7);
+            state.micBars.forEach((bar, index) => {
+                const height = 10 + (index < activeBars ? Math.random() * 30 : 0);
+                bar.style.height = `${height}px`;
+                bar.classList.toggle('active', index < activeBars);
+            });
+        }
+
+        function setMode(mode) {
+            state.isAutoMode = mode === 'auto';
+            
+            // Mettre à jour les boutons
+            elements.autoModeBtn.classList.toggle('active', state.isAutoMode);
+            elements.manualModeBtn.classList.toggle('active', !state.isAutoMode);
+            
+            // Afficher/masquer les réglages
+            elements.autoIndicator.style.display = state.isAutoMode ? 'block' : 'none';
+            elements.manualSettings.style.display = state.isAutoMode ? 'none' : 'block';
+            
+            // Mettre à jour la notification
+            if (state.isAutoMode) {
+                showNotification("🤖 Mode automatique activé", "#10b981", "🤖");
+                updateAdaptationLevel();
+            } else {
+                showNotification("🔧 Mode manuel activé", "#3b82f6", "🔧");
+            }
+            
+            // Mettre à jour les paramètres de reconnaissance
+            updateRecognitionSettings();
+        }
+
+        function updateAdaptationLevel() {
+            const levels = {
+                high: { text: "Adaptation élevée", color: "#10b981" },
+                medium: { text: "Adaptation moyenne", color: "#f59e0b" },
+                low: { text: "Adaptation basse", color: "#ef4444" }
+            };
+            
+            const level = state.speechPatterns.adaptationLevel || 'high';
+            elements.adaptationLevel.textContent = levels[level].text;
+            elements.adaptationLevel.style.background = levels[level].color;
+        }
+
+        function updateSensitivity() {
+            const value = parseInt(elements.sensitivitySlider.value);
+            elements.sensitivityValue.textContent = value + '%';
+            state.speechPatterns.sensitivity = value / 100;
+            
+            if (!state.isAutoMode) {
+                updateRecognitionSettings();
+            }
+        }
+
+        function updateConfidence() {
+            const value = parseInt(elements.confidenceSlider.value);
+            elements.confidenceValue.textContent = value + '%';
+            state.speechPatterns.avgConfidence = value / 100;
+            
+            if (!state.isAutoMode) {
+                updateRecognitionSettings();
+            }
+        }
+
+        function updatePauseThreshold() {
+            const value = parseInt(elements.pauseSlider.value);
+            elements.pauseValue.textContent = (value / 1000).toFixed(1) + 's';
+            state.speechPatterns.pauseDuration = value;
+            
+            if (!state.isAutoMode) {
+                updateRecognitionSettings();
+            }
+        }
+
+        function updateSliderDisplays() {
+            // Initialiser les valeurs des sliders
+            elements.sensitivitySlider.value = state.speechPatterns.sensitivity * 100;
+            elements.confidenceSlider.value = state.speechPatterns.avgConfidence * 100;
+            elements.pauseSlider.value = state.speechPatterns.pauseDuration;
+            
+            // Mettre à jour les affichages
+            updateSensitivity();
+            updateConfidence();
+            updatePauseThreshold();
+        }
+
+        function insertPonctuation(char) {
+            const isArabic = elements.languageSelect.value.startsWith('ar-');
+            
+            // Convertir le caractère spécial
+            let actualChar = char;
+            if (char === '⏎') actualChar = '\n';
+            if (char === ' ') actualChar = ' ';
+            
+            // Ajouter au contenu
+            if (isArabic) {
+                state.textContent = actualChar + state.textContent;
+            } else {
+                state.textContent += actualChar;
+            }
+            
+            // Mettre à jour l'affichage
+            updateTextDisplay();
+            
+            // Notifier
+            const labels = {
+                '.': 'Point ajouté',
+                ',': 'Virgule ajoutée',
+                ';': 'Point-virgule ajouté',
+                ':': 'Deux-points ajoutés',
+                '?': 'Point d\'interrogation ajouté',
+                '!': 'Point d\'exclamation ajouté',
+                '\n': 'Retour à la ligne ajouté',
+                ' ': 'Espace ajouté'
+            };
+            
+            if (labels[actualChar]) {
+                showNotification(labels[actualChar], "#3b82f6", "🔤");
+            }
+        }
+
+        function initSpeechRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!SpeechRecognition) {
+                showNotification("❌ Reconnaissance vocale non supportée", "#ef4444", "❌");
+                elements.startBtn.disabled = true;
+                return;
+            }
+            
+            state.recognition = new SpeechRecognition();
+            configureRecognition();
+            
+            state.recognition.onstart = () => {
+                state.isListening = true;
+                state.speechStartTime = Date.now();
+                updateUI();
+                startMicMonitoring();
+                showNotification("🎤 Dictée en cours...", "#10b981", "🎤");
+            };
+            
+            state.recognition.onresult = (event) => {
+                handleSpeechResult(event);
+            };
+            
+            state.recognition.onerror = (event) => {
+                handleRecognitionError(event);
+            };
+            
+            state.recognition.onend = () => {
+                if (state.isListening) {
+                    setTimeout(() => {
+                        try {
+                            state.recognition.start();
+                        } catch (e) {
+                            console.error('Redémarrage échoué:', e);
+                        }
+                    }, 100);
+                }
+            };
+        }
+
+        function configureRecognition() {
+            if (!state.recognition) return;
+            
+            state.recognition.continuous = true;
+            state.recognition.interimResults = true;
+            state.recognition.maxAlternatives = 3;
+            state.recognition.lang = elements.languageSelect.value;
+        }
+
+        function updateRecognitionSettings() {
+            if (!state.recognition) return;
+            
+            // En mode auto, ajuster dynamiquement
+            if (state.isAutoMode) {
+                const speedFactor = Math.max(0.5, Math.min(2, 120 / Math.max(state.speechPatterns.wordsPerMinute, 60)));
+                const confidenceFactor = Math.max(0.3, Math.min(0.95, state.speechPatterns.avgConfidence));
+                
+                state.speechPatterns.pauseDuration = 2000 * speedFactor;
+                state.speechPatterns.sensitivity = 0.5 + (confidenceFactor * 0.5);
+                
+                updateSliderDisplays();
+                
+                if (confidenceFactor > 0.8 && speedFactor > 0.8) {
+                    state.speechPatterns.adaptationLevel = 'high';
+                } else if (confidenceFactor > 0.6 && speedFactor > 0.6) {
+                    state.speechPatterns.adaptationLevel = 'medium';
+                } else {
+                    state.speechPatterns.adaptationLevel = 'low';
+                }
+                updateAdaptationLevel();
+            }
+        }
+
+        function handleSpeechResult(event) {
+            const results = event.results;
+            const resultIndex = event.resultIndex;
+            
+            let finalText = '';
+            let maxConfidence = 0;
+            
+            for (let i = resultIndex; i < results.length; i++) {
+                const result = results[i];
+                
+                if (result.isFinal) {
+                    let bestAlternative = result[0];
+                    for (let j = 1; j < result.length; j++) {
+                        if (result[j].confidence > bestAlternative.confidence) {
+                            bestAlternative = result[j];
+                        }
+                    }
+                    
+                    const confidence = bestAlternative.confidence;
+                    const transcript = bestAlternative.transcript;
+                    
+                    const confidenceThreshold = state.isAutoMode ? 
+                        state.speechPatterns.avgConfidence * 0.9 : 
+                        state.speechPatterns.avgConfidence;
+                    
+                    if (confidence >= confidenceThreshold) {
+                        finalText += transcript + ' ';
+                        maxConfidence = Math.max(maxConfidence, confidence);
+                        
+                        updateSpeechMetrics(transcript, confidence);
+                    }
+                    
+                } else {
+                    showInterimText(result[0].transcript);
+                }
+            }
+            
+            if (finalText.trim()) {
+                state.textContent += finalText;
+                updateTextDisplay();
+                
+                if (state.isAutoMode) {
+                    learnFromResult(finalText, maxConfidence);
+                }
+            }
+            
+            updateMicAnimation(maxConfidence);
+            updateStats();
+        }
+
+        function updateSpeechMetrics(transcript, confidence) {
+            const words = transcript.split(/\s+/).length;
+            state.totalWords += words;
+            
+            const elapsedMinutes = (Date.now() - state.speechStartTime) / 60000;
+            state.speechPatterns.wordsPerMinute = elapsedMinutes > 0 ? 
+                Math.round(state.totalWords / elapsedMinutes) : 0;
+            
+            state.confidenceScores.push(confidence);
+            if (state.confidenceScores.length > 50) {
+                state.confidenceScores.shift();
+            }
+            
+            const avgConfidence = state.confidenceScores.length > 0 ?
+                state.confidenceScores.reduce((a, b) => a + b, 0) / state.confidenceScores.length : 0.85;
+            
+            state.speechPatterns.avgConfidence = avgConfidence;
+            
+            elements.wpmValue.textContent = state.speechPatterns.wordsPerMinute;
+            elements.accuracyValue.textContent = Math.round(avgConfidence * 100) + '%';
+        }
+
+        function learnFromResult(text, confidence) {
+            const words = text.split(/\s+/).length;
+            const speed = words / 3;
+            
+            if (confidence > 0.8 && speed > 2) {
+                state.speechPatterns.sensitivity = Math.min(0.9, state.speechPatterns.sensitivity + 0.05);
+            } else if (confidence < 0.6 || speed < 1) {
+                state.speechPatterns.sensitivity = Math.max(0.3, state.speechPatterns.sensitivity - 0.05);
+            }
+            
+            updateRecognitionSettings();
+        }
+
+        function updateTextDisplay() {
+            const isArabic = elements.languageSelect.value.startsWith('ar-');
+            
+            if (isArabic) {
+                elements.textDisplay.classList.add('arabic');
+                elements.textDisplay.dir = 'rtl';
+            } else {
+                elements.textDisplay.classList.remove('arabic');
+                elements.textDisplay.dir = 'ltr';
+            }
+            
+            elements.textDisplay.textContent = state.textContent;
+            updatePlaceholder();
+            elements.textDisplay.scrollTop = elements.textDisplay.scrollHeight;
+        }
+
+        function showInterimText(text) {
+            const displayText = state.textContent + text;
+            elements.textDisplay.textContent = displayText;
+            updatePlaceholder();
+        }
+
+        function updatePlaceholder() {
+            if (state.textContent.trim() || elements.textDisplay.textContent.trim()) {
+                elements.textPlaceholder.style.display = 'none';
+            } else {
+                elements.textPlaceholder.style.display = 'block';
+            }
+        }
+
+        function updateStats() {
+            const text = state.textContent || elements.textDisplay.textContent;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const chars = text.length;
+            
+            elements.wordCount.textContent = words;
+            elements.charCount.textContent = chars;
+        }
+
+        function startListening() {
+            if (!state.micPermissionGranted) {
+                showPermissionBanner();
+                return;
+            }
+            
+            if (!state.recognition) {
+                initSpeechRecognition();
+            }
+            
+            // Réinitialiser les statistiques
+            state.speechStartTime = Date.now();
+            state.totalWords = 0;
+            state.confidenceScores = [];
+            
+            try {
+                state.recognition.start();
+            } catch (error) {
+                showNotification("❌ Erreur de démarrage", "#ef4444", "❌");
+                console.error(error);
+            }
+        }
+
+        function stopListening() {
+            if (state.recognition && state.isListening) {
+                state.recognition.stop();
+            }
+            
+            state.isListening = false;
+            updateUI();
+            stopMicMonitoring();
+            showNotification("⏹️ Dictée arrêtée", "#64748b", "⏹️");
+        }
+
+        function clearText() {
+            state.textContent = '';
+            updateTextDisplay();
+            updateStats();
+            showNotification("🗑️ Texte effacé", "#64748b", "🗑️");
+        }
+
+        function copyToClipboard() {
+            const text = state.textContent || elements.textDisplay.textContent;
+            
+            if (!text.trim()) {
+                showNotification("⚠️ Aucun texte à copier", "#f59e0b", "⚠️");
+                return;
+            }
+
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showNotification("📋 Texte copié !", "#3b82f6", "📋");
+                })
+                .catch(err => {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = text;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    showNotification("📋 Texte copié !", "#3b82f6", "📋");
+                });
+        }
+
+        function updateLanguage() {
+            if (state.recognition) {
+                state.recognition.lang = elements.languageSelect.value;
+                if (state.isListening) {
+                    state.recognition.stop();
+                    setTimeout(() => state.recognition.start(), 100);
+                }
+            }
+            updateTextDisplay();
+        }
+
+        function updateUI() {
+            if (state.isListening) {
+                elements.startBtn.disabled = true;
+                elements.stopBtn.disabled = false;
+            } else {
+                elements.startBtn.disabled = false;
+                elements.stopBtn.disabled = true;
+            }
+        }
+
+        function handleRecognitionError(event) {
+            console.error('Erreur reconnaissance:', event.error);
+            
+            if (event.error === 'no-speech') {
+                // Pause normale
+            } else if (event.error === 'audio-capture') {
+                showNotification("❌ Microphone non disponible", "#ef4444", "❌");
+                stopListening();
+            } else if (event.error === 'not-allowed') {
+                showNotification("🔒 Permission microphone refusée", "#ef4444", "🔒");
+                stopListening();
+                state.micPermissionGranted = false;
+                localStorage.setItem('micPermissionGranted', 'false');
+                showPermissionBanner();
+            }
+        }
+
+        function startMicMonitoring() {
+            stopMicMonitoring();
+            
+            // Animation aléatoire pour simuler l'activité
+            state.micInterval = setInterval(() => {
+                if (state.isListening) {
+                    const level = 0.3 + Math.random() * 0.7;
+                    updateMicAnimation(level);
+                }
+            }, 200);
+        }
+
+        function stopMicMonitoring() {
+            if (state.micInterval) {
+                clearInterval(state.micInterval);
+                state.micInterval = null;
+            }
+            
+            // Réinitialiser les barres
+            state.micBars.forEach(bar => {
+                bar.style.height = '10px';
+                bar.classList.remove('active');
+            });
+        }
+
+        function handleKeyboardShortcuts(e) {
+            if (e.target === elements.textDisplay) return;
+            
+            // Espace pour démarrer/arrêter
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (state.isListening) {
+                    stopListening();
+                } else {
+                    startListening();
+                }
+            }
+            
+            // Ctrl/Cmd + M pour changer de mode
+            if ((e.ctrlKey || e.metaKey) && e.key === 'm') {
+                e.preventDefault();
+                setMode(state.isAutoMode ? 'manual' : 'auto');
+            }
+            
+            // Ctrl/Cmd + C pour copier
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+                e.preventDefault();
+                copyToClipboard();
+            }
+            
+            // Ctrl/Cmd + K pour effacer
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                clearText();
+            }
+        }
+
+        function showNotification(message, color, icon) {
+            elements.notificationText.textContent = message;
+            elements.notificationIcon.textContent = icon;
+            elements.notification.style.background = color;
+            elements.notification.classList.add('show');
+            
+            setTimeout(() => {
+                elements.notification.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V1.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V2.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictée Vocale Ultra-Fluide</title>
+    <style>
+        :root { --primary: #4f46e5; --success: #10b981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: #f1f5f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 800px; padding: 20px; }
+        
+        /* Zone de texte optimisée */
+        .text-area-wrapper { position: relative; border: 2px solid #e2e8f0; border-radius: 12px; min-height: 300px; margin-bottom: 20px; transition: border 0.3s; }
+        .text-area-wrapper:focus-within { border-color: var(--primary); }
+        
+        #textDisplay { 
+            padding: 20px; min-height: 300px; font-size: 1.15rem; line-height: 1.6; 
+            outline: none; white-space: pre-wrap; word-wrap: break-word;
+        }
+        
+        /* Style pour le texte en cours de traitement */
+        .interim { color: #94a3b8; font-style: italic; }
+
+        .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-start { background: var(--primary); color: white; }
+        .btn-start.active { background: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        
+        .status-bar { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; pt: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls">
+        <select id="langSelect" style="flex: 0.5; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            <option value="fr-FR">Français 🇫🇷</option>
+            <option value="en-US">English 🇺🇸</option>
+            <option value="ar-SA">العربية 🇸🇦</option>
+        </select>
+        <button id="mainBtn" class="btn-start">Démarrer la dictée</button>
+    </div>
+
+    <div class="text-area-wrapper">
+        <div id="textDisplay" contenteditable="true" spellcheck="true"></div>
+    </div>
+
+    <div class="status-bar">
+        <span id="status">Prêt</span>
+        <span id="stats">0 mots</span>
+    </div>
+</div>
+
+<script>
+    const mainBtn = document.getElementById('mainBtn');
+    const textDisplay = document.getElementById('textDisplay');
+    const status = document.getElementById('status');
+    const langSelect = document.getElementById('langSelect');
+
+    let recognition;
+    let isListening = false;
+    let finalTranscript = '';
+
+    // Initialisation
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true; // LA CLÉ POUR LA FLUIDITÉ
+
+        recognition.onstart = () => {
+            isListening = true;
+            mainBtn.textContent = "Arrêter la dictée";
+            mainBtn.classList.add('active');
+            status.textContent = "Je vous écoute...";
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    insertAtCursor(event.results[i][0].transcript + ' ');
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+            
+            // Affichage temporaire du texte "en cours"
+            updateInterimDisplay(interimTranscript);
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Erreur:", event.error);
+            stopDictation();
+        };
+
+        recognition.onend = () => {
+            if (isListening) recognition.start(); // Auto-restart pour ne jamais couper
+        };
+    }
+
+    function insertAtCursor(text) {
+        // Supprime l'affichage intérimaire avant d'insérer le texte final
+        removeInterim();
+        
+        const sel = window.getSelection();
+        if (sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const node = document.createTextNode(text);
+            range.insertNode(node);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+        updateStats();
+    }
+
+    function updateInterimDisplay(text) {
+        removeInterim();
+        if (text) {
+            const span = document.createElement('span');
+            span.id = 'interim-span';
+            span.className = 'interim';
+            span.textContent = text;
+            
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                range.insertNode(span);
+            }
+        }
+    }
+
+    function removeInterim() {
+        const existing = document.getElementById('interim-span');
+        if (existing) existing.remove();
+    }
+
+    function toggleDictation() {
+        if (isListening) {
+            stopDictation();
+        } else {
+            startDictation();
+        }
+    }
+
+    function startDictation() {
+        recognition.lang = langSelect.value;
+        recognition.start();
+        textDisplay.focus();
+    }
+
+    function stopDictation() {
+        isListening = false;
+        recognition.stop();
+        mainBtn.textContent = "Démarrer la dictée";
+        mainBtn.classList.remove('active');
+        status.textContent = "Arrêté";
+        removeInterim();
+    }
+
+    function updateStats() {
+        const words = textDisplay.innerText.trim().split(/\s+/).length;
+        document.getElementById('stats').textContent = `${textDisplay.innerText.trim() ? words : 0} mots`;
+    }
+
+    mainBtn.addEventListener('click', toggleDictation);
+    
+    // Sauvegarde auto de la langue
+    langSelect.value = localStorage.getItem('pref_lang') || 'fr-FR';
+    langSelect.onchange = () => localStorage.setItem('pref_lang', langSelect.value);
+
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V2.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V3.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictée Vocale Ultra-Fluide</title>
+    <style>
+        :root { --primary: #4f46e5; --success: #10b981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: #f1f5f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 800px; padding: 20px; }
+        
+        /* Zone de texte optimisée */
+        .text-area-wrapper { position: relative; border: 2px solid #e2e8f0; border-radius: 12px; min-height: 300px; margin-bottom: 20px; transition: border 0.3s; }
+        .text-area-wrapper:focus-within { border-color: var(--primary); }
+        
+        #textDisplay { 
+            padding: 20px; min-height: 300px; font-size: 1.15rem; line-height: 1.6; 
+            outline: none; white-space: pre-wrap; word-wrap: break-word;
+        }
+        
+        /* Style pour le texte en cours de traitement */
+        .interim { color: #94a3b8; font-style: italic; }
+
+        .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-start { background: var(--primary); color: white; }
+        .btn-start.active { background: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        
+        /* Styles pour les nouveaux boutons */
+        .secondary-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-secondary { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-clear { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .btn-clear:hover { background: #fee2e2; }
+        .btn-copy { background: #f0f9ff; color: #0369a1; border: 1px solid #7dd3fc; }
+        .btn-copy:hover { background: #e0f2fe; }
+        
+        .status-bar { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls">
+        <select id="langSelect" style="flex: 0.5; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            <option value="fr-FR">Français 🇫🇷</option>
+            <option value="en-US">English 🇺🇸</option>
+            <option value="ar-SA">العربية 🇸🇦</option>
+        </select>
+        <button id="mainBtn" class="btn-start">Démarrer la dictée</button>
+    </div>
+
+    <div class="text-area-wrapper">
+        <div id="textDisplay" contenteditable="true" spellcheck="true"></div>
+    </div>
+
+    <!-- Nouveaux boutons ajoutés -->
+    <div class="secondary-buttons">
+        <button id="clearTextBtn" class="btn-clear">Vider le texte</button>
+        <button id="copyContentBtn" class="btn-copy">Copier le contenu</button>
+    </div>
+
+    <div class="status-bar">
+        <span id="status">Prêt</span>
+        <span id="stats">0 mots</span>
+    </div>
+</div>
+
+<script>
+    const mainBtn = document.getElementById('mainBtn');
+    const textDisplay = document.getElementById('textDisplay');
+    const status = document.getElementById('status');
+    const langSelect = document.getElementById('langSelect');
+    const clearTextBtn = document.getElementById('clearTextBtn');
+    const copyContentBtn = document.getElementById('copyContentBtn');
+
+    let recognition;
+    let isListening = false;
+    let finalTranscript = '';
+
+    // Initialisation
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true; // LA CLÉ POUR LA FLUIDITÉ
+
+        recognition.onstart = () => {
+            isListening = true;
+            mainBtn.textContent = "Arrêter la dictée";
+            mainBtn.classList.add('active');
+            status.textContent = "Je vous écoute...";
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    insertAtCursor(event.results[i][0].transcript + ' ');
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+            
+            // Affichage temporaire du texte "en cours"
+            updateInterimDisplay(interimTranscript);
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Erreur:", event.error);
+            stopDictation();
+        };
+
+        recognition.onend = () => {
+            if (isListening) recognition.start(); // Auto-restart pour ne jamais couper
+        };
+    }
+
+    function insertAtCursor(text) {
+        // Supprime l'affichage intérimaire avant d'insérer le texte final
+        removeInterim();
+        
+        const sel = window.getSelection();
+        if (sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const node = document.createTextNode(text);
+            range.insertNode(node);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+        updateStats();
+    }
+
+    function updateInterimDisplay(text) {
+        removeInterim();
+        if (text) {
+            const span = document.createElement('span');
+            span.id = 'interim-span';
+            span.className = 'interim';
+            span.textContent = text;
+            
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                range.insertNode(span);
+            }
+        }
+    }
+
+    function removeInterim() {
+        const existing = document.getElementById('interim-span');
+        if (existing) existing.remove();
+    }
+
+    function toggleDictation() {
+        if (isListening) {
+            stopDictation();
+        } else {
+            startDictation();
+        }
+    }
+
+    function startDictation() {
+        recognition.lang = langSelect.value;
+        recognition.start();
+        textDisplay.focus();
+    }
+
+    function stopDictation() {
+        isListening = false;
+        recognition.stop();
+        mainBtn.textContent = "Démarrer la dictée";
+        mainBtn.classList.remove('active');
+        status.textContent = "Arrêté";
+        removeInterim();
+    }
+
+    function updateStats() {
+        const words = textDisplay.innerText.trim().split(/\s+/).length;
+        document.getElementById('stats').textContent = `${textDisplay.innerText.trim() ? words : 0} mots`;
+    }
+
+    // Fonction pour vider le texte - SIMPLIFIÉE
+    function clearText() {
+        // Effacer le contenu directement
+        textDisplay.innerHTML = '';
+        
+        // Mettre à jour les statistiques
+        updateStats();
+        
+        // Donner le focus à la zone de texte
+        textDisplay.focus();
+        
+        // Afficher un message de confirmation
+        status.textContent = "Texte effacé";
+        clearTextBtn.textContent = "Texte effacé !";
+        clearTextBtn.style.background = "#dcfce7";
+        clearTextBtn.style.color = "#166534";
+        
+        setTimeout(() => {
+            clearTextBtn.textContent = "Vider le texte";
+            clearTextBtn.style.background = "";
+            clearTextBtn.style.color = "";
+            if (!isListening) status.textContent = "Prêt";
+        }, 1500);
+    }
+
+    // Fonction pour copier le contenu
+    function copyContent() {
+        const textToCopy = textDisplay.innerText.trim();
+        
+        if (!textToCopy) {
+            status.textContent = "Aucun texte à copier";
+            setTimeout(() => {
+                if (!isListening) status.textContent = "Prêt";
+            }, 2000);
+            return;
+        }
+        
+        // Utiliser l'API Clipboard moderne
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                status.textContent = "Texte copié dans le presse-papiers !";
+                copyContentBtn.textContent = "Copié !";
+                copyContentBtn.style.background = "#d1fae5";
+                copyContentBtn.style.color = "#065f46";
+                
+                setTimeout(() => {
+                    copyContentBtn.textContent = "Copier le contenu";
+                    copyContentBtn.style.background = "";
+                    copyContentBtn.style.color = "";
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Erreur lors de la copie: ', err);
+                status.textContent = "Erreur lors de la copie";
+                
+                // Méthode de secours pour les anciens navigateurs
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                status.textContent = "Texte copié (méthode de secours)";
+                setTimeout(() => {
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            });
+    }
+
+    // Événements des boutons
+    mainBtn.addEventListener('click', toggleDictation);
+    clearTextBtn.addEventListener('click', clearText);
+    copyContentBtn.addEventListener('click', copyContent);
+    
+    // Sauvegarde auto de la langue
+    langSelect.value = localStorage.getItem('pref_lang') || 'fr-FR';
+    langSelect.onchange = () => localStorage.setItem('pref_lang', langSelect.value);
+
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\V3.html ---
+

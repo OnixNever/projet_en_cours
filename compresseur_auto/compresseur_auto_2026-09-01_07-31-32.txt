@@ -413,6 +413,67 @@ error: Please commit or stash them.
 [2026-09-01 06:12:47] [recherche] Version « recherche_04 » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\recherche\recherche__recherche_04.txt (221.0 Ko)
 [2026-09-01 06:12:47] [compresseur] (principal) Aucun changement détecté.
 [2026-09-01 06:12:47] [compresseur_auto] (principal) Changement détecté (7 fichier(s)), régénération...
+[2026-09-01 06:12:47] Ancienne version supprimée : compresseur_auto_2026-08-30_17-57-31.txt
+[2026-09-01 06:12:47] [compresseur_auto] (principal) Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-01_06-12-47.txt (87.8 Ko)
+[2026-09-01 06:12:47] [partage_QR] (principal) Changement détecté (7 fichier(s)), régénération...
+[2026-09-01 06:12:47] Ancienne version supprimée : partage_QR_2026-08-30_17-57-31.txt
+[2026-09-01 06:12:47] [partage_QR] (principal) Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\partage_QR\partage_QR_2026-09-01_06-12-47.txt (49.2 Ko)
+[2026-09-01 06:12:47] [%] Groupe(s) de versions détecté(s) : % (2 versions)
+[2026-09-01 06:12:47] [%] (principal) Changement détecté (25 fichier(s)), régénération...
+[2026-09-01 06:12:47] [%] (principal) Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\%\%_2026-09-01_06-12-47.txt (4.4 Mo)
+[2026-09-01 06:12:47] [%] Version « %_09_1.html » modifiée (1 fichier(s)), régénération...
+[2026-09-01 06:12:47] [%] Version « %_09_1.html » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\%\%__%_09_1.html.txt (95.5 Ko)
+[2026-09-01 06:12:47] [%] Version « %_21_ SAVE.html » modifiée (1 fichier(s)), régénération...
+[2026-09-01 06:12:47] [%] Version « %_21_ SAVE.html » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\%\%__%_21_ SAVE.html.txt (350.0 Ko)
+[2026-09-01 06:12:47] [entrainement_tactique] (principal) Aucun changement détecté.
+[2026-09-01 06:12:47] [pdf_to_audio] Groupe(s) de versions détecté(s) : pdf2audio_gpu (3 versions)
+[2026-09-01 06:12:47] [pdf_to_audio] (principal) Changement détecté (0 fichier(s)), régénération...
+[2026-09-01 06:12:47] Ancienne version supprimée : pdf_to_audio_2026-08-28_06-02-34.txt
+[2026-09-01 06:12:47] [pdf_to_audio] (principal) Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio_2026-09-01_06-12-47.txt (324 o)
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_03 » modifiée (16 fichier(s)), régénération...
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_03 » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio__pdf2audio_gpu_03.txt (65.6 Ko)
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_06 » modifiée (30 fichier(s)), régénération...
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_06 » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio__pdf2audio_gpu_06.txt (176.8 Ko)
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_07 » modifiée (30 fichier(s)), régénération...
+[2026-09-01 06:12:47] [pdf_to_audio] Version « pdf2audio_gpu_07 » : fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio__pdf2audio_gpu_07.txt (185.5 Ko)
+[2026-09-01 06:12:47] [Network] (principal) Aucun changement détecté.
+[2026-09-01 06:12:51] Poussé sur Git.
+[2026-09-01 06:19:23] [recherche] Changement détecté (32 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [recherche] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\recherche\recherche_2026-09-01_06-19-23.txt (445.8 Ko)
+[2026-09-01 06:19:23] [compresseur] Changement détecté (1 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [compresseur] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur\compresseur_2026-09-01_06-19-23.txt (19.9 Ko)
+[2026-09-01 06:19:23] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] Ancienne version supprimée : compresseur_auto_2026-09-01_05-53-08.txt
+[2026-09-01 06:19:23] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-01_06-19-23.txt (86.4 Ko)
+[2026-09-01 06:19:23] [partage_QR] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] Ancienne version supprimée : partage_QR_2026-09-01_05-53-08.txt
+[2026-09-01 06:19:23] [partage_QR] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\partage_QR\partage_QR_2026-09-01_06-19-23.txt (49.2 Ko)
+[2026-09-01 06:19:23] [%] Changement détecté (27 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [%] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\%\%_2026-09-01_06-19-23.txt (4.8 Mo)
+[2026-09-01 06:19:23] [entrainement_tactique] Changement détecté (1 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [entrainement_tactique] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\entrainement_tactique\entrainement_tactique_2026-09-01_06-19-23.txt (65.8 Ko)
+[2026-09-01 06:19:23] [pdf_to_audio] Changement détecté (76 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [pdf_to_audio] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\pdf_to_audio\pdf_to_audio_2026-09-01_06-19-23.txt (427.2 Ko)
+[2026-09-01 06:19:23] [Network] Changement détecté (12 fichier(s)), régénération du contexte...
+[2026-09-01 06:19:23] [Network] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\Network\Network_2026-09-01_06-19-23.txt (458.0 Ko)
+[2026-09-01 06:19:26] Poussé sur Git.
+[2026-09-01 07:21:04] [recherche] Aucun changement détecté.
+[2026-09-01 07:21:04] [compresseur] Aucun changement détecté.
+[2026-09-01 07:21:04] [decompresseur] Changement détecté (1 fichier(s)), régénération du contexte...
+[2026-09-01 07:21:04] [decompresseur] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\decompresseur\decompresseur_2026-09-01_07-21-04.txt (14.6 Ko)
+[2026-09-01 07:21:04] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-01 07:21:04] Ancienne version supprimée : compresseur_auto_2026-09-01_05-54-07.txt
+[2026-09-01 07:21:04] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-01_07-21-04.txt (87.5 Ko)
+[2026-09-01 07:21:04] [partage_QR] Aucun changement détecté.
+[2026-09-01 07:21:04] [%] Aucun changement détecté.
+[2026-09-01 07:21:04] [entrainement_tactique] Aucun changement détecté.
+[2026-09-01 07:21:04] [pdf_to_audio] Aucun changement détecté.
+[2026-09-01 07:21:04] [Network] Aucun changement détecté.
+[2026-09-01 07:21:07] Poussé sur Git.
+[2026-09-01 07:31:31] [recherche] Aucun changement détecté.
+[2026-09-01 07:31:31] [compresseur] Aucun changement détecté.
+[2026-09-01 07:31:31] [decompresseur] Aucun changement détecté.
+[2026-09-01 07:31:32] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -428,16 +489,6 @@ gardant que les 3 dernières versions par projet.
 Ne pousse JAMAIS le code source lui-même : seuls les fichiers .txt générés
 sont envoyés sur Git.
 
-NOUVEAUTÉ : détection automatique des "groupes de versions". Si, à la racine
-d'un projet, plusieurs fichiers ou dossiers partagent le même nom de base
-suivi d'un numéro (ex: pourcentage_18, pourcentage_20, pourcentage_21_save,
-ou pdf_to_audio_01, pdf_to_audio_02...), chacun de ces éléments est considéré
-comme une version distincte du même programme. Au lieu de tout mélanger dans
-un seul gros fichier, chaque version reçoit son propre fichier texte séparé
-(régénéré uniquement quand cette version précise change), et le reste du
-projet (tout ce qui ne fait pas partie d'un groupe détecté) continue comme
-avant dans un fichier "principal" avec rotation des 3 dernières versions.
-
 Dépendances :
     - Python 3.9+
     - Git installé et accessible dans le PATH, avec accès en écriture au
@@ -451,7 +502,6 @@ Configuration : voir config.json à côté de ce script.
 """
 
 import os
-import re
 import sys
 import json
 import time
@@ -459,7 +509,6 @@ import hashlib
 import shutil
 import subprocess
 import argparse
-from collections import defaultdict
 from datetime import datetime
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -484,11 +533,6 @@ IGNORE_EXTS = {
 }
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2 Mo, comme dans blinder
 VERSIONS_TO_KEEP = 3
-
-# nom_de_base + "_" + chiffres, avec éventuellement un suffixe libre après
-# (ex: "pourcentage_21_save" -> base="pourcentage", num="21").
-# Le nom de base lui-même peut contenir des tirets du bas (pdf_to_audio_01).
-VERSION_PATTERN = re.compile(r"^(.+)_(\d+)(?:_.*)?$")
 
 
 def log(message: str):
@@ -534,18 +578,6 @@ def save_state(state: dict):
         json.dump(state, f, indent=2, ensure_ascii=False)
 
 
-def migrate_project_state(project_state: dict) -> dict:
-    """Les anciens fichiers state.json stockaient un dict plat chemin->hash
-    directement pour chaque projet. On le migre vers le nouveau format
-    {"main": {...}, "versions": {...}} sans perdre l'historique de hash
-    (ce qui évite une régénération complète inutile au premier lancement)."""
-    if "main" in project_state or "versions" in project_state:
-        project_state.setdefault("main", {})
-        project_state.setdefault("versions", {})
-        return project_state
-    return {"main": project_state, "versions": {}}
-
-
 # ---------------------------------------------------------------------------
 # Scan d'un projet : liste des fichiers pertinents + hash de chacun
 # ---------------------------------------------------------------------------
@@ -560,29 +592,22 @@ def hash_file(path: str) -> str:
         return ""
 
 
-def file_is_eligible(full_path: str) -> bool:
-    ext = os.path.splitext(full_path)[1].lower()
-    if ext in IGNORE_EXTS:
-        return False
-    try:
-        if os.path.getsize(full_path) > MAX_FILE_SIZE:
-            return False
-    except OSError:
-        return False
-    return True
-
-
 def scan_project(project_path: str):
-    """Retourne (liste des fichiers retenus dans l'ordre, dict chemin->hash),
-    en parcourant TOUT le dossier récursivement (comportement d'origine)."""
+    """Retourne (liste des fichiers retenus dans l'ordre, dict chemin->hash)."""
     files_to_read = []
     hashes = {}
 
     for root, dirs, files in os.walk(project_path):
         dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS)
         for f in sorted(files):
+            ext = os.path.splitext(f)[1].lower()
+            if ext in IGNORE_EXTS:
+                continue
             full_path = os.path.join(root, f)
-            if not file_is_eligible(full_path):
+            try:
+                if os.path.getsize(full_path) > MAX_FILE_SIZE:
+                    continue
+            except OSError:
                 continue
             file_hash = hash_file(full_path)
             if not file_hash:
@@ -601,86 +626,6 @@ def project_changed(previous_hashes: dict, current_hashes: dict) -> bool:
         if previous_hashes.get(path) != h:
             return True
     return False
-
-
-# ---------------------------------------------------------------------------
-# Détection des groupes de versions (nouveauté)
-# ---------------------------------------------------------------------------
-def find_version_groups(project_path: str):
-    """Regarde uniquement les éléments à la racine du projet (fichiers ou
-    dossiers) et regroupe ceux qui partagent le même nom de base suivi d'un
-    numéro. Un groupe n'est retenu que s'il contient au moins 2 éléments,
-    pour éviter de traiter un nom isolé comme une "version".
-
-    Retourne (groups, grouped_names) où :
-      - groups : dict {nom_de_base: [nom_élément, ...]}
-      - grouped_names : ensemble de tous les noms d'éléments faisant partie
-        d'un groupe (pratique pour les exclure du scan "principal")
-    """
-    try:
-        entries = sorted(os.listdir(project_path))
-    except OSError:
-        return {}, set()
-
-    candidats = defaultdict(list)
-    for name in entries:
-        if name in IGNORE_DIRS:
-            continue
-        m = VERSION_PATTERN.match(name)
-        if not m:
-            continue
-        base = m.group(1)
-        candidats[base].append(name)
-
-    groups = {base: names for base, names in candidats.items() if len(names) >= 2}
-    grouped_names = set()
-    for names in groups.values():
-        grouped_names.update(names)
-
-    return groups, grouped_names
-
-
-def scan_version_item(project_path: str, item_name: str):
-    """Scanne un seul élément de groupe de versions : récursivement si c'est
-    un dossier, ou juste lui-même si c'est un fichier."""
-    full = os.path.join(project_path, item_name)
-
-    if os.path.isdir(full):
-        return scan_project(full)
-
-    if not file_is_eligible(full):
-        return [], {}
-    file_hash = hash_file(full)
-    if not file_hash:
-        return [], {}
-    return [full], {full: file_hash}
-
-
-def scan_main_project(project_path: str, grouped_names: set):
-    """Comme scan_project, mais ignore à la racine tout élément qui fait
-    partie d'un groupe de versions détecté (il est traité séparément)."""
-    files_to_read = []
-    hashes = {}
-
-    for root, dirs, files in os.walk(project_path):
-        if root == project_path:
-            dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS and d not in grouped_names)
-            files = sorted(f for f in files if f not in grouped_names)
-        else:
-            dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS)
-            files = sorted(files)
-
-        for f in files:
-            full_path = os.path.join(root, f)
-            if not file_is_eligible(full_path):
-                continue
-            file_hash = hash_file(full_path)
-            if not file_hash:
-                continue
-            files_to_read.append(full_path)
-            hashes[full_path] = file_hash
-
-    return files_to_read, hashes
 
 
 # ---------------------------------------------------------------------------
@@ -742,7 +687,7 @@ def ensure_repo(repo_path: str, remote_url: str):
 
 def rotate_and_write(repo_path: str, project_name: str, bundle_text: str):
     """Écrit la nouvelle version horodatée et supprime les plus anciennes
-    au-delà de VERSIONS_TO_KEEP pour ce projet (fichier "principal")."""
+    au-delà de VERSIONS_TO_KEEP pour ce projet."""
     project_dir = os.path.join(repo_path, project_name)
     os.makedirs(project_dir, exist_ok=True)
 
@@ -765,18 +710,20 @@ def rotate_and_write(repo_path: str, project_name: str, bundle_text: str):
     return new_file
 
 
-def write_version_bundle(repo_path: str, project_name: str, version_name: str, bundle_text: str):
-    """Écrit (ou remplace) le fichier texte dédié à une version détectée.
-    Pas de rotation horodatée ici : chaque version a un seul fichier à jour,
-    nommé d'après elle, régénéré uniquement quand son contenu change."""
-    project_dir = os.path.join(repo_path, project_name)
-    os.makedirs(project_dir, exist_ok=True)
-
-    out_file = os.path.join(project_dir, f"{project_name}__{version_name}.txt")
-    with open(out_file, "w", encoding="utf-8") as f:
-        f.write(bundle_text)
-
-    return out_file
+def git_commit_and_push(repo_path: str, project_name: str):
+    run_git(repo_path, ["add", "."])
+    result = run_git(repo_path, ["diff", "--cached", "--quiet"], check=False)
+    if result.returncode == 0:
+        log(f"[{project_name}] Rien à committer.")
+        return
+    msg = f"Mise à jour contexte {project_name} - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+    run_git(repo_path, ["commit", "-m", msg])
+    push_result = run_git(repo_path, ["push"], check=False)
+    if push_result.returncode != 0:
+        log(f"Échec du push, on retente après un pull --rebase : {push_result.stderr.strip()}")
+        run_git(repo_path, ["pull", "--rebase"])
+        run_git(repo_path, ["push"])
+    log(f"[{project_name}] Poussé sur Git.")
 
 
 # ---------------------------------------------------------------------------
@@ -799,53 +746,20 @@ def sync_once(config: dict):
             log(f"[{name}] Dossier introuvable, ignoré : {path}")
             continue
 
-        project_state = migrate_project_state(state.get(name, {}))
-        main_state = project_state["main"]
-        versions_state = project_state["versions"]
+        files_to_read, current_hashes = scan_project(path)
+        previous_hashes = state.get(name, {})
 
-        project_has_change = False
+        if not project_changed(previous_hashes, current_hashes):
+            log(f"[{name}] Aucun changement détecté.")
+            continue
 
-        groups, grouped_names = find_version_groups(path)
+        log(f"[{name}] Changement détecté ({len(files_to_read)} fichier(s)), régénération du contexte...")
+        bundle_text = generate_bundle_text(name, path, files_to_read)
+        out_file = rotate_and_write(repo_path, name, bundle_text)
+        log(f"[{name}] Fichier généré : {out_file} ({human_size(os.path.getsize(out_file))})")
 
-        if groups:
-            noms_groupes = ", ".join(f"{base} ({len(v)} versions)" for base, v in groups.items())
-            log(f"[{name}] Groupe(s) de versions détecté(s) : {noms_groupes}")
-
-        # --- Partie "principale" : tout ce qui n'appartient pas à un groupe ---
-        main_files, main_hashes = scan_main_project(path, grouped_names)
-
-        if project_changed(main_state, main_hashes):
-            log(f"[{name}] (principal) Changement détecté ({len(main_files)} fichier(s)), régénération...")
-            bundle_text = generate_bundle_text(name, path, main_files)
-            out_file = rotate_and_write(repo_path, name, bundle_text)
-            log(f"[{name}] (principal) Fichier généré : {out_file} ({human_size(os.path.getsize(out_file))})")
-            main_state = main_hashes
-            project_has_change = True
-        else:
-            log(f"[{name}] (principal) Aucun changement détecté.")
-
-        # --- Une partie par version détectée ---
-        new_versions_state = {}
-        for base, names in groups.items():
-            for version_name in sorted(names):
-                version_files, version_hashes = scan_version_item(path, version_name)
-                previous = versions_state.get(version_name, {})
-                new_versions_state[version_name] = version_hashes
-
-                if project_changed(previous, version_hashes):
-                    log(f"[{name}] Version « {version_name} » modifiée ({len(version_files)} fichier(s)), régénération...")
-                    bundle_text = generate_bundle_text(f"{name}_{version_name}", path, version_files)
-                    out_file = write_version_bundle(repo_path, name, version_name, bundle_text)
-                    log(f"[{name}] Version « {version_name} » : fichier généré : {out_file} "
-                        f"({human_size(os.path.getsize(out_file))})")
-                    project_has_change = True
-                else:
-                    log(f"[{name}] Version « {version_name} » : aucun changement.")
-
-        state[name] = {"main": main_state, "versions": new_versions_state}
-
-        if project_has_change:
-            any_change = True
+        state[name] = current_hashes
+        any_change = True
 
     if any_change:
         # Un seul commit/push groupé pour tous les projets modifiés dans ce passage
@@ -908,6 +822,10 @@ if __name__ == "__main__":
       "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur"
     },
     {
+      "name": "decompresseur",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/decompresseur"
+    },
+    {
       "name": "compresseur_auto",
       "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto"
     },
@@ -926,6 +844,18 @@ if __name__ == "__main__":
     {
       "name": "pdf_to_audio",
       "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/pdf2audio_project"
+    },
+    {
+      "name": "py_to_starter",
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/code/py_to_starter"
+    },
+    {
+      "name": "Dictée_vocale_intelligente",
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente"
+    },
+    {
+      "name": "ChronoChess",
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/ChronoChess"
     },
     {
       "name": "Network",
@@ -1076,16 +1006,16 @@ planificateur de tâches
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "f5039cd941f77515159ea5b3a8cc25d04db3b712a6ca2110f34e646f72de724e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "d3c2c8e0022bff2ed41697a13421d7e3006461471ee1509ef2cfe396bc59f9e1",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "ec6974564b8e2af472f03c7ec5aa083cc24f2d324d2acf8dda1930aa9e73b70b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "066cb148b9dcfd5d15a4feac9c38486838fe3daa6791ef1102753e49f9592e37",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\planificateur de tâches.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "9f0a3a3345001deb2cc5140e52e3e77953e67f03f5a46e9b3f2e74d09e2f6e09"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "2110e6c7cbdb01e78297363341951c8b7afb08e12d0cc87bc1dbbd40c6c1607a"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.log": "7bd63cc48e9b8e4417e4759da2171f960fd2fc0aee5e33722d535d5e5e8c563c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.log": "97e94fb5fea8ef8b4cbe6e6f3a6745cdb5a405dca4ef26147c7ab930488cc550",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.py": "19795084740fee35b3a07d83fdcf32667f8556813434c513bc47c7b89669625b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
@@ -1169,8 +1099,11 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\settings.json": "9b110e68425b94199a144b4da29575281eda9b55d11cb1515f4fae8e9e226134",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\style.css": "7dcda7d59ca2480adb05fab1d35cba9f5649cd3574f4781028e4f5d595687a7d",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\app.py": "dfc3be60e1b1f9684ec6783baf7d7ce296e49148513a425f4e71860862f1213e",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\cache.json": "b198cdca2a9a827402c4d5aca9f684926c877a951af7040d9304f15fba75201d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\cache.json": "3a14f4e3a2d8fa09c55154ae1060487a96d70c07e8200f402c4b7f454cc256fd",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\requirements.txt": "fcd0f7926be6f57febdf2426b95e59dad4e36593d58258e03e91ecc2e4b4eced"
+  },
+  "decompresseur": {
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/decompresseur\\decompresseur.py": "eeba5d5b33bcca45dd346514873197b7bd31781dc38da739d73dda44bea962a5"
   }
 }
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\state.json ---
