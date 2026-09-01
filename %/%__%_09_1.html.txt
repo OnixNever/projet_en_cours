@@ -1,0 +1,2512 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_09_1.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_09_1.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculateur Global & Rapport (V24 - Mode G Nominatif)</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+/* =========================
+    Styles principaux (Mode Clair - Défaut)
+    ========================= */
+body { 
+    font-family: Arial, sans-serif; 
+    margin:15px; 
+    background:#f4f7fa; 
+    color:#333; 
+    position: relative; 
+}
+h1 { text-align:center; color:#2c3e50; margin-bottom:10px; }
+.menu { text-align:center; margin-bottom:15px; }
+.menu button { margin:3px; padding:8px 15px; font-size:14px; border:none; border-radius:8px; background:#3498db; color:white; cursor:pointer; transition: background 0.3s; }
+.menu button:hover { background:#2980b9; }
+.hidden { display:none; }
+
+/* Conteneur du bouton Mode Sombre */
+#themeToggleContainer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1001; 
+}
+#darkModeToggle {
+    margin: 0 !important;
+    padding: 8px 12px !important; 
+    font-size: 18px !important; 
+    border-radius: 50% !important; 
+    background: #f1c40f !important;
+    color: #333 !important; 
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    width: 45px; 
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Blocs de contenu */
+.mode-content {
+    max-width: 1200px;
+    margin: 15px auto; 
+    padding: 18px; 
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: left;
+}
+
+.ref-block { 
+    display: flex; 
+    align-items: flex-start;
+    gap: 6px; 
+    margin-bottom: 6px; 
+    padding: 6px; 
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background: #fcfcfc;
+    flex-wrap: nowrap; 
+}
+.ref-block[data-selectionnee="true"] {
+    outline: 2px solid #3498db;
+    background: #eaf6ff;
+}
+
+/* Tableaux */
+table { border-collapse:collapse; width:100%; margin-top:8px; border-radius:6px; overflow:hidden; font-size: 14px; }
+th,td { border:1px solid #ddd; padding:6px; text-align:center; }
+th { background:#ecf0f1; }
+
+/* Inputs généraux */
+input:not([type="date"]):not([type="color"]):not([type="range"]):not([type="checkbox"]), 
+textarea, select { 
+    padding: 6px; 
+    border-radius: 4px; 
+    border: 1px solid #ccc; 
+    background: #fff;
+    color: #333;
+    box-sizing: border-box; 
+    font-size: 14px;
+    margin: 2px 0; 
+}
+input[type="date"] { width: 130px; }
+input[type="number"] { width: 90px; } 
+input[type="color"] { width: 35px !important; margin-top: 0; margin-bottom: 0; }
+select { width: 120px; } 
+
+/* Mode D */
+#dDataTable th { background: #e9f3f9; }
+.date-input-d, .value-input-d {
+    background: #fff;
+    color: #333;
+}
+.series-header-d button, .series-header-d span {
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 4px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Graphiques */
+canvas { 
+    display:block; 
+    margin:12px auto; 
+    max-width:640px; 
+    max-height:640px; 
+    background:transparent; 
+}
+
+/* =========================
+    Styles Mode Sombre
+    ========================= */
+body.dark-mode {
+    background: #2c3e50;
+    color: #ecf0f1;
+}
+
+body.dark-mode h1 {
+    color: #f1c40f;
+}
+
+body.dark-mode #darkModeToggle {
+    background: #4a627a !important;
+    color: #f1c40f !important;
+}
+
+body.dark-mode .mode-content {
+    background: #34495e;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .ref-block {
+    background: #405467;
+    border-color: #556c80;
+}
+body.dark-mode .ref-block[data-selectionnee="true"] {
+    outline: 2px solid #f1c40f;
+    background: #506a81;
+}
+
+body.dark-mode input:not([type="date"]):not([type="color"]):not([type="range"]):not([type="checkbox"]), 
+body.dark-mode textarea, 
+body.dark-mode select {
+    background: #516377;
+    border-color: #6a8098;
+    color: #ecf0f1;
+}
+
+body.dark-mode th, body.dark-mode td {
+    border-color: #4a627a;
+}
+body.dark-mode th {
+    background: #4a627a;
+}
+body.dark-mode #dDataTable th {
+    background: #4a627a;
+}
+
+body.dark-mode .date-input-d, 
+body.dark-mode .value-input-d {
+    background: #516377;
+    color: #ecf0f1;
+}
+body.dark-mode .series-header-d button, body.dark-mode .series-header-d span {
+    background: #516377;
+    color: #ecf0f1;
+    border-color: #6a8098;
+}
+
+body.dark-mode .result-table tr[style*="#2ecc71"] { color: #000 !important; }
+body.dark-mode .result-table tr[style*="#e74c3c"] { color: #000 !important; }
+body.dark-mode .result-table tr[style*="#95a5a6"] { color: #000 !important; }
+
+/* Styles pour le mode D (Matrice V15) */
+#dInputsContainer {
+    overflow-x: auto;
+    padding-bottom: 10px;
+    max-width: 100%;
+}
+#dDataTable {
+    border-collapse: collapse;
+    min-width: 600px;
+}
+#dDataTable th, #dDataTable td {
+    padding: 3px 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+    border: 1px solid; 
+}
+.series-header-d { display: flex; align-items: center; gap: 4px; padding: 4px 0; }
+.date-input-d { width: 110px; padding: 3px; font-size: 13px; text-align: center; }
+.value-input-d { width: 80px; padding: 4px; text-align: right; font-size: 13px; }
+.series-name-input { width: 100px; padding: 4px; font-weight: bold; flex-grow: 1; }
+.date-header-actions { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+
+/* Styles pour le Mode G */
+.g-block { flex-direction: column; }
+.ligne-tva { margin: 4px 0; padding: 4px; border: 1px solid #ddd; border-radius: 4px; }
+
+</style>
+</head>
+<body>
+
+<div id="themeToggleContainer">
+    <button onclick="toggleDarkMode()" id="darkModeToggle" title="Basculer entre mode clair et mode sombre">🌙</button>
+</div>
+
+<h1>📊 Calculateur Global</h1>
+
+<div class="menu">
+    <button onclick="showMode('none')">🏠 Menu</button>
+    <button onclick="showMode('modeA')" title="Raccourci: Alt+A">Mode A : Comparer</button>
+    <button onclick="showMode('modeB')" title="Raccourci: Alt+B">Mode B : Gains/Pertes</button>
+    <button onclick="showMode('modeC')" title="Raccourci: Alt+C">Mode C : % par bloc</button>
+    <button onclick="showMode('modeD')" title="Raccourci: Alt+D">Mode D : Évolution</button>
+    <button onclick="showMode('modeE')" title="Raccourci: Alt+E">Mode E : Linéaire</button>
+    <button onclick="showMode('modeF')" title="Raccourci: Alt+F">Mode F : Circulaire</button>
+    <button onclick="showMode('modeG')" title="Raccourci: Alt+G">Mode G : TVA</button>
+    <button onclick="showMode('mode_rapport_global')" title="Raccourci: Alt+R">Rapport Global</button>
+</div>
+
+<div id="modeA" class="hidden mode-content">
+    <h3>Mode A : Comparer à des valeurs</h3>
+    <div id="multiAContainer">
+        <div class="ref-block">
+            <input type="number" class="refA" placeholder="Réf. (€)" style="width:100px;">
+            <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150 120)">
+            <button type="button" onclick="removeNode(this)">🗑️</button>
+        </div>
+    </div>
+    <button type="button" onclick="addABlock()">➕ Ajouter un bloc</button>
+    <button onclick="calculerA()">Calculer</button>
+    <div id="resultA"></div>
+</div>
+
+<div id="modeB" class="hidden mode-content">
+    <h3>Mode B : Gains et pertes (en cascade)</h3>
+    <div id="multiBContainer">
+        <div class="ref-block">
+            <input type="number" class="valeurB" placeholder="Départ (€)" style="width:100px;">
+            <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+            <button type="button" onclick="removeNode(this)">🗑️</button>
+        </div>
+    </div>
+    <button type="button" onclick="addBBlock()">➕ Ajouter un bloc</button>
+    <button onclick="calculerB()">Calculer</button>
+    <div id="resultB"></div>
+</div>
+
+<div id="modeC" class="hidden mode-content">
+    <h3>Mode C : Pourcentage par bloc</h3>
+    <div id="multiCContainer"></div>
+    <button type="button" onclick="addCBlock()">➕ Ajouter un bloc</button>
+    <button onclick="updateC()">Calculer</button>
+    <div id="resultC"></div>
+</div>
+
+<div id="modeD" class="hidden mode-content">
+    <h3>Mode D : Évolution temporelle (Matrice de saisie)</h3>
+    
+    <div style="margin-bottom: 10px;">
+        <button type="button" onclick="addDDate()">➕ Ajouter une date</button>
+        <button type="button" onclick="sortDDates()">↕️ Trier les dates</button>
+    </div>
+
+    <div id="dInputsContainer">
+        <table id="dDataTable">
+            <thead>
+                <tr id="dateHeaderRow">
+                    <th style="min-width: 150px;">Série / Date</th> 
+                </tr>
+            </thead>
+            <tbody id="seriesBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <button type="button" onclick="addDSeries()">➕ Ajouter une série</button>
+    </div>
+
+    <hr style="margin: 15px 0;">
+
+    <button onclick="calculerD()">Générer/Rafraîchir le graphique</button>
+    <canvas id="graphD" style="display: block;"></canvas>
+</div>
+
+<div id="modeE" class="hidden mode-content">
+    <h3>Mode E : Graphique linéaire multi-séries</h3>
+    <div id="multiEContainer">
+        <div class="ref-block">
+            <input type="text" class="labelE" placeholder="Nom série">
+            <input type="text" class="valsE" placeholder="Valeurs (ex: 100 120 130 150)">
+            <button type="button" onclick="removeNode(this)">🗑️</button>
+        </div>
+    </div>
+    <button type="button" onclick="addEBlock()">➕ Ajouter une série</button>
+    <button onclick="calculerE()">Générer le graphique</button>
+    <canvas id="graphE"></canvas>
+</div>
+
+<div id="modeF" class="hidden mode-content">
+    <h3>Mode F : Graphique circulaire et Récapitulatif</h3>
+    <div id="multiFContainer"></div>
+    
+    <button type="button" onclick="addFBlock()">➕ Ajouter une catégorie</button>
+    <button type="button" onclick="fusionnerFCategories()">🔀 Fusionner les catégories sélectionnées</button>
+    <button onclick="calculerF()">Générer le graphique</button>
+    <canvas id="graphF"></canvas>
+
+    <h4>Récapitulatif des catégories</h4>
+    <table id="tableauF" style="width:100%; margin:8px auto 0 auto; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>Catégorie</th>
+                <th>Valeur</th>
+                <th>Pourcentage</th>
+                <th>Sous-catégories</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<div id="modeG" class="hidden mode-content">
+    <h3>Mode G : Calculateur TVA (par bloc)</h3>
+    <div id="multiGContainer"></div>
+    <div style="margin-top:8px;">
+        <button type="button" onclick="addGBlock()">➕ Ajouter un bloc TVA</button>
+        <button type="button" onclick="calculerG()">Calculer</button>
+    </div>
+    <div id="resultG"></div>
+</div>
+
+<div id="mode_rapport_global" class="hidden mode-content">
+    <h3>Rapport Global</h3>
+    <p>Sélectionnez les modes à inclure dans le rapport :</p>
+    
+    <div style="display:flex; flex-wrap:wrap; gap:5px; margin-bottom:15px;">
+        <label><div>Inclure Mode A </div><div><input type="checkbox" id="includeA"></div></label>
+        <label><div>Inclure Mode B </div><div><input type="checkbox" id="includeB"></div></label>
+        <label><div>Inclure Mode C </div><div><input type="checkbox" id="includeC"></div></label>
+        <label><div>Inclure Mode D </div><div><input type="checkbox" id="includeD"></div></label>
+        <label><div>Inclure Mode E </div><div><input type="checkbox" id="includeE"></div></label>
+        <label><div>Inclure Mode F </div><div><input type="checkbox" id="includeF"></div></label>
+        <label><div>Inclure Mode G </div><div><input type="checkbox" id="includeG"></div></label>
+    </div>
+    
+    <label style="cursor:pointer; font-weight:bold; display:inline-flex; align-items:center; gap:10px; margin-bottom:15px;">
+        <div>Tout sélectionner</div>
+        <div><input type="checkbox" id="selectAllModes" onchange="toggleAllModes(this)"></div>
+    </label><br>
+
+    <button onclick="previsualiserRapport()">👀 Prévisualiser</button>
+    <button onclick="genererRapport()">📄 Télécharger PDF</button>
+    <div id="previewContainer"></div>
+</div>
+
+<script>
+/* =========================
+    Variables globales
+    ========================= */
+let chartD = null, chartE = null, chartF = null; 
+let chartDataD = null, chartDataE = null, chartDataF = null; 
+let historique = {A:'', B:'', C:'', D:'', E:'', F:'', G:''}; 
+let historiqueF = []; 
+
+// Stockage pour le Mode D
+const D_COLORS = ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"];
+let dDates = [];
+let dSeries = [];
+
+/* ============
+    Affichage des modes
+    ============
+*/
+function showMode(id){
+    const modes = ["modeA","modeB","modeC","modeD","modeE","modeF","modeG","mode_rapport_global"];
+    modes.forEach(m => {
+        const el = document.getElementById(m);
+        if (el) el.classList.add("hidden");
+    });
+    if (id && id !== 'none') {
+        const toShow = document.getElementById(id);
+        if (toShow) toShow.classList.remove("hidden");
+    }
+}
+
+/* ============
+    Gestion du Mode Sombre
+    ============
+*/
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode ? 'on' : 'off');
+    const button = document.getElementById('darkModeToggle');
+    button.textContent = isDarkMode ? '☀️' : '🌙';
+    
+    const currentModeId = document.querySelector('.mode-content:not(.hidden)')?.id;
+    if (currentModeId === 'modeD') calculerD();
+    if (currentModeId === 'modeE') calculerE();
+    if (currentModeId === 'modeF') calculerF();
+    if (currentModeId === 'modeG') calculerG();
+}
+
+function loadDarkModePreference() {
+    const preference = localStorage.getItem('darkMode');
+    const button = document.getElementById('darkModeToggle');
+    if (!button) return;
+    if (preference === 'on') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️';
+    } else {
+        document.body.classList.remove('dark-mode');
+        button.textContent = '🌙';
+    }
+}
+
+/* ============
+    Utilitaires
+    ============
+*/
+function removeNode(btn){ btn.parentNode.remove(); }
+
+function parseNumber(value) {
+    if (typeof value === 'string') {
+        value = value.replace(',', '.');
+    }
+    const num = parseFloat(value);
+    return isNaN(num) ? null : num;
+}
+
+function formatDateForDisplay(dateString) {
+    if (!dateString) return '';
+    if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        const [yyyy, mm, dd] = dateString.split('-');
+        return `${dd}/${mm}/${yyyy}`;
+    }
+    return dateString;
+}
+
+/* =========================
+    MODE A : Comparer
+    ========================= */
+function addABlock(){
+    const cont = document.getElementById("multiAContainer");
+    const div = document.createElement("div"); div.className="ref-block";
+    div.innerHTML = `
+        <input type="number" class="refA" placeholder="Réf. (€)" style="width:100px;">
+        <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150 120)">
+        <button type="button" onclick="removeNode(this)">🗑️</button>
+    `;
+    cont.appendChild(div);
+}
+
+function calculerA(){
+    const cont = document.getElementById("multiAContainer");
+    const resDiv = document.getElementById("resultA"); resDiv.innerHTML = "";
+    Array.from(cont.getElementsByClassName("ref-block")).forEach(block => {
+        const ref = parseNumber(block.querySelector(".refA").value);
+        const raw = (block.querySelector(".valsA").value || "").trim();
+        if(raw === "") return;
+        const vals = raw.split(/\s+/).map(parseNumber).filter(v => v !== null); 
+        if(ref === null && vals.length === 0) return;
+        
+        let html = `<h4>Analyse pour ${ref === null ? 'n/a': ref.toFixed(2)}€</h4><table class="result-table"><tr><th>Valeur</th><th>Différence (€)</th><th>%</th></tr>`;
+        vals.forEach(v => {
+            const diff = ref === null ? v : v - ref;
+            const pct = (ref === null || ref === 0) ? null : (diff / ref * 100);
+            const col = diff > 0 ? "#2ecc71" : diff < 0 ? "#e74c3c" : "#95a5a6";
+            html += `<tr style="background:${col}; color:#fff;"><td>${v.toFixed(2)}</td><td>${diff>=0?'+':''}${diff.toFixed(2)}</td><td>${pct===null? '—' : pct.toFixed(2)+'%'}</td></tr>`;
+        });
+        html += "</table>";
+        resDiv.innerHTML += html;
+    });
+    historique.A = resDiv.innerHTML;
+}
+
+/* =========================
+    MODE B : Gains / pertes
+    ========================= */
+function addBBlock(){
+    const cont = document.getElementById("multiBContainer");
+    const div = document.createElement("div"); div.className="ref-block";
+    div.innerHTML = `
+        <input type="number" class="valeurB" placeholder="Départ (€)" style="width:100px;">
+        <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+        <button type="button" onclick="removeNode(this)">🗑️</button>
+    `;
+    cont.appendChild(div);
+}
+
+function calculerB(){
+    const cont = document.getElementById("multiBContainer");
+    const resDiv = document.getElementById("resultB"); resDiv.innerHTML = "";
+    Array.from(cont.getElementsByClassName("ref-block")).forEach(block => {
+        const val = parseNumber(block.querySelector(".valeurB").value);
+        const raw = (block.querySelector(".pourcentB").value || "").trim();
+        if(raw === "") return;
+        const taux = raw.split(/\s+/).map(parseNumber).filter(n => n !== null);
+        if(val === null || taux.length===0) return;
+        
+        let html = `<h4>Analyse pour ${val.toFixed(2)}€</h4><table class="result-table"><tr><th>Taux (%)</th><th>Variation (€)</th><th>Résultat (€)</th></tr>`;
+        taux.forEach(p => {
+            const r = val * (1 + p/100);
+            const variation = r - val; // VARIABLE CORRECTEMENT DÉCLARÉE
+            const col = p > 0 ? "#2ecc71" : p < 0 ? "#e74c3c" : "#95a5a6";
+            html += `<tr style="background:${col}; color:#fff;">
+                <td>${p}%</td>
+                <td>${variation >= 0 ? '+' : ''}${variation.toFixed(2)}</td>
+                <td>${r.toFixed(2)}</td>
+            </tr>`;
+        });
+        html += "</table>";
+        resDiv.innerHTML += html;
+    });
+    historique.B = resDiv.innerHTML;
+}
+
+/* =========================
+    MODE C : Pourcentage par bloc
+    ========================= */
+function addCBlock(){
+    const cont = document.getElementById("multiCContainer");
+    const div = document.createElement("div"); div.className = "ref-block";
+    div.innerHTML = `
+        <input type="text" class="valsC" placeholder="Valeurs à modifier (ex: 100 150 200)">
+        <label class="small">Max % : <input type="number" class="maxC" value="100" step="10" style="width:70px;"></label>
+        <input type="range" class="rangeC" min="-100" max="100" value="10" step="1" oninput="updateCBlock(this)">
+        <span class="pctDisplay">10%</span>
+        <button type="button" onclick="removeNode(this)">🗑️</button>
+    `;
+    cont.appendChild(div);
+    updateC();
+}
+
+function updateCBlock(rangeInput){
+    const block = rangeInput.closest(".ref-block");
+    const maxInput = block.querySelector(".maxC");
+    const max = parseNumber(maxInput.value) || 100;
+    rangeInput.min = -max;
+    rangeInput.max = max;
+    const pct = parseNumber(rangeInput.value) || 0;
+    block.querySelector(".pctDisplay").innerText = pct + "%";
+    updateC();
+}
+
+function updateC(){
+    const cont = document.getElementById("multiCContainer");
+    let html = "";
+    Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+        const valsStr = (block.querySelector(".valsC")?.value || "").trim();
+        const vals = valsStr ? valsStr.split(/\s+/).map(parseNumber).filter(v => v !== null) : [];
+        const pct = parseNumber(block.querySelector(".rangeC")?.value) || 0;
+        
+        if(vals.length){
+            html += `<h4>Bloc ${i+1} (${pct}%)</h4><table class="result-table"><tr><th>Valeur initiale</th><th>Variation (€)</th><th>Résultat</th></tr>`;
+            vals.forEach(v => {
+                const r = v * (1 + pct/100);
+                const variation = r - v; // VARIABLE CORRECTEMENT DÉCLARÉE
+                const col = pct > 0 ? "#2ecc71" : pct < 0 ? "#e74c3c" : "#95a5a6";
+                html += `<tr style="background:${col}; color:#fff;">
+                    <td>${v.toFixed(2)}</td>
+                    <td>${variation >= 0 ? '+' : ''}${variation.toFixed(2)}</td>
+                    <td>${r.toFixed(2)}</td>
+                </tr>`;
+            });
+            html += "</table>";
+        }
+    });
+    document.getElementById("resultC").innerHTML = html;
+    historique.C = html;
+}
+
+/* =========================
+    MODE D : Évolution temporelle
+    ========================= */
+function addDDate(defaultDate = null) {
+    if (!defaultDate) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        defaultDate = `${yyyy}-${mm}-${dd}`;
+    }
+    const newDateId = Date.now() + Math.random(); 
+    dDates.push({ id: newDateId, date: defaultDate });
+    dSeries.forEach(s => { s.values[newDateId] = ''; });
+    updateDTable();
+}
+
+function removeDDate(dateId) {
+    dDates = dDates.filter(d => d.id !== dateId);
+    dSeries.forEach(s => { delete s.values[dateId]; });
+    updateDTable();
+}
+
+function updateDDateValue(dateId, newDateString) {
+    const dateObj = dDates.find(d => d.id === dateId);
+    if (dateObj) {
+        dateObj.date = newDateString;
+    }
+    updateDTable(false);
+}
+
+function sortDDates() {
+    dDates.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    updateDTable();
+}
+
+function addDSeries() {
+    const count = dSeries.length + 1;
+    const newSeriesId = Date.now() + Math.random();
+    
+    const newSeries = { 
+        id: newSeriesId, 
+        label: `Série ${count}`, 
+        color: D_COLORS[dSeries.length % D_COLORS.length], 
+        values: {},
+        visible: true
+    };
+
+    dDates.forEach(d => {
+        newSeries.values[d.id] = '';
+    });
+
+    dSeries.push(newSeries);
+    updateDTable();
+}
+
+function removeDSeries(seriesId) {
+    dSeries = dSeries.filter(s => s.id !== seriesId);
+    updateDTable();
+}
+
+function toggleDSeriesVisibility(seriesId, eyeButton) {
+    const series = dSeries.find(s => s.id === seriesId);
+    if (series) {
+        series.visible = !series.visible;
+        eyeButton.textContent = series.visible ? "👁️" : "✖️"; 
+        eyeButton.title = series.visible ? "Cacher cette série" : "Afficher cette série";
+    }
+    calculerD();
+}
+
+function updateDSeriesProp(seriesId, prop, value) {
+    const series = dSeries.find(s => s.id === seriesId);
+    if (series) {
+        series[prop] = value;
+    }
+    if(prop === 'label' || prop === 'color') {
+        calculerD();
+    }
+}
+
+function updateDValue(seriesId, dateId, value) {
+    const series = dSeries.find(s => s.id === seriesId);
+    const parsedValue = parseNumber(value);
+    if (series) {
+        series.values[dateId] = parsedValue;
+    }
+    calculerD();
+}
+
+function updateDTable(recreate = true) {
+    const dateHeaderRow = document.getElementById("dateHeaderRow");
+    const seriesBody = document.getElementById("seriesBody");
+
+    if(recreate) {
+        dDates.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    }
+
+    dateHeaderRow.innerHTML = '<th style="min-width: 150px;">Série / Date</th>'; 
+    dDates.forEach(d => {
+        const th = document.createElement('th');
+        th.innerHTML = `
+            <div class="date-header-actions">
+                <input type="date" class="date-input-d" value="${d.date}" 
+                       onchange="updateDDateValue(${d.id}, this.value)">
+                <button type="button" onclick="removeDDate(${d.id})">🗑️</button>
+            </div>
+        `;
+        dateHeaderRow.appendChild(th);
+    });
+    
+    seriesBody.innerHTML = '';
+    dSeries.forEach(s => {
+        const tr = document.createElement('tr');
+        tr.dataset.seriesId = s.id;
+
+        const thSeries = document.createElement('th');
+        thSeries.innerHTML = `
+            <div class="series-header-d">
+                <input type="text" class="series-name-input" value="${s.label}" title="Nom de la série"
+                       oninput="updateDSeriesProp(${s.id}, 'label', this.value)">
+                <input type="color" value="${s.color}" title="Couleur"
+                       onchange="updateDSeriesProp(${s.id}, 'color', this.value)">
+                <span class="eyeD" style="cursor:pointer;" data-visible="${s.visible}" 
+                      onclick="toggleDSeriesVisibility(${s.id}, this)"
+                      title="${s.visible ? "Cacher cette série" : "Afficher cette série"}">
+                    ${s.visible ? "👁️" : "✖️"}
+                </span>
+                <button type="button" onclick="removeDSeries(${s.id})">🗑️</button>
+            </div>
+        `;
+        thSeries.style.textAlign = 'left';
+        tr.appendChild(thSeries);
+
+        dDates.forEach(d => {
+            const rawVal = s.values[d.id];
+            const currentValue = rawVal !== null && rawVal !== undefined ? rawVal : '';
+            
+            const td = document.createElement('td');
+            td.innerHTML = `<input type="number" class="value-input-d" placeholder="0" value="${currentValue}"
+                                   oninput="updateDValue(${s.id}, ${d.id}, this.value)">`;
+            tr.appendChild(td);
+        });
+        
+        seriesBody.appendChild(tr);
+    });
+    calculerD();
+}
+
+function calculerD(){
+    const canvasD = document.getElementById("graphD");
+    if (dDates.length === 0 || dSeries.length === 0) {
+        canvasD.style.display = 'none';
+        chartDataD = null;
+        if(chartD) chartD.destroy();
+        historique.D = "Aucune date ou série définie pour le Mode D.";
+        return;
+    }
+    
+    const datasets = [];
+    const labels = dDates.map(d => formatDateForDisplay(d.date));
+
+    dSeries.forEach((s) => {
+        if (!s.visible) return;
+        const dataPoints = [];
+        dDates.forEach(d => {
+            const val = parseNumber(s.values[d.id]);
+            dataPoints.push(val);
+        });
+        datasets.push({
+            label: s.label,
+            data: dataPoints,
+            borderColor: s.color,
+            backgroundColor: s.color,
+            borderWidth: 4,
+            fill: false,
+            tension: 0.2,
+            pointRadius: 6,
+            hitRadius: 10,
+            pointHoverRadius: 8
+        });
+    });
+
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const axisColor = isDarkMode ? '#aaa' : '#666';
+    const gridColor = isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+
+    if(chartD) chartD.destroy();
+    if (datasets.length > 0) {
+        chartD = new Chart(canvasD.getContext("2d"), {
+            type: 'line',
+            data: { labels: labels, datasets: datasets },
+            options: { 
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: gridColor },
+                        ticks: { color: axisColor }
+                    }, 
+                    x: {
+                         grid: { color: gridColor },
+                         ticks: { color: axisColor }
+                    }
+                },
+                plugins: { 
+                    legend: { display: true, labels: { color: axisColor } },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+            }
+        });
+        canvasD.style.display = 'block';
+        historique.D = "Graphique multi-séries de l'évolution temporelle généré.";
+    } else {
+        canvasD.style.display = 'none';
+    }
+}
+
+/* =========================
+    MODE E : Graphique linéaire multi-séries
+    ========================= */
+function addEBlock(defaults = {}){
+    const cont = document.getElementById("multiEContainer");
+    const div = document.createElement("div"); div.className="ref-block";
+    const labelParDefaut = defaults.label || `Série ${Array.from(cont.getElementsByClassName("ref-block")).length + 1}`;
+    const valsParDefaut = defaults.vals || "";
+
+    div.innerHTML = `
+        <input type="text" class="labelE" placeholder="Nom série" value="${labelParDefaut}">
+        <input type="text" class="valsE" placeholder="Valeurs (ex: 100 120 130 150)" value="${valsParDefaut}">
+        <button type="button" onclick="removeNode(this)">🗑️</button>
+    `;
+    cont.appendChild(div);
+    div.querySelector(".valsE").addEventListener('input', calculerE);
+    div.querySelector(".labelE").addEventListener('input', calculerE);
+    calculerE();
+}
+
+function calculerE(){
+    const cont = document.getElementById("multiEContainer");
+    const datasets = [];
+    let labels = [];
+    Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+        const label = block.querySelector(".labelE")?.value || "Série " + (i+1);
+        const raw = (block.querySelector(".valsE")?.value || "").trim();
+        const vals = raw.split(/\s+/).map(parseNumber).filter(v => v !== null); 
+        if(vals.length > 0){
+            if(labels.length < vals.length) labels = Array.from({length:vals.length}, (_,k) => "Point " + (k+1));
+            datasets.push({
+                label: label,
+                data: vals,
+                fill: false,
+                borderColor: ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"][i%7],
+                backgroundColor: 'transparent',
+                borderWidth: 4,
+                tension: 0.2,
+                pointRadius: 6,
+                hitRadius: 10,
+                pointHoverRadius: 8
+            });
+        }
+    });
+    
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const axisColor = isDarkMode ? '#aaa' : '#666';
+    const gridColor = isDarkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+
+    chartDataE = {
+        type:'line',
+        labels: labels,
+        datasets: datasets
+    };
+
+    const canvasE = document.getElementById("graphE");
+    if(chartE) chartE.destroy();
+    if (datasets.length > 0) {
+        chartE = new Chart(canvasE.getContext("2d"), {
+            type: chartDataE.type,
+            data: { labels: chartDataE.labels, datasets: chartDataE.datasets },
+            options: { 
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { 
+                        beginAtZero: true,
+                        grid: { color: gridColor },
+                        ticks: { color: axisColor }
+                    }, 
+                    x: {
+                         grid: { color: gridColor },
+                         ticks: { color: axisColor }
+                    }
+                },
+                plugins: { 
+                    legend: { display: true, labels: { color: axisColor } },
+                    tooltip: { mode: 'index', intersect: false }
+                },
+            }
+        });
+        canvasE.style.display = 'block';
+    } else {
+        canvasE.style.display = 'none';
+    }
+
+    historique.E = "Graphique linéaire multi-séries généré.";
+}
+
+/* =========================
+    MODE F : Graphique circulaire et tableau récapitulatif
+    ========================= */
+const paletteF = ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"];
+let compteurF = 0;
+
+function addFBlock(defaults = {}){
+    const cont = document.getElementById("multiFContainer");
+    const div = document.createElement("div"); div.className = "ref-block";
+    const couleurParDefaut = defaults.color || paletteF[compteurF % paletteF.length];
+    const labelParDefaut = defaults.label || `Catégorie ${compteurF + 1}`;
+    const valParDefaut = defaults.val !== undefined ? defaults.val : 100;
+
+    compteurF++;
+    div.dataset.selectionnee = "false";
+    div.innerHTML = `
+        <input type="text" class="labelF" placeholder="Catégorie" value="${labelParDefaut}" style="width:120px;">
+        <input type="number" class="valF" placeholder="Valeur" value="${valParDefaut}" style="width: 90px;">
+        <input type="color" class="colorF" value="${couleurParDefaut}" title="Choisir la couleur">
+        <button type="button" class="selectF" title="Sélectionner pour fusion">❌</button>
+        <button type="button" onclick="removeF(this)">🗑️</button>
+    `;
+
+    const btnSelect = div.querySelector(".selectF");
+    btnSelect.addEventListener("click", () => {
+        const isSelected = div.dataset.selectionnee === "true";
+        div.dataset.selectionnee = isSelected ? "false" : "true";
+        btnSelect.textContent = isSelected ? "❌" : "✅";
+    });
+
+    cont.appendChild(div);
+
+    const newCat = { 
+        element: div, 
+        label: labelParDefaut, 
+        val: valParDefaut, 
+        color: couleurParDefaut, 
+        sub: defaults.sub || [] 
+    };
+    historiqueF.push(newCat);
+    
+    function majHistoriqueEtCalculer(){
+        newCat.label = div.querySelector(".labelF").value || labelParDefaut;
+        newCat.val = parseNumber(div.querySelector(".valF").value) || 0;
+        newCat.color = div.querySelector(".colorF").value;
+        mettreAJourTableauF();
+        calculerF();
+    }
+
+    div.querySelector(".valF").addEventListener("input", majHistoriqueEtCalculer);
+    div.querySelector(".labelF").addEventListener("input", majHistoriqueEtCalculer);
+    div.querySelector(".colorF").addEventListener("input", majHistoriqueEtCalculer);
+
+    mettreAJourTableauF();
+    calculerF();
+}
+
+function removeF(btn){
+    const block = btn.parentNode;
+    const idx = historiqueF.findIndex(c => c.element === block);
+    if(idx !== -1) historiqueF.splice(idx,1);
+    block.remove();
+    mettreAJourTableauF();
+    calculerF();
+}
+
+function hexToRgbArr(hex){
+    const c = (hex||'#000000').replace('#','');
+    return [parseInt(c.substr(0,2),16), parseInt(c.substr(2,2),16), parseInt(c.substr(4,2),16)];
+}
+
+function rgbArrToHex(arr){
+    return "#" + arr.map(n => n.toString(16).padStart(2,'0')).join('');
+}
+
+function calculerF(){
+    const cont = document.getElementById("multiFContainer");
+    const lines = [];
+    historiqueF.forEach(cat => {
+        if(cat.label && cat.val !== null && cat.val > 0) {
+            lines.push({ label: cat.label, val: cat.val, color: cat.color });
+        }
+    });
+    
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    const fontColor = isDarkMode ? '#ecf0f1' : '#333';
+
+    const chartConfig = {
+        type: 'pie',
+        data: {
+            labels: lines.map(l => l.label),
+            datasets: [{ 
+                data: lines.map(l => l.val), 
+                backgroundColor: lines.map(l => l.color) 
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 1,
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { color: fontColor } },
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        const total = ctx.chart.data.datasets[0].data.reduce((sum, v) => sum + v, 0);
+                        return total === 0 ? '' : ((value / total) * 100).toFixed(1) + '%';
+                    },
+                    color: '#fff',
+                    font: { weight: 'bold', size: 14 }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    };
+    
+    chartDataF = chartConfig;
+
+    const canvasF = document.getElementById("graphF");
+    if(chartF) chartF.destroy();
+    if (lines.length > 0) {
+        chartF = new Chart(canvasF.getContext("2d"), chartDataF);
+        canvasF.style.display = 'block';
+    } else {
+        canvasF.style.display = 'none';
+    }
+
+    historique.F = `
+        <p>Mode F : Graphique circulaire</p>
+        <div id="chartF_wrapper_for_export">
+            <canvas id="graphF_for_export"></canvas>
+        </div>
+        <br>
+        <h4>Tableau Récapitulatif des catégories</h4>
+        ${document.getElementById("tableauF").outerHTML}
+    `;
+    ajouterTotalModeF();
+}
+
+function ajouterTotalModeF() {
+    const tableau = document.getElementById("tableauF");
+    if (!tableau) return;
+    const oldTotal = tableau.querySelector(".ligne-total-f");
+    if (oldTotal) oldTotal.remove();
+    const total = historiqueF.reduce((sum, item) => sum + Number(item.val || item.value), 0);
+    const tr = document.createElement("tr");
+    tr.className = "ligne-total-f";
+    tr.style.fontWeight = "bold";
+    tr.style.borderTop = "2px solid #000";
+    tr.innerHTML = `
+        <td>Total</td>
+        <td style="text-align:right;">${total.toFixed(2)}</td>
+        <td></td>
+        <td></td>
+    `;
+    tableau.querySelector("tbody").appendChild(tr);
+}
+
+function mettreAJourTableauF(){
+    const tbody = document.querySelector("#tableauF tbody");
+    tbody.innerHTML = "";
+    const total = historiqueF.reduce((s,c) => s + (parseFloat(c.val) || 0), 0);
+    
+    historiqueF.forEach(cat => {
+        const pourcent = total > 0 ? (cat.val / total * 100).toFixed(1) : 0;
+        const tr = document.createElement("tr");
+        tr.style.backgroundColor = cat.color;
+        
+        const rgb = hexToRgbArr(cat.color);
+        const luminance = (0.299 * rgb[0] + 0.587 * rgb[1] + 0.114 * rgb[2]) / 255;
+        tr.style.color = luminance > 0.5 ? '#000' : '#fff';
+
+        let sousHTML = "";
+        if(cat.sub && cat.sub.length > 0){
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const subTextColor = isDarkMode ? '#ecf0f1' : '#333';
+            const subBgColor = isDarkMode ? '#4a627a' : '#fff';
+            sousHTML = `<div style="text-align:left; padding:4px; color:${subTextColor}; background:${subBgColor}; border-radius:4px; margin:2px; font-size:12px;">` + cat.sub.map(sc => {
+                const pct = total > 0 ? ((sc.val / total) * 100).toFixed(1) : 0;
+                return `<div>${sc.label}: ${sc.val.toFixed(2)} (${pct}%)</div>`;
+            }).join("") + '</div>';
+        } 
+        tr.innerHTML = `<td>${cat.label}</td><td>${cat.val.toFixed(2)}</td><td>${pourcent}%</td><td>${sousHTML}</td>`;
+        tbody.appendChild(tr);
+    });
+    calculerF();
+}
+
+function fusionnerFCategories(){
+    const cont = document.getElementById("multiFContainer");
+    const selectedBlocks = Array.from(cont.getElementsByClassName("ref-block")).filter(d => d.dataset.selectionnee === "true");
+    
+    if(selectedBlocks.length < 2){ alert("Sélectionnez au moins 2 catégories à fusionner !"); return; }
+
+    let nomNouvelle = prompt("Entrez le nom de la nouvelle catégorie fusionnée :", "Catégorie Fusionnée");
+    if(!nomNouvelle) nomNouvelle = "Catégorie Fusionnée";
+
+    let valTotale = 0;
+    const rgbs = [];
+    const sous = [];
+    const elementsToRemove = [];
+
+    selectedBlocks.forEach(block => {
+        const h = historiqueF.find(c => c.element === block);
+        if(h){
+            valTotale += h.val;
+            rgbs.push(hexToRgbArr(h.color));
+            sous.push({ label: h.label, val: h.val, color: h.color, isParent: true });
+            if(h.sub && h.sub.length) sous.push(...h.sub);
+            elementsToRemove.push(h);
+        }
+    });
+
+    const moy = rgbs[0].map((_,i) => Math.round(rgbs.reduce((s,c) => s + c[i], 0) / rgbs.length));
+    const couleurFusion = rgbArrToHex(moy);
+
+    elementsToRemove.forEach(h => {
+        h.element.remove();
+        const idx = historiqueF.findIndex(c => c === h);
+        if(idx !== -1) historiqueF.splice(idx,1);
+    });
+
+    addFBlock({ 
+        label: nomNouvelle, 
+        val: valTotale, 
+        color: couleurFusion, 
+        sub: sous 
+    });
+
+    mettreAJourTableauF();
+    calculerF();
+}
+
+/* =========================
+    MODE G : Calculateur TVA (blocs indépendants)
+    ========================= */
+function addGBlock(defaults = {}) {
+    const cont = document.getElementById("multiGContainer");
+    const blockId = 'gblock-' + (Date.now() + Math.floor(Math.random()*1000));
+    const div = document.createElement('div');
+    div.className = 'ref-block g-block';
+    div.id = blockId;
+
+    const blockName = defaults.name || 'Bloc TVA';
+    const globalTva = (defaults.tva !== undefined) ? defaults.tva : 21;
+
+    div.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px; width:100%;">
+            <input type="text" class="bloc-nom-input" value="${blockName}" placeholder="Nom du bloc" style="flex:1;">
+            <label style="white-space:nowrap;">TVA Globale (%) :
+              <input type="number" class="global-tva-input" value="${globalTva}" style="width:70px;">
+            </label>
+            <button type="button" onclick="addGLigneToBlock('${blockId}')">➕ Ligne</button>
+            <button type="button" onclick="removeNode(this)" title="Supprimer bloc">🗑️</button>
+        </div>
+        <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:6px; margin-top:8px;"></div>
+    `;
+
+    cont.appendChild(div);
+
+    const globalInput = div.querySelector('.global-tva-input');
+    globalInput.addEventListener('input', () => {
+        propagateGlobalTvaToBlock(blockId);
+        calculerG();
+    });
+
+    addGLigneToBlock(blockId, "Ligne 1", 100, 'HT', globalTva);
+    if (defaults.addSecond) addGLigneToBlock(blockId, "Ligne 2", 250, 'HT', globalTva);
+
+    return div;
+}
+
+function addGLigneToBlock(blockId, labelDefault = "", valDefault = "", typeDefault = 'HT', tvaDefault = 21) {
+    const block = document.getElementById(blockId);
+    if (!block) return;
+    const container = block.querySelector('.ligneGContainer');
+    const row = document.createElement('div');
+    row.className = 'ligne-tva';
+    row.style.display = 'flex';
+    row.style.gap = '6px';
+    row.style.alignItems = 'center';
+
+    row.innerHTML = `
+        <input type="text" class="libelleG" placeholder="Libellé" value="${labelDefault}" style="flex:1;">
+        <input type="number" class="valeurG" placeholder="Montant" value="${valDefault}" style="width:100px;">
+        <select class="typeG" style="width:80px;">
+          <option value="HT"${typeDefault==='HT' ? ' selected':''}>HT</option>
+          <option value="TTC"${typeDefault==='TTC' ? ' selected':''}>TTC</option>
+        </select>
+        <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="${tvaDefault}" style="width:70px;">
+        <button type="button" onclick="removeNode(this)" title="Supprimer la ligne">✖️</button>
+    `;
+
+    row.querySelector('.valeurG').addEventListener('input', () => calculerG());
+    row.querySelector('.typeG').addEventListener('change', () => calculerG());
+    row.querySelector('.tvaIndividuelleG').addEventListener('input', () => calculerG());
+    row.querySelector('.libelleG').addEventListener('input', () => calculerG());
+
+    container.appendChild(row);
+    calculerG();
+    return row;
+}
+
+function propagateGlobalTvaToBlock(blockId) {
+    const block = document.getElementById(blockId);
+    if (!block) return;
+    const global = parseFloat(block.querySelector('.global-tva-input').value) || 0;
+    const lines = block.querySelectorAll('.ligne-tva');
+    lines.forEach(line => {
+        const tvaInput = line.querySelector('.tvaIndividuelleG');
+        if (tvaInput) {
+            tvaInput.value = global;
+        }
+    });
+}
+
+function calculerG(){
+    const cont = document.getElementById("multiGContainer");
+    const resDiv = document.getElementById("resultG"); 
+    resDiv.innerHTML = "";
+
+    const blocks = Array.from(cont.getElementsByClassName('g-block'));
+    if (blocks.length === 0) {
+        resDiv.innerHTML = "<p>Aucun bloc TVA défini.</p>";
+        historique.G = resDiv.innerHTML;
+        return;
+    }
+
+    let globalHTML = "";
+    
+    blocks.forEach((block, idx) => {
+        const blockName = block.querySelector('.bloc-nom-input')?.value || `Bloc ${idx+1}`;
+        const globalTva = parseFloat(block.querySelector('.global-tva-input')?.value) || 0;
+        const lines = Array.from(block.querySelectorAll('.ligne-tva'));
+
+        let html = `<h4>${blockName} (TVA globale ${globalTva}%)</h4>`;
+        html += `<table class="result-table"><tr>
+            <th>Libellé</th><th>Montant donné</th><th>Taux TVA</th><th>Montant TVA</th><th>Montant HT</th><th>Montant TTC</th>
+        </tr>`;
+
+        let totalTVA = 0, totalHT = 0, totalTTC = 0;
+        lines.forEach(l => {
+            const lib = l.querySelector('.libelleG')?.value || '';
+            const raw = parseFloat(l.querySelector('.valeurG')?.value);
+            if (isNaN(raw)) return;
+            const type = l.querySelector('.typeG')?.value || 'HT';
+            const tva = parseFloat(l.querySelector('.tvaIndividuelleG')?.value);
+            const applicableTva = isNaN(tva) ? globalTva : tva;
+
+            const factor = 1 + applicableTva/100;
+            let montantHT, montantTTC, tvaVal;
+            if (type === 'HT') {
+                montantHT = raw;
+                montantTTC = montantHT * factor;
+                tvaVal = montantTTC - montantHT;
+            } else {
+                montantTTC = raw;
+                montantHT = montantTTC / factor;
+                tvaVal = montantTTC - montantHT;
+            }
+
+            totalTVA += tvaVal;
+            totalHT += montantHT;
+            totalTTC += montantTTC;
+
+            html += `<tr>
+                <td style="text-align:left;">${lib}</td>
+                <td>${raw.toFixed(2)} € (${type})</td>
+                <td>${applicableTva}%</td>
+                <td>${tvaVal.toFixed(2)} €</td>
+                <td>${montantHT.toFixed(2)} €</td>
+                <td>${montantTTC.toFixed(2)} €</td>
+            </tr>`;
+        });
+
+        html += `<tr style="font-weight:bold; background:#ecf0f1; color:#333;">
+            <td style="text-align:left;">Totaux</td>
+            <td>—</td><td>—</td>
+            <td>${totalTVA.toFixed(2)} €</td>
+            <td>${totalHT.toFixed(2)} €</td>
+            <td>${totalTTC.toFixed(2)} €</td>
+        </tr>`;
+
+        html += `</table>`;
+        resDiv.innerHTML += html;
+        globalHTML += html; // Stocker aussi pour l'historique
+    });
+
+    historique.G = globalHTML; // CORRECTION : stocker le HTML complet
+}
+
+/* ======================================================================================================================================================
+===================================================================RAPPORT GLOBAL (PDF)===================================================================
+====================================================================================================================================================== */
+function toggleAllModes(checkbox) {
+    const isChecked = checkbox.checked;
+    const modeCheckboxes = document.querySelectorAll('#mode_rapport_global input[type="checkbox"]:not(#selectAllModes)');
+    modeCheckboxes.forEach(cb => cb.checked = isChecked);
+}
+
+function previsualiserRapport() {
+    const previewContainer = document.getElementById("previewContainer");
+    previewContainer.innerHTML = '<h3 style="color: #2c3e50; margin-bottom: 25px; padding-bottom: 10px; border-bottom: 2px solid #3498db;">Prévisualisation du Rapport</h3>';
+    
+    const modes = [
+        { id: 'A', title: 'Mode A : Comparer à des valeurs' },
+        { id: 'B', title: 'Mode B : Gains et pertes' },
+        { id: 'C', title: 'Mode C : Pourcentage par bloc' },
+        { id: 'D', title: 'Mode D : Évolution temporelle', isChart: true, chartId: 'graphD', chartInstance: chartD },
+        { id: 'E', title: 'Mode E : Graphique linéaire multi-séries', isChart: true, chartId: 'graphE', chartInstance: chartE },
+        { id: 'F', title: 'Mode F : Graphique circulaire', isChart: true, chartId: 'graphF', chartInstance: chartF },
+        { id: 'G', title: 'Mode G : Calculateur TVA' }
+    ];
+
+    let content = "";
+    let hasContent = false;
+    
+    modes.forEach(mode => {
+        const include = document.getElementById("include" + mode.id).checked;
+        if (include && historique[mode.id]) {
+            hasContent = true;
+            content += `<div class="mode-section" style="margin: 35px 0; padding: 25px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #eaeaea;">
+                <h4 style="border-bottom: 3px solid #3498db; padding-bottom: 12px; color: #2c3e50; margin-bottom: 25px; font-size: 1.4em; font-weight: 600;">${mode.title}</h4>`;
+            
+            if (mode.isChart && mode.chartInstance) {
+                // Pour les graphiques, on crée un canvas interactif
+                const chartElement = document.getElementById(mode.chartId);
+                if (chartElement && chartElement.style.display !== 'none') {
+                    // On crée un nouveau canvas avec les mêmes dimensions
+                    content += `<div style="text-align: center; margin: 25px 0;">
+                        <div style="position: relative; height: 450px; width: 100%; max-width: 800px; margin: 0 auto;">
+                            <canvas id="preview_${mode.chartId}" style="width: 100% !important; height: 100% !important; max-width: 800px; max-height: 450px;"></canvas>
+                        </div>
+                    </div>`;
+                }
+                
+                // Pour le Mode F, ajouter le tableau récapitulatif
+                if (mode.id === 'F') {
+                    content += `<div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #eee;">
+                        <h5 style="color: #34495e; margin-bottom: 18px; font-size: 1.2em; font-weight: 600;">Tableau récapitulatif</h5>
+                        <div style="overflow-x: auto; border: 1px solid #ddd; border-radius: 8px; padding: 5px;">${document.getElementById("tableauF").outerHTML}</div>
+                    </div>`;
+                }
+            } else {
+                // Pour les modes sans graphique
+                content += `<div style="overflow-x: auto; margin: 20px 0; border: 1px solid #ddd; border-radius: 8px; padding: 10px; background: #f9f9f9;">${historique[mode.id]}</div>`;
+            }
+            
+            content += `</div>`;
+        }
+    });
+
+    if(!hasContent) {
+        content = `<div style="color: #666; font-style: italic; padding: 40px; text-align: center; background: #f9f9f9; border-radius: 12px; border: 1px dashed #ddd; margin: 30px 0;">
+            <div style="font-size: 48px; margin-bottom: 20px;">📊</div>
+            <div style="font-size: 1.2em; margin-bottom: 10px; color: #7f8c8d;">Aucun mode sélectionné</div>
+            <div style="color: #95a5a6;">Veuillez sélectionner au moins un mode et vous assurer qu'il contient des données.</div>
+        </div>`;
+    }
+    
+    previewContainer.innerHTML += content;
+    
+    // Re-créer les graphiques interactifs dans la prévisualisation
+    setTimeout(() => {
+        modes.forEach(mode => {
+            if (mode.isChart && mode.chartInstance && document.getElementById(`preview_${mode.chartId}`)) {
+                const previewCanvasId = `preview_${mode.chartId}`;
+                const previewCanvas = document.getElementById(previewCanvasId);
+                
+                if (!previewCanvas || !mode.chartInstance) return;
+                
+                // Détruire tout graphique existant sur ce canvas
+                const existingChart = Chart.getChart(previewCanvas);
+                if (existingChart) existingChart.destroy();
+                
+                // Copier les données du graphique original
+                const chartType = mode.chartInstance.config.type;
+                const chartData = JSON.parse(JSON.stringify(mode.chartInstance.config.data));
+                const chartOptions = JSON.parse(JSON.stringify(mode.chartInstance.config.options));
+                
+                // Ajuster les options pour la prévisualisation
+                chartOptions.responsive = true;
+                chartOptions.maintainAspectRatio = false;
+                
+                // Pour le graphique circulaire, ajuster la taille de la légende
+                if (chartType === 'pie') {
+                    chartOptions.plugins = chartOptions.plugins || {};
+                    chartOptions.plugins.legend = {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            font: { size: 12 },
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    };
+                }
+                
+                // Créer le nouveau graphique
+                new Chart(previewCanvas.getContext('2d'), {
+                    type: chartType,
+                    data: chartData,
+                    options: chartOptions
+                });
+            }
+        });
+    }, 300);
+}
+
+/* =========================
+    NOUVELLE FONCTION POUR PDF AVEC TEXTE SÉLECTIONNABLE
+    ========================= */
+
+async function genererRapport() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF('p', 'mm', 'a4');
+    
+    // Configuration de base
+    const pageWidth = doc.internal.pageSize.width;
+    const margin = 20;
+    const contentWidth = pageWidth - 2 * margin;
+    let y = margin;
+    
+    // Styles améliorés
+    const styles = {
+        title: { size: 24, bold: true, color: [40, 40, 40] },
+        subtitle: { size: 18, bold: true, color: [60, 60, 60] },
+        section: { size: 16, bold: true, color: [80, 80, 80] },
+        normal: { size: 12, bold: false, color: [0, 0, 0] },
+        small: { size: 10, bold: false, color: [100, 100, 100] },
+        tableHeader: { size: 10, bold: true, color: [255, 255, 255] },
+        tableRow: { size: 9, bold: false, color: [60, 60, 60] }
+    };
+    
+    // Fonction pour ajouter une nouvelle page si nécessaire
+    function checkPageHeight(additionalHeight) {
+        if (y + additionalHeight > 280) {
+            doc.addPage();
+            y = margin;
+            return true;
+        }
+        return false;
+    }
+    
+    // Fonction pour appliquer un style
+    function applyStyle(style) {
+        doc.setFontSize(style.size);
+        doc.setTextColor(...style.color);
+        doc.setFont("helvetica", style.bold ? "bold" : "normal");
+    }
+    
+    // Fonction pour ajouter du texte avec retour à la ligne automatique
+    function addText(text, x = margin, style = styles.normal) {
+        applyStyle(style);
+        
+        const lineHeight = style.size * 0.35;
+        const maxWidth = contentWidth;
+        
+        // Découper le texte en lignes
+        const lines = doc.splitTextToSize(text, maxWidth);
+        
+        // Vérifier si on a assez de place
+        checkPageHeight(lines.length * lineHeight);
+        
+        // Ajouter chaque ligne
+        lines.forEach(line => {
+            doc.text(line, x, y);
+            y += lineHeight;
+        });
+        
+        return lines.length;
+    }
+    
+    // Fonction utilitaire pour convertir hex en RGB
+    function hexToRgb(hex) {
+        if (!hex || hex.length !== 7) return [0, 0, 0];
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return [r, g, b];
+    }
+    
+    // Fonction pour calculer les largeurs de colonnes intelligentes
+    function calculateColumnWidths(headers, rows) {
+        const minWidth = 25;
+        const maxWidth = 70;
+        
+        // Largeurs par défaut selon le type de colonne
+        const defaultWidths = {
+            'Valeur': 40,
+            'Différence': 45,
+            '%': 25,
+            'Taux': 35,
+            'Variation': 45,
+            'Résultat': 50,
+            'Valeur initiale': 55,
+            'Date': 50,
+            'Catégorie': 65,
+            'Valeur (€)': 50,
+            'Pourcentage': 40,
+            'Sous-catégories': 75,
+            'Libellé': 65,
+            'Montant': 45,
+            'TVA %': 35,
+            'Montant TVA': 50,
+            'HT': 35,
+            'TTC': 35
+        };
+        
+        const colWidths = [];
+        
+        for (let i = 0; i < headers.length; i++) {
+            let width = 45; // Largeur par défaut
+            
+            // Largeur prédéfinie selon le nom de la colonne
+            for (const [key, presetWidth] of Object.entries(defaultWidths)) {
+                if (headers[i].includes(key)) {
+                    width = presetWidth;
+                    break;
+                }
+            }
+            
+            // Ajuster selon le contenu réel
+            let maxContentLength = headers[i].length;
+            rows.forEach(row => {
+                if (row[i] && row[i].toString) {
+                    const cellText = row[i].toString();
+                    // Ne pas compter les symboles € et % dans la longueur
+                    const effectiveLength = cellText.replace(/[€%+\-]/g, '').trim().length;
+                    maxContentLength = Math.max(maxContentLength, effectiveLength);
+                }
+            });
+            
+            // Calcul basé sur la longueur (3.5mm par caractère)
+            const calculatedWidth = Math.min(maxWidth, Math.max(minWidth, maxContentLength * 3.5));
+            width = Math.max(width, calculatedWidth);
+            
+            colWidths.push(width);
+        }
+        
+        // Ajuster pour ne pas dépasser la largeur disponible
+        const totalWidth = colWidths.reduce((a, b) => a + b, 0);
+        if (totalWidth > contentWidth) {
+            const scaleFactor = contentWidth / totalWidth;
+            return colWidths.map(width => Math.floor(width * scaleFactor * 0.95));
+        }
+        
+        return colWidths;
+    }
+    
+    // Fonction pour ajouter un tableau avec alignement PRÉCIS
+    function addTable(headers, rows, x = margin, colors = null, modeType = '') {
+        // 1. Calculer les largeurs de colonnes
+        const colWidths = calculateColumnWidths(headers, rows);
+        const rowHeight = 8;
+        const headerHeight = 10;
+        const tableWidth = colWidths.reduce((a, b) => a + b, 0);
+        
+        // 2. Position X centrée si le tableau est plus petit que la largeur
+        let tableX = x;
+        if (tableWidth < contentWidth) {
+            tableX = x + (contentWidth - tableWidth) / 2;
+        }
+        
+        // 3. Vérifier la hauteur disponible
+        checkPageHeight((rows.length * rowHeight) + headerHeight + 15);
+        
+        // 4. COULEURS D'EN-TÊTE PAR MODE
+        const headerColors = {
+            'A': [52, 152, 219],    // Bleu
+            'B': [46, 204, 113],    // Vert
+            'C': [155, 89, 182],    // Violet
+            'D': [241, 196, 15],    // Jaune
+            'F': [231, 76, 60],     // Rouge
+            'G': [26, 188, 156]     // Turquoise
+        };
+        const headerBgColor = headerColors[modeType] || [52, 152, 219];
+        
+        // 5. EN-TÊTE DU TABLEAU - TEXTE BIEN CENTRÉ
+        applyStyle({ size: 10, bold: true, color: [255, 255, 255] });
+        let currentX = tableX;
+        
+        headers.forEach((header, i) => {
+            // Fond de l'en-tête
+            doc.setFillColor(...headerBgColor);
+            doc.rect(currentX, y, colWidths[i], headerHeight, 'F');
+            
+            // TEXTE PARFAITEMENT CENTRÉ
+            const text = header;
+            const fontSize = 10;
+            // Calculer la largeur exacte du texte
+            const textWidth = (doc.getStringUnitWidth(text) * fontSize) / doc.internal.scaleFactor;
+            const textX = currentX + (colWidths[i] - textWidth) / 2;
+            
+            doc.text(text, textX, y + 7);
+            
+            currentX += colWidths[i];
+        });
+        y += headerHeight;
+        
+        // 6. LIGNES DU TABLEAU - ALIGNEMENT PRÉCIS
+        applyStyle({ size: 9, bold: false, color: [40, 40, 40] });
+        
+        rows.forEach((row, rowIndex) => {
+            checkPageHeight(rowHeight);
+            
+            currentX = tableX;
+            
+            row.forEach((cell, colIndex) => {
+                const cellText = cell.toString();
+                
+                // DÉTERMINER LA POSITION X EXACTE
+                let textX;
+                
+                if (cellText.includes('€') || cellText.includes('%') || 
+                    (!isNaN(parseFloat(cellText.replace(',', '.').replace('€', '').replace('%', '').trim())) && 
+                     cellText.trim() !== '')) {
+                    // ALIGNEMENT À DROITE pour nombres, monnaies, pourcentages
+                    const textWidth = (doc.getStringUnitWidth(cellText) * 9) / doc.internal.scaleFactor;
+                    textX = currentX + colWidths[colIndex] - textWidth - 3;
+                } else if (colIndex === 0) {
+                    // Première colonne : alignement à GAUCHE
+                    textX = currentX + 3;
+                } else {
+                    // Autres colonnes : CENTRÉ
+                    const textWidth = (doc.getStringUnitWidth(cellText) * 9) / doc.internal.scaleFactor;
+                    textX = currentX + (colWidths[colIndex] - textWidth) / 2;
+                }
+                
+                // Fond alterné
+                if (rowIndex % 2 === 0) {
+                    doc.setFillColor(250, 250, 250);
+                } else {
+                    doc.setFillColor(255, 255, 255);
+                }
+                doc.rect(currentX, y, colWidths[colIndex], rowHeight, 'F');
+                
+                // Bordures légères
+                doc.setDrawColor(230, 230, 230);
+                doc.setLineWidth(0.1);
+                doc.rect(currentX, y, colWidths[colIndex], rowHeight);
+                
+                // Texte
+                doc.text(cellText, textX, y + 6);
+                
+                currentX += colWidths[colIndex];
+            });
+            
+            y += rowHeight;
+        });
+        
+        y += 12; // Espace après le tableau
+    }
+    
+    // Fonctions de traitement pour chaque mode avec design spécifique
+    async function processModeA() {
+        if (!historique.A) return;
+        
+        addText("Mode A : Comparaison de valeurs", margin, styles.subtitle);
+        y += 8;
+        
+        const parser = new DOMParser();
+        const docHTML = parser.parseFromString(historique.A, 'text/html');
+        const tables = docHTML.querySelectorAll('table');
+        
+        tables.forEach((table, tableIndex) => {
+            const headers = ['Valeur (€)', 'Différence (€)', 'Pourcentage'];
+            const rows = [];
+            const rowColors = [];
+            
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                const row = [];
+                tr.querySelectorAll('td').forEach(td => {
+                    row.push(td.textContent.trim());
+                });
+                if (row.length > 0) {
+                    rows.push(row);
+                    
+                    // Déterminer la couleur selon la valeur
+                    const diffText = row[1];
+                    let color;
+                    
+                    if (diffText.includes('+')) {
+                        color = [46, 204, 113]; // Vert pour gain
+                    } else if (diffText.includes('-')) {
+                        color = [231, 76, 60]; // Rouge pour perte
+                    } else {
+                        color = [149, 165, 166]; // Gris pour neutre
+                    }
+                    
+                    rowColors.push(color);
+                }
+            });
+            
+            if (headers.length > 0 && rows.length > 0) {
+                // Ajouter un titre pour chaque bloc
+                if (tableIndex > 0) {
+                    y += 5;
+                }
+                
+                addTable(headers, rows, margin, rowColors, 'A');
+            }
+        });
+    }
+    
+    function processModeB() {
+        if (!historique.B) return;
+        
+        addText("Mode B : Calcul de gains et pertes", margin, styles.subtitle);
+        y += 8;
+        
+        const parser = new DOMParser();
+        const docHTML = parser.parseFromString(historique.B, 'text/html');
+        const tables = docHTML.querySelectorAll('table');
+        
+        tables.forEach((table, tableIndex) => {
+            const headers = ['Taux (%)', 'Variation (€)', 'Résultat (€)'];
+            const rows = [];
+            const rowColors = [];
+            
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                const row = [];
+                tr.querySelectorAll('td').forEach(td => {
+                    row.push(td.textContent.trim());
+                });
+                if (row.length > 0) {
+                    rows.push(row);
+                    
+                    // Déterminer la couleur selon le taux
+                    const taux = parseFloat(row[0]);
+                    let color;
+                    
+                    if (taux > 0) {
+                        color = [46, 204, 113]; // Vert pour gain
+                    } else if (taux < 0) {
+                        color = [231, 76, 60]; // Rouge pour perte
+                    } else {
+                        color = [149, 165, 166]; // Gris pour neutre
+                    }
+                    
+                    rowColors.push(color);
+                }
+            });
+            
+            if (rows.length > 0) {
+                addTable(headers, rows, margin, rowColors, 'B');
+            }
+        });
+    }
+    
+    function processModeC() {
+        if (!historique.C) return;
+        
+        addText("Mode C : Application de pourcentages par bloc", margin, styles.subtitle);
+        y += 8;
+        
+        const parser = new DOMParser();
+        const docHTML = parser.parseFromString(historique.C, 'text/html');
+        const tables = docHTML.querySelectorAll('table');
+        
+        tables.forEach((table, tableIndex) => {
+            // Titre du bloc avec le pourcentage
+            const sectionTitle = table.previousElementSibling;
+            if (sectionTitle && sectionTitle.tagName === 'H4') {
+                addText(sectionTitle.textContent, margin, { size: 14, bold: true, color: [80, 80, 80] });
+                y += 2;
+            }
+            
+            const headers = ['Valeur initiale (€)', 'Variation (€)', 'Résultat (€)'];
+            const rows = [];
+            const rowColors = [];
+            
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                const row = [];
+                tr.querySelectorAll('td').forEach(td => {
+                    row.push(td.textContent.trim());
+                });
+                if (row.length > 0) {
+                    rows.push(row);
+                    
+                    // Déterminer la couleur selon la variation
+                    const variationText = row[1];
+                    let color;
+                    
+                    if (variationText.includes('+')) {
+                        color = [46, 204, 113]; // Vert pour gain
+                    } else if (variationText.includes('-')) {
+                        color = [231, 76, 60]; // Rouge pour perte
+                    } else {
+                        color = [149, 165, 166]; // Gris pour neutre
+                    }
+                    
+                    rowColors.push(color);
+                }
+            });
+            
+            if (rows.length > 0) {
+                addTable(headers, rows, margin, rowColors, 'C');
+            }
+        });
+    }
+    
+    async function processModeD() {
+        if (!chartD || dSeries.length === 0) return;
+        
+        addText("Mode D : Évolution temporelle", margin, styles.subtitle);
+        y += 12;
+        
+        try {
+            // Créer un graphique haute résolution pour le PDF
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 700;
+            canvas.style.display = 'none';
+            document.body.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Préparer les données
+            const visibleSeries = dSeries.filter(s => s.visible);
+            const labels = dDates.map(d => formatDateForDisplay(d.date));
+            const datasets = visibleSeries.map((s, i) => ({
+                label: s.label,
+                data: dDates.map(d => {
+                    const val = parseNumber(s.values[d.id]);
+                    return val !== null && val !== undefined ? val : null;
+                }),
+                borderColor: s.color,
+                backgroundColor: s.color + '40',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.3,
+                pointRadius: 4,
+                pointBackgroundColor: s.color,
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2
+            }));
+            
+            // Créer un nouveau graphique haute résolution
+            const tempChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { 
+                                color: 'rgba(0,0,0,0.08)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { size: 12 },
+                                callback: function(value) {
+                                    return value + ' €';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { 
+                                color: 'rgba(0,0,0,0.08)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Attendre le rendu
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            // Récupérer l'image
+            const imgData = tempChart.toBase64Image();
+            const imgWidth = contentWidth;
+            const imgHeight = imgWidth * 0.5;
+            
+            checkPageHeight(imgHeight + 10);
+            
+            doc.addImage(imgData, 'PNG', margin, y, imgWidth, imgHeight);
+            y += imgHeight + 20;
+            
+            // Nettoyer
+            tempChart.destroy();
+            document.body.removeChild(canvas);
+            
+            // Ajouter le tableau de données
+            addText("Données détaillées", margin, { size: 14, bold: true, color: [80, 80, 80] });
+            y += 5;
+            
+            const headers = ['Date', ...visibleSeries.map(s => s.label)];
+            const rows = [];
+            
+            dDates.forEach((dateObj, dateIndex) => {
+                const row = [formatDateForDisplay(dateObj.date)];
+                visibleSeries.forEach(series => {
+                    const val = series.values[dateObj.id];
+                    row.push(val !== null && val !== undefined ? val.toFixed(2) + ' €' : '—');
+                });
+                rows.push(row);
+            });
+            
+            addTable(headers, rows, margin, null, 'D');
+            
+        } catch (error) {
+            console.error("Erreur Mode D:", error);
+            addText("Graphique non disponible", margin, styles.normal);
+            y += 10;
+        }
+    }
+    
+    async function processModeE() {
+        if (!chartE) return;
+        
+        addText("Mode E : Graphique linéaire multi-séries", margin, styles.subtitle);
+        y += 12;
+        
+        try {
+            // Créer un graphique haute résolution
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 700;
+            canvas.style.display = 'none';
+            document.body.appendChild(canvas);
+            
+            const ctx = canvas.getContext('2d');
+            
+            // Copier les données du graphique existant
+            const chartData = chartE.data;
+            const datasets = chartData.datasets.map((dataset, i) => ({
+                ...dataset,
+                borderWidth: 3,
+                fill: false,
+                tension: 0.3,
+                pointRadius: 5,
+                pointBackgroundColor: dataset.borderColor,
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 2
+            }));
+            
+            const tempChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 14 },
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { 
+                                color: 'rgba(0,0,0,0.08)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { size: 12 },
+                                callback: function(value) {
+                                    return value + ' €';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: { 
+                                color: 'rgba(0,0,0,0.08)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            await new Promise(resolve => setTimeout(resolve, 600));
+            
+            const imgData = tempChart.toBase64Image();
+            const imgWidth = contentWidth;
+            const imgHeight = imgWidth * 0.5;
+            
+            checkPageHeight(imgHeight + 10);
+            
+            doc.addImage(imgData, 'PNG', margin, y, imgWidth, imgHeight);
+            y += imgHeight + 15;
+            
+            tempChart.destroy();
+            document.body.removeChild(canvas);
+            
+        } catch (error) {
+            console.error("Erreur Mode E:", error);
+            addText("Graphique non disponible", margin, styles.normal);
+            y += 10;
+        }
+    }
+    
+    async function processModeF() {
+    if (!chartF || historiqueF.length === 0) return;
+    
+    addText("Mode F : Graphique circulaire", margin, styles.subtitle);
+    y += 12;
+    
+    try {
+        // Utiliser le graphique EXISTANT de Chart.js pour le PDF
+        // Récupérer les données exactes du graphique actuel
+        const chartData = chartF.data;
+        const labels = chartData.labels || [];
+        const datasets = chartData.datasets || [];
+        
+        if (datasets.length === 0 || labels.length === 0) {
+            addText("Données du graphique non disponibles", margin, styles.normal);
+            y += 10;
+            return;
+        }
+        
+        const data = datasets[0].data || [];
+        const colors = datasets[0].backgroundColor || [];
+        const total = data.reduce((sum, val) => sum + val, 0);
+        
+        // Créer un canvas CARRÉ pour éviter l'étirement
+        const canvas = document.createElement('canvas');
+        const size = 600; // Taille plus grande pour meilleure qualité
+        canvas.width = size;
+        canvas.height = size;
+        canvas.style.display = 'none';
+        document.body.appendChild(canvas);
+        
+        const ctx = canvas.getContext('2d');
+        
+        // Créer un graphique IDENTIQUE à celui de la prévisualisation
+        const tempChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: colors,
+                    borderWidth: 3,
+                    borderColor: '#ffffff',
+                    hoverOffset: 15
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+                cutout: '50%',
+                plugins: {
+                    legend: { 
+                        display: false // On gère la légende manuellement
+                    },
+                    tooltip: { 
+                        enabled: true,
+                        callbacks: {
+                            label: function(context) {
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return `${context.label}: ${context.parsed.toFixed(2)} € (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'pdfLabels',
+                afterDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    const meta = chart.getDatasetMeta(0);
+                    
+                    meta.data.forEach((arc, index) => {
+                        // Position au centre de l'arc
+                        const angle = arc.startAngle + (arc.endAngle - arc.startAngle) / 2;
+                        const radius = arc.outerRadius * 0.65; // Un peu plus près du centre
+                        
+                        const x = arc.x + Math.cos(angle) * radius;
+                        const y = arc.y + Math.sin(angle) * radius;
+                        
+                        // Pourcentage
+                        const percentage = ((data[index] / total) * 100).toFixed(1);
+                        
+                        // Style du texte
+                        ctx.fillStyle = '#ffffff';
+                        ctx.font = 'bold 18px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                        ctx.shadowBlur = 3;
+                        ctx.fillText(`${percentage}%`, x, y);
+                        ctx.shadowBlur = 0; // Réinitialiser l'ombre
+                    });
+                }
+            }]
+        });
+        
+        // Attendre le rendu complet
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Dimensions dans le PDF (CARRÉ pour éviter l'étirement)
+        const pdfSize = Math.min(100, contentWidth * 0.55); // Taille réduite pour laisser de la place
+        const imgX = margin + (contentWidth - pdfSize) / 2; // Centré horizontalement
+        
+        checkPageHeight(pdfSize + 60); // Espace pour la légende
+        
+        // Ajouter l'image CARRÉE au PDF
+        const imgData = canvas.toDataURL('image/png', 1.0); // Qualité maximale
+        doc.addImage(imgData, 'PNG', imgX, y, pdfSize, pdfSize);
+        y += pdfSize + 15;
+        
+        // Légende avec les MÊMES NOMS que dans la prévisualisation
+        applyStyle({ size: 10, bold: false, color: [80, 80, 80] });
+        
+        // Calculer les colonnes pour la légende (2 colonnes)
+        const legendCols = 2;
+        const itemsPerCol = Math.ceil(labels.length / legendCols);
+        const colWidth = contentWidth / legendCols;
+        
+        for (let col = 0; col < legendCols; col++) {
+            const startIdx = col * itemsPerCol;
+            const endIdx = Math.min(startIdx + itemsPerCol, labels.length);
+            
+            let legendY = y;
+            
+            for (let i = startIdx; i < endIdx; i++) {
+                const label = labels[i];
+                const value = data[i];
+                const color = colors[i];
+                const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                
+                const legendText = `${label}: ${value.toFixed(2)} € (${percentage}%)`;
+                const legendX = margin + (col * colWidth);
+                
+                // Carré de couleur
+                if (color) {
+                    const rgb = hexToRgb(color);
+                    doc.setFillColor(...rgb);
+                    doc.rect(legendX, legendY, 4, 4, 'F');
+                }
+                
+                // Texte
+                doc.text(legendText, legendX + 8, legendY + 3);
+                
+                legendY += 6; // Espacement entre les lignes
+            }
+            
+            // Prendre la hauteur maximale des colonnes
+            if (col === 0) {
+                const colHeight = (endIdx - startIdx) * 6;
+                y = Math.max(y, y + colHeight);
+            }
+        }
+        
+        y += 10; // Espace après la légende
+        
+        // Nettoyer
+        tempChart.destroy();
+        document.body.removeChild(canvas);
+        
+        // Tableau récapitulatif avec les MÊMES NOMS
+        addText("Tableau récapitulatif", margin, { size: 14, bold: true, color: [80, 80, 80] });
+        y += 8;
+        
+        const headers = ['Catégorie', 'Valeur (€)', 'Pourcentage'];
+        const rows = [];
+        
+        for (let i = 0; i < labels.length; i++) {
+            const label = labels[i];
+            const value = data[i];
+            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) + '%' : '0%';
+            
+            rows.push([
+                label,
+                parseFloat(value).toFixed(2) + ' €',
+                percentage
+            ]);
+        }
+        
+        // Ligne de total
+        rows.push([
+            'TOTAL',
+            total.toFixed(2) + ' €',
+            '100%'
+        ]);
+        
+        // Utiliser la fonction addTable
+        addTable(headers, rows, margin, null, 'F');
+        
+    } catch (error) {
+        console.error("Erreur Mode F:", error);
+        addText("Graphique non disponible", margin, styles.normal);
+        y += 10;
+        
+        // Fallback : afficher les données textuelles
+        addText("Données disponibles:", margin, { size: 12, bold: true, color: [80, 80, 80] });
+        y += 5;
+        
+        historiqueF.forEach((cat, i) => {
+            const percentage = total > 0 ? ((cat.val / total) * 100).toFixed(1) : '0';
+            const text = `${cat.label}: ${cat.val.toFixed(2)} € (${percentage}%)`;
+            addText(text, margin + 10, { size: 10, bold: false, color: [100, 100, 100] });
+        });
+    }
+}
+    
+    function processModeG() {
+        if (!historique.G) return;
+        
+        addText("Mode G : Calculateur TVA", margin, styles.subtitle);
+        y += 8;
+        
+        const parser = new DOMParser();
+        const docHTML = parser.parseFromString(historique.G, 'text/html');
+        const tables = docHTML.querySelectorAll('table');
+        
+        tables.forEach((table, tableIndex) => {
+            // Titre du bloc
+            const previousSibling = table.previousElementSibling;
+            if (previousSibling && previousSibling.tagName === 'H4') {
+                addText(previousSibling.textContent, margin, { size: 14, bold: true, color: [80, 80, 80] });
+                y += 3;
+            }
+            
+            const headers = ['Libellé', 'Montant', 'TVA %', 'Montant TVA', 'HT', 'TTC'];
+            const rows = [];
+            
+            // Extraire toutes les lignes
+            const allRows = [];
+            table.querySelectorAll('tbody tr').forEach(tr => {
+                const row = [];
+                tr.querySelectorAll('td').forEach(td => {
+                    row.push(td.textContent.trim());
+                });
+                if (row.length > 0) allRows.push(row);
+            });
+            
+            // Séparer les lignes détaillées des totaux
+            const detailRows = allRows.slice(0, -1);
+            const totalRow = allRows[allRows.length - 1];
+            
+            // Ajouter les lignes détaillées
+            detailRows.forEach(row => rows.push(row));
+            
+            // Ajouter une ligne vide de séparation visuelle
+            if (detailRows.length > 0) {
+                rows.push(['', '', '', '', '', '']);
+            }
+            
+            // Ajouter la ligne de totaux
+            rows.push(totalRow);
+            
+            if (rows.length > 0) {
+                addTable(headers, rows, margin, null, 'G');
+            }
+            
+            y += 5;
+        });
+    }
+    
+    // ==================== DÉBUT DU RAPPORT ====================
+    
+    // Titre principal avec style
+    doc.setFillColor(52, 152, 219, 10);
+    doc.rect(0, 0, pageWidth, 50, 'F');
+    
+    addText("RAPPORT GLOBAL CALCULATEUR", margin, { size: 26, bold: true, color: [30, 30, 30] });
+    y += 8;
+    
+    // Date de génération
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    const timeStr = now.toLocaleTimeString('fr-FR', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    
+    addText(`Généré le ${dateStr} à ${timeStr}`, margin, { size: 11, bold: false, color: [100, 100, 100] });
+    y += 20;
+    
+    // Ligne de séparation décorative
+    doc.setDrawColor(52, 152, 219);
+    doc.setLineWidth(1);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 15;
+    
+    // Traiter chaque mode sélectionné
+    const modes = [
+        { id: 'A', title: 'Mode A : Comparaison de valeurs', process: processModeA },
+        { id: 'B', title: 'Mode B : Calcul de gains et pertes', process: processModeB },
+        { id: 'C', title: 'Mode C : Application de pourcentages par bloc', process: processModeC },
+        { id: 'D', title: 'Mode D : Évolution temporelle', process: processModeD },
+        { id: 'E', title: 'Mode E : Graphique linéaire multi-séries', process: processModeE },
+        { id: 'F', title: 'Mode F : Répartition circulaire', process: processModeF },
+        { id: 'G', title: 'Mode G : Calculateur TVA', process: processModeG }
+    ];
+    
+    let modeCount = 0;
+    
+    // Exécuter les modes sélectionnés
+    for (const mode of modes) {
+        if (document.getElementById("include" + mode.id).checked) {
+            modeCount++;
+            
+            // Ajouter un saut de page entre les modes (sauf le premier)
+            if (mode.id !== 'A' && y > 100) {
+                // Ligne de séparation fine
+                doc.setDrawColor(220, 220, 220);
+                doc.setLineWidth(0.5);
+                doc.line(margin, y - 10, pageWidth - margin, y - 10);
+                y += 15;
+                
+                // Vérifier si on a besoin d'une nouvelle page
+                if (y > 220) {
+                    doc.addPage();
+                    y = margin;
+                    
+                    // En-tête de page
+                    doc.setFillColor(250, 250, 250);
+                    doc.rect(0, 0, pageWidth, 30, 'F');
+                    addText("Rapport Global Calculateur (suite)", margin, { size: 14, bold: true, color: [80, 80, 80] });
+                    y += 20;
+                }
+            }
+            
+            await mode.process();
+        }
+    }
+    
+    // Message si aucun mode sélectionné
+    if (modeCount === 0) {
+        addText("Aucun mode sélectionné", pageWidth / 2, { size: 16, bold: true, color: [150, 150, 150] }, true);
+        addText("Veuillez sélectionner au moins un mode dans l'interface", margin, { size: 12, bold: false, color: [180, 180, 180] });
+    }
+    
+    // Pied de page sur chaque page
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        
+        // Ligne de pied de page
+        doc.setDrawColor(220, 220, 220);
+        doc.setLineWidth(0.5);
+        doc.line(margin, 275, pageWidth - margin, 275);
+        
+        // Numérotation et info
+        doc.setFontSize(9);
+        doc.setTextColor(150, 150, 150);
+        doc.text(
+            `Page ${i} / ${pageCount}`,
+            pageWidth - margin,
+            285,
+            { align: 'right' }
+        );
+        
+        doc.text(
+            `Calculateur Global • ${now.getFullYear()}`,
+            margin,
+            285
+        );
+    }
+    
+    // Sauvegarder le PDF avec un nom significatif
+    const fileName = `Rapport_Calculateur_${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}.pdf`;
+    doc.save(fileName);
+}
+
+/* =========================
+    Initialisation au chargement
+    ========================= */
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. Charger la préférence du mode sombre
+    loadDarkModePreference();
+    
+    // 2. Initialisation Mode D
+    const defaultDates = [
+        { id: Date.now(), date: '2025-01-01' },
+        { id: Date.now() + 1, date: '2025-04-01' },
+        { id: Date.now() + 2, date: '2025-07-01' },
+    ];
+    dDates = [...defaultDates];
+    dSeries = [
+        { id: Date.now() + 3, label: 'Produit A', color: D_COLORS[0], values: {}, visible: true },
+        { id: Date.now() + 4, label: 'Produit B', color: D_COLORS[1], values: {}, visible: true }
+    ];
+    
+    dSeries[0].values[defaultDates[0].id] = 100;
+    dSeries[0].values[defaultDates[1].id] = 110;
+    dSeries[0].values[defaultDates[2].id] = 120;
+    dSeries[1].values[defaultDates[0].id] = 80;
+    dSeries[1].values[defaultDates[1].id] = 100;
+    dSeries[1].values[defaultDates[2].id] = 130;
+    updateDTable();
+
+    // 3. Initialisation Mode A
+    const contA = document.getElementById("multiAContainer");
+    while(contA.children.length > 1) { contA.removeChild(contA.lastChild); }
+    if(contA.children.length === 0) { addABlock(); }
+    contA.querySelector('.refA').value = '100';
+    contA.querySelector('.valsA').value = '80 120 100';
+
+    // 4. Initialisation Mode B
+    const contB = document.getElementById("multiBContainer");
+    while(contB.children.length > 1) { contB.removeChild(contB.lastChild); }
+    if(contB.children.length === 0) { addBBlock(); }
+    contB.querySelector('.valeurB').value = '500';
+    contB.querySelector('.pourcentB').value = '15 -10 5';
+
+    // 5. Initialisation Mode C
+    const contC = document.getElementById("multiCContainer");
+    while(contC.children.length > 0) { contC.removeChild(contC.lastChild); }
+    if(contC.children.length === 0) { addCBlock(); }
+    contC.querySelector('.valsC').value = '100 200 300';
+    contC.querySelector('.rangeC').value = '20';
+    updateCBlock(contC.querySelector('.rangeC'));
+    
+    // 6. Initialisation Mode E
+    const contE = document.getElementById("multiEContainer");
+    while(contE.children.length > 1) { contE.removeChild(contE.lastChild); }
+    if(contE.children.length === 0) { 
+        addEBlock({ label: 'Ventes Mensuelles', vals: '100 120 130 150' });
+    }
+    
+    // 7. Initialisation Mode F
+    historiqueF = [];
+    const contF = document.getElementById("multiFContainer");
+    while(contF.children.length > 0) { contF.removeChild(contF.lastChild); }
+    if(contF.children.length === 0) { 
+        addFBlock({ label: 'Ventes', val: 750, color: '#3498db' });
+        addFBlock({ label: 'Marketing', val: 250, color: '#e74c3c' });
+    }
+    
+    // 8. Initialisation Mode G
+    const contG = document.getElementById("multiGContainer");
+    while(contG.children.length > 1) { contG.removeChild(contG.lastChild); }
+    if(contG.children.length === 0) { 
+        addGBlock({ name: 'Facture exemple', tva: 20, addSecond: true });
+    }
+    
+    // 9. Calcul initial pour tous les modes
+    calculerA();
+    calculerB();
+    updateC();
+    calculerE();
+    calculerF();
+    calculerG();
+
+    // 10. Afficher le menu principal
+    showMode('none');
+});
+// Ajouter au DOMContentLoaded
+document.addEventListener('keydown', (e) => {
+    if (e.altKey) {
+        switch(e.key.toLowerCase()) {
+            case 'a': showMode('modeA'); break;
+            case 'b': showMode('modeB'); break;
+            case 'c': showMode('modeC'); break;
+            case 'd': showMode('modeD'); break;
+            case 'e': showMode('modeE'); break;
+            case 'f': showMode('modeF'); break;
+            case 'g': showMode('modeG'); break;
+            case 'r': showMode('mode_rapport_global'); break;
+            case 'h': showMode('none'); break; // Alt+H pour Home
+        }
+        e.preventDefault();
+    }
+});
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_09_1.html ---
+

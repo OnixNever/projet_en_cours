@@ -9357,6 +9357,1507 @@ if __name__ == "__main__":
         "link": "https://www.junobeach.org/canada-in-wwii/articles/basic-infantry-tactics/"
       }
     ]
+  },
+  "youtube:médecine:100": {
+    "timestamp": 1788120136.772704,
+    "data": [
+      {
+        "id": "EUeoV3QASSM",
+        "title": "Médecins assistants : Quand soigner ne fait plus rêver | RTS",
+        "channel": "RTS - Radio Télévision Suisse",
+        "thumbnail_url": "https://i.ytimg.com/vi/EUeoV3QASSM/hqdefault.jpg",
+        "duration": "22:37",
+        "link": "https://www.youtube.com/watch?v=EUeoV3QASSM"
+      },
+      {
+        "id": "hnDLZWNOYgM",
+        "title": "Ayurveda: Traditional Indian Medicine - The Health Magazine",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/hnDLZWNOYgM/hqdefault.jpg",
+        "duration": "10:18",
+        "link": "https://www.youtube.com/watch?v=hnDLZWNOYgM"
+      },
+      {
+        "id": "44qlUDE4xmo",
+        "title": "Devenir médecin : Le parcours de nos héros de demain",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/44qlUDE4xmo/hqdefault.jpg",
+        "duration": "1:03:04",
+        "link": "https://www.youtube.com/watch?v=44qlUDE4xmo"
+      },
+      {
+        "id": "lOSmNMxKtMo",
+        "title": "Un médecin urgentiste analyse des séries | Science VS Fiction",
+        "channel": "AVRE (Explore Media)",
+        "thumbnail_url": "https://i.ytimg.com/vi/lOSmNMxKtMo/hqdefault.jpg",
+        "duration": "14:12",
+        "link": "https://www.youtube.com/watch?v=lOSmNMxKtMo"
+      },
+      {
+        "id": "p6aouz-_Dyw",
+        "title": "Devenir médecin ? L'étonnant filon roumain | ARTE Regards",
+        "channel": "ARTE",
+        "thumbnail_url": "https://i.ytimg.com/vi/p6aouz-_Dyw/hqdefault.jpg",
+        "duration": "30:26",
+        "link": "https://www.youtube.com/watch?v=p6aouz-_Dyw"
+      },
+      {
+        "id": "oV9EKDyCesk",
+        "title": "Medical studies in 2025",
+        "channel": "Thotis",
+        "thumbnail_url": "https://i.ytimg.com/vi/oV9EKDyCesk/hqdefault.jpg",
+        "duration": "2:50",
+        "link": "https://www.youtube.com/watch?v=oV9EKDyCesk"
+      },
+      {
+        "id": "H90VldrxZcU",
+        "title": "The exploits of medicine",
+        "channel": "franceinfo",
+        "thumbnail_url": "https://i.ytimg.com/vi/H90VldrxZcU/hqdefault.jpg",
+        "duration": "14:46",
+        "link": "https://www.youtube.com/watch?v=H90VldrxZcU"
+      },
+      {
+        "id": "x9bli3c-YJg",
+        "title": "Karim Ounas, l'agent d'entretien hospitalier du Nord devenu médecin anesthésiste-réanimateur",
+        "channel": "France 3 Hauts-de-France",
+        "thumbnail_url": "https://i.ytimg.com/vi/x9bli3c-YJg/hqdefault.jpg",
+        "duration": "3:56",
+        "link": "https://www.youtube.com/watch?v=x9bli3c-YJg"
+      },
+      {
+        "id": "tVB_530hqaU",
+        "title": "Medical student Elise took her own life following a burnout - It starts today",
+        "channel": "Ça commence aujourd'hui - France Télévisions",
+        "thumbnail_url": "https://i.ytimg.com/vi/tVB_530hqaU/hqdefault.jpg",
+        "duration": "14:51",
+        "link": "https://www.youtube.com/watch?v=tVB_530hqaU"
+      },
+      {
+        "id": "HHpAz9ZXqzg",
+        "title": "Pourquoi choisir les ÉTUDES DE MÉDECINE ? Le témoignage de Pierre",
+        "channel": "AuFutur",
+        "thumbnail_url": "https://i.ytimg.com/vi/HHpAz9ZXqzg/hqdefault.jpg",
+        "duration": "22:29",
+        "link": "https://www.youtube.com/watch?v=HHpAz9ZXqzg"
+      },
+      {
+        "id": "nJv-UQB1D-4",
+        "title": "François-Xavier Hanin, médecin spécialiste en médecine nucléaire",
+        "channel": "Cliniques universitaires Saint-Luc",
+        "thumbnail_url": "https://i.ytimg.com/vi/nJv-UQB1D-4/hqdefault.jpg",
+        "duration": "2:24",
+        "link": "https://www.youtube.com/watch?v=nJv-UQB1D-4"
+      },
+      {
+        "id": "X2fy9h70wV8",
+        "title": "COMPRENDRE : le cancer",
+        "channel": "Nat Geo France",
+        "thumbnail_url": "https://i.ytimg.com/vi/X2fy9h70wV8/hqdefault.jpg",
+        "duration": "2:41",
+        "link": "https://www.youtube.com/watch?v=X2fy9h70wV8"
+      },
+      {
+        "id": "-W08FnJ-grc",
+        "title": "What is Traditional Chinese Medicine? - Health Magazine",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/-W08FnJ-grc/hqdefault.jpg",
+        "duration": "12:02",
+        "link": "https://www.youtube.com/watch?v=-W08FnJ-grc"
+      },
+      {
+        "id": "vEIR9aympug",
+        "title": "Urgences vitales et tri des patients : le quotidien d'Aurélie, médecin urgentiste | Reportage",
+        "channel": "Konbini",
+        "thumbnail_url": "https://i.ytimg.com/vi/vEIR9aympug/hqdefault.jpg",
+        "duration": "26:12",
+        "link": "https://www.youtube.com/watch?v=vEIR9aympug"
+      },
+      {
+        "id": "1xuUeBI76QY",
+        "title": "La médecine tibétaine, l'art de guérir - GEO Reportage - Arte",
+        "channel": "Inspiration- Zen",
+        "thumbnail_url": "https://i.ytimg.com/vi/1xuUeBI76QY/hqdefault.jpg",
+        "duration": "52:27",
+        "link": "https://www.youtube.com/watch?v=1xuUeBI76QY"
+      },
+      {
+        "id": "fnR-UUE8WW4",
+        "title": "Lyon 24h/24 : le défi des urgentistes du SAMU",
+        "channel": "SPICA LIFE",
+        "thumbnail_url": "https://i.ytimg.com/vi/fnR-UUE8WW4/hqdefault.jpg",
+        "duration": "1:36:18",
+        "link": "https://www.youtube.com/watch?v=fnR-UUE8WW4"
+      },
+      {
+        "id": "IoYxkBvkKpw",
+        "title": "Médecine interne",
+        "channel": "American Hospital of Paris",
+        "thumbnail_url": "https://i.ytimg.com/vi/IoYxkBvkKpw/hqdefault.jpg",
+        "duration": "3:02",
+        "link": "https://www.youtube.com/watch?v=IoYxkBvkKpw"
+      },
+      {
+        "id": "sjpgHwWe3MI",
+        "title": "MÉDECIN SPÉCIALISTE DU VIEILLISSEMENT : COMMENT MIEUX VIEILLIR ET VIVRE PLUS LONGTEMPS",
+        "channel": "LEGEND",
+        "thumbnail_url": "https://i.ytimg.com/vi/sjpgHwWe3MI/hqdefault.jpg",
+        "duration": "1:47:35",
+        "link": "https://www.youtube.com/watch?v=sjpgHwWe3MI"
+      },
+      {
+        "id": "o8gZYmTD9Lw",
+        "title": "Medical Interns: Students in Suffering - Health Magazine",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/o8gZYmTD9Lw/hqdefault.jpg",
+        "duration": "3:20",
+        "link": "https://www.youtube.com/watch?v=o8gZYmTD9Lw"
+      },
+      {
+        "id": "jcgsleRvMMI",
+        "title": "Will AI soon replace our doctors? | TF1 INFO",
+        "channel": "TF1 INFO",
+        "thumbnail_url": "https://i.ytimg.com/vi/jcgsleRvMMI/hqdefault.jpg",
+        "duration": "3:37",
+        "link": "https://www.youtube.com/watch?v=jcgsleRvMMI"
+      },
+      {
+        "id": "hMXnax1W5lY",
+        "title": "Se préparer à la première année de médecine (PASS et LAS)",
+        "channel": "Hippocast - PASS-LAS",
+        "thumbnail_url": "https://i.ytimg.com/vi/hMXnax1W5lY/hqdefault.jpg",
+        "duration": "1:06:39",
+        "link": "https://www.youtube.com/watch?v=hMXnax1W5lY"
+      },
+      {
+        "id": "4p8Lq4r0Ugs",
+        "title": "MMS180 : le métier de Médecin, en Médecine Physique et Réadaptation (MPR)",
+        "channel": "UNESS",
+        "thumbnail_url": "https://i.ytimg.com/vi/4p8Lq4r0Ugs/hqdefault.jpg",
+        "duration": "3:35",
+        "link": "https://www.youtube.com/watch?v=4p8Lq4r0Ugs"
+      },
+      {
+        "id": "dpHaG13TFlc",
+        "title": "Études de médecine : trop difficile ? #touteunehistoire",
+        "channel": "Toute une histoire | Officiel",
+        "thumbnail_url": "https://i.ytimg.com/vi/dpHaG13TFlc/hqdefault.jpg",
+        "duration": "1:38",
+        "link": "https://www.youtube.com/watch?v=dpHaG13TFlc"
+      },
+      {
+        "id": "a8vC9ZHQNMs",
+        "title": "Pioneer of AI in Medicine: Is Current Medicine Treating You TOO LATE?",
+        "channel": "Le Manal Show",
+        "thumbnail_url": "https://i.ytimg.com/vi/a8vC9ZHQNMs/hqdefault.jpg",
+        "duration": "1:37:07",
+        "link": "https://www.youtube.com/watch?v=a8vC9ZHQNMs"
+      },
+      {
+        "id": "fyeAx92vksY",
+        "title": "Tout savoir sur la médecine esthétique du visage",
+        "channel": "Pourquoi Docteur",
+        "thumbnail_url": "https://i.ytimg.com/vi/fyeAx92vksY/hqdefault.jpg",
+        "duration": "26:01",
+        "link": "https://www.youtube.com/watch?v=fyeAx92vksY"
+      },
+      {
+        "id": "6mnzOKfE9AM",
+        "title": "L'acupuncture : médecine traditionnelle chinoise sans médicament",
+        "channel": "France 3 Hauts-de-France",
+        "thumbnail_url": "https://i.ytimg.com/vi/6mnzOKfE9AM/hqdefault.jpg",
+        "duration": "7:04",
+        "link": "https://www.youtube.com/watch?v=6mnzOKfE9AM"
+      },
+      {
+        "id": "_WpOvci6A-c",
+        "title": "Internes en chirurgie, un quotidien hors du commun",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/_WpOvci6A-c/hqdefault.jpg",
+        "duration": "1:43:40",
+        "link": "https://www.youtube.com/watch?v=_WpOvci6A-c"
+      },
+      {
+        "id": "vcwn8Ni2qWo",
+        "title": "Everything you need to know about medical school 🧐",
+        "channel": "Robin RIGAUDEAU",
+        "thumbnail_url": "https://i.ytimg.com/vi/vcwn8Ni2qWo/hqdefault.jpg",
+        "duration": "14:13",
+        "link": "https://www.youtube.com/watch?v=vcwn8Ni2qWo"
+      },
+      {
+        "id": "frp424bBJFw",
+        "title": "3 Questions for an Expert: Nuclear Medicine",
+        "channel": "AP-HM - Hôpitaux Universitaires de Marseille",
+        "thumbnail_url": "https://i.ytimg.com/vi/frp424bBJFw/hqdefault.jpg",
+        "duration": "2:25",
+        "link": "https://www.youtube.com/watch?v=frp424bBJFw"
+      },
+      {
+        "id": "j90mPWHIEgU",
+        "title": "J'ai arrêté médecine après 8 ans.",
+        "channel": "Julien Giovannetti (Koala)",
+        "thumbnail_url": "https://i.ytimg.com/vi/j90mPWHIEgU/hqdefault.jpg",
+        "duration": "7:25",
+        "link": "https://www.youtube.com/watch?v=j90mPWHIEgU"
+      },
+      {
+        "id": "VdwXvUmF96g",
+        "title": "Médecine intégrative: quand le patient est roi",
+        "channel": "Le Temps",
+        "thumbnail_url": "https://i.ytimg.com/vi/VdwXvUmF96g/hqdefault.jpg",
+        "duration": "4:56",
+        "link": "https://www.youtube.com/watch?v=VdwXvUmF96g"
+      },
+      {
+        "id": "3H3UVoL93EQ",
+        "title": "50 termes médicaux que tout le monde devrait connaître",
+        "channel": "Docteur Par Coeur",
+        "thumbnail_url": "https://i.ytimg.com/vi/3H3UVoL93EQ/hqdefault.jpg",
+        "duration": "14:38",
+        "link": "https://www.youtube.com/watch?v=3H3UVoL93EQ"
+      },
+      {
+        "id": "3irmm6FZ0co",
+        "title": "Love in medicine | Jean-Philippe Salaun | TEDxCaen",
+        "channel": "TEDx Talks",
+        "thumbnail_url": "https://i.ytimg.com/vi/3irmm6FZ0co/hqdefault.jpg",
+        "duration": "8:44",
+        "link": "https://www.youtube.com/watch?v=3irmm6FZ0co"
+      },
+      {
+        "id": "ASoV1EtfxZQ",
+        "title": "Presentation of the Emergency Medicine Residency (Specialty) at Laval University",
+        "channel": "Faculté de médecine – Université Laval ",
+        "thumbnail_url": "https://i.ytimg.com/vi/ASoV1EtfxZQ/hqdefault.jpg",
+        "duration": "6:39",
+        "link": "https://www.youtube.com/watch?v=ASoV1EtfxZQ"
+      },
+      {
+        "id": "kBE3YOd9DFA",
+        "title": "Les spécialités les plus demandées à international - Médecine humanitaire et sociale",
+        "channel": "UFR médecine",
+        "thumbnail_url": "https://i.ytimg.com/vi/kBE3YOd9DFA/hqdefault.jpg",
+        "duration": "3:07",
+        "link": "https://www.youtube.com/watch?v=kBE3YOd9DFA"
+      },
+      {
+        "id": "riuQH5KkoOY",
+        "title": "ULB - Bachelier en Médecine",
+        "channel": "ULB TV",
+        "thumbnail_url": "https://i.ytimg.com/vi/riuQH5KkoOY/hqdefault.jpg",
+        "duration": "2:58",
+        "link": "https://www.youtube.com/watch?v=riuQH5KkoOY"
+      },
+      {
+        "id": "CkwSeMrOPjc",
+        "title": "The Comprehensive Map of Medicine",
+        "channel": "Domain of Science",
+        "thumbnail_url": "https://i.ytimg.com/vi/CkwSeMrOPjc/hqdefault.jpg",
+        "duration": "51:46",
+        "link": "https://www.youtube.com/watch?v=CkwSeMrOPjc"
+      },
+      {
+        "id": "9eSYZClGQHU",
+        "title": "Santé mentale : Interne en médecine, Olivia raconte son burn-out",
+        "channel": "20 Minutes France",
+        "thumbnail_url": "https://i.ytimg.com/vi/9eSYZClGQHU/hqdefault.jpg",
+        "duration": "5:01",
+        "link": "https://www.youtube.com/watch?v=9eSYZClGQHU"
+      },
+      {
+        "id": "zIFxjcZG_GQ",
+        "title": "Mathilde : du cursus Médecine-Sciences à l'Institut Pasteur | ENS-PSL",
+        "channel": "École normale supérieure - PSL",
+        "thumbnail_url": "https://i.ytimg.com/vi/zIFxjcZG_GQ/hqdefault.jpg",
+        "duration": "1:39",
+        "link": "https://www.youtube.com/watch?v=zIFxjcZG_GQ"
+      },
+      {
+        "id": "aXLyLvoxKFA",
+        "title": "Histoire de la chirurgie | Documentaire | ARTE",
+        "channel": "ARTE",
+        "thumbnail_url": "https://i.ytimg.com/vi/aXLyLvoxKFA/hqdefault.jpg",
+        "duration": "1:29:16",
+        "link": "https://www.youtube.com/watch?v=aXLyLvoxKFA"
+      },
+      {
+        "id": "OGGyBRSNZrA",
+        "title": "Le SECRET pour RÉUSSIR EN MÉDECINE (méthode complète révélée)",
+        "channel": "Julien Giovannetti (Koala)",
+        "thumbnail_url": "https://i.ytimg.com/vi/OGGyBRSNZrA/hqdefault.jpg",
+        "duration": "3:25:47",
+        "link": "https://www.youtube.com/watch?v=OGGyBRSNZrA"
+      },
+      {
+        "id": "W_PszdeMBdg",
+        "title": "Expliquer la médecine aux enfants avec Michel Cymes - La Maison des Maternelles",
+        "channel": "La Maison des Maternelles - France Télévisions",
+        "thumbnail_url": "https://i.ytimg.com/vi/W_PszdeMBdg/hqdefault.jpg",
+        "duration": "10:11",
+        "link": "https://www.youtube.com/watch?v=W_PszdeMBdg"
+      },
+      {
+        "id": "Zu4p7CoyXI4",
+        "title": "Technologues en médecine nucléaire",
+        "channel": "CHU de Québec-Université Laval",
+        "thumbnail_url": "https://i.ytimg.com/vi/Zu4p7CoyXI4/hqdefault.jpg",
+        "duration": "5:10",
+        "link": "https://www.youtube.com/watch?v=Zu4p7CoyXI4"
+      },
+      {
+        "id": "IV2NrsMZw0o",
+        "title": "Objectif 2050 : la technologie au service de la médecine",
+        "channel": "BFM Tech",
+        "thumbnail_url": "https://i.ytimg.com/vi/IV2NrsMZw0o/hqdefault.jpg",
+        "duration": "52:27",
+        "link": "https://www.youtube.com/watch?v=IV2NrsMZw0o"
+      },
+      {
+        "id": "gUoVS-MOmuE",
+        "title": "WHY I QUIT MEDICAL SCHOOL AFTER 5 YEARS… My journey and my doubts",
+        "channel": "Chloé Crétois",
+        "thumbnail_url": "https://i.ytimg.com/vi/gUoVS-MOmuE/hqdefault.jpg",
+        "duration": "9:22",
+        "link": "https://www.youtube.com/watch?v=gUoVS-MOmuE"
+      },
+      {
+        "id": "EzIIQdwFqYo",
+        "title": "Aventures de médecine - Pionniers de l'urgence",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/EzIIQdwFqYo/hqdefault.jpg",
+        "duration": "1:46:03",
+        "link": "https://www.youtube.com/watch?v=EzIIQdwFqYo"
+      },
+      {
+        "id": "eVoJqqHmg5g",
+        "title": "Études de médecine : une mère en détrèsse #touteunehistoire",
+        "channel": "Toute une histoire | Officiel",
+        "thumbnail_url": "https://i.ytimg.com/vi/eVoJqqHmg5g/hqdefault.jpg",
+        "duration": "3:53",
+        "link": "https://www.youtube.com/watch?v=eVoJqqHmg5g"
+      },
+      {
+        "id": "CWpUx6xtKzo",
+        "title": "Poitiers : le cri d'alarme des étudiants en médecine",
+        "channel": "France 3 Nouvelle-Aquitaine",
+        "thumbnail_url": "https://i.ytimg.com/vi/CWpUx6xtKzo/hqdefault.jpg",
+        "duration": "2:22",
+        "link": "https://www.youtube.com/watch?v=CWpUx6xtKzo"
+      },
+      {
+        "id": "0_Ogw9525n8",
+        "title": "Quel futur pour la santé ?  Vers une médecine à deux vitesses ? #MaddyKeynote",
+        "channel": "FRANCE 24",
+        "thumbnail_url": "https://i.ytimg.com/vi/0_Ogw9525n8/hqdefault.jpg",
+        "duration": "3:24",
+        "link": "https://www.youtube.com/watch?v=0_Ogw9525n8"
+      },
+      {
+        "id": "a5BNg3VLW80",
+        "title": "Aesthetic treatments, vitamins, injections, creams...: should we be wary of anti-aging medicine?",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/a5BNg3VLW80/hqdefault.jpg",
+        "duration": "1:40:26",
+        "link": "https://www.youtube.com/watch?v=a5BNg3VLW80"
+      },
+      {
+        "id": "0uNEwd2YTNc",
+        "title": "Les étudiants en faculté de médecine ont fait leur rentrée",
+        "channel": "France 3 Grand Est",
+        "thumbnail_url": "https://i.ytimg.com/vi/0uNEwd2YTNc/hqdefault.jpg",
+        "duration": "2:14",
+        "link": "https://www.youtube.com/watch?v=0uNEwd2YTNc"
+      },
+      {
+        "id": "aHfJgN-Wmzw",
+        "title": "Maîtrise en médecine cellulaire et moléculaire",
+        "channel": "Institut de recherches cliniques de Montréal",
+        "thumbnail_url": "https://i.ytimg.com/vi/aHfJgN-Wmzw/hqdefault.jpg",
+        "duration": "1:53",
+        "link": "https://www.youtube.com/watch?v=aHfJgN-Wmzw"
+      },
+      {
+        "id": "x8zEU1wHkec",
+        "title": "Comment la France a fait disparaître ses médecins ?",
+        "channel": "AVRE (Explore Media)",
+        "thumbnail_url": "https://i.ytimg.com/vi/x8zEU1wHkec/hqdefault.jpg",
+        "duration": "10:20",
+        "link": "https://www.youtube.com/watch?v=x8zEU1wHkec"
+      },
+      {
+        "id": "u6ixaYfDwt4",
+        "title": "À Nice, des étudiants en médecine préparent déjà leur concours, aidés par des anciens",
+        "channel": "France 3 Provence-Alpes-Côte d'Azur",
+        "thumbnail_url": "https://i.ytimg.com/vi/u6ixaYfDwt4/hqdefault.jpg",
+        "duration": "1:46",
+        "link": "https://www.youtube.com/watch?v=u6ixaYfDwt4"
+      },
+      {
+        "id": "KWJ-EHHtbtE",
+        "title": "Philippe Charlier, Séminaire \" Médecine légale et histoire\"",
+        "channel": "LPS Orsay",
+        "thumbnail_url": "https://i.ytimg.com/vi/KWJ-EHHtbtE/hqdefault.jpg",
+        "duration": "46:59",
+        "link": "https://www.youtube.com/watch?v=KWJ-EHHtbtE"
+      },
+      {
+        "id": "IcraYt06-qI",
+        "title": "Emergency situation under high tension in Dreux",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/IcraYt06-qI/hqdefault.jpg",
+        "duration": "1:24:04",
+        "link": "https://www.youtube.com/watch?v=IcraYt06-qI"
+      },
+      {
+        "id": "7JlhrLQVu54",
+        "title": "L'incroyable histoire de la médecine",
+        "channel": "Les Arènes du Savoir",
+        "thumbnail_url": "https://i.ytimg.com/vi/7JlhrLQVu54/hqdefault.jpg",
+        "duration": "47:18",
+        "link": "https://www.youtube.com/watch?v=7JlhrLQVu54"
+      },
+      {
+        "id": "Mor82fPoLdI",
+        "title": "Tout comprendre sur : le cœur",
+        "channel": "Nat Geo France",
+        "thumbnail_url": "https://i.ytimg.com/vi/Mor82fPoLdI/hqdefault.jpg",
+        "duration": "2:27",
+        "link": "https://www.youtube.com/watch?v=Mor82fPoLdI"
+      },
+      {
+        "id": "no61aonPD4U",
+        "title": "Études de médecine : la Roumanie comme solution ? #touteunehistoire",
+        "channel": "Toute une histoire | Officiel",
+        "thumbnail_url": "https://i.ytimg.com/vi/no61aonPD4U/hqdefault.jpg",
+        "duration": "2:00",
+        "link": "https://www.youtube.com/watch?v=no61aonPD4U"
+      },
+      {
+        "id": "bxdoW0Gw4jg",
+        "title": "Erreurs médicales : 10 000 morts par an",
+        "channel": "100% DOCS - Reportages & Documentaires",
+        "thumbnail_url": "https://i.ytimg.com/vi/bxdoW0Gw4jg/hqdefault.jpg",
+        "duration": "1:31:17",
+        "link": "https://www.youtube.com/watch?v=bxdoW0Gw4jg"
+      },
+      {
+        "id": "CiXg9JxqzAc",
+        "title": "Medical Adventures - Transplants: A Second Chance",
+        "channel": "Allo Docteurs",
+        "thumbnail_url": "https://i.ytimg.com/vi/CiXg9JxqzAc/hqdefault.jpg",
+        "duration": "1:52:00",
+        "link": "https://www.youtube.com/watch?v=CiXg9JxqzAc"
+      },
+      {
+        "id": "3agf0rw-5AY",
+        "title": "Les mystères de la médecine EP4",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/3agf0rw-5AY/hqdefault.jpg",
+        "duration": "1:23:02",
+        "link": "https://www.youtube.com/watch?v=3agf0rw-5AY"
+      },
+      {
+        "id": "FZPBRkvpisY",
+        "title": "SAMU 28 : Blessures par balle, accidents graves : L'incroyable défi des médecins de Dreux",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/FZPBRkvpisY/hqdefault.jpg",
+        "duration": "1:31:43",
+        "link": "https://www.youtube.com/watch?v=FZPBRkvpisY"
+      },
+      {
+        "id": "bSupf9g6NHw",
+        "title": "Médecin de demain - S01E01",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/bSupf9g6NHw/hqdefault.jpg",
+        "duration": "54:11",
+        "link": "https://www.youtube.com/watch?v=bSupf9g6NHw"
+      },
+      {
+        "id": "FqC1KtKCX8s",
+        "title": "Les trésors oubliés de la médecine arabe | Documentaire | ARTE",
+        "channel": "ARTE",
+        "thumbnail_url": "https://i.ytimg.com/vi/FqC1KtKCX8s/hqdefault.jpg",
+        "duration": "1:28:44",
+        "link": "https://www.youtube.com/watch?v=FqC1KtKCX8s"
+      },
+      {
+        "id": "5SCt16ml1JY",
+        "title": "5 things I wish I had known before studying medicine",
+        "channel": "Robin RIGAUDEAU",
+        "thumbnail_url": "https://i.ytimg.com/vi/5SCt16ml1JY/hqdefault.jpg",
+        "duration": "12:27",
+        "link": "https://www.youtube.com/watch?v=5SCt16ml1JY"
+      },
+      {
+        "id": "3UGTm-paUH0",
+        "title": "Médecins de Demain : Saison 3 - Épisode 1",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/3UGTm-paUH0/hqdefault.jpg",
+        "duration": "58:11",
+        "link": "https://www.youtube.com/watch?v=3UGTm-paUH0"
+      },
+      {
+        "id": "_m-uzPgSYec",
+        "title": "Médecine nucléaire - Scintigraphie thyroïdienne",
+        "channel": "Hôpital Citadelle",
+        "thumbnail_url": "https://i.ytimg.com/vi/_m-uzPgSYec/hqdefault.jpg",
+        "duration": "1:43",
+        "link": "https://www.youtube.com/watch?v=_m-uzPgSYec"
+      },
+      {
+        "id": "oAeoAT_XpEI",
+        "title": "La médecine interne - (Votre Santé) - HCL",
+        "channel": "HCL - Hospices Civils de Lyon",
+        "thumbnail_url": "https://i.ytimg.com/vi/oAeoAT_XpEI/hqdefault.jpg",
+        "duration": "13:07",
+        "link": "https://www.youtube.com/watch?v=oAeoAT_XpEI"
+      },
+      {
+        "id": "GbAVbC9_-bI",
+        "title": "Film de promotion pour les infirmiers en médecine interne",
+        "channel": "Chirec Hospital group",
+        "thumbnail_url": "https://i.ytimg.com/vi/GbAVbC9_-bI/hqdefault.jpg",
+        "duration": "6:16",
+        "link": "https://www.youtube.com/watch?v=GbAVbC9_-bI"
+      },
+      {
+        "id": "NqzolG-2LSk",
+        "title": "Études de Médecine en France [Partie 1/2 ]: Reclassement pour ÉTRANGER, EUROPÉEN, PASS LAS [2022]",
+        "channel": "Dr Idriss TSAYEM ",
+        "thumbnail_url": "https://i.ytimg.com/vi/NqzolG-2LSk/hqdefault.jpg",
+        "duration": "11:06",
+        "link": "https://www.youtube.com/watch?v=NqzolG-2LSk"
+      },
+      {
+        "id": "n-Vpdwx_m1E",
+        "title": "Groupes cliniques en médecine vétérinaire",
+        "channel": "Université de Namur",
+        "thumbnail_url": "https://i.ytimg.com/vi/n-Vpdwx_m1E/hqdefault.jpg",
+        "duration": "6:58",
+        "link": "https://www.youtube.com/watch?v=n-Vpdwx_m1E"
+      },
+      {
+        "id": "v-dWi6CpFnk",
+        "title": "La médecine préventive : vers une santé durable avec le chercheur Alaedine Benani #621",
+        "channel": "Métamorphose, éveille ta conscience",
+        "thumbnail_url": "https://i.ytimg.com/vi/v-dWi6CpFnk/hqdefault.jpg",
+        "duration": "1:14:21",
+        "link": "https://www.youtube.com/watch?v=v-dWi6CpFnk"
+      },
+      {
+        "id": "ZGct3O1imdA",
+        "title": "ULB - Bachelor's in Veterinary Medicine",
+        "channel": "ULB TV",
+        "thumbnail_url": "https://i.ytimg.com/vi/ZGct3O1imdA/hqdefault.jpg",
+        "duration": "3:03",
+        "link": "https://www.youtube.com/watch?v=ZGct3O1imdA"
+      },
+      {
+        "id": "RYhrMvQ0hmo",
+        "title": "Pourquoi la médecine libérale ne fait plus rêver les jeunes médecins",
+        "channel": "Ouest-France",
+        "thumbnail_url": "https://i.ytimg.com/vi/RYhrMvQ0hmo/hqdefault.jpg",
+        "duration": "11:40",
+        "link": "https://www.youtube.com/watch?v=RYhrMvQ0hmo"
+      },
+      {
+        "id": "clWwHdQy-W0",
+        "title": "L'état des urgences médicales",
+        "channel": "Fréquence Médicale",
+        "thumbnail_url": "https://i.ytimg.com/vi/clWwHdQy-W0/hqdefault.jpg",
+        "duration": "27:08",
+        "link": "https://www.youtube.com/watch?v=clWwHdQy-W0"
+      },
+      {
+        "id": "On0BAn2PHZo",
+        "title": "9. Être infirmière en médecine",
+        "channel": "Réussis ton IFSI",
+        "thumbnail_url": "https://i.ytimg.com/vi/On0BAn2PHZo/hqdefault.jpg",
+        "duration": "9:32",
+        "link": "https://www.youtube.com/watch?v=On0BAn2PHZo"
+      },
+      {
+        "id": "gfK19GFgDwM",
+        "title": "Comment BIEN choisir sa spécialité en médecine ?",
+        "channel": "Dr. Walid MEKEDDEM",
+        "thumbnail_url": "https://i.ytimg.com/vi/gfK19GFgDwM/hqdefault.jpg",
+        "duration": "15:00",
+        "link": "https://www.youtube.com/watch?v=gfK19GFgDwM"
+      },
+      {
+        "id": "YjoCLKn2wSM",
+        "title": "How I Finished First in Medical School Entrance Exams",
+        "channel": "Selyan Signature",
+        "thumbnail_url": "https://i.ytimg.com/vi/YjoCLKn2wSM/hqdefault.jpg",
+        "duration": "13:32",
+        "link": "https://www.youtube.com/watch?v=YjoCLKn2wSM"
+      },
+      {
+        "id": "O-zXNlDPPYw",
+        "title": "A day with a genetics researcher",
+        "channel": "Ludovic B",
+        "thumbnail_url": "https://i.ytimg.com/vi/O-zXNlDPPYw/hqdefault.jpg",
+        "duration": "21:41",
+        "link": "https://www.youtube.com/watch?v=O-zXNlDPPYw"
+      },
+      {
+        "id": "6UzFfXeZT9g",
+        "title": "Les études de médecine ? Les meilleurs conseils d'étudiants (c'est moins drôle que sur la miniature)",
+        "channel": "HugoDécrypte - Actus du jour",
+        "thumbnail_url": "https://i.ytimg.com/vi/6UzFfXeZT9g/hqdefault.jpg",
+        "duration": "12:16",
+        "link": "https://www.youtube.com/watch?v=6UzFfXeZT9g"
+      },
+      {
+        "id": "9-qsGkIblvo",
+        "title": "Le pavillon et le programme de Médecine dentaire",
+        "channel": "Faculté de médecine dentaire – Université Laval ",
+        "thumbnail_url": "https://i.ytimg.com/vi/9-qsGkIblvo/hqdefault.jpg",
+        "duration": "7:36",
+        "link": "https://www.youtube.com/watch?v=9-qsGkIblvo"
+      },
+      {
+        "id": "QdYHHzgogSI",
+        "title": "Introduction à l’anatomie : Tout ce que vous devez savoir",
+        "channel": "Docteur Par Coeur",
+        "thumbnail_url": "https://i.ytimg.com/vi/QdYHHzgogSI/hqdefault.jpg",
+        "duration": "7:41",
+        "link": "https://www.youtube.com/watch?v=QdYHHzgogSI"
+      },
+      {
+        "id": "htgQpcrjoQI",
+        "title": "1 semaine (réaliste) en médecine (pov : j'ai pleuré) - 4e année externat",
+        "channel": "Camstudyy ",
+        "thumbnail_url": "https://i.ytimg.com/vi/htgQpcrjoQI/hqdefault.jpg",
+        "duration": "19:59",
+        "link": "https://www.youtube.com/watch?v=htgQpcrjoQI"
+      },
+      {
+        "id": "cgmh34-rigQ",
+        "title": "Meridians in Chinese Medicine",
+        "channel": "Philippe Sionneau",
+        "thumbnail_url": "https://i.ytimg.com/vi/cgmh34-rigQ/hqdefault.jpg",
+        "duration": "12:27",
+        "link": "https://www.youtube.com/watch?v=cgmh34-rigQ"
+      },
+      {
+        "id": "Qg22021-_i8",
+        "title": "Common-sense advice from a doctor on how to take care of your health",
+        "channel": "Le Figaro",
+        "thumbnail_url": "https://i.ytimg.com/vi/Qg22021-_i8/hqdefault.jpg",
+        "duration": "12:46",
+        "link": "https://www.youtube.com/watch?v=Qg22021-_i8"
+      },
+      {
+        "id": "-7g8ziEa7HE",
+        "title": "The Diagnostic Process in Internal Medicine",
+        "channel": "Dr Said EL KETTANI | Médecine Interne & Santé",
+        "thumbnail_url": "https://i.ytimg.com/vi/-7g8ziEa7HE/hqdefault.jpg",
+        "duration": "14:35",
+        "link": "https://www.youtube.com/watch?v=-7g8ziEa7HE"
+      },
+      {
+        "id": "K-Uyn3e_lvQ",
+        "title": "Médecine du sport (Votre santé) - HCL",
+        "channel": "HCL - Hospices Civils de Lyon",
+        "thumbnail_url": "https://i.ytimg.com/vi/K-Uyn3e_lvQ/hqdefault.jpg",
+        "duration": "6:02",
+        "link": "https://www.youtube.com/watch?v=K-Uyn3e_lvQ"
+      },
+      {
+        "id": "3gFiVLz21EQ",
+        "title": "[AVS] Ayurvéda, une médecine internationale ! - Sophie Benabi",
+        "channel": "Beur FM",
+        "thumbnail_url": "https://i.ytimg.com/vi/3gFiVLz21EQ/hqdefault.jpg",
+        "duration": "38:43",
+        "link": "https://www.youtube.com/watch?v=3gFiVLz21EQ"
+      },
+      {
+        "id": "p2Srd4Rjbhs",
+        "title": "Médecine nucléaire - Scintigraphie cardiaque",
+        "channel": "Hôpital Citadelle",
+        "thumbnail_url": "https://i.ytimg.com/vi/p2Srd4Rjbhs/hqdefault.jpg",
+        "duration": "2:08",
+        "link": "https://www.youtube.com/watch?v=p2Srd4Rjbhs"
+      },
+      {
+        "id": "JppdeQVH0uU",
+        "title": "Médecin de demain - S01E04",
+        "channel": "Urgences",
+        "thumbnail_url": "https://i.ytimg.com/vi/JppdeQVH0uU/hqdefault.jpg",
+        "duration": "42:11",
+        "link": "https://www.youtube.com/watch?v=JppdeQVH0uU"
+      },
+      {
+        "id": "BS7NK_Q8ow0",
+        "title": "Anémie - Préparation PAE Médecine Générale",
+        "channel": "IPPAE - préparation PAE Cardio - Géria - Med-G",
+        "thumbnail_url": "https://i.ytimg.com/vi/BS7NK_Q8ow0/hqdefault.jpg",
+        "duration": "31:16",
+        "link": "https://www.youtube.com/watch?v=BS7NK_Q8ow0"
+      },
+      {
+        "id": "e5WaU8RT42s",
+        "title": "Etudes de santé : la 2e année en spé médecine",
+        "channel": "Génération Zébrée",
+        "thumbnail_url": "https://i.ytimg.com/vi/e5WaU8RT42s/hqdefault.jpg",
+        "duration": "6:27",
+        "link": "https://www.youtube.com/watch?v=e5WaU8RT42s"
+      },
+      {
+        "id": "RPtLIWg2-Q4",
+        "title": "L'Histoire Obscure de la Médecine sur 45 000 ans !",
+        "channel": "Poisson Fécond",
+        "thumbnail_url": "https://i.ytimg.com/vi/RPtLIWg2-Q4/hqdefault.jpg",
+        "duration": "44:17",
+        "link": "https://www.youtube.com/watch?v=RPtLIWg2-Q4"
+      },
+      {
+        "id": "u_EQVgYpQn4",
+        "title": "Médecine",
+        "channel": "Université de Montréal",
+        "thumbnail_url": "https://i.ytimg.com/vi/u_EQVgYpQn4/hqdefault.jpg",
+        "duration": "2:31:27",
+        "link": "https://www.youtube.com/watch?v=u_EQVgYpQn4"
+      },
+      {
+        "id": "RC14jMEnoxY",
+        "title": "Medicine | The (Real) Salaries of Medical Students",
+        "channel": "Robin RIGAUDEAU",
+        "thumbnail_url": "https://i.ytimg.com/vi/RC14jMEnoxY/hqdefault.jpg",
+        "duration": "6:15",
+        "link": "https://www.youtube.com/watch?v=RC14jMEnoxY"
+      },
+      {
+        "id": "a1irUBVJdk0",
+        "title": "3h33 pour réussir Médecine (Guide Ultime)",
+        "channel": "Julien Giovannetti (Koala)",
+        "thumbnail_url": "https://i.ytimg.com/vi/a1irUBVJdk0/hqdefault.jpg",
+        "duration": "3:33:28",
+        "link": "https://www.youtube.com/watch?v=a1irUBVJdk0"
+      },
+      {
+        "id": "CLr93_0fl1k",
+        "title": "Médecine esthétique : peut-on avoir la peau des riches ? | Vivons heureux | ARTE Radio Podcasts",
+        "channel": "ARTE Radio and ARTE",
+        "thumbnail_url": "https://i.ytimg.com/vi/CLr93_0fl1k/hqdefault.jpg",
+        "duration": "42:09",
+        "link": "https://www.youtube.com/watch?v=CLr93_0fl1k"
+      },
+      {
+        "id": "PxYjbq1tuNo",
+        "title": "Study Method for 2nd & 3rd Year Medical School",
+        "channel": "Dr STL",
+        "thumbnail_url": "https://i.ytimg.com/vi/PxYjbq1tuNo/hqdefault.jpg",
+        "duration": "26:50",
+        "link": "https://www.youtube.com/watch?v=PxYjbq1tuNo"
+      },
+      {
+        "id": "9pWuPhEFApk",
+        "title": "Le concept de Qì en médecine chinoise",
+        "channel": "Philippe Sionneau",
+        "thumbnail_url": "https://i.ytimg.com/vi/9pWuPhEFApk/hqdefault.jpg",
+        "duration": "16:36",
+        "link": "https://www.youtube.com/watch?v=9pWuPhEFApk"
+      }
+    ]
+  },
+  "pdf:médecine:100": {
+    "timestamp": 1788120212.065422,
+    "data": [
+      {
+        "id": "https://unifa-edu.info/contenu/wp-content/uploads/2025/05/Histoire-de-la-medecine.pdf",
+        "title": "PDF L'HISTOIRE DE LA MEDECINE - unifa-edu.info",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://unifa-edu.info/contenu/wp-content/uploads/2025/05/Histoire-de-la-medecine.pdf"
+      },
+      {
+        "id": "https://ia800108.us.archive.org/13/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf",
+        "title": "PDF [9782257705037] Médecine interne (2° Éd.) (Coll. Le livre de l`interne)",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://ia800108.us.archive.org/13/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf"
+      },
+      {
+        "id": "https://d8miq7k9f04rm.cloudfront.net/legacy/posts/post-pdf/14438.pdf",
+        "title": "Médecine et étymologie",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://d8miq7k9f04rm.cloudfront.net/legacy/posts/post-pdf/14438.pdf"
+      },
+      {
+        "id": "https://www.mcours.net/cours/pdf/hascl2/bbgrhss2clic560.pdf",
+        "title": "PDF 2.1. Éléments De Définition De La Médecine Mod",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.mcours.net/cours/pdf/hascl2/bbgrhss2clic560.pdf"
+      },
+      {
+        "id": "https://apps.who.int/gb/ebwha/pdf_files/WHA78/A78_4Add1-fr.pdf",
+        "title": "A78/4 Add.1 - Projet de stratégie mondiale pour la médecine ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://apps.who.int/gb/ebwha/pdf_files/WHA78/A78_4Add1-fr.pdf"
+      },
+      {
+        "id": "https://www.a2sup.fr/files/guides/1516/medecine.pdf",
+        "title": "medecine.pdf",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://www.a2sup.fr/files/guides/1516/medecine.pdf"
+      },
+      {
+        "id": "https://ressources.campusfrance.org/esr/domaines/fr/medecine_fr.pdf",
+        "title": "DOMAINE D’ÉTUDES Médecine",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://ressources.campusfrance.org/esr/domaines/fr/medecine_fr.pdf"
+      },
+      {
+        "id": "https://ia801204.us.archive.org/10/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf",
+        "title": "[9782257705037] Médecine interne (2° Éd.) (Coll. Le livre ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://ia801204.us.archive.org/10/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf"
+      },
+      {
+        "id": "https://ia601905.us.archive.org/28/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf",
+        "title": "Médecine Sciences Publications Médecine interne 2e édition",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://ia601905.us.archive.org/28/items/LivreDeLinterneAnesthsiologie/Livre+de+l'interne+-+Médecine+interne.pdf"
+      },
+      {
+        "id": "https://www.samw.ch/dam/jcr:df942c50-1f2d-4b61-a2fa-6cd0236e6412/feuille_de_route_assm_medecine_comme_science.pdf",
+        "title": "La médecine comme science Prise de position de l’Académie Suisse",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.samw.ch/dam/jcr:df942c50-1f2d-4b61-a2fa-6cd0236e6412/feuille_de_route_assm_medecine_comme_science.pdf"
+      },
+      {
+        "id": "https://uclouvain.be/cours-2024-wmds2210.pdf",
+        "title": "Secteur médecine générale",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://uclouvain.be/cours-2024-wmds2210.pdf"
+      },
+      {
+        "id": "https://www.snfmi.org/sites/default/files/old/medecine_chinoise.pdf",
+        "title": "Médecine traditionnelle chinoise (MTC)",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.snfmi.org/sites/default/files/old/medecine_chinoise.pdf"
+      },
+      {
+        "id": "https://www.sftg.eu/media/referentiel-medecine-generale-2025.pdf",
+        "title": "Profession médecine générale Référentiel professionnel de la médecine générale",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.sftg.eu/media/referentiel-medecine-generale-2025.pdf"
+      },
+      {
+        "id": "https://www.ummto.dz/fmed/wp-content/uploads/2021/10/NOUVEAU-PROGRAMME-1ERE-ANNEE-MEDECINE.pdf",
+        "title": "NOUVEAU-PROGRAMME-1ERE-ANNEE-MEDECINE.pdf",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.ummto.dz/fmed/wp-content/uploads/2021/10/NOUVEAU-PROGRAMME-1ERE-ANNEE-MEDECINE.pdf"
+      },
+      {
+        "id": "https://numerabilis.u-paris.fr/ressources/pdf/sfhm/hsm/HSMx1972x006x001/HSMx1972x006x001x0022.pdf",
+        "title": "PDF Essai d'une définition moderne de la médecine comme base méthodologique ...",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://numerabilis.u-paris.fr/ressources/pdf/sfhm/hsm/HSMx1972x006x001/HSMx1972x006x001x0022.pdf"
+      },
+      {
+        "id": "https://www.jstor.org/stable/pdf/24349967.pdf",
+        "title": "PDF Médecine, pharmacopées traditionnelles et développement en Afrique",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.jstor.org/stable/pdf/24349967.pdf"
+      },
+      {
+        "id": "https://www.edition-efua.acaref.net/wp-content/uploads/sites/6/2024/01/Amadou-KONE.pdf",
+        "title": "PDF Médecine traditionnelle versus médecine moderne en milieu rural ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.edition-efua.acaref.net/wp-content/uploads/sites/6/2024/01/Amadou-KONE.pdf"
+      },
+      {
+        "id": "https://www.georg.ch/pub/media/productattach/l/a/la_medecine_dans_l_antiquite_grecque_et_romaine.pdf",
+        "title": "PDF Trad.King_Dasen.indb - Georg",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.georg.ch/pub/media/productattach/l/a/la_medecine_dans_l_antiquite_grecque_et_romaine.pdf"
+      },
+      {
+        "id": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/",
+        "title": "[PDF] Diplôme d'État de docteur en médecine (avec document annexé",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/"
+      },
+      {
+        "id": "https://muse.jhu.edu/pub/17/article/379434/pdf",
+        "title": "Littérature et médecine: Approches et perspectives (XVIe",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://muse.jhu.edu/pub/17/article/379434/pdf"
+      },
+      {
+        "id": "https://www.latunisiemedicale.com/index.php/tunismed/article/view/3633/2627",
+        "title": "[PDF] Apprentissage des principes de la médecine basée sur les faits ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.latunisiemedicale.com/index.php/tunismed/article/view/3633/2627"
+      },
+      {
+        "id": "https://pdfs.semanticscholar.org/8f42/efa781366206e73f37ae3ca5e52d65bbee37.pdf",
+        "title": "[PDF] Le magnétiseur amoureux de Charles de Villers",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://pdfs.semanticscholar.org/8f42/efa781366206e73f37ae3ca5e52d65bbee37.pdf"
+      },
+      {
+        "id": "https://lexiques.wordpress.com/wp-content/uploads/2015/02/abrc3a9viations-mc3a9dicales.pdf",
+        "title": "PDF Abécédaire Des Abréviations Médicales",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://lexiques.wordpress.com/wp-content/uploads/2015/02/abrc3a9viations-mc3a9dicales.pdf"
+      },
+      {
+        "id": "https://www.unamur.be/sites/default/files/2024-06/medecine.pdf",
+        "title": "medecine.pdf",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.unamur.be/sites/default/files/2024-06/medecine.pdf"
+      },
+      {
+        "id": "https://www.unige.ch/biblio/files/8714/6772/6755/Biblio-Medecine1erRecours-v2-Web.pdf",
+        "title": "La médecine de premier recours: votre généraliste et vous",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.unige.ch/biblio/files/8714/6772/6755/Biblio-Medecine1erRecours-v2-Web.pdf"
+      },
+      {
+        "id": "https://fulbright-france.org/sites/default/files/medecine_2025.pdf.pdf",
+        "title": "Les études de médecine",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://fulbright-france.org/sites/default/files/medecine_2025.pdf.pdf"
+      },
+      {
+        "id": "https://international-review.icrc.org/sites/default/files/S0020860400008676a.pdf",
+        "title": "[PDF] Histoire De La Médecine by Jean Starobinski",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://international-review.icrc.org/sites/default/files/S0020860400008676a.pdf"
+      },
+      {
+        "id": "https://www.jstor.org/stable/23330350",
+        "title": "\"L'Anonyme\" de Londres et la médecine d'Italie du Sud - jstor",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.jstor.org/stable/23330350"
+      },
+      {
+        "id": "https://sfc3aac4256cd47eb.jimcontent.com/download/version/1518245153/module/5979286664/name/S.+Plotkin.pdf",
+        "title": "[PDF] Le microbiote intestinal comme nouveau terrain de jeu en ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://sfc3aac4256cd47eb.jimcontent.com/download/version/1518245153/module/5979286664/name/S.+Plotkin.pdf"
+      },
+      {
+        "id": "https://nice.cnge.fr/IMG/pdf/Guide_du_DES_de_Medecine_Generale_Rentree_2015-2.pdf",
+        "title": "GUIDE DU DIPLOME D’ETUDES SPECIALISEES DE MEDECINE GENERALE PROMOTION 2015",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://nice.cnge.fr/IMG/pdf/Guide_du_DES_de_Medecine_Generale_Rentree_2015-2.pdf"
+      },
+      {
+        "id": "https://www.conseil-national.medecin.fr/sites/default/files/referentiel_medecine_generale_.pdf",
+        "title": "Document de Références en MEDECINE GENERALE à l' ...",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://www.conseil-national.medecin.fr/sites/default/files/referentiel_medecine_generale_.pdf"
+      },
+      {
+        "id": "http://udsmed.u-strasbg.fr/aufemo/PDF/actualites/Etudes_Medecine_UFR2S_Pr_DIAGNE.pdf",
+        "title": "U-strasbg",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "http://udsmed.u-strasbg.fr/aufemo/PDF/actualites/Etudes_Medecine_UFR2S_Pr_DIAGNE.pdf"
+      },
+      {
+        "id": "https://supsante.com/wp-content/uploads/2021/06/Documentation-MEDECINE.pdf",
+        "title": "SUPSANTE.COM Établissement d’enseignement supérieur libre",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://supsante.com/wp-content/uploads/2021/06/Documentation-MEDECINE.pdf"
+      },
+      {
+        "id": "https://www.furet.com/media/pdf/feuilletage/9/7/8/2/8/0/4/1/9782804169022.pdf",
+        "title": "Physiologie médicale Ganong I Barrett I Barman Boitano I Brooks 3e édition",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.furet.com/media/pdf/feuilletage/9/7/8/2/8/0/4/1/9782804169022.pdf"
+      },
+      {
+        "id": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/1F37F6B0A5C436C25DDF58726C9FF9F0/S0009840X09000924a.pdf/div-class-title-greek-medicine-j-pigeaud-span-class-italic-poetiques-du-corps-aux-origines-de-la-medecine-span-l-ane-d-or-28-pp-xii-704-paris-les-belles-lettres-2008-paper-40-isbn-978-2-251-42032-5-div.pdf",
+        "title": "GREEK MEDICINE Pigeaud (J.) Poétiques du corps. Aux ...",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/1F37F6B0A5C436C25DDF58726C9FF9F0/S0009840X09000924a.pdf/div-class-title-greek-medicine-j-pigeaud-span-class-italic-poetiques-du-corps-aux-origines-de-la-medecine-span-l-ane-d-or-28-pp-xii-704-paris-les-belles-lettres-2008-paper-40-isbn-978-2-251-42032-5-div.pdf"
+      },
+      {
+        "id": "https://excerpts.numilog.com/books/9782759819386.pdf",
+        "title": "Comprendre le langage médical par l étymologie - Numilog.com",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://excerpts.numilog.com/books/9782759819386.pdf"
+      },
+      {
+        "id": "https://www.medecinesfax.org/useruploads/files/pcem1.pdf",
+        "title": "1 Premier cycle d’études médicales PCEM PREMIERE ANNEE (PCEM1)",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.medecinesfax.org/useruploads/files/pcem1.pdf"
+      },
+      {
+        "id": "https://www.elsevier-masson.fr/media/wysiwyg/PDF/FR/LE_CATALOGUE_MEDECINE_e_comm_compressed.pdf",
+        "title": "Apprendre en toute confiance avec les outils les plus fiables",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://www.elsevier-masson.fr/media/wysiwyg/PDF/FR/LE_CATALOGUE_MEDECINE_e_comm_compressed.pdf"
+      },
+      {
+        "id": "https://numerabilis.u-paris.fr/ressources/pdf/medica/bibnum/164221x03x01/164221x03x01.pdf",
+        "title": "Bibliothèque numérique",
+        "language": "FR",
+        "pages_count": null,
+        "file_url": "https://numerabilis.u-paris.fr/ressources/pdf/medica/bibnum/164221x03x01/164221x03x01.pdf"
+      },
+      {
+        "id": "https://www.sciencedirect.com/science/article/pii/S0895435696002958/pdf",
+        "title": "Evidence-Based Medicine and “Medecine d'Observation”'",
+        "language": "",
+        "pages_count": null,
+        "file_url": "https://www.sciencedirect.com/science/article/pii/S0895435696002958/pdf"
+      }
+    ]
+  },
+  "related_terms:médecine:4": {
+    "timestamp": 1788120213.9837918,
+    "data": []
+  },
+  "documentaries:médecine:100": {
+    "timestamp": 1788120216.0527222,
+    "data": [
+      {
+        "id": "https://fr.wikipedia.org/wiki/Catégorie:Film_documentaire_sur_la_médecine",
+        "title": "Catégorie:Film documentaire sur la médecine — Wikipédia",
+        "channel": "fr.wikipedia.org",
+        "description": "Cette catégorie comprend la sous-catégorie suivante. Film documentaire sur la psychiatrie – 27 P • 2 C · Cette catégorie contient les 32 pages suivantes. ... Diagnostic C.I.V.",
+        "link": "https://fr.wikipedia.org/wiki/Catégorie:Film_documentaire_sur_la_médecine"
+      },
+      {
+        "id": "https://www.france.tv/france-2/aventures-de-medecine/",
+        "title": "Aventures de médecine | France TV",
+        "channel": "france.tv",
+        "description": "Chaque documentaire se penche sur l'histoire d'une révolution médicale, des pionniers aux dernières techniques actuelles, à l'aide de reportages, d'explications illustrées d'images de synthèse, et d'interviews de médecins et de patients.",
+        "link": "https://www.france.tv/france-2/aventures-de-medecine/"
+      },
+      {
+        "id": "https://cinehorizon.com/uncategorised/10-documentaires-medicaux-a-decouvrir/",
+        "title": "10 Documentaires Médicaux à Découvrir - cinehorizon.com",
+        "channel": "cinehorizon.com",
+        "description": "Apr 15, 2025 · Explorez le monde fascinant de la médecine à travers ces 10 documentaires captivants, disponibles en français.",
+        "link": "https://cinehorizon.com/uncategorised/10-documentaires-medicaux-a-decouvrir/"
+      },
+      {
+        "id": "https://www.arte.tv/fr/videos/sciences/medecine-et-sante/",
+        "title": "Médecine et santé - ARTE",
+        "channel": "arte.tv",
+        "description": "La santé des femmes, de l'ignorance à la reconnaissance Parce que la \"médecine des hommes\" était la norme, la santé des femmes a longtemps été mal comprise et mal traitée.",
+        "link": "https://www.arte.tv/fr/videos/sciences/medecine-et-sante/"
+      },
+      {
+        "id": "https://dicodoc.blog/tag/medecine/",
+        "title": "Médecine – LE CINEMA DOCUMENTAIRE DE A à Z",
+        "channel": "dicodoc.blog",
+        "description": "Feb 22, 2026 · Le cinéma documentaire nous a déjà montré, à plusieurs reprises, le travail des médecins. Camille lui va nous montrer un médecin de campagne, un jeune médecin qui n’a pas fait le choix de s’installer à la ville.",
+        "link": "https://dicodoc.blog/tag/medecine/"
+      },
+      {
+        "id": "https://www.youtube.com/watch?v=FqC1KtKCX8s",
+        "title": "Les trésors oubliés de la médecine arabe | Documentaire ...",
+        "channel": "youtube.com",
+        "description": "Mar 2, 2026 · Documentaire disponible jusqu'au 27/10/2026Et si, face au phénomène de résistance aux antibiotiques, les remèdes d’Al-Razi ou Avicenne pouvaient inspirer les...",
+        "link": "https://www.youtube.com/watch?v=FqC1KtKCX8s"
+      },
+      {
+        "id": "https://www.les-docus.com/sciences/medecine/",
+        "title": "Tous les documentaires \"Médecine\" en streaming | Les Docus",
+        "channel": "les-docus.com",
+        "description": "Retrouvez ici tous les documentaires sur la médecine, le corps humain et ses maladies… Vidéos en français en streaming.",
+        "link": "https://www.les-docus.com/sciences/medecine/"
+      },
+      {
+        "id": "https://libguides.biblio.usherbrooke.ca/med-UdeS/astuces",
+        "title": "Recherche documentaire? - Médecine - Guides thématiques at Université de Sherbrooke",
+        "channel": "libguides.biblio.usherbrooke.ca",
+        "description": "Consultez le guide Les étapes de la recherche documentaire pour découvrir d'autres ressources clés.",
+        "link": "https://libguides.biblio.usherbrooke.ca/med-UdeS/astuces"
+      },
+      {
+        "id": "https://www.radiofrance.fr/franceinter/podcasts/le-13-14/le-13-14-du-mercredi-19-juin-2024-8831373",
+        "title": "Le documentaire \"Toubib\" : 12 ans dans la vie d'un étudiant en médecine | France Inter",
+        "channel": "radiofrance.fr",
+        "description": "June 19, 2024 - Nous recevons aujourd'hui Antoine et Angel Page à l'occasion de la sortie prochaine du documentaire \"Toubib\" (28 août 2024). Pendant 12 ans, Antoine Page, réalisateur, a suivi son frère, Angel Page, désormais médecin généraliste, dans ...",
+        "link": "https://www.radiofrance.fr/franceinter/podcasts/le-13-14/le-13-14-du-mercredi-19-juin-2024-8831373"
+      },
+      {
+        "id": "https://www.les-docus.com/lhistoire-de-la-medecine/",
+        "title": "Documentaire \"L'histoire de la médecine\" en streaming",
+        "channel": "les-docus.com",
+        "description": "August 18, 2024 - Documentaire sur l'histoire de la médecine en streaming. L'histoire de la médecine est la branche de l'histoire consacrée à l'étude des connaissances et des ...",
+        "link": "https://www.les-docus.com/lhistoire-de-la-medecine/"
+      },
+      {
+        "id": "https://www.les-docus.com/tag/medecins/",
+        "title": "Tous les documentaires \"médecins\" en streaming | Les-docus.com",
+        "channel": "les-docus.com",
+        "description": "Retrouvez sur les-docus.com, la référence du documentaire en ligne, tous les documentaires \" médecins \" en streaming et en français",
+        "link": "https://www.les-docus.com/tag/medecins/"
+      },
+      {
+        "id": "https://www.youtube.com/watch?v=Md5RvELYH8k",
+        "title": "L’envers des soirées de médecine sous alcool, l'histoire tragique de Simon - Documentaire Complet - YouTube",
+        "channel": "youtube.com",
+        "description": "Plus de documentaires sur la plateforme france.tv https://bit.ly/3OgIW7x🔔 N'oubliez pas d'activer vos notifications 🔔--------------------------------------... Published: January 30, 2025",
+        "link": "https://www.youtube.com/watch?v=Md5RvELYH8k"
+      },
+      {
+        "id": "https://medecinedurgence.fr/espacedocumentaire",
+        "title": "Espace documentaire de Médecine d'Urgence",
+        "channel": "medecinedurgence.fr",
+        "description": "Espace documentaire · Explorez ... intérêt pour les urgentistes… · Documents, issus de société savantes, ayant trait de façon générale ou spécifique à la Médecine d'Urgence…...",
+        "link": "https://medecinedurgence.fr/espacedocumentaire"
+      },
+      {
+        "id": "https://www.film-documentaire.fr/4DACTION/w_fiche_film/71699",
+        "title": "Docteur et la Femme médecine",
+        "channel": "film-documentaire.fr",
+        "description": "Alexandre est psychiatre, chef du service addictologie du CHU de Rouen. Shianne est aussi psychiatre, elle dirige un centre de soins dans l’Ohio où elle pratique une médecine traditionnelle issue des savoirs ancestraux de sa tribu Amérindienne, les Senecas.",
+        "link": "https://www.film-documentaire.fr/4DACTION/w_fiche_film/71699"
+      },
+      {
+        "id": "https://www.youtube.com/watch?v=aXLyLvoxKFA",
+        "title": "Histoire de la chirurgie | Documentaire | ARTE",
+        "channel": "youtube.com",
+        "description": "May 9, 2026 · Disponible en rediffusion jusqu'au 03/11/2026 Des balbutiements de la pratique chirurgicale jusqu’à sa forme moderne, ce riche panorama retrace les jalons et...",
+        "link": "https://www.youtube.com/watch?v=aXLyLvoxKFA"
+      },
+      {
+        "id": "https://www.filmsdocumentaires.com/1-sante",
+        "title": "Capuseen.com : Catalogue Santé et Médecine",
+        "channel": "filmsdocumentaires.com",
+        "description": "La rencontre entre un psychiatre addictologue de l'Hopital de Rouen et une femme medecine iroquoise de l'Ohio. Comment concilier deux visions de l'humain, de l'esprit, de la maladie... Psychologie, Féminisme - 91 mn - Anna Hints · Dans l’intimité des saunas sacrés d’Estonie, tous les ...",
+        "link": "https://www.filmsdocumentaires.com/1-sante"
+      },
+      {
+        "id": "https://moisdudoc.com/programme/films/toubib-12-annees-dans-la-vie-dun-etudiant-en-medecine",
+        "title": "Toubib - 12 années dans la vie d'un étudiant en médecine | Le mois du film documentaire",
+        "channel": "moisdudoc.com",
+        "description": "Douze années durant lesquelles j’ai pu filmer toutes les étapes de son parcours : le bachotage de la première année, les premiers contacts avec les malades, les nombreux stages en hôpitaux, l’externat, l’internat, les missions à l’étranger, les remplacements de médecins de ville ou de campagne.",
+        "link": "https://moisdudoc.com/programme/films/toubib-12-annees-dans-la-vie-dun-etudiant-en-medecine"
+      },
+      {
+        "id": "https://www.editions-frison-roche.com/produit/256/9782876711075/la-recherche-documentaire-et-bibliographique-en-medecine-en-pharmacie",
+        "title": "La recherche documentaire et bibliographique en médecine & en pharmacie - - P.M Belbenoit-Avich (EAN13 : 9782876711075) | Editions Frison-Roche",
+        "channel": "editions-frison-roche.com",
+        "description": "",
+        "link": "https://www.editions-frison-roche.com/produit/256/9782876711075/la-recherche-documentaire-et-bibliographique-en-medecine-en-pharmacie"
+      },
+      {
+        "id": "https://www.arte.tv/en/videos/sciences/medicine-and-health/",
+        "title": "Médecine et santé",
+        "channel": "arte.tv",
+        "description": "What we know about our body, how it works and how to heal it.",
+        "link": "https://www.arte.tv/en/videos/sciences/medicine-and-health/"
+      },
+      {
+        "id": "https://www.youtube.com/playlist?list=PLCwXWOyIR22sUQ0yWcpNJBYq6GyX3il3D",
+        "title": "🩺 Santé | Documentaires complets - YouTube",
+        "channel": "youtube.com",
+        "description": "Share your videos with friends, family, and the world",
+        "link": "https://www.youtube.com/playlist?list=PLCwXWOyIR22sUQ0yWcpNJBYq6GyX3il3D"
+      },
+      {
+        "id": "https://www.arte.tv/fr/videos/106660-000-A/la-sante-des-femmes-de-l-ignorance-a-la-reconnaissance/",
+        "title": "La santé des femmes, de l'ignorance à la reconnaissance - Arte",
+        "channel": "arte.tv",
+        "description": "Mar 17, 2026 · Dressant le constat d’un \" gender gap \" alarmant dans le domaine médical, ce documentaire à la fois scientifique et intimiste expose les conséquences concrètes des inégalités de genre sur la vie d’hommes et de femmes.",
+        "link": "https://www.arte.tv/fr/videos/106660-000-A/la-sante-des-femmes-de-l-ignorance-a-la-reconnaissance/"
+      },
+      {
+        "id": "https://www.youtube.com/watch?v=bSupf9g6NHw",
+        "title": "Médecin de demain - S01E01 - YouTube",
+        "channel": "youtube.com",
+        "description": "Dans cette série de documentaires, nous avons suivi ces internes en médecine qui se battent jours après jours pour apprendre leurs métiers. Du bloc opératoir... Published: October 8, 2019 Views: 311K",
+        "link": "https://www.youtube.com/watch?v=bSupf9g6NHw"
+      },
+      {
+        "id": "https://www.youtube.com/channel/UCe0-6_Vl5rgD-OcwpoZY1Hw",
+        "title": "Au Cœur de la Santé - YouTube",
+        "channel": "youtube.com",
+        "description": "Découvrez les coulisses du monde de la Santé dans des documentaires embarqués au plus près de ses professionnels et de leurs patients.",
+        "link": "https://www.youtube.com/channel/UCe0-6_Vl5rgD-OcwpoZY1Hw"
+      },
+      {
+        "id": "https://www.netflix.com/title/80170862",
+        "title": "Watch The Bleeding Edge | Netflix Official Site",
+        "channel": "netflix.com",
+        "description": "This eye-opening look at the fast-growing medical device industry reveals how the rush to innovate can lead to devastating consequences for patients. Watch trailers & learn more.",
+        "link": "https://www.netflix.com/title/80170862"
+      },
+      {
+        "id": "https://www.youtube.com/playlist?list=PLZfnwkcIsoFnlDYNMNyZvsDMKQVJqmAyZ",
+        "title": "SANTÉ : URGENCES, PROGRÈS ET DÉFIS",
+        "channel": "youtube.com",
+        "description": "AboutPressCopyrightContact usCreatorsAdvertiseDevelopersTermsPrivacyPolicy & SafetyHow YouTube worksTest new featuresNFL Sunday Ticket · © 2026 Google LLC · SANTÉ : URGENCES, PROGRÈS ET DÉFIS - YouTube",
+        "link": "https://www.youtube.com/playlist?list=PLZfnwkcIsoFnlDYNMNyZvsDMKQVJqmAyZ"
+      }
+    ]
+  },
+  "articles:médecine:100": {
+    "timestamp": 1788120217.7845426,
+    "data": [
+      {
+        "id": "https://en.wikipedia.org/wiki/Medicine",
+        "title": "Medicine - Wikipedia",
+        "source_name": "en.wikipedia.org",
+        "link": "https://en.wikipedia.org/wiki/Medicine"
+      },
+      {
+        "id": "https://en.wikipedia.org/wiki/Médecine_Tropicale_et_Santé_Internationale",
+        "title": "Médecine Tropicale et Santé Internationale",
+        "source_name": "en.wikipedia.org",
+        "link": "https://en.wikipedia.org/wiki/Médecine_Tropicale_et_Santé_Internationale"
+      },
+      {
+        "id": "https://fr.wikipedia.org/wiki/Médecine",
+        "title": "Médecine — Wikipédia",
+        "source_name": "fr.wikipedia.org",
+        "link": "https://fr.wikipedia.org/wiki/Médecine"
+      },
+      {
+        "id": "https://fr.wikipedia.org/wiki/Portail:Médecine",
+        "title": "Portail:Médecine — Wikipédia",
+        "source_name": "fr.wikipedia.org",
+        "link": "https://fr.wikipedia.org/wiki/Portail:Médecine"
+      },
+      {
+        "id": "https://fr.wikipedia.org/wiki/Catégorie:Médecine",
+        "title": "Catégorie:Médecine - Wikipédia",
+        "source_name": "fr.wikipedia.org",
+        "link": "https://fr.wikipedia.org/wiki/Catégorie:Médecine"
+      },
+      {
+        "id": "https://fr.wikipedia.org/wiki/De_l'ancienne_médecine",
+        "title": "De l'ancienne médecine - Wikipédia",
+        "source_name": "fr.wikipedia.org",
+        "link": "https://fr.wikipedia.org/wiki/De_l'ancienne_médecine"
+      },
+      {
+        "id": "https://grokipedia.com/page/knock_ou_le_triomphe_de_la_mdecine_(book)",
+        "title": "Knock ou le triomphe de la médecine (book)",
+        "source_name": "grokipedia.com",
+        "link": "https://grokipedia.com/page/knock_ou_le_triomphe_de_la_mdecine_(book)"
+      },
+      {
+        "id": "https://www.frenchdictionary.com/translate/médecine",
+        "title": "médecine | French to English Translation - FrenchDictionary.com",
+        "source_name": "frenchdictionary.com",
+        "link": "https://www.frenchdictionary.com/translate/médecine"
+      },
+      {
+        "id": "https://www.larousse.fr/dictionnaires/francais/médecine/50082",
+        "title": "Définitions : médecine - Dictionnaire de français Larousse",
+        "source_name": "larousse.fr",
+        "link": "https://www.larousse.fr/dictionnaires/francais/médecine/50082"
+      },
+      {
+        "id": "https://dictionnaire.lerobert.com/en/definition/medecine",
+        "title": "médecine - Definition, Meaning, Examples & Pronunciation in ...",
+        "source_name": "dictionnaire.lerobert.com",
+        "link": "https://dictionnaire.lerobert.com/en/definition/medecine"
+      },
+      {
+        "id": "https://dictionary.reverso.net/french-english/médecine",
+        "title": "MÉDECINE translation in English | French-English Dictionary ...",
+        "source_name": "dictionary.reverso.net",
+        "link": "https://dictionary.reverso.net/french-english/médecine"
+      },
+      {
+        "id": "https://www.sciencedirect.com/science/article/pii/S024886630582185X",
+        "title": "Histoire de la médecine interne - ScienceDirect",
+        "source_name": "sciencedirect.com",
+        "link": "https://www.sciencedirect.com/science/article/pii/S024886630582185X"
+      },
+      {
+        "id": "https://beauvoirclinic.com/",
+        "title": "Beauvoir Clinic — Médecine esthétique d'exception à Waterloo",
+        "source_name": "beauvoirclinic.com",
+        "link": "https://beauvoirclinic.com/"
+      },
+      {
+        "id": "https://apps.apple.com/ly/app/thérapeutique-médecine-général/id1312840635",
+        "title": "Thérapeutique Médecine Général - App Store - Apple",
+        "source_name": "apps.apple.com",
+        "link": "https://apps.apple.com/ly/app/thérapeutique-médecine-général/id1312840635"
+      },
+      {
+        "id": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5318046/",
+        "title": "La Médecine et ses Destinées, Leçon d'Ouverture du Cours de ...",
+        "source_name": "pmc.ncbi.nlm.nih.gov",
+        "link": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5318046/"
+      },
+      {
+        "id": "https://www.eesc.europa.eu/en/news-media/presentations/au-coeur-de-la-sante-de-lexpertise-medicale-la-medecine-technique",
+        "title": "Au cœur de la santé, de l'expertise médicale à la médecine ...",
+        "source_name": "eesc.europa.eu",
+        "link": "https://www.eesc.europa.eu/en/news-media/presentations/au-coeur-de-la-sante-de-lexpertise-medicale-la-medecine-technique"
+      },
+      {
+        "id": "https://www.medecinesciences.org/en/",
+        "title": "médecine/sciences",
+        "source_name": "medecinesciences.org",
+        "link": "https://www.medecinesciences.org/en/"
+      },
+      {
+        "id": "https://dictionary.cambridge.org/us/dictionary/french-english/medecine",
+        "title": "MÉDECINE in English - Cambridge Dictionary",
+        "source_name": "dictionary.cambridge.org",
+        "link": "https://dictionary.cambridge.org/us/dictionary/french-english/medecine"
+      },
+      {
+        "id": "https://www.collinsdictionary.com/us/dictionary/french-english/médecine",
+        "title": "Translate \"MÉDECINE\" from French into English | Collins French-English Dictionary",
+        "source_name": "collinsdictionary.com",
+        "link": "https://www.collinsdictionary.com/us/dictionary/french-english/médecine"
+      },
+      {
+        "id": "https://m.interglot.com/fr/en/médecine",
+        "title": "Translate 'médecine' from French to English",
+        "source_name": "m.interglot.com",
+        "link": "https://m.interglot.com/fr/en/médecine"
+      },
+      {
+        "id": "https://www.physicsformedicine.espci.fr/",
+        "title": "Institute Physics for Medicine Paris, also known in French as Institut de Physique pour la Médecine, is a joint research unit founded by Mickael Tanter with a singular ambition: to put the power of physics at the service of medicine.",
+        "source_name": "physicsformedicine.espci.fr",
+        "link": "https://www.physicsformedicine.espci.fr/"
+      },
+      {
+        "id": "https://www.collinsdictionary.com/dictionary/french-english/médecine/related",
+        "title": "All related terms of MÉDECINE | Collins French-English Dictionary",
+        "source_name": "collinsdictionary.com",
+        "link": "https://www.collinsdictionary.com/dictionary/french-english/médecine/related"
+      },
+      {
+        "id": "https://dictionnaire.lerobert.com/en/synonyms/medecine",
+        "title": "médecine - Synonyms in French | Le Robert Online Thesaurus",
+        "source_name": "dictionnaire.lerobert.com",
+        "link": "https://dictionnaire.lerobert.com/en/synonyms/medecine"
+      },
+      {
+        "id": "https://en.wiktionary.org/wiki/médecine",
+        "title": "médecine - Wiktionary, the free dictionary",
+        "source_name": "en.wiktionary.org",
+        "link": "https://en.wiktionary.org/wiki/médecine"
+      },
+      {
+        "id": "https://www.academie-medecine.fr/?lang=en",
+        "title": "Académie nationale de médecine | Une institution dans son temps – L'Académie nationale de médecine a pour missions de répondre au Gouvernement sur la santé publique, de contribuer aux progrès de l'art de guérir et de promouvoir la médecine française.",
+        "source_name": "academie-medecine.fr",
+        "link": "https://www.academie-medecine.fr/?lang=en"
+      },
+      {
+        "id": "https://www.youtube.com/watch?v=8oGZ5jGr4Ao",
+        "title": "How to Pronounce ''Une médecine'' (A medicine) Correctly ...",
+        "source_name": "youtube.com",
+        "link": "https://www.youtube.com/watch?v=8oGZ5jGr4Ao"
+      },
+      {
+        "id": "https://www.who.int/fr/news/item/11-07-2025-who--itu--wipo-showcase-a-new-report-on-ai-use-in-traditional-medicine",
+        "title": "L'OMS, l'UIT et l'OMPI présentent un nouveau rapport sur l ...",
+        "source_name": "who.int",
+        "link": "https://www.who.int/fr/news/item/11-07-2025-who--itu--wipo-showcase-a-new-report-on-ai-use-in-traditional-medicine"
+      },
+      {
+        "id": "https://www.bing.com/aclick?ld=e8IXgcqPbUpGcls0uBWLqN4TVUCUxn9O2X7YJugxHWlPNkd00WTUodh5lktFqzDTVIFz9iweuvTGTMs1cn7inzK-mrw1yj3hk2Hrw-PVDk2ecm-fw8YtDfgKv3rTO8kQQdE6MV5QXwtV4Cq2m0pSWVhQZDkaDV0uZBCxhPrHZOhITBTUbnzL02SRfxiCmhN9HVoT0pMg&u=aHR0cHMlM2ElMmYlMmZ3d3cubXNmLWF6Zy5iZSUyZmZyJTJmZXBpZGVtaWUtZWJvbGEtMjAyNiUzZnV0bV9zb3VyY2UlM2RtaWNyb3NvZnQlMjZ1dG1fbWVkaXVtJTNkc2VhJTI2dXRtX2NhbXBhaWduJTNkZWJvbGElMjZtc2Nsa2lkJTNkZjM4ODlkOTJkNTdjMTIzNTdlZDhmNzA2NTllNzk5ZmE&rlid=f3889d92d57c12357ed8f70659e799fa",
+        "title": "Médecins Sans Frontières - Soutenez notre fonds special",
+        "source_name": "bing.com",
+        "link": "https://www.bing.com/aclick?ld=e8IXgcqPbUpGcls0uBWLqN4TVUCUxn9O2X7YJugxHWlPNkd00WTUodh5lktFqzDTVIFz9iweuvTGTMs1cn7inzK-mrw1yj3hk2Hrw-PVDk2ecm-fw8YtDfgKv3rTO8kQQdE6MV5QXwtV4Cq2m0pSWVhQZDkaDV0uZBCxhPrHZOhITBTUbnzL02SRfxiCmhN9HVoT0pMg&u=aHR0cHMlM2ElMmYlMmZ3d3cubXNmLWF6Zy5iZSUyZmZyJTJmZXBpZGVtaWUtZWJvbGEtMjAyNiUzZnV0bV9zb3VyY2UlM2RtaWNyb3NvZnQlMjZ1dG1fbWVkaXVtJTNkc2VhJTI2dXRtX2NhbXBhaWduJTNkZWJvbGElMjZtc2Nsa2lkJTNkZjM4ODlkOTJkNTdjMTIzNTdlZDhmNzA2NTllNzk5ZmE&rlid=f3889d92d57c12357ed8f70659e799fa"
+      },
+      {
+        "id": "https://nejm.org/",
+        "title": "The New England Journal of Medicine | Research & Review Articles on Disease & Clinical Practice",
+        "source_name": "nejm.org",
+        "link": "https://nejm.org/"
+      },
+      {
+        "id": "https://www.gymglish.com/en/frantastique/french-translation/medecine",
+        "title": "Medecine - English Translation",
+        "source_name": "gymglish.com",
+        "link": "https://www.gymglish.com/en/frantastique/french-translation/medecine"
+      },
+      {
+        "id": "https://word.tips/spelling/medicine-vs-medecine/",
+        "title": "Medicine or Medecine | How to spell it? | Spelling",
+        "source_name": "word.tips",
+        "link": "https://word.tips/spelling/medicine-vs-medecine/"
+      },
+      {
+        "id": "https://en.pons.com/translate/french-english/médecin",
+        "title": "MÉDECIN - Translation from French into English | PONS",
+        "source_name": "en.pons.com",
+        "link": "https://en.pons.com/translate/french-english/médecin"
+      },
+      {
+        "id": "https://med.stanford.edu/",
+        "title": "Home | Stanford Medicine",
+        "source_name": "med.stanford.edu",
+        "link": "https://med.stanford.edu/"
+      },
+      {
+        "id": "https://dictionary.cambridge.org/dictionary/french-english/medical",
+        "title": "MÉDICAL | translate French to English - Cambridge Dictionary",
+        "source_name": "dictionary.cambridge.org",
+        "link": "https://dictionary.cambridge.org/dictionary/french-english/medical"
+      },
+      {
+        "id": "https://www.uottawa.ca/faculty-medicine/",
+        "title": "Faculty of Medicine | Faculty of Medicine",
+        "source_name": "uottawa.ca",
+        "link": "https://www.uottawa.ca/faculty-medicine/"
+      },
+      {
+        "id": "https://hms.harvard.edu/",
+        "title": "Harvard Medical School",
+        "source_name": "hms.harvard.edu",
+        "link": "https://hms.harvard.edu/"
+      },
+      {
+        "id": "https://bjsm.bmj.com/",
+        "title": "Homepage | BJSM",
+        "source_name": "bjsm.bmj.com",
+        "link": "https://bjsm.bmj.com/"
+      }
+    ]
   }
 }
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\recherche_04\cache.json ---
