@@ -568,6 +568,51 @@ error: Please commit or stash them.
 [2026-09-03 18:33:19] [compresseur] Aucun changement détecté.
 [2026-09-03 18:33:19] [decompresseur] Aucun changement détecté.
 [2026-09-03 18:33:19] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-03 18:33:19] Ancienne version supprimée : compresseur_auto_2026-09-03_18-18-08.txt
+[2026-09-03 18:33:19] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-03_18-33-19.txt (97.5 Ko)
+[2026-09-03 18:33:19] [partage_QR] Aucun changement détecté.
+[2026-09-03 18:33:19] [%] Aucun changement détecté.
+[2026-09-03 18:33:19] [entrainement_tactique] Aucun changement détecté.
+[2026-09-03 18:33:19] [pdf_to_audio] Aucun changement détecté.
+[2026-09-03 18:33:19] [py_to_starter] Aucun changement détecté.
+[2026-09-03 18:33:19] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-03 18:33:19] [ChronoChess] Aucun changement détecté.
+[2026-09-03 18:33:19] [Network] Aucun changement détecté.
+[2026-09-03 18:33:22] Poussé sur Git.
+[2026-09-03 18:38:23] [recherche] Aucun changement détecté.
+[2026-09-03 18:38:23] [compresseur] Aucun changement détecté.
+[2026-09-03 18:38:23] [decompresseur] Aucun changement détecté.
+[2026-09-03 18:38:23] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-03 18:38:23] Ancienne version supprimée : compresseur_auto_2026-09-03_18-23-12.txt
+[2026-09-03 18:38:23] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-03_18-38-23.txt (98.6 Ko)
+[2026-09-03 18:38:23] [partage_QR] Aucun changement détecté.
+[2026-09-03 18:38:23] [%] Aucun changement détecté.
+[2026-09-03 18:38:23] [entrainement_tactique] Aucun changement détecté.
+[2026-09-03 18:38:23] [pdf_to_audio] Aucun changement détecté.
+[2026-09-03 18:38:23] [py_to_starter] Aucun changement détecté.
+[2026-09-03 18:38:23] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-03 18:38:23] [ChronoChess] Aucun changement détecté.
+[2026-09-03 18:38:23] [Network] Aucun changement détecté.
+[2026-09-03 18:38:26] Poussé sur Git.
+[2026-09-03 18:43:27] [recherche] Aucun changement détecté.
+[2026-09-03 18:43:27] [compresseur] Aucun changement détecté.
+[2026-09-03 18:43:27] [decompresseur] Aucun changement détecté.
+[2026-09-03 18:43:27] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-03 18:43:27] Ancienne version supprimée : compresseur_auto_2026-09-03_18-28-16.txt
+[2026-09-03 18:43:27] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-03_18-43-27.txt (99.8 Ko)
+[2026-09-03 18:43:27] [partage_QR] Aucun changement détecté.
+[2026-09-03 18:43:27] [%] Aucun changement détecté.
+[2026-09-03 18:43:27] [entrainement_tactique] Aucun changement détecté.
+[2026-09-03 18:43:27] [pdf_to_audio] Aucun changement détecté.
+[2026-09-03 18:43:27] [py_to_starter] Aucun changement détecté.
+[2026-09-03 18:43:27] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-03 18:43:27] [ChronoChess] Aucun changement détecté.
+[2026-09-03 18:43:27] [Network] Aucun changement détecté.
+[2026-09-03 18:43:30] Poussé sur Git.
+[2026-09-03 18:48:31] [recherche] Aucun changement détecté.
+[2026-09-03 18:48:31] [compresseur] Aucun changement détecté.
+[2026-09-03 18:48:31] [decompresseur] Aucun changement détecté.
+[2026-09-03 18:48:31] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -1100,12 +1145,12 @@ planificateur de tâches
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "501a3ba55238b50d80dca3e282cc9a996d9b7305c2bf57aa00b81edc3e5d7c0b",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "2f734844507f48aebd9e0f731b47d09e43ff357f937590a44250a164392ca609",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "01989a0f8f34ee886f2d5842ed7fdd897c9ef5443e922006ab8aa9c199ffab2b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\planificateur de tâches.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "2cdc894c53daa6c77397f165ac641f4c7169123cfd62f9f6750ffdd41f41e423"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "27e709c0c4dd6dead3cd896a9ce7ea83837f293c857bea4edc8bbbe3279b0f1c"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
