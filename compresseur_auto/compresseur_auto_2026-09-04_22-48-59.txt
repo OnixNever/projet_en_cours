@@ -598,6 +598,55 @@ error: Please commit or stash them.
 [2026-09-03 18:43:27] [compresseur] Aucun changement détecté.
 [2026-09-03 18:43:27] [decompresseur] Aucun changement détecté.
 [2026-09-03 18:43:27] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-03 18:43:27] Ancienne version supprimée : compresseur_auto_2026-09-03_18-28-16.txt
+[2026-09-03 18:43:27] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-03_18-43-27.txt (99.8 Ko)
+[2026-09-03 18:43:27] [partage_QR] Aucun changement détecté.
+[2026-09-03 18:43:27] [%] Aucun changement détecté.
+[2026-09-03 18:43:27] [entrainement_tactique] Aucun changement détecté.
+[2026-09-03 18:43:27] [pdf_to_audio] Aucun changement détecté.
+[2026-09-03 18:43:27] [py_to_starter] Aucun changement détecté.
+[2026-09-03 18:43:27] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-03 18:43:27] [ChronoChess] Aucun changement détecté.
+[2026-09-03 18:43:27] [Network] Aucun changement détecté.
+[2026-09-03 18:43:30] Poussé sur Git.
+[2026-09-03 18:48:31] [recherche] Aucun changement détecté.
+[2026-09-03 18:48:31] [compresseur] Aucun changement détecté.
+[2026-09-03 18:48:31] [decompresseur] Aucun changement détecté.
+[2026-09-03 18:48:31] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-03 18:48:31] Ancienne version supprimée : compresseur_auto_2026-09-03_18-33-19.txt
+[2026-09-03 18:48:31] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-03_18-48-31.txt (100.9 Ko)
+[2026-09-03 18:48:31] [partage_QR] Aucun changement détecté.
+[2026-09-03 18:48:31] [%] Aucun changement détecté.
+[2026-09-03 18:48:31] [entrainement_tactique] Aucun changement détecté.
+[2026-09-03 18:48:31] [pdf_to_audio] Aucun changement détecté.
+[2026-09-03 18:48:31] [py_to_starter] Aucun changement détecté.
+[2026-09-03 18:48:31] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-03 18:48:31] [ChronoChess] Aucun changement détecté.
+[2026-09-03 18:48:31] [Network] Aucun changement détecté.
+[2026-09-03 18:48:34] Poussé sur Git.
+[2026-09-04 17:22:14] [recherche] Changement détecté (32 fichier(s)), régénération du contexte...
+[2026-09-04 17:22:15] [recherche] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\recherche\recherche_2026-09-04_17-22-15.txt (520.1 Ko)
+[2026-09-04 17:22:15] [compresseur] Aucun changement détecté.
+[2026-09-04 17:22:15] [decompresseur] Aucun changement détecté.
+[2026-09-04 17:22:15] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-04 17:22:15] Ancienne version supprimée : compresseur_auto_2026-09-03_18-38-23.txt
+[2026-09-04 17:22:15] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-04_17-22-15.txt (102.2 Ko)
+[2026-09-04 17:22:15] [partage_QR] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-09-04 17:22:15] Ancienne version supprimée : partage_QR_2026-09-01_05-54-07.txt
+[2026-09-04 17:22:15] [partage_QR] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\partage_QR\partage_QR_2026-09-04_17-22-15.txt (49.5 Ko)
+[2026-09-04 17:22:15] [%] Aucun changement détecté.
+[2026-09-04 17:22:15] [entrainement_tactique] Aucun changement détecté.
+[2026-09-04 17:22:15] [pdf_to_audio] Aucun changement détecté.
+[2026-09-04 17:22:15] [py_to_starter] Aucun changement détecté.
+[2026-09-04 17:22:15] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-04 17:22:15] [ChronoChess] Aucun changement détecté.
+[2026-09-04 17:22:15] [Network] Changement détecté (22 fichier(s)), régénération du contexte...
+[2026-09-04 17:22:15] [Network] Fichier généré : C:/Users/Oniix/Desktop/mes prog/context-sync-repo\Network\Network_2026-09-04_17-22-15.txt (775.4 Ko)
+[2026-09-04 17:22:17] Poussé sur Git.
+[2026-09-04 22:48:59] [recherche] Aucun changement détecté.
+[2026-09-04 22:48:59] [compresseur] Aucun changement détecté.
+[2026-09-04 22:48:59] [decompresseur] Aucun changement détecté.
+[2026-09-04 22:48:59] [compresseur_auto] Changement détecté (7 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\auto_context_sync.log ---
 
@@ -1130,16 +1179,16 @@ planificateur de tâches
   },
   "compresseur_auto": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\README.md": "398a8975d7b06a4d5bf308e0206c55f702ef31e689c2d6046e051fd85afe6512",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "19ed8662464d7c4554ecbbeb88777b402f0676871025cf697293b34f08fc90fd",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.log": "48a24ce791c3972b8cf6074f4031ed5d4cefdf1618388e15ea11a214cbdb6d38",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\auto_context_sync.py": "7016de2d4312171283dff114cca25eaa4264b07b99b858f458093a9457c07d64",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\config.json": "01989a0f8f34ee886f2d5842ed7fdd897c9ef5443e922006ab8aa9c199ffab2b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\planificateur de tâches.txt": "a999d8507d77a64bd6e287e91a2aca8b6a4929778c276108e8e03c4dcada1ca9",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "f2bde1b265361a60e303ac6bda1c711cdbd810915a5f2c94ad42f33ab9f0b324"
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/compresseur_auto\\state.json": "19fec472f62cfa8eb0af7da53ab77d862498b4e5d47a8c32ae83fc2b44694e2e"
   },
   "partage_QR": {
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.log": "97e94fb5fea8ef8b4cbe6e6f3a6745cdb5a405dca4ef26147c7ab930488cc550",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.log": "2b02e98a5b53ef207e1fbe1a68569c13cb02cfaa618e6e021a6a887ed33c8b51",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\app.py": "19795084740fee35b3a07d83fdcf32667f8556813434c513bc47c7b89669625b",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/partage_QR\\files\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
@@ -1150,18 +1199,28 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique\\entrainement-tactique.html": "51e493b9aea31a2f93835b551113dd12e01b31d2577299d0f64025dd9c40b892"
   },
   "Network": {
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\gestion_serveur.html": "b8a12f17c0d61280b02a860fe63bf4ab8de52718449fb82b36f2723f48a88780",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\serveur.py": "804d1aeb013cfb8e695aee1944a34898cea4e5d4db6577a1890c551b052088f4",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\start tout.bat": "b0fd751601a3e469af4ece86a0e1b2b893d635c7b3aa65e1d37cc57127d2eedf",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\start.bat": "62d573206b51cc889ee8afd726b24f17d1f356bee7880c1d41f489cbc078aec8",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\utilisateur.html": "437e4743d973db4c009355bfca7e08ffe8c36afd40651de26c10764e5c93539a",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\config.json": "79bd4e0d65a9ab937d4fda9e8b3d20f057a689c7878fc1be154b3023f14848a8",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\messages.json": "1e05ce8cd553b4228c10098e89606d793214b47ec933d30d7ba34c039a1b2f79",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\users.json": "3cb1721cb324c22af42bb234cf86ee08b4742b7981877a0b889d8c312f875dbf",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\backups\\backup_20260125_100547\\users.json": "b83b111a0ba65422153b028513852bd91a915a84072549b6c1420fc102b096c8",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\15bfd783-41ee-4d9e-972d-6264253f74c7.html": "b6acad946d9526d9a98b99a3fe1eb3d97038fa1e2d34f9682b3ac9d56d7965a4",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\9411b3fc-c219-443e-95d6-eff33512c175.html": "d2b46521a9623cbe2a4e54d53897e87847fca91b93505e2a0d57fbd029ceb8e4",
-    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\data\\uploads\\9b634073-6627-4b4b-9a19-b9dd72b02b65.html": "933d9384a5f1894f10d08287702ab48d8f71e8863c10bb4efa2fac5291902967"
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\gestion_serveur.html": "67f2e28d61111cab9f59d01e78119e21a28371f620c3751b2063d7c96edc6b50",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\serveur.py": "7ae3e7dcf9b3e5f227c1492a8b2a9b73cb3a1f76d1392f6f528ab623a524caa7",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\start tout.bat": "45fa18ab1e4b5e3fdeb61d92b4a2931f3abe8001311866ed3586d6f914979fa9",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\start.bat": "ccceccb65df793aa1852be29889c4fa44fa94164d4d37f31cc23f7675765bb98",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\utilisateur.html": "60d15a780809abcbc5ef8d039f1b2a293a83ee52af787ab700bab585af6e1c04",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\data\\config.json": "fad11217133ce1e7e4ad6672e34a04d5d12fa7522710988324de11980017e2cc",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\data\\messages.json": "82650e4ac87af18d89341cbc309970a83587000dfdea3f6a4870d7450a39aa02",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\data\\projects.json": "d11c0929d79fb5e25d94d8ca0bf27d4bdee03722799ff3afb20981b05d4c7a47",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\data\\sessions.json": "6386009c157579461e82004cc508fb9153be6ac7a9e6010276b320be0bf68b7f",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\reseau_local_02\\data\\users.json": "8a122c73625971fab3c9cd5340b4f94d03a2421baa40fee666f8c0309c4d6695",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\gestion_serveur.html": "b8a12f17c0d61280b02a860fe63bf4ab8de52718449fb82b36f2723f48a88780",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\serveur.py": "804d1aeb013cfb8e695aee1944a34898cea4e5d4db6577a1890c551b052088f4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\start tout.bat": "b0fd751601a3e469af4ece86a0e1b2b893d635c7b3aa65e1d37cc57127d2eedf",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\start.bat": "62d573206b51cc889ee8afd726b24f17d1f356bee7880c1d41f489cbc078aec8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\utilisateur.html": "437e4743d973db4c009355bfca7e08ffe8c36afd40651de26c10764e5c93539a",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\config.json": "79bd4e0d65a9ab937d4fda9e8b3d20f057a689c7878fc1be154b3023f14848a8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\messages.json": "1e05ce8cd553b4228c10098e89606d793214b47ec933d30d7ba34c039a1b2f79",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\users.json": "3cb1721cb324c22af42bb234cf86ee08b4742b7981877a0b889d8c312f875dbf",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\backups\\backup_20260125_100547\\users.json": "b83b111a0ba65422153b028513852bd91a915a84072549b6c1420fc102b096c8",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\uploads\\15bfd783-41ee-4d9e-972d-6264253f74c7.html": "b6acad946d9526d9a98b99a3fe1eb3d97038fa1e2d34f9682b3ac9d56d7965a4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\uploads\\9411b3fc-c219-443e-95d6-eff33512c175.html": "d2b46521a9623cbe2a4e54d53897e87847fca91b93505e2a0d57fbd029ceb8e4",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\\réseau_local_01\\data\\uploads\\9b634073-6627-4b4b-9a19-b9dd72b02b65.html": "933d9384a5f1894f10d08287702ab48d8f71e8863c10bb4efa2fac5291902967"
   },
   "%": {
     "C:/Users/Oniix/Desktop/mes prog/html_et_css/%\\%_01.html": "18928dc245291223b0d3bb3241f15d6064c0d61654944eee7709df0d2ca9837f",
@@ -1223,7 +1282,7 @@ planificateur de tâches
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\settings.json": "9b110e68425b94199a144b4da29575281eda9b55d11cb1515f4fae8e9e226134",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_03\\style.css": "7dcda7d59ca2480adb05fab1d35cba9f5649cd3574f4781028e4f5d595687a7d",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\app.py": "dfc3be60e1b1f9684ec6783baf7d7ce296e49148513a425f4e71860862f1213e",
-    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\cache.json": "3a14f4e3a2d8fa09c55154ae1060487a96d70c07e8200f402c4b7f454cc256fd",
+    "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\cache.json": "3c74c2e9355050d95c1056e5d49040b1bcee070e91d35d9d9d8d489a0d560e5f",
     "C:/Users/Oniix/Desktop/mes prog/Python/code/recherche\\recherche_04\\requirements.txt": "fcd0f7926be6f57febdf2426b95e59dad4e36593d58258e03e91ecc2e4b4eced"
   },
   "decompresseur": {
