@@ -1,0 +1,282 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente
+  ├── Dictée_vocale_intelligente_03.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\Dictée_vocale_intelligente_03.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictée Vocale Ultra-Fluide</title>
+    <style>
+        :root { --primary: #4f46e5; --success: #10b981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+        body { background: #f1f5f9; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 800px; padding: 20px; }
+        
+        /* Zone de texte optimisée */
+        .text-area-wrapper { position: relative; border: 2px solid #e2e8f0; border-radius: 12px; min-height: 300px; margin-bottom: 20px; transition: border 0.3s; }
+        .text-area-wrapper:focus-within { border-color: var(--primary); }
+        
+        #textDisplay { 
+            padding: 20px; min-height: 300px; font-size: 1.15rem; line-height: 1.6; 
+            outline: none; white-space: pre-wrap; word-wrap: break-word;
+        }
+        
+        /* Style pour le texte en cours de traitement */
+        .interim { color: #94a3b8; font-style: italic; }
+
+        .controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-start { background: var(--primary); color: white; }
+        .btn-start.active { background: #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
+        
+        /* Styles pour les nouveaux boutons */
+        .secondary-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-secondary { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+        .btn-secondary:hover { background: #e2e8f0; }
+        .btn-clear { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+        .btn-clear:hover { background: #fee2e2; }
+        .btn-copy { background: #f0f9ff; color: #0369a1; border: 1px solid #7dd3fc; }
+        .btn-copy:hover { background: #e0f2fe; }
+        
+        .status-bar { display: flex; justify-content: space-between; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="controls">
+        <select id="langSelect" style="flex: 0.5; border-radius: 8px; border: 1px solid #ddd; padding: 5px;">
+            <option value="fr-FR">Français 🇫🇷</option>
+            <option value="en-US">English 🇺🇸</option>
+            <option value="ar-SA">العربية 🇸🇦</option>
+        </select>
+        <button id="mainBtn" class="btn-start">Démarrer la dictée</button>
+    </div>
+
+    <div class="text-area-wrapper">
+        <div id="textDisplay" contenteditable="true" spellcheck="true"></div>
+    </div>
+
+    <!-- Nouveaux boutons ajoutés -->
+    <div class="secondary-buttons">
+        <button id="clearTextBtn" class="btn-clear">Vider le texte</button>
+        <button id="copyContentBtn" class="btn-copy">Copier le contenu</button>
+    </div>
+
+    <div class="status-bar">
+        <span id="status">Prêt</span>
+        <span id="stats">0 mots</span>
+    </div>
+</div>
+
+<script>
+    const mainBtn = document.getElementById('mainBtn');
+    const textDisplay = document.getElementById('textDisplay');
+    const status = document.getElementById('status');
+    const langSelect = document.getElementById('langSelect');
+    const clearTextBtn = document.getElementById('clearTextBtn');
+    const copyContentBtn = document.getElementById('copyContentBtn');
+
+    let recognition;
+    let isListening = false;
+    let finalTranscript = '';
+
+    // Initialisation
+    if ('webkitSpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true; // LA CLÉ POUR LA FLUIDITÉ
+
+        recognition.onstart = () => {
+            isListening = true;
+            mainBtn.textContent = "Arrêter la dictée";
+            mainBtn.classList.add('active');
+            status.textContent = "Je vous écoute...";
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = '';
+            
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    insertAtCursor(event.results[i][0].transcript + ' ');
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+            
+            // Affichage temporaire du texte "en cours"
+            updateInterimDisplay(interimTranscript);
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Erreur:", event.error);
+            stopDictation();
+        };
+
+        recognition.onend = () => {
+            if (isListening) recognition.start(); // Auto-restart pour ne jamais couper
+        };
+    }
+
+    function insertAtCursor(text) {
+        // Supprime l'affichage intérimaire avant d'insérer le texte final
+        removeInterim();
+        
+        const sel = window.getSelection();
+        if (sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const node = document.createTextNode(text);
+            range.insertNode(node);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+        updateStats();
+    }
+
+    function updateInterimDisplay(text) {
+        removeInterim();
+        if (text) {
+            const span = document.createElement('span');
+            span.id = 'interim-span';
+            span.className = 'interim';
+            span.textContent = text;
+            
+            const sel = window.getSelection();
+            if (sel.rangeCount) {
+                const range = sel.getRangeAt(0);
+                range.insertNode(span);
+            }
+        }
+    }
+
+    function removeInterim() {
+        const existing = document.getElementById('interim-span');
+        if (existing) existing.remove();
+    }
+
+    function toggleDictation() {
+        if (isListening) {
+            stopDictation();
+        } else {
+            startDictation();
+        }
+    }
+
+    function startDictation() {
+        recognition.lang = langSelect.value;
+        recognition.start();
+        textDisplay.focus();
+    }
+
+    function stopDictation() {
+        isListening = false;
+        recognition.stop();
+        mainBtn.textContent = "Démarrer la dictée";
+        mainBtn.classList.remove('active');
+        status.textContent = "Arrêté";
+        removeInterim();
+    }
+
+    function updateStats() {
+        const words = textDisplay.innerText.trim().split(/\s+/).length;
+        document.getElementById('stats').textContent = `${textDisplay.innerText.trim() ? words : 0} mots`;
+    }
+
+    // Fonction pour vider le texte - SIMPLIFIÉE
+    function clearText() {
+        // Effacer le contenu directement
+        textDisplay.innerHTML = '';
+        
+        // Mettre à jour les statistiques
+        updateStats();
+        
+        // Donner le focus à la zone de texte
+        textDisplay.focus();
+        
+        // Afficher un message de confirmation
+        status.textContent = "Texte effacé";
+        clearTextBtn.textContent = "Texte effacé !";
+        clearTextBtn.style.background = "#dcfce7";
+        clearTextBtn.style.color = "#166534";
+        
+        setTimeout(() => {
+            clearTextBtn.textContent = "Vider le texte";
+            clearTextBtn.style.background = "";
+            clearTextBtn.style.color = "";
+            if (!isListening) status.textContent = "Prêt";
+        }, 1500);
+    }
+
+    // Fonction pour copier le contenu
+    function copyContent() {
+        const textToCopy = textDisplay.innerText.trim();
+        
+        if (!textToCopy) {
+            status.textContent = "Aucun texte à copier";
+            setTimeout(() => {
+                if (!isListening) status.textContent = "Prêt";
+            }, 2000);
+            return;
+        }
+        
+        // Utiliser l'API Clipboard moderne
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                status.textContent = "Texte copié dans le presse-papiers !";
+                copyContentBtn.textContent = "Copié !";
+                copyContentBtn.style.background = "#d1fae5";
+                copyContentBtn.style.color = "#065f46";
+                
+                setTimeout(() => {
+                    copyContentBtn.textContent = "Copier le contenu";
+                    copyContentBtn.style.background = "";
+                    copyContentBtn.style.color = "";
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Erreur lors de la copie: ', err);
+                status.textContent = "Erreur lors de la copie";
+                
+                // Méthode de secours pour les anciens navigateurs
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                status.textContent = "Texte copié (méthode de secours)";
+                setTimeout(() => {
+                    if (!isListening) status.textContent = "Prêt";
+                }, 2000);
+            });
+    }
+
+    // Événements des boutons
+    mainBtn.addEventListener('click', toggleDictation);
+    clearTextBtn.addEventListener('click', clearText);
+    copyContentBtn.addEventListener('click', copyContent);
+    
+    // Sauvegarde auto de la langue
+    langSelect.value = localStorage.getItem('pref_lang') || 'fr-FR';
+    langSelect.onchange = () => localStorage.setItem('pref_lang', langSelect.value);
+
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente\Dictée_vocale_intelligente_03.html ---
+

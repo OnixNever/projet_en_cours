@@ -1,0 +1,219 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_01.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_01.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculateur de Pourcentages</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f7fa;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .menu {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .menu button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .menu button:hover {
+      background: #2980b9;
+    }
+    .hidden {
+      display: none;
+    }
+    textarea, input {
+      width: 95%;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    pre {
+      background: #ecf0f1;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Calculateur de Pourcentages</h1>
+
+  <div class="menu">
+    <button onclick="showMode('modeA')">Mode A : Comparer à une valeur de référence</button>
+    <button onclick="showMode('modeB')">Mode B : Croissance et graphique</button>
+    <button onclick="showMode('modeC')">Mode C : Gains & Pertes appliqués</button>
+  </div>
+
+  <!-- Mode A -->
+  <div id="modeA" class="hidden">
+    <h3>Mode A : Comparer à une valeur de référence</h3>
+    <label>Valeur de référence :</label>
+    <input type="number" id="refA" step="0.01" placeholder="Ex: 100">
+
+    <label>Valeurs à comparer (séparées par des espaces) :</label>
+    <input type="text" id="valeursA" placeholder="Ex: 90 150">
+
+    <button onclick="calculerA()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatA">---</pre>
+  </div>
+
+  <!-- Mode B -->
+  <div id="modeB" class="hidden">
+    <h3>Mode B : Évolution et graphique</h3>
+    <label>Listes de séries (une par ligne, 1er mot = nom, puis valeurs) :</label>
+    <textarea id="seriesB" rows="5" placeholder="Exemple :
+Test 72.65 86.36 94.20 102.19 102.20 101.40 117.00 114.35
+Série2 100 120 130 140"></textarea>
+
+    <button onclick="calculerB()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatB">---</pre>
+    <canvas id="graphB" width="400" height="200"></canvas>
+  </div>
+
+  <!-- Mode C -->
+  <div id="modeC" class="hidden">
+    <h3>Mode C : Gains et pertes appliqués</h3>
+    <label>Valeur de départ :</label>
+    <input type="number" id="valeurC" step="0.01" placeholder="Ex: 200">
+
+    <label>Pourcentages à appliquer (séparés par des espaces, ex: 10 -5 20) :</label>
+    <input type="text" id="pourcentC" placeholder="Ex: 10 -5 20">
+
+    <button onclick="calculerC()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatC">---</pre>
+  </div>
+
+  <script>
+    function showMode(modeId) {
+      document.getElementById("modeA").classList.add("hidden");
+      document.getElementById("modeB").classList.add("hidden");
+      document.getElementById("modeC").classList.add("hidden");
+      document.getElementById(modeId).classList.remove("hidden");
+    }
+
+    // Mode A : comparaison à une référence
+    function calculerA() {
+      const ref = parseFloat(document.getElementById("refA").value);
+      const valeurs = document.getElementById("valeursA").value.split(" ").map(Number);
+      let res = "";
+      if (isNaN(ref) || ref === 0) {
+        res = "⚠️ Merci d'entrer une valeur de référence valide (≠ 0).";
+      } else {
+        valeurs.forEach(v => {
+          if (!isNaN(v)) {
+            let diff = ((v - ref) / ref) * 100;
+            res += `${v} → ${diff >= 0 ? "Gain" : "Perte"} : ${diff.toFixed(2)}% sur la valeur de référence (${ref})\n`;
+          }
+        });
+      }
+      document.getElementById("resultatA").innerText = res;
+    }
+
+    // Mode B : évolution + moyenne + graphique
+    let chartB;
+    function calculerB() {
+      const lignes = document.getElementById("seriesB").value.trim().split("\n");
+      let res = "";
+      let series = [];
+
+      lignes.forEach((ligne, idx) => {
+        let parts = ligne.trim().split(/\s+/);
+        if (parts.length < 3) return; 
+        let nom = parts[0];
+        let valeurs = parts.slice(1).map(Number).filter(v => !isNaN(v));
+        
+        if (valeurs.length < 2) return;
+
+        series.push({ nom, valeurs });
+
+        res += `${nom} :\n`;
+        let croissanceTotale = 0;
+        let nbCroissances = 0;
+
+        for (let i = 1; i < valeurs.length; i++) {
+          let diff = ((valeurs[i] - valeurs[i-1]) / valeurs[i-1]) * 100;
+          res += `  ${valeurs[i-1]} → ${valeurs[i]} : ${diff.toFixed(2)}%\n`;
+          croissanceTotale += diff;
+          nbCroissances++;
+        }
+
+        let moyenne = croissanceTotale / nbCroissances;
+        res += `👉 Moyenne de croissance : ${moyenne.toFixed(2)}%\n\n`;
+      });
+
+      document.getElementById("resultatB").innerText = res;
+
+      // Graphique
+      const ctx = document.getElementById("graphB").getContext("2d");
+      if (chartB) chartB.destroy();
+      chartB = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: series[0].valeurs.map((_, i) => "Étape " + (i+1)),
+          datasets: series.map((s, idx) => ({
+            label: s.nom,
+            data: s.valeurs,
+            borderColor: `hsl(${idx*60},70%,50%)`,
+            fill: false
+          }))
+        }
+      });
+    }
+
+    // Mode C : appliquer gains et pertes
+    function calculerC() {
+      const base = parseFloat(document.getElementById("valeurC").value);
+      const pourcents = document.getElementById("pourcentC").value.split(" ").map(Number);
+      let res = "";
+      if (isNaN(base)) {
+        res = "⚠️ Merci d'entrer une valeur de départ valide.";
+      } else {
+        pourcents.forEach(p => {
+          if (!isNaN(p)) {
+            let nv = base * (1 + p/100);
+            res += `${p >= 0 ? "Gain" : "Perte"} de ${p}% → ${nv.toFixed(2)}\n`;
+          }
+        });
+      }
+      document.getElementById("resultatC").innerText = res;
+    }
+  </script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_01.html ---
+

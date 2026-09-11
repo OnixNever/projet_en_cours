@@ -1,0 +1,1679 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_11.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_11.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculateur Global</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<style>
+/* STYLES ESSENTIELS */
+body { font-family: Arial, sans-serif; margin: 15px; background: #f4f7fa; color: #333; }
+.hidden { display: none; }
+.mode-content { max-width: 1000px; margin: 15px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+
+/* MENU */
+.menu { text-align: center; margin: 15px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
+.menu button { 
+    margin: 2px; padding: 8px 12px; 
+    background: #3498db; color: white; border: none; border-radius: 4px; 
+    cursor: pointer; font-size: 14px;
+}
+.menu button:hover { background: #2980b9; }
+
+/* BLOCS COMMUNS */
+.ref-block { 
+    display: flex; align-items: center; gap: 8px; 
+    margin: 10px 0; padding: 10px; 
+    background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; 
+}
+input[type="number"], input[type="text"], input[type="date"] { 
+    padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; 
+    font-size: 14px;
+}
+select { padding: 6px 8px; border: 1px solid #ccc; border-radius: 4px; }
+
+/* TABLEAUX */
+table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+th { background: #3498db; color: white; font-weight: bold; }
+
+/* MODE C */
+.c-block { background: #f8f9fa; border: 1px solid #ddd; border-radius: 6px; padding: 15px; margin: 15px 0; }
+.c-block-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.c-variable-item { display: flex; align-items: center; gap: 10px; margin: 8px 0; padding: 10px; background: white; border: 1px solid #eee; border-radius: 5px; }
+.c-block-slider, .c-var-slider { flex: 1; }
+.c-var-value { min-width: 60px; text-align: center; font-weight: bold; }
+
+/* RESULTATS */
+.results-table { width: 100%; margin-top: 20px; }
+.positive { color: #27ae60; font-weight: bold; }
+.negative { color: #e74c3c; font-weight: bold; }
+.total-row { background-color: #e8f4fd; font-weight: bold; }
+
+/* GRAPHIQUES */
+.chart-container { 
+    height: 450px; margin: 25px 0; 
+    border: 1px solid #e0e0e0; border-radius: 8px; 
+    padding: 15px; background: #fafcfd;
+}
+
+/* BOUTONS */
+button { 
+    padding: 8px 15px; background: #3498db; color: white; 
+    border: none; border-radius: 5px; cursor: pointer; font-size: 14px;
+}
+button:hover { background: #2980b9; }
+.action-button { background: #2ecc71; }
+.action-button:hover { background: #27ae60; }
+.secondary { background: #95a5a6; }
+.secondary:hover { background: #7f8c8d; }
+.delete-btn { background: #e74c3c; }
+.delete-btn:hover { background: #c0392b; }
+
+/* MODE F */
+.fusion-toggle-btn { 
+    width: 32px; height: 32px; border: 2px solid #ddd; border-radius: 4px; 
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+}
+.fusion-toggle-btn.selected { background: #9b59b6; color: white; border-color: #8e44ad; }
+.fusion-controls { 
+    background: #f0f7ff; padding: 15px; border-radius: 6px; 
+    margin: 15px 0; border: 1px solid #d0e0ff;
+}
+.fusion-controls h4 { margin: 0 0 10px 0; color: #2c3e50; }
+
+/* MODE H - DEVISES AMELIORE */
+.currency-card { 
+    background: linear-gradient(135deg, #3498db, #2ecc71); 
+    color: white; padding: 20px; border-radius: 10px; 
+    margin: 20px 0;
+}
+.currency-input-group { 
+    display: flex; align-items: center; gap: 15px; 
+    margin: 20px 0; 
+}
+.currency-box { 
+    flex: 1; background: rgba(255, 255, 255, 0.95); 
+    padding: 15px; border-radius: 8px;
+}
+.currency-box-header { 
+    display: flex; align-items: center; gap: 10px; 
+    margin-bottom: 10px;
+}
+.currency-flag { 
+    width: 32px; height: 24px; 
+    border-radius: 4px; object-fit: cover;
+}
+.switch-button { 
+    background: white; border: none; border-radius: 50%; 
+    width: 45px; height: 45px; cursor: pointer; 
+    font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.amount-input { 
+    width: 100%; padding: 12px; font-size: 18px; 
+    border: 2px solid #e0e0e0; border-radius: 6px; 
+    text-align: right;
+}
+.rate-info { 
+    background: rgba(255, 255, 255, 0.1); 
+    padding: 10px; border-radius: 6px; 
+    margin-top: 15px; font-size: 15px;
+}
+.currency-select { 
+    width: 100%; padding: 8px; border-radius: 4px; 
+    border: 1px solid #ccc; background: white;
+}
+
+/* HISTORIQUE */
+.conversion-history { 
+    margin-top: 25px; padding: 20px; 
+    background: #f8fafc; border-radius: 8px;
+}
+.history-table-container { 
+    max-height: 250px; overflow-y: auto; 
+    margin: 10px 0; border: 1px solid #ddd;
+}
+.history-item { 
+    display: grid; grid-template-columns: 1fr 1fr auto auto;
+    gap: 10px; padding: 10px; border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+/* NOTIFICATIONS */
+.notification {
+    position: fixed; top: 20px; right: 20px;
+    background: #2ecc71; color: white; padding: 12px 20px;
+    border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 1000; animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<h1 style="text-align:center; color:#2c3e50; margin-bottom:10px;">📊 Calculateur Global</h1>
+
+<!-- MENU PRINCIPAL -->
+<div class="menu">
+    <button onclick="showMode('none')">🏠 Menu</button>
+    <button onclick="showMode('modeA')">⚖️ Comparer</button>
+    <button onclick="showMode('modeC')">🎚️ % par bloc</button>
+    <button onclick="showMode('modeD')">📈 Évolution</button>
+    <button onclick="showMode('modeE')">📈 Linéaire</button>
+    <button onclick="showMode('modeF')">🟣 Circulaire</button>
+    <button onclick="showMode('modeG')">💰 TVA</button>
+    <button onclick="showMode('modeH')">💱 Devises</button>
+</div>
+
+<!-- =============== MODE A =============== -->
+<div id="modeA" class="hidden mode-content">
+    <h3>⚖️ Mode A : Comparer à des valeurs</h3>
+    <div id="multiAContainer">
+        <div class="ref-block">
+            <input type="number" class="refA" placeholder="Référence" value="100" style="width:100px;" oninput="autoCalculA()">
+            <input type="text" class="valsA" placeholder="Valeurs (séparées par espaces)" value="80 120 100" style="flex:1;" oninput="autoCalculA()">
+            <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+        </div>
+    </div>
+    <button onclick="addABlock()" class="action-button">➕ Ajouter un bloc</button>
+    <div id="resultA" style="margin-top:20px;"></div>
+</div>
+
+<!-- =============== MODE C COMPACT =============== -->
+<div id="modeC" class="hidden mode-content">
+    <h3>🎚️ Mode C : Pourcentage par bloc</h3>
+    
+    <div id="multiCContainer">
+        <!-- Blocs ajoutés dynamiquement -->
+    </div>
+    
+    <button onclick="addCBlock()" class="action-button" style="margin:15px 0; width:100%; padding:12px;">
+        ➕ Ajouter un nouveau bloc
+    </button>
+    
+    <table class="results-table" id="cResults">
+        <thead>
+            <tr>
+                <th>Bloc</th>
+                <th>Variable</th>
+                <th>Valeur initiale</th>
+                <th>% appliqué</th>
+                <th>Valeur finale</th>
+                <th>+/- Valeur</th>
+            </tr>
+        </thead>
+        <tbody id="cResultsBody">
+        </tbody>
+        <tfoot id="cResultsTotal">
+        </tfoot>
+    </table>
+</div>
+
+<!-- =============== MODE D CORRIGE =============== -->
+<div id="modeD" class="hidden mode-content">
+    <h3>📈 Mode D : Évolution temporelle</h3>
+    
+    <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
+        <button onclick="addDDate()" class="action-button">➕ Ajouter une date</button>
+        <button onclick="addDSeries()" class="action-button">➕ Ajouter une série</button>
+        <button onclick="sortDDates()" class="secondary">↕️ Trier les dates</button>
+        <button onclick="calculerD()" class="action-button">📊 Calculer le graphique</button>
+    </div>
+    
+    <div style="overflow-x: auto; margin: 20px 0;">
+        <table id="dDataTable">
+            <thead id="dateHeaderRow">
+                <tr><th>Série / Date</th></tr>
+            </thead>
+            <tbody id="seriesBody"></tbody>
+        </table>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="graphD"></canvas>
+    </div>
+</div>
+
+<!-- =============== MODE E =============== -->
+<div id="modeE" class="hidden mode-content">
+    <h3>📈 Mode E : Graphique linéaire multi-séries</h3>
+    
+    <div id="multiEContainer">
+        <div class="ref-block">
+            <input type="text" class="labelE" placeholder="Nom de la série" value="Ventes" style="width:150px;" oninput="autoCalculE()">
+            <input type="text" class="valsE" placeholder="Valeurs (séparées par espaces)" value="100 120 130 150" style="flex:1;" oninput="autoCalculE()">
+            <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+        </div>
+    </div>
+    
+    <div style="margin: 15px 0;">
+        <button onclick="addEBlock()" class="action-button">➕ Ajouter une série</button>
+        <button onclick="calculerE()" class="action-button" style="margin-left:10px;">📊 Calculer</button>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="graphE"></canvas>
+    </div>
+</div>
+
+<!-- =============== MODE F AMELIORE =============== -->
+<div id="modeF" class="hidden mode-content">
+    <h3>🟣 Mode F : Graphique circulaire avec fusion</h3>
+    
+    <div id="multiFContainer">
+        <div class="ref-block" data-category-id="1">
+            <input type="text" class="labelF" placeholder="Catégorie" value="Ventes" style="width:150px;" oninput="autoCalculF()">
+            <input type="number" class="valF" placeholder="Valeur" value="750" style="width:100px;" oninput="autoCalculF()">
+            <input type="color" class="colorF" value="#3498db" oninput="autoCalculF()">
+            <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false">✗</div>
+            <button onclick="removeF(this)" class="delete-btn">🗑️</button>
+        </div>
+        <div class="ref-block" data-category-id="2">
+            <input type="text" class="labelF" placeholder="Catégorie" value="Marketing" style="width:150px;" oninput="autoCalculF()">
+            <input type="number" class="valF" placeholder="Valeur" value="250" style="width:100px;" oninput="autoCalculF()">
+            <input type="color" class="colorF" value="#e74c3c" oninput="autoCalculF()">
+            <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false">✗</div>
+            <button onclick="removeF(this)" class="delete-btn">🗑️</button>
+        </div>
+    </div>
+    
+    <div style="margin: 15px 0;">
+        <button onclick="addFBlock()" class="action-button">➕ Ajouter une catégorie</button>
+        <button onclick="calculerF()" class="action-button" style="margin-left:10px;">📊 Calculer</button>
+    </div>
+    
+    <div class="fusion-controls">
+        <h4>Fusionner les catégories sélectionnées :</h4>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="fusionName" placeholder="Nom de la nouvelle catégorie" style="flex: 1; min-width: 200px;">
+            <button onclick="mergeSelectedCategories()" class="action-button" style="background: #9b59b6;">🔀 Fusionner</button>
+        </div>
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+            <button onclick="selectAllForFusion(true)" class="secondary">✓ Tout sélectionner</button>
+            <button onclick="selectAllForFusion(false)" class="secondary">✗ Tout désélectionner</button>
+        </div>
+        <div id="fusionStatus" style="margin-top: 10px; font-size: 14px;">
+            <span id="selectedCount">0</span> catégorie(s) sélectionnée(s)
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="graphF"></canvas>
+    </div>
+
+    <div style="margin-top: 30px;">
+        <h4>📊 Récapitulatif des catégories</h4>
+        <table id="tableauF">
+            <thead>
+                <tr>
+                    <th>Catégorie</th>
+                    <th>Valeur</th>
+                    <th>Pourcentage</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot id="tableauFTotal">
+                <!-- Total ajouté dynamiquement -->
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<!-- =============== MODE G =============== -->
+<div id="modeG" class="hidden mode-content">
+    <h3>💰 Mode G : Calculateur TVA</h3>
+    
+    <div id="multiGContainer">
+        <div class="ref-block" id="gblock-1">
+            <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                <input type="text" class="bloc-nom-input" value="Facture exemple" placeholder="Nom du bloc" style="flex:1;" oninput="autoCalculG()">
+                <label>TVA Globale (%): <input type="number" class="global-tva-input" value="20" style="width:70px;" oninput="autoCalculG()"></label>
+                <button onclick="addGLigneToBlock('gblock-1')" class="secondary">➕ Ligne</button>
+                <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+            </div>
+            <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+                <div class="ligne-tva" style="display:flex; gap:10px; align-items:center;">
+                    <input type="text" class="libelleG" placeholder="Libellé" value="Produit A" style="flex:1;" oninput="autoCalculG()">
+                    <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+                    <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+                        <option value="HT" selected>HT</option>
+                        <option value="TTC">TTC</option>
+                    </select>
+                    <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+                    <button onclick="removeNode(this)" class="delete-btn">✖</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="margin-top:20px;">
+        <button onclick="addGBlock()" class="action-button">➕ Ajouter un bloc TVA</button>
+        <button onclick="calculerG()" class="action-button" style="margin-left:10px;">🧮 Calculer</button>
+    </div>
+    
+    <div id="resultG" style="margin-top:25px;"></div>
+</div>
+
+<!-- =============== MODE H AMELIORE =============== -->
+<div id="modeH" class="hidden mode-content">
+    <h3>💱 Mode H : Convertisseur de Devises</h3>
+    
+    <div class="currency-card">
+        <div class="currency-input-group">
+            <div class="currency-box">
+                <div class="currency-box-header">
+                    <img src="https://flagcdn.com/w20/eu.png" class="currency-flag" id="fromFlag">
+                    <select id="fromCurrency" class="currency-select" onchange="updateFlags()">
+                        <!-- Devises ajoutées dynamiquement -->
+                    </select>
+                </div>
+                <input type="number" id="fromAmount" class="amount-input" 
+                       value="100" step="0.01" oninput="convertCurrency()">
+            </div>
+            
+            <button onclick="switchCurrencies()" class="switch-button" title="Inverser les devises">⇄</button>
+            
+            <div class="currency-box">
+                <div class="currency-box-header">
+                    <img src="https://flagcdn.com/w20/us.png" class="currency-flag" id="toFlag">
+                    <select id="toCurrency" class="currency-select" onchange="updateFlags()">
+                        <!-- Devises ajoutées dynamiquement -->
+                    </select>
+                </div>
+                <input type="text" id="toAmount" class="amount-input" readonly>
+            </div>
+        </div>
+        
+        <div class="rate-info" id="rateInfo">
+            Taux de change: 1 EUR = ... USD
+        </div>
+        
+        <div style="margin-top: 15px; text-align: center;">
+            <button onclick="saveConversionToHistory()" class="action-button">
+                💾 Sauvegarder cette conversion
+            </button>
+        </div>
+    </div>
+    
+    <!-- Historique des conversions -->
+    <div class="conversion-history">
+        <h4>📋 Historique des conversions</h4>
+        <div class="history-table-container" id="historyContainer">
+            <div id="conversionHistoryList">
+                <!-- Les conversions seront ajoutées ici dynamiquement -->
+            </div>
+        </div>
+        <div style="margin-top: 15px;">
+            <button onclick="clearConversionHistory()" class="secondary">🗑️ Effacer l'historique</button>
+            <button onclick="exportHistoryToCSV()" class="secondary">📤 Exporter en CSV</button>
+        </div>
+    </div>
+    
+    <div style="margin-top: 25px;">
+        <h4>📊 Taux de change actuels (par rapport à EUR)</h4>
+        <div id="allRatesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 15px;">
+            <!-- Les taux seront affichés ici -->
+        </div>
+    </div>
+</div>
+
+<script>
+// =============================================
+// VARIABLES GLOBALES
+// =============================================
+let chartD = null, chartE = null, chartF = null;
+let dDates = [], dSeries = [];
+let historiqueF = [];
+let conversionHistory = JSON.parse(localStorage.getItem('conversionHistory') || '[]');
+
+// Mode C
+let cBlocks = [];
+let cBlockCounter = 1;
+
+// Mode H - Devises
+let exchangeRates = {};
+const currencyFlags = {
+    'EUR': 'eu', 'USD': 'us', 'GBP': 'gb', 'CHF': 'ch', 
+    'JPY': 'jp', 'CNY': 'cn', 'RUB': 'ru', 'INR': 'in',
+    'BRL': 'br', 'KRW': 'kr', 'MXN': 'mx', 'SGD': 'sg',
+    'HKD': 'hk', 'NZD': 'nz', 'SEK': 'se', 'NOK': 'no',
+    'DKK': 'dk', 'PLN': 'pl', 'TRY': 'tr', 'THB': 'th',
+    'IDR': 'id', 'MYR': 'my', 'PHP': 'ph', 'VND': 'vn',
+    'AED': 'ae', 'SAR': 'sa', 'ZAR': 'za', 'EGP': 'eg',
+    'CAD': 'ca', 'AUD': 'au'
+};
+
+// =============================================
+// FONCTIONS UTILITAIRES
+// =============================================
+function showMode(id){
+    document.querySelectorAll('.mode-content').forEach(el => el.classList.add('hidden'));
+    if (id !== 'none') {
+        document.getElementById(id).classList.remove('hidden');
+        
+        if (id === 'modeC' && cBlocks.length === 0) addCBlock();
+        if (id === 'modeH') loadExchangeRates();
+        if (id === 'modeF') autoCalculF(); // Mettre à jour le graphique circulaire
+    }
+}
+
+function removeNode(btn){ 
+    btn.parentNode.remove();
+    if (btn.closest('#multiFContainer')) autoCalculF();
+    if (btn.closest('#multiGContainer')) autoCalculG();
+    if (btn.closest('#multiCContainer')) updateCResults();
+}
+
+function parseNumber(value) {
+    if (typeof value === 'string') {
+        value = value.replace(',', '.');
+    }
+    const num = parseFloat(value);
+    return isNaN(num) ? 0 : num;
+}
+
+function showNotification(message, type = 'success') {
+    const colors = {
+        success: '#2ecc71',
+        error: '#e74c3c',
+        warning: '#f1c40f',
+        info: '#3498db'
+    };
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.background = colors[type] || colors.info;
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// =============================================
+// MODE A
+// =============================================
+function addABlock(){
+    const cont = document.getElementById("multiAContainer");
+    const div = document.createElement("div"); 
+    div.className = "ref-block";
+    div.innerHTML = `
+        <input type="number" class="refA" placeholder="Référence" value="100" style="width:100px;" oninput="autoCalculA()">
+        <input type="text" class="valsA" placeholder="Valeurs (séparées par espaces)" value="80 120 100" style="flex:1;" oninput="autoCalculA()">
+        <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+    `;
+    cont.appendChild(div);
+}
+
+function autoCalculA(){
+    const cont = document.getElementById("multiAContainer");
+    const resDiv = document.getElementById("resultA"); 
+    resDiv.innerHTML = "";
+    
+    Array.from(cont.getElementsByClassName("ref-block")).forEach((block, index) => {
+        const ref = parseNumber(block.querySelector(".refA").value);
+        const raw = (block.querySelector(".valsA").value || "").trim();
+        if(raw === "") return;
+        const vals = raw.split(/\s+/).map(parseNumber).filter(v => v !== null); 
+        
+        let html = `<div style="margin:15px 0;"><h4>Bloc ${index + 1} - Référence : ${ref.toFixed(2)}€</h4>`;
+        html += `<table style="width:100%;"><tr><th>Valeur</th><th>Différence</th><th>%</th></tr>`;
+        
+        vals.forEach(v => {
+            const diff = v - ref;
+            const pct = (ref === 0) ? null : (diff / ref * 100);
+            const col = diff > 0 ? "#2ecc71" : diff < 0 ? "#e74c3c" : "#95a5a6";
+            html += `<tr style="background:${col}; color:#fff;">
+                <td>${v.toFixed(2)} €</td>
+                <td>${diff>=0?'+':''}${diff.toFixed(2)} €</td>
+                <td>${pct===null?'—':pct.toFixed(2)+'%'}</td>
+            </tr>`;
+        });
+        html += "</table></div>";
+        resDiv.innerHTML += html;
+    });
+}
+
+// =============================================
+// MODE C COMPACT
+// =============================================
+function addCBlock() {
+    const blockId = Date.now();
+    const block = {
+        id: blockId,
+        name: `Bloc ${cBlockCounter}`,
+        blockPercent: 0,
+        variables: [
+            { id: Date.now() + 1, name: `Variable 1`, value: 100, percent: 0 },
+            { id: Date.now() + 2, name: `Variable 2`, value: 200, percent: 0 }
+        ]
+    };
+    
+    cBlocks.push(block);
+    cBlockCounter++;
+    renderCBlocks();
+    updateCResults();
+}
+
+function renderCBlocks() {
+    const container = document.getElementById('multiCContainer');
+    if (cBlocks.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:#666;">Ajoutez un premier bloc</p>';
+        return;
+    }
+    
+    let html = '';
+    
+    cBlocks.forEach((block) => {
+        html += `
+            <div class="c-block" data-block-id="${block.id}">
+                <div class="c-block-header">
+                    <input type="text" value="${block.name}" onchange="updateCBlockName(${block.id}, this.value)" 
+                           style="flex:1; min-width: 150px;" placeholder="Nom du bloc">
+                    <span style="font-weight:bold;">% bloc:</span>
+                    <input type="range" class="c-block-slider" min="-100" max="100" value="${block.blockPercent}" 
+                           oninput="updateBlockPercent(${block.id}, this.value)" style="flex: 2;">
+                    <span style="width:50px; text-align:center; font-weight:bold; color:#3498db;">${block.blockPercent}%</span>
+                    <button onclick="removeCBlock(${block.id})" class="delete-btn">🗑️</button>
+                </div>
+                
+                ${block.variables.map(variable => `
+                    <div class="c-variable-item">
+                        <input type="number" value="${variable.value}" style="width:100px;"
+                               onchange="updateVariableValue(${block.id}, ${variable.id}, this.value)">
+                        <span style="width:120px; text-align:left;">${variable.name}</span>
+                        <input type="range" class="c-var-slider" min="-100" max="100" value="${variable.percent}"
+                               oninput="updateVariablePercent(${block.id}, ${variable.id}, this.value)" style="flex: 2;">
+                        <span class="c-var-value" style="color:${variable.percent >= 0 ? '#27ae60' : '#e74c3c'}">
+                            ${variable.percent >= 0 ? '+' : ''}${variable.percent}%
+                        </span>
+                        <button onclick="removeVariable(${block.id}, ${variable.id})" class="delete-btn" style="padding: 5px 10px;">✖</button>
+                    </div>
+                `).join('')}
+                
+                <button onclick="addVariableToBlock(${block.id})" class="secondary" style="width:100%; margin-top:10px;">
+                    ➕ Ajouter une variable
+                </button>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function updateCBlockName(blockId, newName) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) block.name = newName;
+}
+
+function updateBlockPercent(blockId, newPercent) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        let percent = parseInt(newPercent) || 0;
+        if (percent > 100) percent = 100;
+        if (percent < -100) percent = -100;
+        
+        block.blockPercent = percent;
+        block.variables.forEach(variable => {
+            variable.percent = percent;
+        });
+        renderCBlocks();
+        updateCResults();
+    }
+}
+
+function updateVariableValue(blockId, variableId, newValue) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        const variable = block.variables.find(v => v.id === variableId);
+        if (variable) {
+            variable.value = parseFloat(newValue) || 0;
+            updateCResults();
+        }
+    }
+}
+
+function updateVariablePercent(blockId, variableId, newPercent) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        const variable = block.variables.find(v => v.id === variableId);
+        if (variable) {
+            let percent = parseInt(newPercent) || 0;
+            if (percent > 100) percent = 100;
+            if (percent < -100) percent = -100;
+            
+            variable.percent = percent;
+            renderCBlocks();
+            updateCResults();
+        }
+    }
+}
+
+function addVariableToBlock(blockId) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        block.variables.push({
+            id: Date.now(),
+            name: `Variable ${block.variables.length + 1}`,
+            value: 100,
+            percent: block.blockPercent
+        });
+        renderCBlocks();
+        updateCResults();
+    }
+}
+
+function removeVariable(blockId, variableId) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block && block.variables.length > 1) {
+        block.variables = block.variables.filter(v => v.id !== variableId);
+        renderCBlocks();
+        updateCResults();
+    } else {
+        showNotification('Un bloc doit avoir au moins une variable', 'warning');
+    }
+}
+
+function removeCBlock(blockId) {
+    if (cBlocks.length <= 1) {
+        showNotification('Vous devez garder au moins un bloc', 'warning');
+        return;
+    }
+    
+    if (confirm('Voulez-vous vraiment supprimer ce bloc ?')) {
+        cBlocks = cBlocks.filter(b => b.id !== blockId);
+        renderCBlocks();
+        updateCResults();
+        showNotification('Bloc supprimé avec succès', 'success');
+    }
+}
+
+function updateCResults() {
+    const tbody = document.getElementById('cResultsBody');
+    const tfoot = document.getElementById('cResultsTotal');
+    let html = '';
+    
+    let totalInitial = 0;
+    let totalFinal = 0;
+    let totalVariation = 0;
+    
+    cBlocks.forEach(block => {
+        block.variables.forEach(variable => {
+            const initial = variable.value;
+            const final = initial * (1 + variable.percent / 100);
+            const variation = final - initial;
+            
+            totalInitial += initial;
+            totalFinal += final;
+            totalVariation += variation;
+            
+            html += `<tr>
+                <td>${block.name}</td>
+                <td>${variable.name}</td>
+                <td>${initial.toFixed(2)}</td>
+                <td>${variable.percent >= 0 ? '+' : ''}${variable.percent}%</td>
+                <td>${final.toFixed(2)}</td>
+                <td class="${variation >= 0 ? 'positive' : 'negative'}">${variation >= 0 ? '+' : ''}${variation.toFixed(2)}</td>
+            </tr>`;
+        });
+    });
+    
+    tbody.innerHTML = html;
+    
+    // Ajouter la ligne de total
+    tfoot.innerHTML = `
+        <tr class="total-row">
+            <td colspan="2"><strong>TOTAL GLOBAL</strong></td>
+            <td><strong>${totalInitial.toFixed(2)}</strong></td>
+            <td></td>
+            <td><strong>${totalFinal.toFixed(2)}</strong></td>
+            <td class="${totalVariation >= 0 ? 'positive' : 'negative'}">
+                <strong>${totalVariation >= 0 ? '+' : ''}${totalVariation.toFixed(2)}</strong>
+            </td>
+        </tr>
+    `;
+}
+
+// =============================================
+// MODE D CORRIGE
+// =============================================
+function addDDate() {
+    const date = new Date().toISOString().split('T')[0];
+    const id = Date.now();
+    dDates.push({ id, date });
+    updateDTable();
+}
+
+function removeDDate(id) {
+    dDates = dDates.filter(d => d.id !== id);
+    dSeries.forEach(s => {
+        delete s.values[id];
+    });
+    updateDTable();
+}
+
+function addDSeries() {
+    const newSeries = {
+        id: Date.now(),
+        name: `Série ${dSeries.length + 1}`,
+        values: {},
+        color: '#' + Math.floor(Math.random()*16777215).toString(16)
+    };
+    dDates.forEach(d => {
+        newSeries.values[d.id] = 0;
+    });
+    dSeries.push(newSeries);
+    updateDTable();
+}
+
+function removeDSeries(id) {
+    dSeries = dSeries.filter(s => s.id !== id);
+    updateDTable();
+}
+
+function updateDDate(id, newDate) {
+    const dateObj = dDates.find(d => d.id === id);
+    if (dateObj) {
+        dateObj.date = newDate;
+    }
+}
+
+function updateDSeriesName(id, newName) {
+    const series = dSeries.find(s => s.id === id);
+    if (series) {
+        series.name = newName;
+    }
+}
+
+function updateDSeriesColor(id, newColor) {
+    const series = dSeries.find(s => s.id === id);
+    if (series) {
+        series.color = newColor;
+    }
+}
+
+function updateDSeriesValue(seriesId, dateId, newValue) {
+    const series = dSeries.find(s => s.id === seriesId);
+    if (series) {
+        series.values[dateId] = parseFloat(newValue) || 0;
+    }
+}
+
+function updateDTable() {
+    const dateHeader = document.getElementById('dateHeaderRow');
+    const seriesBody = document.getElementById('seriesBody');
+    
+    // Mettre à jour l'en-tête des dates
+    let headerHTML = '<th style="min-width: 160px;">Série / Date</th>';
+    dDates.forEach(d => {
+        headerHTML += `
+            <th>
+                <input type="date" value="${d.date}" onchange="updateDDate(${d.id}, this.value)" style="width:120px;">
+                <button onclick="removeDDate(${d.id})" style="padding:2px 6px;font-size:11px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer;">✖</button>
+            </th>
+        `;
+    });
+    dateHeader.innerHTML = headerHTML;
+    
+    // Mettre à jour le corps du tableau
+    seriesBody.innerHTML = '';
+    dSeries.forEach(s => {
+        let row = document.createElement('tr');
+        let rowHTML = `
+            <td>
+                <input type="text" value="${s.name}" onchange="updateDSeriesName(${s.id}, this.value)" style="width:120px;">
+                <input type="color" value="${s.color}" onchange="updateDSeriesColor(${s.id}, this.value)" title="Couleur" style="width: 30px; height: 30px;">
+                <button onclick="removeDSeries(${s.id})" style="padding:2px 6px;font-size:11px; background: #e74c3c; color: white; border: none; border-radius: 3px; cursor: pointer;">✖</button>
+            </td>
+        `;
+        
+        dDates.forEach(d => {
+            const val = s.values[d.id] || 0;
+            rowHTML += `
+                <td>
+                    <input type="number" value="${val}" 
+                           onchange="updateDSeriesValue(${s.id}, ${d.id}, this.value)" 
+                           style="width:80px;" step="0.01">
+                </td>
+            `;
+        });
+        
+        row.innerHTML = rowHTML;
+        seriesBody.appendChild(row);
+    });
+}
+
+function sortDDates() {
+    dDates.sort((a, b) => new Date(a.date) - new Date(b.date));
+    updateDTable();
+}
+
+function calculerD() {
+    const ctx = document.getElementById('graphD')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartD) {
+        chartD.destroy();
+    }
+    
+    const labels = dDates.map(d => d.date);
+    const datasets = dSeries.map(s => ({
+        label: s.name,
+        data: dDates.map(d => s.values[d.id] || 0),
+        borderColor: s.color,
+        backgroundColor: s.color + '20',
+        fill: false,
+        tension: 0.1
+    }));
+    
+    chartD = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Évolution temporelle'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// =============================================
+// MODE E
+// =============================================
+function addEBlock() {
+    const cont = document.getElementById("multiEContainer");
+    const div = document.createElement("div"); 
+    div.className = "ref-block";
+    div.innerHTML = `
+        <input type="text" class="labelE" placeholder="Nom de la série" oninput="autoCalculE()" style="width:150px;">
+        <input type="text" class="valsE" placeholder="Valeurs (séparées par espaces)" oninput="autoCalculE()" style="flex:1;">
+        <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+    `;
+    cont.appendChild(div);
+}
+
+function autoCalculE() { 
+    calculerE(); 
+}
+
+function calculerE() {
+    const ctx = document.getElementById('graphE')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartE) {
+        chartE.destroy();
+    }
+    
+    const blocks = Array.from(document.querySelectorAll('#multiEContainer .ref-block'));
+    const seriesData = [];
+    
+    blocks.forEach(block => {
+        const label = block.querySelector('.labelE').value || 'Série sans nom';
+        const raw = (block.querySelector('.valsE').value || "").trim();
+        if (raw === "") return;
+        
+        const values = raw.split(/\s+/).map(parseNumber).filter(v => v !== null);
+        if (values.length > 0) {
+            seriesData.push({
+                label: label,
+                data: values,
+                borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+                backgroundColor: '#3498db20',
+                fill: false,
+                tension: 0.1
+            });
+        }
+    });
+    
+    if (seriesData.length === 0) return;
+    
+    const maxLength = Math.max(...seriesData.map(s => s.data.length));
+    const labels = Array.from({length: maxLength}, (_, i) => `Point ${i + 1}`);
+    
+    chartE = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: seriesData
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Graphique linéaire multi-séries'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                },
+                x: {
+                    grid: {
+                        color: 'rgba(0,0,0,0.1)'
+                    }
+                }
+            }
+        }
+    });
+}
+
+// =============================================
+// MODE F AMELIORE
+// =============================================
+function addFBlock() {
+    const container = document.getElementById("multiFContainer");
+    const id = historiqueF.length + 1;
+    
+    const div = document.createElement("div");
+    div.className = "ref-block";
+    div.setAttribute('data-category-id', id);
+    div.innerHTML = `
+        <input type="text" class="labelF" placeholder="Catégorie" value="Catégorie ${id}" style="width:150px;" oninput="autoCalculF()">
+        <input type="number" class="valF" placeholder="Valeur" value="100" style="width:100px;" oninput="autoCalculF()">
+        <input type="color" class="colorF" value="#${Math.floor(Math.random()*16777215).toString(16)}" oninput="autoCalculF()">
+        <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false">✗</div>
+        <button onclick="removeF(this)" class="delete-btn">🗑️</button>
+    `;
+    
+    container.appendChild(div);
+    autoCalculF();
+    updateSelectedCount();
+}
+
+function removeF(btn) {
+    const block = btn.closest('.ref-block');
+    block.remove();
+    autoCalculF();
+    updateSelectedCount();
+}
+
+function autoCalculF() { 
+    calculerF(); 
+}
+
+function calculerF() {
+    const ctx = document.getElementById('graphF')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartF) {
+        chartF.destroy();
+    }
+    
+    // Mettre à jour historiqueF avec les valeurs actuelles
+    historiqueF = [];
+    const blocks = document.querySelectorAll('#multiFContainer .ref-block');
+    blocks.forEach(block => {
+        historiqueF.push({
+            label: block.querySelector('.labelF').value,
+            val: parseFloat(block.querySelector('.valF').value) || 0,
+            color: block.querySelector('.colorF').value
+        });
+    });
+    
+    if (historiqueF.length === 0) return;
+    
+    const total = historiqueF.reduce((sum, cat) => sum + cat.val, 0);
+    
+    const data = {
+        labels: historiqueF.map(cat => cat.label),
+        datasets: [{
+            data: historiqueF.map(cat => cat.val),
+            backgroundColor: historiqueF.map(cat => cat.color),
+            borderWidth: 2,
+            borderColor: '#ffffff'
+        }]
+    };
+    
+    chartF = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                },
+                title: {
+                    display: true,
+                    text: `Répartition - Total: ${total.toFixed(2)}`
+                },
+                datalabels: {
+                    formatter: (value, ctx) => {
+                        if (total === 0) return '0%';
+                        const percentage = (value / total * 100).toFixed(1);
+                        return `${percentage}%`;
+                    },
+                    color: '#fff',
+                    font: {
+                        weight: 'bold',
+                        size: 12
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+    
+    // Mettre à jour le tableau
+    const tbody = document.querySelector('#tableauF tbody');
+    const tfoot = document.getElementById('tableauFTotal');
+    
+    tbody.innerHTML = '';
+    historiqueF.forEach((cat, index) => {
+        const percentage = total === 0 ? 0 : (cat.val / total * 100);
+        tbody.innerHTML += `<tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:${cat.color};margin-right:8px;border-radius:2px;"></span>${cat.label}</td>
+            <td>${cat.val.toFixed(2)}</td>
+            <td>${percentage.toFixed(1)}%</td>
+        </tr>`;
+    });
+    
+    // Ajouter le total
+    tfoot.innerHTML = `
+        <tr style="font-weight: bold; background: #e8f2fc;">
+            <td>TOTAL</td>
+            <td>${total.toFixed(2)}</td>
+            <td>100%</td>
+        </tr>
+    `;
+}
+
+function toggleFusionSelection(btn) {
+    const isSelected = btn.getAttribute('data-selected') === 'true';
+    if (isSelected) {
+        btn.textContent = '✗';
+        btn.classList.remove('selected');
+        btn.setAttribute('data-selected', 'false');
+    } else {
+        btn.textContent = '✓';
+        btn.classList.add('selected');
+        btn.setAttribute('data-selected', 'true');
+    }
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const selected = document.querySelectorAll('.fusion-toggle-btn[data-selected="true"]');
+    document.getElementById('selectedCount').textContent = selected.length;
+}
+
+function selectAllForFusion(select) {
+    document.querySelectorAll('.fusion-toggle-btn').forEach(btn => {
+        if (select) {
+            btn.textContent = '✓';
+            btn.classList.add('selected');
+            btn.setAttribute('data-selected', 'true');
+        } else {
+            btn.textContent = '✗';
+            btn.classList.remove('selected');
+            btn.setAttribute('data-selected', 'false');
+        }
+    });
+    updateSelectedCount();
+}
+
+function mergeSelectedCategories() {
+    const selected = Array.from(document.querySelectorAll('.fusion-toggle-btn[data-selected="true"]'));
+    if (selected.length < 2) {
+        showNotification('Sélectionnez au moins 2 catégories à fusionner.', 'warning');
+        return;
+    }
+    
+    const fusionName = document.getElementById('fusionName').value || 'Fusionnée';
+    let totalVal = 0;
+    let color = '#3498db';
+    
+    // Calculer la somme et prendre la couleur de la première catégorie
+    selected.forEach((btn, index) => {
+        const block = btn.closest('.ref-block');
+        const val = parseFloat(block.querySelector('.valF').value) || 0;
+        totalVal += val;
+        if (index === 0) {
+            color = block.querySelector('.colorF').value;
+        }
+        block.remove();
+    });
+    
+    // Ajouter la nouvelle catégorie fusionnée
+    addFBlock();
+    const lastBlock = document.querySelector('#multiFContainer .ref-block:last-child');
+    lastBlock.querySelector('.labelF').value = fusionName;
+    lastBlock.querySelector('.valF').value = totalVal;
+    lastBlock.querySelector('.colorF').value = color;
+    
+    // Réinitialiser le champ de nom
+    document.getElementById('fusionName').value = '';
+    
+    showNotification(`Catégories fusionnées en "${fusionName}"`, 'success');
+}
+
+// =============================================
+// MODE G
+// =============================================
+function addGBlock() {
+    const container = document.getElementById("multiGContainer");
+    const blockId = 'gblock-' + Date.now();
+    
+    const div = document.createElement("div");
+    div.className = "ref-block";
+    div.id = blockId;
+    div.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px; width:100%;">
+            <input type="text" class="bloc-nom-input" value="Nouveau bloc" placeholder="Nom du bloc" style="flex:1;" oninput="autoCalculG()">
+            <label>TVA Globale (%): <input type="number" class="global-tva-input" value="20" style="width:70px;" oninput="autoCalculG()"></label>
+            <button onclick="addGLigneToBlock('${blockId}')" class="secondary">➕ Ligne</button>
+            <button onclick="removeNode(this)" class="delete-btn">🗑️</button>
+        </div>
+        <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+            <div class="ligne-tva" style="display:flex; gap:10px; align-items:center;">
+                <input type="text" class="libelleG" placeholder="Libellé" value="Produit" style="flex:1;" oninput="autoCalculG()">
+                <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+                <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+                    <option value="HT">HT</option>
+                    <option value="TTC" selected>TTC</option>
+                </select>
+                <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+                <button onclick="removeNode(this)" class="delete-btn">✖</button>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(div);
+    autoCalculG();
+}
+
+function addGLigneToBlock(blockId) {
+    const block = document.getElementById(blockId);
+    if (!block) return;
+    
+    const container = block.querySelector('.ligneGContainer');
+    const ligneDiv = document.createElement("div");
+    ligneDiv.className = "ligne-tva";
+    ligneDiv.style.cssText = "display:flex; gap:10px; align-items:center;";
+    ligneDiv.innerHTML = `
+        <input type="text" class="libelleG" placeholder="Libellé" style="flex:1;" oninput="autoCalculG()">
+        <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+        <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+            <option value="HT">HT</option>
+            <option value="TTC" selected>TTC</option>
+        </select>
+        <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+        <button onclick="removeNode(this)" class="delete-btn">✖</button>
+    `;
+    
+    container.appendChild(ligneDiv);
+    autoCalculG();
+}
+
+function autoCalculG() { 
+    calculerG(); 
+}
+
+function calculerG() {
+    const resultDiv = document.getElementById("resultG");
+    const blocks = document.querySelectorAll('#multiGContainer .ref-block');
+    
+    let globalHTML = "";
+    
+    blocks.forEach((block, blockIndex) => {
+        const blocNom = block.querySelector('.bloc-nom-input').value || `Bloc ${blockIndex + 1}`;
+        const globalTVA = parseFloat(block.querySelector('.global-tva-input').value) || 20;
+        
+        const lignes = block.querySelectorAll('.ligne-tva');
+        let totalHT = 0;
+        let totalTVA = 0;
+        let totalTTC = 0;
+        
+        let tableHTML = `
+            <div style="margin: 20px 0; padding: 15px; background: #f8fafc; border-radius: 10px;">
+                <h4>${blocNom} (TVA par défaut: ${globalTVA}%)</h4>
+                <table style="width:100%; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th>Libellé</th>
+                            <th>Montant</th>
+                            <th>Type</th>
+                            <th>TVA</th>
+                            <th>HT</th>
+                            <th>TVA (€)</th>
+                            <th>TTC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        lignes.forEach(ligne => {
+            const libelle = ligne.querySelector('.libelleG').value || "";
+            const valeur = parseFloat(ligne.querySelector('.valeurG').value) || 0;
+            const type = ligne.querySelector('.typeG').value;
+            const tva = parseFloat(ligne.querySelector('.tvaIndividuelleG').value) || globalTVA;
+            
+            let ht, ttc, tvaEur;
+            
+            if (type === "HT") {
+                ht = valeur;
+                tvaEur = ht * (tva / 100);
+                ttc = ht + tvaEur;
+            } else {
+                ttc = valeur;
+                ht = ttc / (1 + (tva / 100));
+                tvaEur = ttc - ht;
+            }
+            
+            totalHT += ht;
+            totalTVA += tvaEur;
+            totalTTC += ttc;
+            
+            tableHTML += `
+                <tr>
+                    <td>${libelle}</td>
+                    <td>${valeur.toFixed(2)} €</td>
+                    <td>${type}</td>
+                    <td>${tva.toFixed(1)}%</td>
+                    <td>${ht.toFixed(2)} €</td>
+                    <td>${tvaEur.toFixed(2)} €</td>
+                    <td>${ttc.toFixed(2)} €</td>
+                </tr>
+            `;
+        });
+        
+        tableHTML += `
+                    </tbody>
+                    <tfoot style="font-weight:bold; background:#e8f2fc;">
+                        <tr>
+                            <td colspan="4">TOTAUX</td>
+                            <td>${totalHT.toFixed(2)} €</td>
+                            <td>${totalTVA.toFixed(2)} €</td>
+                            <td>${totalTTC.toFixed(2)} €</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        `;
+        
+        globalHTML += tableHTML;
+    });
+    
+    resultDiv.innerHTML = globalHTML;
+}
+
+// =============================================
+// MODE H AMELIORE
+// =============================================
+function loadExchangeRates() {
+    // Taux de secours (sans API key nécessaire)
+    exchangeRates = {
+        'EUR': 1,
+        'USD': 1.08,
+        'GBP': 0.85,
+        'JPY': 160,
+        'CHF': 0.95,
+        'CAD': 1.46,
+        'AUD': 1.64,
+        'CNY': 7.78,
+        'INR': 89.5,
+        'RUB': 98.2,
+        'BRL': 5.45,
+        'KRW': 1445,
+        'MXN': 18.2,
+        'SGD': 1.45,
+        'HKD': 8.45,
+        'NZD': 1.78,
+        'SEK': 11.2,
+        'NOK': 11.5,
+        'DKK': 7.45,
+        'PLN': 4.32,
+        'TRY': 34.8,
+        'THB': 38.9,
+        'IDR': 17200,
+        'MYR': 5.12,
+        'PHP': 60.8,
+        'VND': 27000,
+        'AED': 3.97,
+        'SAR': 4.05,
+        'ZAR': 20.1,
+        'EGP': 50.8
+    };
+    
+    updateCurrencySelects();
+    convertCurrency();
+    updateAllRates();
+}
+
+function updateCurrencySelects() {
+    const fromSelect = document.getElementById('fromCurrency');
+    const toSelect = document.getElementById('toCurrency');
+    
+    fromSelect.innerHTML = '';
+    toSelect.innerHTML = '';
+    
+    // Trier les devises par ordre alphabétique
+    Object.keys(exchangeRates).sort().forEach(currency => {
+        const option1 = document.createElement('option');
+        option1.value = currency;
+        option1.textContent = `${currency} - ${getCurrencyName(currency)}`;
+        fromSelect.appendChild(option1);
+        
+        const option2 = document.createElement('option');
+        option2.value = currency;
+        option2.textContent = `${currency} - ${getCurrencyName(currency)}`;
+        toSelect.appendChild(option2);
+    });
+    
+    fromSelect.value = 'EUR';
+    toSelect.value = 'USD';
+    updateFlags();
+}
+
+function getCurrencyName(code) {
+    const names = {
+        'EUR': 'Euro', 'USD': 'Dollar US', 'GBP': 'Livre Sterling', 
+        'JPY': 'Yen Japonais', 'CHF': 'Franc Suisse', 'CAD': 'Dollar Canadien',
+        'AUD': 'Dollar Australien', 'CNY': 'Yuan Chinois', 'INR': 'Roupie Indienne',
+        'RUB': 'Rouble Russe', 'BRL': 'Real Brésilien', 'KRW': 'Won Sud-Coréen',
+        'MXN': 'Peso Mexicain', 'SGD': 'Dollar de Singapour', 'HKD': 'Dollar de Hong Kong',
+        'NZD': 'Dollar Néo-Zélandais', 'SEK': 'Couronne Suédoise', 'NOK': 'Couronne Norvégienne',
+        'DKK': 'Couronne Danoise', 'PLN': 'Zloty Polonais', 'TRY': 'Livre Turque',
+        'THB': 'Baht Thaïlandais', 'IDR': 'Roupie Indonésienne', 'MYR': 'Ringgit Malaisien',
+        'PHP': 'Peso Philippin', 'VND': 'Dong Vietnamien', 'AED': 'Dirham des Émirats',
+        'SAR': 'Riyal Saoudien', 'ZAR': 'Rand Sud-Africain', 'EGP': 'Livre Égyptienne'
+    };
+    return names[code] || code;
+}
+
+function updateFlags() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    
+    const fromFlag = document.getElementById('fromFlag');
+    const toFlag = document.getElementById('toFlag');
+    
+    if (currencyFlags[fromCurrency]) {
+        fromFlag.src = `https://flagcdn.com/w20/${currencyFlags[fromCurrency]}.png`;
+        fromFlag.style.display = 'block';
+    } else {
+        fromFlag.style.display = 'none';
+    }
+    
+    if (currencyFlags[toCurrency]) {
+        toFlag.src = `https://flagcdn.com/w20/${currencyFlags[toCurrency]}.png`;
+        toFlag.style.display = 'block';
+    } else {
+        toFlag.style.display = 'none';
+    }
+    
+    convertCurrency();
+}
+
+function convertCurrency() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
+    
+    if (!exchangeRates[fromCurrency] || !exchangeRates[toCurrency]) {
+        document.getElementById('toAmount').value = '0.00';
+        return;
+    }
+    
+    // Convertir d'abord en EUR, puis vers la devise cible
+    const amountInEur = fromAmount / exchangeRates[fromCurrency];
+    const convertedAmount = amountInEur * exchangeRates[toCurrency];
+    
+    document.getElementById('toAmount').value = convertedAmount.toFixed(2);
+    
+    // Mettre à jour l'info du taux
+    const rate = (exchangeRates[toCurrency] / exchangeRates[fromCurrency]).toFixed(4);
+    document.getElementById('rateInfo').innerHTML = `
+        Taux de change: 1 ${fromCurrency} = ${rate} ${toCurrency}
+    `;
+}
+
+function switchCurrencies() {
+    const fromCurrency = document.getElementById('fromCurrency');
+    const toCurrency = document.getElementById('toCurrency');
+    const fromAmount = document.getElementById('fromAmount');
+    const toAmount = document.getElementById('toAmount');
+    
+    const tempCurrency = fromCurrency.value;
+    fromCurrency.value = toCurrency.value;
+    toCurrency.value = tempCurrency;
+    
+    // Échanger les montants
+    const tempAmount = fromAmount.value;
+    fromAmount.value = toAmount.value;
+    
+    updateFlags();
+    convertCurrency();
+}
+
+function updateAllRates() {
+    const container = document.getElementById('allRatesGrid');
+    if (!container) return;
+    
+    let html = '';
+    const baseCurrency = 'EUR';
+    
+    Object.entries(exchangeRates)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .forEach(([currency, rate]) => {
+            if (currency === baseCurrency) return;
+            
+            html += `
+                <div style="padding: 10px; background: white; border-radius: 8px; border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                    <div style="font-weight: bold; color: #2c3e50;">${currency} - ${getCurrencyName(currency)}</div>
+                    <div style="font-size: 18px; color: #3498db; margin-top: 5px;">${rate.toFixed(4)}</div>
+                    <div style="font-size: 12px; color: #666;">1 ${baseCurrency} = ${rate.toFixed(2)} ${currency}</div>
+                </div>
+            `;
+        });
+    
+    container.innerHTML = html;
+}
+
+function saveConversionToHistory() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
+    const toAmount = parseFloat(document.getElementById('toAmount').value) || 0;
+    
+    if (fromAmount === 0) {
+        showNotification('Veuillez entrer un montant à convertir', 'warning');
+        return;
+    }
+    
+    const conversion = {
+        id: Date.now(),
+        date: new Date().toLocaleString('fr-FR'),
+        from: {
+            currency: fromCurrency,
+            amount: fromAmount
+        },
+        to: {
+            currency: toCurrency,
+            amount: toAmount
+        },
+        rate: (toAmount / fromAmount).toFixed(4)
+    };
+    
+    conversionHistory.unshift(conversion);
+    if (conversionHistory.length > 20) {
+        conversionHistory = conversionHistory.slice(0, 20);
+    }
+    
+    localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
+    updateConversionHistoryDisplay();
+    showNotification('Conversion sauvegardée dans l\'historique', 'success');
+}
+
+function updateConversionHistoryDisplay() {
+    const container = document.getElementById('conversionHistoryList');
+    if (!container) return;
+    
+    if (conversionHistory.length === 0) {
+        container.innerHTML = `
+            <div style="padding: 20px; text-align: center; color: #666;">
+                Aucune conversion dans l'historique
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    
+    conversionHistory.forEach(conv => {
+        html += `
+            <div class="history-item">
+                <div class="history-date" style="font-size: 12px; color: #666;">${conv.date}</div>
+                <div class="history-amount" style="font-weight: bold;">${conv.from.amount.toFixed(2)} ${conv.from.currency}</div>
+                <div style="text-align: center;">→</div>
+                <div class="history-result" style="font-weight: bold; color: #2ecc71;">${conv.to.amount.toFixed(2)} ${conv.to.currency}</div>
+                <div style="font-size: 12px; color: #666;">Taux: ${conv.rate}</div>
+                <button onclick="deleteConversion(${conv.id})" style="padding: 4px 8px; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                    Supprimer
+                </button>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function deleteConversion(id) {
+    conversionHistory = conversionHistory.filter(conv => conv.id !== id);
+    localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
+    updateConversionHistoryDisplay();
+    showNotification('Conversion supprimée', 'success');
+}
+
+function clearConversionHistory() {
+    if (conversionHistory.length === 0) return;
+    
+    if (confirm('Voulez-vous vraiment effacer tout l\'historique des conversions ?')) {
+        conversionHistory = [];
+        localStorage.setItem('conversionHistory', JSON.stringify([]));
+        updateConversionHistoryDisplay();
+        showNotification('Historique effacé', 'success');
+    }
+}
+
+function exportHistoryToCSV() {
+    if (conversionHistory.length === 0) {
+        showNotification('L\'historique est vide', 'warning');
+        return;
+    }
+    
+    let csv = 'Date;Montant Source;Devise Source;Montant Cible;Devise Cible;Taux de change\n';
+    
+    conversionHistory.forEach(conv => {
+        csv += `${conv.date};${conv.from.amount};${conv.from.currency};${conv.to.amount};${conv.to.currency};${conv.rate}\n`;
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', `historique_conversions_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showNotification('Historique exporté en CSV', 'success');
+}
+
+// =============================================
+// INITIALISATION
+// =============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialiser chaque mode
+    
+    // Mode D - Données par défaut
+    if (dDates.length === 0) {
+        addDDate('2025-01-01');
+        addDDate('2025-04-01');
+        addDDate('2025-07-01');
+        addDSeries('Série 1');
+        addDSeries('Série 2');
+        
+        // Initialiser quelques valeurs
+        if (dSeries[0] && dSeries[1]) {
+            dSeries[0].values[dDates[0].id] = 100;
+            dSeries[0].values[dDates[1].id] = 110;
+            dSeries[0].values[dDates[2].id] = 120;
+            dSeries[1].values[dDates[0].id] = 80;
+            dSeries[1].values[dDates[1].id] = 100;
+            dSeries[1].values[dDates[2].id] = 130;
+        }
+    }
+    
+    // Initialiser l'historique des conversions
+    updateConversionHistoryDisplay();
+    
+    // Calculer tous les modes au démarrage
+    autoCalculA();
+    if (cBlocks.length === 0) addCBlock();
+    updateDTable();
+    autoCalculF();
+    autoCalculG();
+    
+    console.log('✅ Calculateur Global corrigé et amélioré !');
+});
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_11.html ---
+

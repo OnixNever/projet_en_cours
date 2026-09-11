@@ -1,0 +1,367 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_02.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_02.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculateur de Pourcentages</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f7fa;
+      color: #333;
+    }
+    h1 { text-align: center; color: #2c3e50; }
+    .menu { text-align: center; margin-bottom: 20px; }
+    .menu button {
+      margin: 5px; padding: 10px 20px; font-size: 16px;
+      border: none; background: #3498db; color: white;
+      border-radius: 8px; cursor: pointer;
+    }
+    .menu button:hover { background: #2980b9; }
+    .hidden { display: none; }
+    textarea, input {
+      width: 95%; margin: 5px 0; padding: 8px;
+      border-radius: 5px; border: 1px solid #ccc;
+    }
+    pre {
+      background: #ecf0f1; padding: 10px; border-radius: 5px;
+      white-space: pre-wrap;
+    }
+    canvas {
+      display: block; margin: 20px auto;
+      max-width: 500px; max-height: 500px;
+    }
+    .download-buttons {
+      text-align: center;
+      margin-top: 10px;
+    }
+    select, .download-buttons button {
+      margin: 5px; padding: 8px 15px;
+      border: none; border-radius: 6px;
+      cursor: pointer; font-size: 15px;
+    }
+    .download-buttons button {
+      background: #27ae60; color: white;
+    }
+    .download-buttons button:hover {
+      background: #1e8449;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Calculateur de Pourcentages</h1>
+
+  <div class="menu">
+    <button onclick="showMode('modeA')">Mode A : Comparer à une valeur de référence</button>
+    <button onclick="showMode('modeB')">Mode B : Gains & Pertes appliqués</button>
+    <button onclick="showMode('modeC')">Mode C : Croissance et graphique</button>
+    <button onclick="showMode('modeD')">Mode D : Graphique circulaire</button>
+  </div>
+
+  <!-- MODE A -->
+  <div id="modeA" class="hidden">
+    <h3>Mode A : Comparer à une valeur de référence</h3>
+    <label>Valeur de référence :</label>
+    <input type="number" id="refA" step="0.01" placeholder="Ex: 100">
+    <label>Valeurs à comparer (séparées par des espaces) :</label>
+    <input type="text" id="valeursA" placeholder="Ex: 90 150">
+    <button onclick="calculerA()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatA">---</pre>
+  </div>
+
+  <!-- MODE B -->
+  <div id="modeB" class="hidden">
+    <h3>Mode B : Gains et pertes appliqués</h3>
+    <label>Valeur de départ :</label>
+    <input type="number" id="valeurB" step="0.01" placeholder="Ex: 200">
+    <label>Pourcentages à appliquer (séparés par des espaces) :</label>
+    <input type="text" id="pourcentB" placeholder="Ex: 10 -5 20">
+    <button onclick="calculerB()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatB">---</pre>
+  </div>
+
+  <!-- MODE C -->
+  <div id="modeC" class="hidden">
+    <h3>Mode C : Croissance et graphique</h3>
+    <label>Titre du graphique :</label>
+    <input type="text" id="titreC" placeholder="Ex: Évolution des ventes mensuelles">
+    <label>Listes de séries (une par ligne, 1er mot = nom, puis valeurs) :</label>
+    <textarea id="seriesC" rows="5" placeholder="Exemple :
+Test 72.65 86.36 94.20 102.19 102.20 101.40 117.00 114.35
+Série2 100 120 130 140"></textarea>
+    <button onclick="calculerC()">Calculer</button>
+    <h4>Résultats :</h4>
+    <pre id="resultatC">---</pre>
+    <canvas id="graphC"></canvas>
+    <div class="download-buttons">
+      <select id="formatC">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+        <option value="ico">ICO</option>
+        <option value="pdf">PDF</option>
+      </select>
+      <button onclick="downloadChart('C')">Télécharger</button>
+    </div>
+  </div>
+
+  <!-- MODE D -->
+  <div id="modeD" class="hidden">
+    <h3>Mode D : Graphique circulaire par catégorie</h3>
+    <label>Entrer le titre, puis les catégories et leurs valeurs :</label>
+    <textarea id="categoriesD" rows="6" placeholder="Exemple :
+Répartition du budget
+Ventes 300
+Marketing 150
+Développement 200
+Support 100"></textarea>
+    <button onclick="calculerD()">Afficher le graphique</button>
+    <canvas id="graphD"></canvas>
+    <div class="download-buttons">
+      <select id="formatD">
+        <option value="png">PNG</option>
+        <option value="jpeg">JPEG</option>
+        <option value="ico">ICO</option>
+        <option value="pdf">PDF</option>
+      </select>
+      <button onclick="downloadChart('D')">Télécharger</button>
+    </div>
+  </div>
+
+  <script>
+    function showMode(modeId) {
+      ["modeA","modeB","modeC","modeD"].forEach(id => {
+        document.getElementById(id).classList.add("hidden");
+      });
+      document.getElementById(modeId).classList.remove("hidden");
+    }
+
+    // --- MODE A ---
+    function calculerA() {
+      const ref = parseFloat(document.getElementById("refA").value);
+      const valeurs = document.getElementById("valeursA").value.split(" ").map(Number);
+      let res = "";
+      if (isNaN(ref) || ref === 0) {
+        res = "⚠️ Merci d'entrer une valeur de référence valide (≠ 0).";
+      } else {
+        valeurs.forEach(v => {
+          if (!isNaN(v)) {
+            let diff = ((v - ref) / ref) * 100;
+            res += `${v} → ${diff >= 0 ? "Gain" : "Perte"} : ${diff.toFixed(2)}% sur la valeur de référence (${ref})\n`;
+          }
+        });
+      }
+      document.getElementById("resultatA").innerText = res;
+    }
+
+    // --- MODE B ---
+    function calculerB() {
+      const base = parseFloat(document.getElementById("valeurB").value);
+      const pourcents = document.getElementById("pourcentB").value.split(" ").map(Number);
+      let res = "";
+      if (isNaN(base)) {
+        res = "⚠️ Merci d'entrer une valeur de départ valide.";
+      } else {
+        pourcents.forEach(p => {
+          if (!isNaN(p)) {
+            let nv = base * (1 + p / 100);
+            res += `${p >= 0 ? "Gain" : "Perte"} de ${p}% → ${nv.toFixed(2)}\n`;
+          }
+        });
+      }
+      document.getElementById("resultatB").innerText = res;
+    }
+
+    // --- MODE C ---
+    let chartC;
+    function calculerC() {
+      const titre = document.getElementById("titreC").value.trim() || "Graphique";
+      const lignes = document.getElementById("seriesC").value.trim().split("\n");
+      let res = "";
+      let series = [];
+
+      lignes.forEach(ligne => {
+        let parts = ligne.trim().split(/\s+/);
+        if (parts.length < 3) return;
+        let nom = parts[0];
+        let valeurs = parts.slice(1).map(Number).filter(v => !isNaN(v));
+        if (valeurs.length < 2) return;
+        series.push({ nom, valeurs });
+
+        res += `${nom} :\n`;
+        let croissanceTotale = 0;
+        for (let i = 1; i < valeurs.length; i++) {
+          let diff = ((valeurs[i] - valeurs[i - 1]) / valeurs[i - 1]) * 100;
+          res += `  ${valeurs[i - 1]} → ${valeurs[i]} : ${diff.toFixed(2)}%\n`;
+          croissanceTotale += diff;
+        }
+        let moyenne = croissanceTotale / (valeurs.length - 1);
+        res += `👉 Moyenne de croissance : ${moyenne.toFixed(2)}%\n\n`;
+      });
+
+      document.getElementById("resultatC").innerText = res;
+
+      const ctx = document.getElementById("graphC").getContext("2d");
+      if (chartC) chartC.destroy();
+      chartC = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: series[0]?.valeurs.map((_, i) => "Étape " + (i + 1)) || [],
+          datasets: series.map((s, idx) => ({
+            label: s.nom,
+            data: s.valeurs,
+            borderColor: `hsl(${idx * 60}, 70%, 50%)`,
+            fill: false
+          }))
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: titre,
+              font: { size: 18, weight: 'bold' },
+              color: '#2c3e50'
+            }
+          }
+        }
+      });
+    }
+
+    // --- MODE D ---
+    let chartD;
+    function calculerD() {
+      const lignes = document.getElementById("categoriesD").value.trim().split("\n");
+      if (lignes.length < 2) return alert("Merci d'entrer un titre puis des données.");
+      const titre = lignes[0].trim();
+      const dataLignes = lignes.slice(1);
+      let labels = [], valeurs = [];
+
+      dataLignes.forEach(ligne => {
+        let parts = ligne.trim().split(/\s+/);
+        if (parts.length >= 2) {
+          let nom = parts.slice(0, -1).join(" ");
+          let val = parseFloat(parts[parts.length - 1]);
+          if (!isNaN(val)) {
+            labels.push(nom);
+            valeurs.push(val);
+          }
+        }
+      });
+
+      const ctx = document.getElementById("graphD").getContext("2d");
+      if (chartD) chartD.destroy();
+      chartD = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels,
+          datasets: [{
+            data: valeurs,
+            backgroundColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 60%)`)
+          }]
+        },
+        options: {
+          plugins: {
+            title: { display: true, text: titre, font: { size: 18, weight: 'bold' } },
+            legend: {
+              position: 'bottom',
+              labels: {
+                generateLabels(chart) {
+                  const ds = chart.data.datasets[0];
+                  const meta = chart.getDatasetMeta(0);
+                  const visibles = ds.data.filter((_, i) => !meta.data[i].hidden);
+                  const total = visibles.reduce((a, b) => a + b, 0);
+                  return chart.data.labels.map((label, i) => {
+                    const val = ds.data[i];
+                    const hidden = meta.data[i].hidden;
+                    const pct = hidden ? 0 : ((val / total) * 100).toFixed(1);
+                    return {
+                      text: `${label} (${val}${hidden ? "" : ` | ${pct}%`})`,
+                      fillStyle: ds.backgroundColor[i],
+                      hidden, index: i
+                    };
+                  });
+                }
+              },
+              onClick(e, legendItem, legend) {
+                const index = legendItem.index;
+                const ci = legend.chart;
+                const meta = ci.getDatasetMeta(0);
+                meta.data[index].hidden = !meta.data[index].hidden;
+                ci.update();
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label(ctx) {
+                  const ds = ctx.chart.data.datasets[0];
+                  const meta = ctx.chart.getDatasetMeta(0);
+                  const visibles = ds.data.filter((_, i) => !meta.data[i].hidden);
+                  const total = visibles.reduce((a, b) => a + b, 0);
+                  const val = ctx.raw;
+                  const pct = (val / total * 100).toFixed(1);
+                  return `${ctx.label} → ${val} (${pct}%)`;
+                }
+              }
+            },
+            datalabels: {
+              color: '#fff',
+              font: { weight: 'bold' },
+              formatter: (val, ctx) => {
+                const ds = ctx.chart.data.datasets[0];
+                const meta = ctx.chart.getDatasetMeta(0);
+                const visibles = ds.data.filter((_, i) => !meta.data[i].hidden);
+                const total = visibles.reduce((a, b) => a + b, 0);
+                if (meta.data[ctx.dataIndex].hidden) return '';
+                const pct = (val / total * 100).toFixed(1);
+                return `${pct}%`;
+              }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+
+    // --- Téléchargements ---
+    async function downloadChart(mode) {
+      const format = document.getElementById(`format${mode}`).value;
+      const chartCanvas = document.getElementById(`graph${mode}`);
+      if (!chartCanvas) return alert("Aucun graphique à télécharger.");
+      const dataURL = chartCanvas.toDataURL(`image/${format === 'ico' ? 'png' : format}`);
+
+      if (format === "pdf") {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: "landscape" });
+        pdf.addImage(dataURL, "PNG", 15, 15, 260, 160);
+        pdf.save(`graphique_mode_${mode}.pdf`);
+      } else {
+        const a = document.createElement("a");
+        a.href = dataURL;
+        a.download = `graphique_mode_${mode}.${format}`;
+        a.click();
+      }
+    }
+  </script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_02.html ---
+

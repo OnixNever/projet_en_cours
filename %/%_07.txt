@@ -1,0 +1,867 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_07.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_07.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculateur Global</title>
+
+<!-- Librairies externes (Chart.js + plugin datalabels + jspdf + html2canvas) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+/* =========================
+   Styles principaux (léger, clair)
+   ========================= */
+body { font-family: Arial, sans-serif; margin:20px; background:#f4f7fa; color:#333; }
+h1 { text-align:center; color:#2c3e50; margin-bottom:10px; }
+.menu { text-align:center; margin-bottom:18px; }
+.menu button { margin:5px; padding:10px 18px; font-size:15px; border:none; border-radius:10px; background:#3498db; color:white; cursor:pointer; }
+.menu button:hover { background:#2980b9; }
+.hidden { display:none; }
+input,textarea,select { width:95%; margin:6px 0; padding:8px; border-radius:6px; border:1px solid #ccc; box-sizing:border-box; }
+canvas { display:block; margin:16px auto; max-width:640px; max-height:640px; background:transparent; }
+table { border-collapse:collapse; width:95%; margin-top:10px; border-radius:8px; overflow:hidden; }
+th,td { border:1px solid #ddd; padding:8px; text-align:center; }
+th { background:#ecf0f1; }
+.ref-block { display:flex; gap:8px; margin-bottom:6px; align-items:center; flex-wrap:wrap; }
+.ref-block input, .ref-block select { padding:6px; width:160px; border-radius:6px; border:1px solid #ccc; }
+.ref-block button { padding:6px 8px; cursor:pointer; border-radius:8px; }
+.ref-block .rangeC { width:150px; }
+.ref-block .pctDisplay { width:48px; display:inline-block; text-align:center; }
+#previewContainer img { max-width:600px; display:block; margin:8px auto; }
+#tableauF tbody tr td { vertical-align: middle; }
+label { display:inline-flex; align-items:center; gap:8px; margin-right:8px; }
+.small { font-size:12px; color:#666; }
+</style>
+</head>
+<body>
+<h1>📊 Calculateur Global</h1>
+
+<!-- Menu des modes -->
+<div class="menu">
+  <button onclick="showMode('modeA')">Mode A : Comparer</button>
+  <button onclick="showMode('modeB')">Mode B : Gains/Pertes</button>
+  <button onclick="showMode('modeC')">Mode C : % par bloc</button>
+  <button onclick="showMode('modeD')">Mode D : Évolution temporelle</button>
+  <button onclick="showMode('modeE')">Mode E : Graphique linéaire</button>
+  <button onclick="showMode('modeF')">Mode F : Graphique circulaire</button>
+  <button onclick="showMode('modeG')">Mode G : Calculateur TVA</button>
+  <button onclick="showMode('mode_rapport_global')">Rapport Global</button>
+</div>
+
+<!-- =========================
+     MODE A : Comparer
+     ========================= -->
+<div id="modeA" class="hidden">
+  <h3>Mode A : Comparer à des valeurs</h3>
+  <div id="multiAContainer">
+    <div class="ref-block">
+      <input type="number" class="refA" placeholder="Valeur de référence">
+      <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150)">
+      <button type="button" onclick="removeNode(this)">🗑️</button>
+    </div>
+  </div>
+  <button type="button" onclick="addABlock()">➕ Ajouter</button>
+  <button onclick="calculerA()">Calculer</button>
+  <div id="resultA"></div>
+</div>
+
+<!-- =========================
+     MODE B : Gains/Pertes
+     ========================= -->
+<div id="modeB" class="hidden">
+  <h3>Mode B : Gains et pertes</h3>
+  <div id="multiBContainer">
+    <div class="ref-block">
+      <input type="number" class="valeurB" placeholder="Valeur de départ">
+      <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+      <button type="button" onclick="removeNode(this)">🗑️</button>
+    </div>
+  </div>
+  <button type="button" onclick="addBBlock()">➕ Ajouter</button>
+  <button onclick="calculerB()">Calculer</button>
+  <div id="resultB"></div>
+</div>
+
+<!-- =========================
+     MODE C : Pourcentage par bloc
+     ========================= -->
+<div id="modeC" class="hidden">
+  <h3>Mode C : Pourcentage par bloc</h3>
+  <div id="multiCContainer"></div>
+  <button type="button" onclick="addCBlock()">➕ Ajouter un bloc</button>
+  <button onclick="updateC()">Calculer</button>
+  <div id="resultC"></div>
+</div>
+
+<!-- =========================
+     MODE D : Évolution temporelle
+     ========================= -->
+<div id="modeD" class="hidden">
+  <h3>Mode D : Évolution temporelle</h3>
+  <div id="multiDContainer"></div>
+  <button type="button" onclick="addDBlock()">➕ Ajouter une série</button>
+  <button onclick="calculerD()">Calculer</button>
+  <canvas id="graphD"></canvas>
+</div>
+
+<!-- =========================
+     MODE E : Graphique linéaire multi-séries
+     ========================= -->
+<div id="modeE" class="hidden">
+  <h3>Mode E : Graphique linéaire multi-séries</h3>
+  <div id="multiEContainer">
+    <div class="ref-block">
+      <input type="text" class="labelE" placeholder="Nom série">
+      <input type="text" class="valsE" placeholder="Valeurs (ex: 100 120 130)">
+      <button type="button" onclick="removeNode(this)">🗑️</button>
+    </div>
+  </div>
+  <button type="button" onclick="addEBlock()">➕ Ajouter une série</button>
+  <button onclick="calculerE()">Calculer</button>
+  <canvas id="graphE"></canvas>
+</div>
+
+<!-- =========================
+     MODE F : Graphique circulaire
+     ========================= -->
+<div id="modeF" class="hidden">
+  <h3>Mode F : Graphique circulaire</h3>
+  <div id="multiFContainer"></div>
+  <button type="button" onclick="addFBlock()">➕ Ajouter une catégorie</button>
+  <button type="button" onclick="fusionnerFCategories()">🔀 Fusionner les catégories sélectionnées</button>
+  <button onclick="calculerF()">Calculer</button>
+  <canvas id="graphF"></canvas>
+
+  <h4>Récapitulatif des catégories</h4>
+  <table id="tableauF" style="width:95%; margin:auto; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Valeur</th>
+        <th>Pourcentage</th>
+        <th>Sous-catégories</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- =========================
+     MODE G : Calculateur TVA
+     ========================= -->
+<div id="modeG" class="hidden">
+  <h3>Mode G : Calculateur TVA</h3>
+  <div id="multiGContainer">
+    <div class="ref-block">
+      <select class="tvaMode">
+        <option value="htTtc">HT → TTC</option>
+        <option value="ttcHt">TTC → HT</option>
+      </select>
+      <input type="number" class="valeurG" value="100" placeholder="Montant">
+      <input type="number" class="tauxTVA" value="21" placeholder="TVA %">
+      <button type="button" onclick="removeNode(this)">🗑️</button>
+    </div>
+  </div>
+  <button type="button" onclick="addGBlock()">➕ Ajouter un bloc de TVA</button>
+  <button onclick="calculerG()">Calculer</button>
+  <div id="resultG"></div>
+</div>
+
+<!-- =========================
+     RAPPORT GLOBAL
+     ========================= -->
+<div id="mode_rapport_global" class="hidden">
+  <h3>Rapport Global</h3>
+
+  <!-- Cases à cocher pour inclure les modes -->
+  <label><div>Inclure Mode A </div><div><input type="checkbox" id="includeA"></div></label><br>
+  <label><div>Inclure Mode B </div><div><input type="checkbox" id="includeB"></div></label><br>
+  <label><div>Inclure Mode C </div><div><input type="checkbox" id="includeC"></div></label><br>
+  <label><div>Inclure Mode D </div><div><input type="checkbox" id="includeD"></div></label><br>
+  <label><div>Inclure Mode E </div><div><input type="checkbox" id="includeE"></div></label><br>
+  <label><div>Inclure Mode F </div><div><input type="checkbox" id="includeF"></div></label><br>
+  <label><div>Inclure Mode G </div><div><input type="checkbox" id="includeG"></div></label><br>
+
+  <label style="cursor:pointer; font-weight:bold; display:inline-flex; align-items:center; gap:10px;">
+    <div>Tout sélectionner</div>
+    <div><input type="checkbox" id="selectAllModes" onchange="toggleAllModes(this)"></div>
+  </label><br><br>
+
+  <button onclick="previsualiserRapport()">👀 Prévisualiser</button>
+  <button onclick="genererRapport()">📄 Télécharger PDF</button>
+  <div id="previewContainer"></div>
+</div>
+
+<!-- =========================
+     JavaScript : logique et fonctions
+     ========================= -->
+<script>
+/* =========================
+   Variables globales & historique (stockage HTML généré)
+   ========================= */
+let chartD = null, chartE = null, chartF = null;
+let historique = {A:'', B:'', C:'', D:'', E:'', F:'', G:''};
+let historiqueF = []; // historique détaillé pour le tableau du mode F
+
+/* ============
+   Affichage des modes
+   ============
+*/
+function showMode(id){
+  const modes = ["modeA","modeB","modeC","modeD","modeE","modeF","modeG","mode_rapport_global"];
+  modes.forEach(m => document.getElementById(m).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+/* ============
+   Utilitaires simples
+   ============
+*/
+function removeNode(btn){ btn.parentNode.remove(); } // suppression d'un bloc
+
+// conversion hex -> rgb array (utile pour moyenne couleur)
+function hexToRgbArr(hex){
+  const c = (hex||'#000000').replace('#','');
+  return [parseInt(c.substr(0,2),16), parseInt(c.substr(2,2),16), parseInt(c.substr(4,2),16)];
+}
+function rgbArrToHex(arr){
+  return "#" + arr.map(n => n.toString(16).padStart(2,'0')).join('');
+}
+
+/* =========================
+   MODE A : Comparer
+   ========================= */
+function addABlock(){
+  const cont = document.getElementById("multiAContainer");
+  const div = document.createElement("div"); div.className="ref-block";
+  div.innerHTML = `
+    <input type="number" class="refA" placeholder="Valeur de référence">
+    <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150)">
+    <button type="button" onclick="removeNode(this)">🗑️</button>
+  `;
+  cont.appendChild(div);
+}
+
+function calculerA(){
+  const cont = document.getElementById("multiAContainer");
+  const resDiv = document.getElementById("resultA"); resDiv.innerHTML = "";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach(block => {
+    const refRaw = block.querySelector(".refA").value;
+    const ref = parseFloat(refRaw);
+    const raw = (block.querySelector(".valsA").value || "").trim();
+    if(raw === "") return;
+    const vals = raw.split(/\s+/).map(Number).filter(v => !isNaN(v));
+    if(isNaN(ref) && vals.length===0) return;
+    let html = `<h4>Analyse pour ${isNaN(ref)? 'n/a': ref.toFixed(2)}€</h4><table><tr><th>Valeur</th><th>Différence (€)</th><th>%</th></tr>`;
+    vals.forEach(v => {
+      const diff = isNaN(ref) ? v : v - ref;
+      const pct = (isNaN(ref) || ref === 0) ? null : (diff / ref * 100);
+      const col = diff > 0 ? "#2ecc71" : diff < 0 ? "#e74c3c" : "#95a5a6";
+      html += `<tr style="background:${col}; color:#fff;"><td>${v}</td><td>${diff>=0?'+':''}${diff.toFixed(2)}</td><td>${pct===null? '—' : pct.toFixed(2)+'%'}</td></tr>`;
+    });
+    html += "</table>";
+    resDiv.innerHTML += html;
+  });
+  historique.A = resDiv.innerHTML;
+}
+
+/* =========================
+   MODE B : Gains / pertes
+   ========================= */
+function addBBlock(){
+  const cont = document.getElementById("multiBContainer");
+  const div = document.createElement("div"); div.className="ref-block";
+  div.innerHTML = `
+    <input type="number" class="valeurB" placeholder="Valeur de départ">
+    <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+    <button type="button" onclick="removeNode(this)">🗑️</button>
+  `;
+  cont.appendChild(div);
+}
+
+function calculerB(){
+  const cont = document.getElementById("multiBContainer");
+  const resDiv = document.getElementById("resultB"); resDiv.innerHTML = "";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach(block => {
+    const val = parseFloat(block.querySelector(".valeurB").value);
+    const raw = (block.querySelector(".pourcentB").value || "").trim();
+    if(raw === "") return;
+    const taux = raw.split(/\s+/).map(Number).filter(n => !isNaN(n));
+    if(isNaN(val) || taux.length===0) return;
+    let html = `<h4>Analyse pour ${val.toFixed(2)}€</h4><table><tr><th>Taux (%)</th><th>Résultat (€)</th></tr>`;
+    taux.forEach(p => {
+      const r = val * (1 + p/100);
+      const col = p > 0 ? "#2ecc71" : p < 0 ? "#e74c3c" : "#95a5a6";
+      html += `<tr style="background:${col}; color:#fff;"><td>${p}%</td><td>${r.toFixed(2)}</td></tr>`;
+    });
+    html += "</table>";
+    resDiv.innerHTML += html;
+  });
+  historique.B = resDiv.innerHTML;
+}
+
+/* =========================
+   MODE C : Pourcentage par bloc
+   ========================= */
+function addCBlock(){
+  const cont = document.getElementById("multiCContainer");
+  const div = document.createElement("div"); div.className = "ref-block";
+  div.innerHTML = `
+    <input type="text" class="valsC" placeholder="Valeurs (ex: 100 150 200)">
+    <label class="small">Max % : <input type="number" class="maxC" value="100" step="10" style="width:70px;"></label>
+    <input type="range" class="rangeC" min="-100" max="100" value="0" step="1" oninput="updateCBlock(this)">
+    <span class="pctDisplay">0%</span>
+    <button type="button" onclick="removeNode(this)">🗑️</button>
+  `;
+  cont.appendChild(div);
+  updateC();
+}
+
+function updateCBlock(rangeInput){
+  const block = rangeInput.closest(".ref-block");
+  const maxInput = block.querySelector(".maxC");
+  const max = parseFloat(maxInput.value) || 100;
+  rangeInput.min = -max;
+  rangeInput.max = max;
+  const pct = parseFloat(rangeInput.value) || 0;
+  block.querySelector(".pctDisplay").innerText = pct + "%";
+  updateC();
+}
+
+function updateC(){
+  const cont = document.getElementById("multiCContainer");
+  let html = "";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+    const valsStr = (block.querySelector(".valsC")?.value || "").trim();
+    const vals = valsStr ? valsStr.split(/\s+/).map(Number).filter(v => !isNaN(v)) : [];
+    const pct = parseFloat(block.querySelector(".rangeC")?.value) || 0;
+    if(vals.length){
+      html += `<h4>Bloc ${i+1} (${pct}%)</h4><table><tr><th>Valeur</th><th>Résultat</th></tr>`;
+      vals.forEach(v => {
+        const r = v * (1 + pct/100);
+        const col = pct > 0 ? "#2ecc71" : pct < 0 ? "#e74c3c" : "#95a5a6";
+        html += `<tr style="background:${col}; color:#fff;"><td>${v}</td><td>${r.toFixed(2)}</td></tr>`;
+      });
+      html += "</table>";
+    }
+  });
+  document.getElementById("resultC").innerHTML = html;
+  historique.C = html;
+}
+
+/* =========================
+   MODE D : Évolution temporelle
+   - Séries composées d'événements (date texte et valeur)
+   - On ignore les séries dont l'icône 'œil' est en mode caché.
+   ========================= */
+function addDBlock(){
+  const cont = document.getElementById("multiDContainer");
+  const div = document.createElement("div"); div.className = "ref-block";
+  div.style.flexDirection = "column";
+  div.innerHTML = `
+    <div style="display:flex;  align-items:center; gap:10px; margin-bottom:6px;">
+      <input type="text" class="labelD" placeholder="Nom série" style="font-weight:bold;">
+      <span class="eyeD" style="cursor:pointer;">👁️</span>
+      <button type="button" onclick="removeDBlock(this)">🗑️</button>
+    </div>
+    <div class="eventsDContainer" style="margin-left:6px; display:flex; flex-direction:column; gap:6px;"></div>
+    <button type="button" class="addEventBtn" onclick="addDEvent(this)" style="margin:6px 0 0 6px;">➕ Ajouter un événement</button>
+  `;
+  cont.appendChild(div);
+
+  const eye = div.querySelector(".eyeD");
+  eye.dataset.visible = "true";
+  eye.addEventListener("click", () => {
+    eye.dataset.visible = eye.dataset.visible === "true" ? "false" : "true";
+    eye.textContent = eye.dataset.visible === "true" ? "👁️" : "🙈";
+  });
+}
+
+function addDEvent(btn){
+  const container = btn.previousElementSibling; // eventsDContainer
+  const div = document.createElement("div");
+  div.style.display = "flex"; div.style.gap = "8px"; div.style.alignItems = "center";
+  // date par défaut : JJ/MM/YYYY
+  const today = new Date();
+  const dd = String(today.getDate()).padStart(2,'0');
+  const mm = String(today.getMonth()+1).padStart(2,'0');
+  const yyyy = today.getFullYear();
+  const defaultDate = `${dd}/${mm}/${yyyy}`;
+  div.innerHTML = `
+    <input type="text" class="dateD" placeholder="JJ/MM/AAAA" value="${defaultDate}">
+    <input type="number" class="valD" placeholder="Valeur">
+    <button type="button" onclick="this.parentNode.remove()">🗑️</button>
+  `;
+  container.appendChild(div);
+}
+
+function removeDBlock(btn){
+  const block = btn.closest('.ref-block');
+  if(block) block.remove();
+}
+
+function calculerD(){
+  const cont = document.getElementById("multiDContainer");
+  const datasets = [];
+  const labelsSet = new Set();
+
+  Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+    const label = block.querySelector(".labelD")?.value || `Série ${i+1}`;
+    const eye = block.querySelector(".eyeD");
+    const visible = !eye || eye.dataset.visible === "true";
+    if(!visible) return;
+
+    const dataMap = {};
+    Array.from(block.querySelectorAll(".eventsDContainer div")).forEach(row => {
+      const date = (row.querySelector(".dateD").value || "").trim();
+      const val = parseFloat(row.querySelector(".valD").value);
+      if(date && !isNaN(val)){
+        dataMap[date] = val;
+        labelsSet.add(date);
+      }
+    });
+
+    datasets.push({
+      label: label,
+      data: dataMap,
+      borderColor: ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"][i%7],
+      fill: false,
+      tension: 0.2
+    });
+  });
+
+  // tri simple des labels (texte). On garde tri lexicographique ici.
+  const labels = Array.from(labelsSet).sort();
+
+  // transformer map -> array alignée avec labels
+  datasets.forEach(ds => {
+    ds.data = labels.map(lab => ds.data[lab] ?? null);
+  });
+
+  if(chartD) chartD.destroy();
+  const ctx = document.getElementById("graphD").getContext("2d");
+  chartD = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labels, datasets: datasets },
+    options: { plugins: { legend: { display: true } } }
+  });
+
+  historique.D = "Graphique multi-séries de l'évolution temporelle généré.";
+}
+
+/* =========================
+   MODE E : Graphique linéaire multi-séries
+   ========================= */
+function addEBlock(){
+  const cont = document.getElementById("multiEContainer");
+  const div = document.createElement("div"); div.className="ref-block";
+  div.innerHTML = `
+    <input type="text" class="labelE" placeholder="Nom série">
+    <input type="text" class="valsE" placeholder="Valeurs (ex: 100 120 130)">
+    <button type="button" onclick="removeNode(this)">🗑️</button>
+  `;
+  cont.appendChild(div);
+}
+
+function calculerE(){
+  const cont = document.getElementById("multiEContainer");
+  const datasets = [];
+  let labels = [];
+  Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+    const label = block.querySelector(".labelE")?.value || "Série " + (i+1);
+    const vals = (block.querySelector(".valsE")?.value || "").trim().split(/\s+/).map(Number).filter(v => !isNaN(v));
+    if(vals.length > 0){
+      if(labels.length < vals.length) labels = Array.from({length:vals.length}, (_,k) => "Point " + (k+1));
+      datasets.push({
+        label: label,
+        data: vals,
+        fill: false,
+        borderColor: ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"][i%7],
+        tension: 0.2
+      });
+    }
+  });
+
+  if(chartE) chartE.destroy();
+  const ctx = document.getElementById("graphE").getContext("2d");
+  chartE = new Chart(ctx, { type:'line', data: { labels: labels, datasets: datasets }, options: { plugins: { legend: { display: true } } } });
+
+  historique.E = "Graphique linéaire multi-séries généré.";
+}
+
+/* =========================
+   MODE F : Graphique circulaire
+   - Ajout / sélection / fusion / tableau récap
+   ========================= */
+const paletteF = ["#3498db","#2ecc71","#e74c3c","#f1c40f","#9b59b6","#1abc9c","#95a5a6"];
+let compteurF = 0;
+
+function addFBlock(){
+  const cont = document.getElementById("multiFContainer");
+  const div = document.createElement("div"); div.className = "ref-block";
+  const couleurParDefaut = paletteF[compteurF % paletteF.length];
+  compteurF++;
+  div.dataset.selectionnee = "false";
+  div.innerHTML = `
+    <input type="text" class="labelF" placeholder="Catégorie">
+    <input type="number" class="valF" placeholder="Valeur">
+    <input type="color" class="colorF" value="${couleurParDefaut}" title="Choisir la couleur">
+    <button type="button" class="selectF">❌</button>
+    <button type="button" onclick="removeF(this)">🗑️</button>
+  `;
+
+  // gestion sélection/désélection
+  const btnSelect = div.querySelector(".selectF");
+  btnSelect.addEventListener("click", () => {
+    const isSelected = div.dataset.selectionnee === "true";
+    div.dataset.selectionnee = isSelected ? "false" : "true";
+    btnSelect.textContent = isSelected ? "❌" : "✅";
+  });
+
+  // mettre à jour historiqueF à chaque modification
+  const inputVal = div.querySelector(".valF");
+  const inputLabel = div.querySelector(".labelF");
+  const inputColor = div.querySelector(".colorF");
+
+  function majHistorique(){
+    let cat = historiqueF.find(c => c.element === div);
+    if(!cat){
+      cat = { element: div, label: inputLabel.value || "Catégorie", val: parseFloat(inputVal.value) || 0, color: inputColor.value, sub: [] };
+      historiqueF.push(cat);
+    } else {
+      cat.label = inputLabel.value || "Catégorie";
+      cat.val = parseFloat(inputVal.value) || 0;
+      cat.color = inputColor.value;
+    }
+    mettreAJourTableauF();
+    calculerF();
+  }
+
+  inputVal.addEventListener("input", majHistorique);
+  inputLabel.addEventListener("input", majHistorique);
+  inputColor.addEventListener("input", majHistorique);
+
+  cont.appendChild(div);
+  majHistorique();
+}
+
+function removeF(btn){ 
+  const block = btn.parentNode;
+  // retirer du tableau historique si présent
+  const idx = historiqueF.findIndex(c => c.element === block);
+  if(idx !== -1) historiqueF.splice(idx,1);
+  block.remove(); 
+  mettreAJourTableauF();
+  calculerF();
+}
+
+function calculerF(){
+  // générer le graphique à partir des blocs valides
+  const cont = document.getElementById("multiFContainer");
+  const lines = [];
+  Array.from(cont.getElementsByClassName("ref-block")).forEach(block => {
+    const label = (block.querySelector(".labelF")?.value || "").trim();
+    const val = parseFloat(block.querySelector(".valF")?.value);
+    const color = block.querySelector(".colorF")?.value || paletteF[0];
+    if(label && !isNaN(val)) lines.push({ label, val, color });
+  });
+
+  if(chartF) chartF.destroy();
+  const ctx = document.getElementById("graphF").getContext("2d");
+  chartF = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: lines.map(l => l.label),
+      datasets: [{ data: lines.map(l => l.val), backgroundColor: lines.map(l => l.color) }]
+    },
+    options: {
+      plugins: {
+        legend: { display: true },
+        datalabels: {
+          formatter: (value, ctx) => {
+            const meta = ctx.chart.getDatasetMeta(0);
+            const visibleTotal = ctx.chart.data.datasets[0].data.reduce((sum, v, idx) => (meta.data[idx].hidden ? sum : sum + v), 0);
+            return visibleTotal === 0 ? '' : ((value / visibleTotal) * 100).toFixed(1) + '%';
+          },
+          color: '#fff',
+          font: { weight: 'bold' }
+        }
+      }
+    },
+    plugins: [ChartDataLabels]
+  });
+
+  historique.F = "Graphique circulaire généré.";
+  // mettre à jour tableau si besoin
+  mettreAJourTableauF();
+}
+
+function mettreAJourTableauF(){
+  // reconstruit le tableau d'après historiqueF (définit lors des ajouts / modifs)
+  const tbody = document.querySelector("#tableauF tbody");
+  tbody.innerHTML = "";
+  // recalculer total en utilisant historiqueF
+  const total = historiqueF.reduce((s,c) => s + (parseFloat(c.val) || 0), 0);
+  historiqueF.forEach(cat => {
+    const pourcent = total > 0 ? (cat.val / total * 100).toFixed(1) : 0;
+    const tr = document.createElement("tr");
+    tr.style.backgroundColor = cat.color;
+    tr.style.color = "#fff";
+    let sousHTML = "";
+    if(cat.sub && cat.sub.length > 0){
+      sousHTML = cat.sub.map(sc => {
+        const pct = total > 0 ? ((sc.val / total) * 100).toFixed(1) : 0;
+        return `<div style="margin-left:10px;">${sc.label}: ${sc.val} (${pct}%)</div>`;
+      }).join("");
+    }
+    tr.innerHTML = `<td>${cat.label}</td><td>${cat.val}</td><td>${pourcent}%</td><td>${sousHTML}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+/* Fusionner catégories sélectionnées (crée un nouveau bloc et conserve les sous-cat) */
+function fusionnerFCategories(){
+  const cont = document.getElementById("multiFContainer");
+  const selected = Array.from(cont.getElementsByClassName("ref-block")).filter(d => d.dataset.selectionnee === "true");
+  if(selected.length < 2){ alert("Sélectionnez au moins 2 catégories à fusionner !"); return; }
+
+  let nomNouvelle = prompt("Entrez le nom de la nouvelle catégorie fusionnée :", "Nouvelle catégorie");
+  if(!nomNouvelle) nomNouvelle = "Nouvelle catégorie";
+
+  // total valeurs et moyenne couleurs
+  let valTotale = 0;
+  const rgbs = [];
+  const sous = [];
+
+  selected.forEach(d => {
+    const val = parseFloat(d.querySelector(".valF")?.value) || 0;
+    valTotale += val;
+    rgbs.push(hexToRgbArr(d.querySelector(".colorF")?.value || '#000000'));
+    // récupération des sous-cat déjà enregistrées
+    const h = historiqueF.find(c => c.element === d);
+    if(h){
+      if(h.sub && h.sub.length) sous.push(...h.sub);
+      sous.push({ label: h.label, val: h.val, color: h.color });
+    }
+  });
+
+  // moyenne RGB
+  const moy = rgbs[0].map((_,i) => Math.round(rgbs.reduce((s,c) => s + c[i], 0) / rgbs.length));
+  const couleurFusion = rgbArrToHex(moy);
+
+  // suppression des anciennes catégories (DOM + historique)
+  selected.forEach(d => {
+    const idx = historiqueF.findIndex(c => c.element === d);
+    if(idx !== -1) historiqueF.splice(idx,1);
+    d.remove();
+  });
+
+  // création du nouveau bloc
+  const div = document.createElement("div"); div.className = "ref-block";
+  div.dataset.selectionnee = "false";
+  div.innerHTML = `
+    <input type="text" class="labelF" placeholder="Catégorie" value="${nomNouvelle}">
+    <input type="number" class="valF" placeholder="Valeur" value="${valTotale}">
+    <input type="color" class="colorF" value="${couleurFusion}">
+    <button type="button" class="selectF">❌</button>
+    <button type="button" onclick="removeF(this)">🗑️</button>
+  `;
+
+  // bouton sélection
+  const btnSelect = div.querySelector(".selectF");
+  btnSelect.addEventListener("click", () => {
+    const isSelected = div.dataset.selectionnee === "true";
+    div.dataset.selectionnee = isSelected ? "false" : "true";
+    btnSelect.textContent = isSelected ? "❌" : "✅";
+  });
+
+  // ajouter au DOM + historiqueF
+  document.getElementById("multiFContainer").appendChild(div);
+  const cat = { element: div, label: nomNouvelle, val: valTotale, color: couleurFusion, sub: sous };
+  historiqueF.push(cat);
+
+  // lier modifications au nouveau bloc (comme addFBlock le ferait)
+  const inputVal = div.querySelector(".valF");
+  const inputLabel = div.querySelector(".labelF");
+  const inputColor = div.querySelector(".colorF");
+  function majHistoriqueNouvel(){
+    const c = historiqueF.find(x => x.element === div);
+    if(c){
+      c.label = inputLabel.value || "Catégorie";
+      c.val = parseFloat(inputVal.value) || 0;
+      c.color = inputColor.value;
+    }
+    mettreAJourTableauF();
+    calculerF();
+  }
+  inputVal.addEventListener("input", majHistoriqueNouvel);
+  inputLabel.addEventListener("input", majHistoriqueNouvel);
+  inputColor.addEventListener("input", majHistoriqueNouvel);
+
+  // mise à jour visuelle
+  mettreAJourTableauF();
+  calculerF();
+}
+
+/* =========================
+   MODE G : Calculateur TVA
+   ========================= */
+function addGBlock(){
+  const cont = document.getElementById("multiGContainer");
+  const div = document.createElement("div"); div.className="ref-block";
+  div.innerHTML = `<select class="tvaMode"><option value="htTtc">HT → TTC</option><option value="ttcHt">TTC → HT</option></select>
+                   <input type="number" class="valeurG" value="100" placeholder="Montant">
+                   <input type="number" class="tauxTVA" value="21" placeholder="TVA %">
+                   <button type="button" onclick="removeNode(this)">🗑️</button>`;
+  cont.appendChild(div);
+}
+
+function calculerG(){
+  const cont = document.getElementById("multiGContainer");
+  let html = `<table><tr><th>#</th><th>Montant</th><th>Type</th><th>% TVA</th><th>Valeur TVA (€)</th><th>Résultat</th></tr>`;
+  Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i) => {
+    const mode = block.querySelector(".tvaMode").value;
+    const val = parseFloat(block.querySelector(".valeurG").value);
+    const tva = parseFloat(block.querySelector(".tauxTVA").value);
+    if(isNaN(val) || isNaN(tva)) return;
+    let res, tvaValue;
+    if(mode === "htTtc"){
+      res = val * (1 + tva/100);
+      tvaValue = res - val;
+    } else {
+      res = val / (1 + tva/100);
+      tvaValue = val - res;
+    }
+    html += `<tr><td>${i+1}</td><td>${val.toFixed(2)}</td><td>${mode === "htTtc" ? "HT → TTC" : "TTC → HT"}</td><td>${tva.toFixed(2)}%</td><td>${tvaValue.toFixed(2)}</td><td>${res.toFixed(2)}</td></tr>`;
+  });
+  html += "</table>";
+  document.getElementById("resultG").innerHTML = html;
+  historique.G = html;
+}
+
+/* =========================
+   RAPPORT GLOBAL : prévisualisation & génération PDF
+   ========================= */
+const modeDescriptions = {
+  A: "Comparer des valeurs",
+  B: "Gains et pertes",
+  C: "Pourcentage par bloc",
+  D: "Évolution temporelle",
+  E: "Graphique linéaire multi-séries",
+  F: "Graphique circulaire",
+  G: "Calculateur TVA"
+};
+
+async function previsualiserRapport(){
+  const cont = document.getElementById("previewContainer");
+  cont.innerHTML = "";
+  ["A","B","C","D","E","F","G"].forEach(m => {
+    if(document.getElementById("include"+m)?.checked){
+      cont.innerHTML += `<h3>Mode ${m} : ${modeDescriptions[m]}</h3>` + (historique[m] || "");
+      if(m === "D" && chartD) {
+        const img = document.createElement("img"); img.src = chartD.toBase64Image(); cont.appendChild(img);
+      }
+      if(m === "E" && chartE) {
+        const img = document.createElement("img"); img.src = chartE.toBase64Image(); cont.appendChild(img);
+      }
+      if(m === "F" && chartF) {
+        const img = document.createElement("img"); img.src = chartF.toBase64Image(); cont.appendChild(img);
+      }
+    }
+  });
+}
+
+async function genererRapport(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({orientation:'p', unit:'pt', format:'a4'});
+  let y = 40;
+  for(const m of ["A","B","C","D","E","F","G"]){
+    if(document.getElementById("include"+m)?.checked){
+      doc.setFontSize(14);
+      doc.text(`Mode ${m} : ${modeDescriptions[m]}`, 40, y);
+      y += 20;
+      doc.setFontSize(10);
+      const text = (historique[m] || "").replace(/<[^>]+>/g,' ').trim();
+      const lines = doc.splitTextToSize(text, 520);
+      doc.text(lines, 40, y);
+      y += lines.length * 12 + 10;
+
+      // Ajouter images de graphiques si existantes
+      let chartImg = null;
+      if(m === "D" && chartD) chartImg = chartD.toBase64Image();
+      if(m === "E" && chartE) chartImg = chartE.toBase64Image();
+      if(m === "F" && chartF) chartImg = chartF.toBase64Image();
+
+      if(chartImg){
+        if(y > 700){ doc.addPage(); y = 40; }
+        doc.addImage(chartImg, "PNG", 80, y, 400, 300);
+        y += 320;
+      }
+      if(y > 760){ doc.addPage(); y = 40; }
+    }
+  }
+  doc.save("rapport_global.pdf");
+}
+
+/* ========
+   Helpers restants (toggle all, raccourcis clavier)
+   ======== */
+function toggleAllModes(master){
+  const all = ["A","B","C","D","E","F","G"];
+  all.forEach(m => { const cb = document.getElementById("include" + m); if(cb) cb.checked = master.checked; });
+}
+
+// raccourcis Alt + lettre (pratique pour naviguer)
+document.addEventListener("keydown", function(e){
+  if(e.altKey){
+    const key = e.key.toUpperCase();
+    switch(key){
+      case "A": showMode("modeA"); break;
+      case "B": showMode("modeB"); break;
+      case "C": showMode("modeC"); break;
+      case "D": showMode("modeD"); break;
+      case "E": showMode("modeE"); break;
+      case "F": showMode("modeF"); break;
+      case "G": showMode("modeG"); break;
+      case "R": showMode("mode_rapport_global"); break;
+    }
+  }
+});
+
+/* =============
+   Initialisation minimale (ajoute un bloc de base pour chaque mode)
+   ============= */
+(function initDefaults(){
+  // on crée un bloc initial par mode pour l'ergonomie
+  addABlock();
+  addBBlock();
+  addCBlock();
+  addDBlock();
+  addEBlock();
+  addFBlock();
+  addGBlock();
+})();
+</script>
+
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_07.html ---
+

@@ -1,0 +1,2329 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_12.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_12.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Calculateur Global Pro</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ============================================
+   VARIABLES CSS POUR THÈMES
+   ============================================ */
+:root {
+    /* Thème clair par défaut */
+    --bg-primary: #f4f7fa;
+    --bg-secondary: white;
+    --bg-tertiary: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --accent-color: #3498db;
+    --accent-hover: #2980b9;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --error-color: #e74c3c;
+    --border-color: #dddddd;
+    --border-light: #eeeeee;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --card-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    --header-height: 70px;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --bg-tertiary: #2d2d2d;
+    --text-primary: #f0f0f0;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --accent-color: #4dabf7;
+    --accent-hover: #3d9be5;
+    --success-color: #2ecc71;
+    --warning-color: #f1c40f;
+    --error-color: #e74c3c;
+    --border-color: #444444;
+    --border-light: #333333;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --card-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   STYLES DE BASE
+   ============================================ */
+* {
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 15px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    padding-bottom: 20px;
+}
+
+/* ============================================
+   HEADER ET CONTROLES
+   ============================================ */
+.app-header {
+    background: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+h1 {
+    margin: 0;
+    color: var(--accent-color);
+    font-size: 1.8rem;
+}
+
+.header-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ============================================
+   BOUTONS
+   ============================================ */
+button {
+    padding: 10px 15px;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.action-button {
+    background: var(--success-color);
+}
+
+.action-button:hover {
+    background: #219653;
+}
+
+.secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.secondary:hover {
+    background: var(--border-light);
+}
+
+.delete-btn {
+    background: var(--error-color);
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.save-btn {
+    background: var(--success-color);
+}
+
+/* ============================================
+   MENU PRINCIPAL
+   ============================================ */
+.menu {
+    text-align: center;
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.menu button {
+    margin: 2px;
+    padding: 10px 15px;
+    flex: 1;
+    min-width: 120px;
+    max-width: 180px;
+}
+
+/* ============================================
+   CONTENU DES MODES
+   ============================================ */
+.hidden { display: none !important; }
+.mode-content {
+    max-width: 1200px;
+    margin: 15px auto;
+    padding: 25px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
+}
+
+/* ============================================
+   FORMULAIRES ET INPUTS
+   ============================================ */
+input, select {
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* ============================================
+   BLOCS COMMUNS
+   ============================================ */
+.ref-block, .c-block {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+}
+
+/* ============================================
+   TABLEAUX
+   ============================================ */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* ============================================
+   GRAPHIQUES
+   ============================================ */
+.chart-container {
+    height: 400px;
+    margin: 25px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    background: var(--bg-secondary);
+}
+
+/* ============================================
+   NOTIFICATIONS
+   ============================================ */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--success-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.notification.error {
+    background: var(--error-color);
+}
+
+.notification.warning {
+    background: var(--warning-color);
+}
+
+.notification.info {
+    background: var(--accent-color);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================
+   INDICATEUR DE SAUVEGARDE
+   ============================================ */
+.save-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--success-color);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    z-index: 999;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+/* ============================================
+   MODAL DE SAUVEGARDE
+   ============================================ */
+.backup-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 25px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.backup-item {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+    
+    .header-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .menu {
+        flex-direction: column;
+    }
+    
+    .menu button {
+        max-width: none;
+        width: 100%;
+    }
+    
+    .mode-content {
+        padding: 15px;
+        margin: 10px auto;
+    }
+    
+    .ref-block {
+        padding: 15px;
+    }
+    
+    .chart-container {
+        height: 300px;
+        padding: 10px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+    
+    .header-controls {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .menu button {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        margin: 10px;
+    }
+}
+
+/* ============================================
+   UTILITAIRES
+   ============================================ */
+.positive { color: var(--success-color); font-weight: bold; }
+.negative { color: var(--error-color); font-weight: bold; }
+.total-row { background: rgba(52, 152, 219, 0.1); font-weight: bold; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 8px; }
+.gap-4 { gap: 16px; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-4 { margin-bottom: 16px; }
+.text-sm { font-size: 14px; }
+.font-bold { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER AVEC CONTROLES
+     ============================================ -->
+<header class="app-header">
+    <div class="header-top">
+        <h1><i class="fas fa-calculator"></i> Calculateur Global Pro</h1>
+        <div class="header-controls">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Changer de thème">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="save-btn" onclick="showBackupModal()" title="Gérer les sauvegardes">
+                <i class="fas fa-save"></i> Sauvegardes
+            </button>
+            <button class="secondary" onclick="exportAllData()" title="Exporter les données">
+                <i class="fas fa-download"></i> Exporter
+            </button>
+        </div>
+    </div>
+    
+    <!-- Menu principal -->
+    <div class="menu">
+        <button onclick="showMode('none')">
+            <i class="fas fa-home"></i> Accueil
+        </button>
+        <button onclick="showMode('modeA')">
+            <i class="fas fa-balance-scale"></i> Comparer
+        </button>
+        <button onclick="showMode('modeC')">
+            <i class="fas fa-percentage"></i> % Bloc
+        </button>
+        <button onclick="showMode('modeD')">
+            <i class="fas fa-chart-line"></i> Évolution
+        </button>
+        <button onclick="showMode('modeE')">
+            <i class="fas fa-chart-area"></i> Linéaire
+        </button>
+        <button onclick="showMode('modeF')">
+            <i class="fas fa-chart-pie"></i> Circulaire
+        </button>
+        <button onclick="showMode('modeG')">
+            <i class="fas fa-receipt"></i> TVA
+        </button>
+        <button onclick="showMode('modeH')">
+            <i class="fas fa-exchange-alt"></i> Devises
+        </button>
+    </div>
+</header>
+
+<!-- Indicateur de sauvegarde -->
+<div class="save-indicator" id="saveIndicator">
+    <i class="fas fa-check-circle"></i>
+    <span>Sauvegardé</span>
+</div>
+
+<!-- ============================================
+     MODES EXISTANTS
+     ============================================ -->
+
+<!-- Mode A -->
+<div id="modeA" class="hidden mode-content">
+    <h3><i class="fas fa-balance-scale"></i> Mode A : Comparer à des valeurs</h3>
+    <div id="multiAContainer">
+        <div class="ref-block">
+            <input type="number" class="refA" placeholder="Référence" value="100" style="width:100px;" oninput="autoCalculA()">
+            <input type="text" class="valsA" placeholder="Valeurs (séparées par espaces)" value="80 120 100" style="flex:1;" oninput="autoCalculA()">
+            <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    <button onclick="addABlock()" class="action-button"><i class="fas fa-plus"></i> Ajouter un bloc</button>
+    <div id="resultA" style="margin-top:20px;"></div>
+</div>
+
+<!-- Mode C -->
+<div id="modeC" class="hidden mode-content">
+    <h3><i class="fas fa-percentage"></i> Mode C : Pourcentage par bloc</h3>
+    <div id="multiCContainer"></div>
+    <button onclick="addCBlock()" class="action-button" style="margin:15px 0; width:100%; padding:12px;">
+        <i class="fas fa-plus"></i> Ajouter un nouveau bloc
+    </button>
+    <table class="results-table" id="cResults">
+        <thead>
+            <tr>
+                <th>Bloc</th><th>Variable</th><th>Valeur initiale</th>
+                <th>% appliqué</th><th>Valeur finale</th><th>+/- Valeur</th>
+            </tr>
+        </thead>
+        <tbody id="cResultsBody"></tbody>
+        <tfoot id="cResultsTotal"></tfoot>
+    </table>
+</div>
+
+<!-- Mode D -->
+<div id="modeD" class="hidden mode-content">
+    <h3><i class="fas fa-chart-line"></i> Mode D : Évolution temporelle</h3>
+    <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
+        <button onclick="addDDate()" class="action-button"><i class="fas fa-plus"></i> Date</button>
+        <button onclick="addDSeries()" class="action-button"><i class="fas fa-plus"></i> Série</button>
+        <button onclick="sortDDates()" class="secondary"><i class="fas fa-sort"></i> Trier</button>
+        <button onclick="calculerD()" class="action-button"><i class="fas fa-chart-line"></i> Calculer</button>
+    </div>
+    <div style="overflow-x: auto; margin: 20px 0;">
+        <table id="dDataTable">
+            <thead id="dateHeaderRow"><tr><th>Série / Date</th></tr></thead>
+            <tbody id="seriesBody"></tbody>
+        </table>
+    </div>
+    <div class="chart-container"><canvas id="graphD"></canvas></div>
+</div>
+
+<!-- Mode E -->
+<div id="modeE" class="hidden mode-content">
+    <h3><i class="fas fa-chart-area"></i> Mode E : Graphique linéaire multi-séries</h3>
+    <div id="multiEContainer">
+        <div class="ref-block">
+            <input type="text" class="labelE" placeholder="Nom de la série" value="Ventes" style="width:150px;" oninput="autoCalculE()">
+            <input type="text" class="valsE" placeholder="Valeurs (séparées par espaces)" value="100 120 130 150" style="flex:1;" oninput="autoCalculE()">
+            <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    <div style="margin: 15px 0;">
+        <button onclick="addEBlock()" class="action-button"><i class="fas fa-plus"></i> Ajouter une série</button>
+        <button onclick="calculerE()" class="action-button" style="margin-left:10px;"><i class="fas fa-chart-line"></i> Calculer</button>
+    </div>
+    <div class="chart-container"><canvas id="graphE"></canvas></div>
+</div>
+
+<!-- Mode F -->
+<div id="modeF" class="hidden mode-content">
+    <h3><i class="fas fa-chart-pie"></i> Mode F : Graphique circulaire avec fusion</h3>
+    <div id="multiFContainer">
+        <div class="ref-block" data-category-id="1">
+            <input type="text" class="labelF" placeholder="Catégorie" value="Ventes" style="width:150px;" oninput="autoCalculF()">
+            <input type="number" class="valF" placeholder="Valeur" value="750" style="width:100px;" oninput="autoCalculF()">
+            <input type="color" class="colorF" value="#3498db" oninput="autoCalculF()">
+            <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false">✗</div>
+            <button onclick="removeF(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+        <div class="ref-block" data-category-id="2">
+            <input type="text" class="labelF" placeholder="Catégorie" value="Marketing" style="width:150px;" oninput="autoCalculF()">
+            <input type="number" class="valF" placeholder="Valeur" value="250" style="width:100px;" oninput="autoCalculF()">
+            <input type="color" class="colorF" value="#e74c3c" oninput="autoCalculF()">
+            <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false">✗</div>
+            <button onclick="removeF(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+    </div>
+    <div style="margin: 15px 0;">
+        <button onclick="addFBlock()" class="action-button"><i class="fas fa-plus"></i> Ajouter une catégorie</button>
+        <button onclick="calculerF()" class="action-button" style="margin-left:10px;"><i class="fas fa-chart-pie"></i> Calculer</button>
+    </div>
+    <div class="fusion-controls" style="background: var(--bg-tertiary); padding: 15px; border-radius: 6px; margin: 15px 0; border: 1px solid var(--border-color);">
+        <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">Fusionner les catégories sélectionnées :</h4>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <input type="text" id="fusionName" placeholder="Nom de la nouvelle catégorie" style="flex: 1; min-width: 200px;">
+            <button onclick="mergeSelectedCategories()" class="action-button" style="background: #9b59b6;"><i class="fas fa-merge"></i> Fusionner</button>
+        </div>
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+            <button onclick="selectAllForFusion(true)" class="secondary"><i class="fas fa-check-square"></i> Tout sélectionner</button>
+            <button onclick="selectAllForFusion(false)" class="secondary"><i class="fas fa-times-circle"></i> Tout désélectionner</button>
+        </div>
+        <div id="fusionStatus" style="margin-top: 10px; font-size: 14px; color: var(--text-secondary);">
+            <span id="selectedCount">0</span> catégorie(s) sélectionnée(s)
+        </div>
+    </div>
+    <div class="chart-container"><canvas id="graphF"></canvas></div>
+    <div style="margin-top: 30px;">
+        <h4><i class="fas fa-table"></i> Récapitulatif des catégories</h4>
+        <table id="tableauF">
+            <thead><tr><th>Catégorie</th><th>Valeur</th><th>Pourcentage</th></tr></thead>
+            <tbody></tbody>
+            <tfoot id="tableauFTotal"></tfoot>
+        </table>
+    </div>
+</div>
+
+<!-- Mode G -->
+<div id="modeG" class="hidden mode-content">
+    <h3><i class="fas fa-receipt"></i> Mode G : Calculateur TVA</h3>
+    <div id="multiGContainer">
+        <div class="ref-block" id="gblock-1">
+            <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                <input type="text" class="bloc-nom-input" value="Facture exemple" placeholder="Nom du bloc" style="flex:1;" oninput="autoCalculG()">
+                <label style="color: var(--text-primary);">TVA Globale (%): <input type="number" class="global-tva-input" value="20" style="width:70px;" oninput="autoCalculG()"></label>
+                <button onclick="addGLigneToBlock('gblock-1')" class="secondary"><i class="fas fa-plus"></i> Ligne</button>
+                <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+                <div class="ligne-tva" style="display:flex; gap:10px; align-items:center;">
+                    <input type="text" class="libelleG" placeholder="Libellé" value="Produit A" style="flex:1;" oninput="autoCalculG()">
+                    <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+                    <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+                        <option value="HT" selected>HT</option><option value="TTC">TTC</option>
+                    </select>
+                    <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+                    <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top:20px;">
+        <button onclick="addGBlock()" class="action-button"><i class="fas fa-plus"></i> Ajouter un bloc TVA</button>
+        <button onclick="calculerG()" class="action-button" style="margin-left:10px;"><i class="fas fa-calculator"></i> Calculer</button>
+    </div>
+    <div id="resultG" style="margin-top:25px;"></div>
+</div>
+
+<!-- Mode H -->
+<div id="modeH" class="hidden mode-content">
+    <h3><i class="fas fa-exchange-alt"></i> Mode H : Convertisseur de Devises</h3>
+    <div class="currency-card" style="background: linear-gradient(135deg, var(--accent-color), var(--success-color)); color: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <div class="currency-input-group" style="display: flex; align-items: center; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
+            <div class="currency-box" style="flex: 1; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; min-width: 200px;">
+                <div class="currency-box-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <img src="https://flagcdn.com/w20/eu.png" class="currency-flag" id="fromFlag" style="width: 32px; height: 24px; border-radius: 4px; object-fit: cover;">
+                    <select id="fromCurrency" class="currency-select" onchange="updateFlags()" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary);"></select>
+                </div>
+                <input type="number" id="fromAmount" class="amount-input" value="100" step="0.01" oninput="convertCurrency()" style="width: 100%; padding: 12px; font-size: 18px; border: 2px solid var(--border-light); border-radius: 6px; text-align: right; background: var(--bg-secondary); color: var(--text-primary);">
+            </div>
+            <button onclick="switchCurrencies()" class="switch-button" style="background: white; border: none; border-radius: 50%; width: 45px; height: 45px; cursor: pointer; font-size: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); color: var(--text-primary);">⇄</button>
+            <div class="currency-box" style="flex: 1; background: rgba(255, 255, 255, 0.95); padding: 15px; border-radius: 8px; min-width: 200px;">
+                <div class="currency-box-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <img src="https://flagcdn.com/w20/us.png" class="currency-flag" id="toFlag" style="width: 32px; height: 24px; border-radius: 4px; object-fit: cover;">
+                    <select id="toCurrency" class="currency-select" onchange="updateFlags()" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary);"></select>
+                </div>
+                <input type="text" id="toAmount" class="amount-input" readonly style="width: 100%; padding: 12px; font-size: 18px; border: 2px solid var(--border-light); border-radius: 6px; text-align: right; background: var(--bg-secondary); color: var(--text-primary);">
+            </div>
+        </div>
+        <div class="rate-info" id="rateInfo" style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 6px; margin-top: 15px; font-size: 15px;">
+            Taux de change: 1 EUR = ... USD
+        </div>
+        <div style="margin-top: 15px; text-align: center;">
+            <button onclick="saveConversionToHistory()" class="action-button"><i class="fas fa-save"></i> Sauvegarder cette conversion</button>
+        </div>
+    </div>
+    <div class="conversion-history" style="margin-top: 25px; padding: 20px; background: var(--bg-tertiary); border-radius: 8px;">
+        <h4><i class="fas fa-history"></i> Historique des conversions</h4>
+        <div class="history-table-container" id="historyContainer" style="max-height: 250px; overflow-y: auto; margin: 10px 0; border: 1px solid var(--border-color);">
+            <div id="conversionHistoryList"></div>
+        </div>
+        <div style="margin-top: 15px;">
+            <button onclick="clearConversionHistory()" class="secondary"><i class="fas fa-trash"></i> Effacer l'historique</button>
+            <button onclick="exportHistoryToCSV()" class="secondary"><i class="fas fa-file-export"></i> Exporter en CSV</button>
+        </div>
+    </div>
+    <div style="margin-top: 25px;">
+        <h4><i class="fas fa-chart-bar"></i> Taux de change actuels (par rapport à EUR)</h4>
+        <div id="allRatesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-top: 15px;"></div>
+    </div>
+</div>
+
+<!-- Modal de sauvegarde -->
+<div class="backup-modal hidden" id="backupModal">
+    <div class="modal-content">
+        <h3 style="margin-top: 0;"><i class="fas fa-save"></i> Gestion des sauvegardes</h3>
+        
+        <div class="mb-4">
+            <button onclick="createBackup()" class="action-button"><i class="fas fa-plus"></i> Nouvelle sauvegarde</button>
+            <button onclick="importBackupFile()" class="secondary"><i class="fas fa-upload"></i> Importer</button>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <h4>Sauvegardes locales</h4>
+            <div id="backupList" style="max-height: 300px; overflow-y: auto;"></div>
+        </div>
+        
+        <div class="flex justify-between mt-4">
+            <button onclick="closeBackupModal()" class="secondary">Fermer</button>
+            <button onclick="clearAllBackups()" class="delete-btn"><i class="fas fa-trash"></i> Tout effacer</button>
+        </div>
+    </div>
+</div>
+
+<!-- Input fichier caché -->
+<input type="file" id="backupFileInput" accept=".json" class="hidden" onchange="handleBackupFileSelect(event)">
+
+<script>
+// ============================================
+// VARIABLES GLOBALES
+// ============================================
+const APP_STORAGE_KEY = 'global_calculator_data_v2';
+const BACKUP_STORAGE_KEY = 'calculator_backups';
+const AUTO_SAVE_DELAY = 2000;
+const MAX_BACKUPS = 10;
+
+let chartD = null, chartE = null, chartF = null;
+let dDates = [], dSeries = [];
+let historiqueF = [];
+let conversionHistory = JSON.parse(localStorage.getItem('conversionHistory') || '[]');
+let cBlocks = [];
+let cBlockCounter = 1;
+let exchangeRates = {};
+let currentTheme = 'light';
+let saveTimeout = null;
+
+const currencyFlags = {
+    'EUR': 'eu', 'USD': 'us', 'GBP': 'gb', 'CHF': 'ch', 'JPY': 'jp', 'CNY': 'cn',
+    'RUB': 'ru', 'INR': 'in', 'BRL': 'br', 'KRW': 'kr', 'MXN': 'mx', 'SGD': 'sg',
+    'HKD': 'hk', 'NZD': 'nz', 'SEK': 'se', 'NOK': 'no', 'DKK': 'dk', 'PLN': 'pl',
+    'TRY': 'tr', 'THB': 'th', 'IDR': 'id', 'MYR': 'my', 'PHP': 'ph', 'VND': 'vn',
+    'AED': 'ae', 'SAR': 'sa', 'ZAR': 'za', 'EGP': 'eg', 'CAD': 'ca', 'AUD': 'au'
+};
+
+// ============================================
+// INITIALISATION
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Calculateur Global Pro - Initialisation');
+    
+    // 1. Charger le thème
+    loadTheme();
+    
+    // 2. Charger les données sauvegardées
+    loadAllData();
+    
+    // 3. Initialiser les modes
+    initModes();
+    
+    // 4. Activer la sauvegarde automatique
+    initAutoSave();
+    
+    // 5. Initialiser les taux de change
+    loadExchangeRates();
+    
+    showNotification('Application chargée avec succès !', 'success');
+});
+
+// ============================================
+// SYSTÈME DE THÈME
+// ============================================
+function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    localStorage.setItem('calculator_theme', currentTheme);
+    
+    const themeIcon = document.querySelector('.theme-toggle i');
+    themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    
+    showNotification(`Thème ${currentTheme === 'light' ? 'clair' : 'sombre'} activé`, 'info');
+}
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem('calculator_theme') || 'light';
+    currentTheme = savedTheme;
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    const themeIcon = document.querySelector('.theme-toggle i');
+    if (themeIcon) {
+        themeIcon.className = currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+}
+
+// ============================================
+// SYSTÈME DE SAUVEGARDE AVANCÉ
+// ============================================
+function initAutoSave() {
+    // Sauvegarde automatique lors des changements
+    document.addEventListener('input', debounce(saveAllData, 1000));
+    
+    // Sauvegarde périodique
+    setInterval(saveAllData, 30000);
+    
+    // Sauvegarde avant fermeture
+    window.addEventListener('beforeunload', function(e) {
+        if (hasUnsavedChanges()) {
+            saveAllData();
+        }
+    });
+}
+
+function hasUnsavedChanges() {
+    return true; // Toujours sauvegarder pour sécurité
+}
+
+function saveAllData() {
+    try {
+        const appData = {
+            timestamp: new Date().toISOString(),
+            version: '2.0',
+            modeA: collectModeAData(),
+            modeC: cBlocks,
+            modeD: { dates: dDates, series: dSeries },
+            modeF: historiqueF,
+            modeG: collectModeGData(),
+            modeH: {
+                conversions: conversionHistory,
+                fromCurrency: document.getElementById('fromCurrency')?.value || 'EUR',
+                toCurrency: document.getElementById('toCurrency')?.value || 'USD',
+                fromAmount: document.getElementById('fromAmount')?.value || '100'
+            },
+            settings: {
+                theme: currentTheme,
+                lastMode: getCurrentMode()
+            }
+        };
+        
+        localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(appData));
+        showSaveIndicator();
+        
+        // Sauvegarde automatique dans l'historique
+        if (shouldCreateBackup()) {
+            createBackup('Sauvegarde automatique', false);
+        }
+        
+        return appData;
+    } catch (error) {
+        console.error('Erreur sauvegarde:', error);
+        return null;
+    }
+}
+
+function loadAllData() {
+    try {
+        const saved = localStorage.getItem(APP_STORAGE_KEY);
+        if (saved) {
+            const data = JSON.parse(saved);
+            
+            // Restaurer chaque mode
+            if (data.modeA) restoreModeAData(data.modeA);
+            if (data.modeC) cBlocks = data.modeC;
+            if (data.modeD) {
+                dDates = data.modeD.dates || [];
+                dSeries = data.modeD.series || [];
+            }
+            if (data.modeF) historiqueF = data.modeF;
+            if (data.modeG) restoreModeGData(data.modeG);
+            if (data.modeH) {
+                conversionHistory = data.modeH.conversions || [];
+                updateConversionHistoryDisplay();
+            }
+            
+            // Restaurer le thème
+            if (data.settings?.theme) {
+                currentTheme = data.settings.theme;
+                document.documentElement.setAttribute('data-theme', currentTheme);
+            }
+            
+            console.log('✅ Données restaurées');
+            return true;
+        }
+    } catch (error) {
+        console.error('❌ Erreur chargement:', error);
+    }
+    
+    // Données par défaut
+    initDefaultData();
+    return false;
+}
+
+function initDefaultData() {
+    if (cBlocks.length === 0) addCBlock();
+    if (dDates.length === 0) {
+        addDDate();
+        addDDate();
+        addDSeries();
+    }
+    conversionHistory = [];
+}
+
+function shouldCreateBackup() {
+    const lastBackup = localStorage.getItem('last_backup_timestamp');
+    if (!lastBackup) return true;
+    
+    const lastBackupTime = new Date(lastBackup).getTime();
+    const now = new Date().getTime();
+    const hoursSinceLastBackup = (now - lastBackupTime) / (1000 * 60 * 60);
+    
+    return hoursSinceLastBackup >= 1; // Toutes les heures
+}
+
+// ============================================
+// GESTION DES SAUVEGARDES (BACKUPS)
+// ============================================
+function createBackup(name = null, showNotification = true) {
+    const backupName = name || `Sauvegarde_${new Date().toLocaleDateString('fr-FR')}`;
+    const backupData = saveAllData();
+    
+    const backup = {
+        id: Date.now(),
+        name: backupName,
+        timestamp: new Date().toISOString(),
+        data: backupData,
+        size: JSON.stringify(backupData).length
+    };
+    
+    let backups = JSON.parse(localStorage.getItem(BACKUP_STORAGE_KEY) || '[]');
+    backups.unshift(backup);
+    
+    if (backups.length > MAX_BACKUPS) {
+        backups = backups.slice(0, MAX_BACKUPS);
+    }
+    
+    localStorage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(backups));
+    localStorage.setItem('last_backup_timestamp', new Date().toISOString());
+    
+    if (showNotification) {
+        showNotification(`Sauvegarde "${backupName}" créée`, 'success');
+    }
+    
+    displayBackupList();
+    return backup;
+}
+
+function displayBackupList() {
+    const container = document.getElementById('backupList');
+    if (!container) return;
+    
+    const backups = JSON.parse(localStorage.getItem(BACKUP_STORAGE_KEY) || '[]');
+    
+    if (backups.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                <i class="fas fa-inbox fa-2x" style="margin-bottom: 15px;"></i>
+                <p>Aucune sauvegarde disponible</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    backups.forEach(backup => {
+        const date = new Date(backup.timestamp).toLocaleString('fr-FR');
+        const size = (backup.size / 1024).toFixed(2);
+        
+        html += `
+            <div class="backup-item">
+                <div class="backup-info">
+                    <div class="backup-name" style="font-weight: 600; margin-bottom: 5px;">${backup.name}</div>
+                    <div class="backup-date" style="font-size: 12px; color: var(--text-muted);">${date} • ${size} Ko</div>
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <button onclick="restoreBackup(${backup.id})" style="padding: 8px 12px;" class="secondary">
+                        <i class="fas fa-undo"></i>
+                    </button>
+                    <button onclick="deleteBackup(${backup.id})" style="padding: 8px 12px;" class="delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function restoreBackup(backupId) {
+    const backups = JSON.parse(localStorage.getItem(BACKUP_STORAGE_KEY) || '[]');
+    const backup = backups.find(b => b.id === backupId);
+    
+    if (!backup) {
+        showNotification('Sauvegarde introuvable', 'error');
+        return;
+    }
+    
+    if (confirm(`Restaurer la sauvegarde "${backup.name}" ?\nLes données actuelles seront écrasées.`)) {
+        try {
+            restoreAllData(backup.data);
+            showNotification(`Sauvegarde "${backup.name}" restaurée`, 'success');
+            closeBackupModal();
+        } catch (error) {
+            showNotification('Erreur restauration', 'error');
+        }
+    }
+}
+
+function deleteBackup(backupId) {
+    let backups = JSON.parse(localStorage.getItem(BACKUP_STORAGE_KEY) || '[]');
+    const backup = backups.find(b => b.id === backupId);
+    
+    if (!backup) return;
+    
+    if (confirm(`Supprimer la sauvegarde "${backup.name}" ?`)) {
+        backups = backups.filter(b => b.id !== backupId);
+        localStorage.setItem(BACKUP_STORAGE_KEY, JSON.stringify(backups));
+        displayBackupList();
+        showNotification('Sauvegarde supprimée', 'success');
+    }
+}
+
+function clearAllBackups() {
+    const backups = JSON.parse(localStorage.getItem(BACKUP_STORAGE_KEY) || '[]');
+    if (backups.length === 0) return;
+    
+    if (confirm(`Supprimer toutes les ${backups.length} sauvegardes ?`)) {
+        localStorage.removeItem(BACKUP_STORAGE_KEY);
+        displayBackupList();
+        showNotification('Toutes les sauvegardes supprimées', 'success');
+    }
+}
+
+function exportAllData() {
+    const data = saveAllData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    
+    const dateStr = new Date().toISOString().split('T')[0];
+    a.href = url;
+    a.download = `calculateur_sauvegarde_${dateStr}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    showNotification('Données exportées', 'success');
+}
+
+function importBackupFile() {
+    document.getElementById('backupFileInput').click();
+}
+
+function handleBackupFileSelect(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            if (confirm('Importer ces données ?')) {
+                restoreAllData(data);
+                showNotification('Données importées', 'success');
+                closeBackupModal();
+            }
+        } catch (error) {
+            showNotification('Fichier invalide', 'error');
+        }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+}
+
+function restoreAllData(data) {
+    if (!data) return;
+    
+    if (data.modeA) restoreModeAData(data.modeA);
+    if (data.modeC) cBlocks = data.modeC;
+    if (data.modeD) {
+        dDates = data.modeD.dates || [];
+        dSeries = data.modeD.series || [];
+    }
+    if (data.modeF) historiqueF = data.modeF;
+    if (data.modeG) restoreModeGData(data.modeG);
+    if (data.modeH) {
+        conversionHistory = data.modeH.conversions || [];
+        updateConversionHistoryDisplay();
+    }
+    
+    if (data.settings?.theme) {
+        currentTheme = data.settings.theme;
+        document.documentElement.setAttribute('data-theme', currentTheme);
+    }
+    
+    updateAllModes();
+}
+
+// ============================================
+// FONCTIONS UTILITAIRES
+// ============================================
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.style.display = 'flex';
+    
+    setTimeout(() => {
+        indicator.style.display = 'none';
+    }, 2000);
+}
+
+function showNotification(message, type = 'info', duration = 3000) {
+    document.querySelectorAll('.notification').forEach(el => el.remove());
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    
+    const icons = {
+        success: 'fas fa-check-circle',
+        error: 'fas fa-exclamation-circle',
+        warning: 'fas fa-exclamation-triangle',
+        info: 'fas fa-info-circle'
+    };
+    
+    notification.innerHTML = `
+        <i class="${icons[type] || icons.info}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.style.animation = 'slideIn 0.3s ease reverse';
+            setTimeout(() => notification.remove(), 300);
+        }
+    }, duration);
+}
+
+function getCurrentMode() {
+    const visibleMode = document.querySelector('.mode-content:not(.hidden)');
+    return visibleMode ? visibleMode.id : 'none';
+}
+
+// ============================================
+// FONCTIONS POUR LA COLLECTE DE DONNÉES
+// ============================================
+function collectModeAData() {
+    const blocks = document.querySelectorAll('#multiAContainer .ref-block');
+    return Array.from(blocks).map(block => ({
+        ref: block.querySelector('.refA').value,
+        vals: block.querySelector('.valsA').value
+    }));
+}
+
+function restoreModeAData(data) {
+    const container = document.getElementById('multiAContainer');
+    container.innerHTML = '';
+    
+    data.forEach(item => {
+        addABlock();
+        const lastBlock = container.lastElementChild;
+        lastBlock.querySelector('.refA').value = item.ref;
+        lastBlock.querySelector('.valsA').value = item.vals;
+    });
+    
+    if (data.length === 0) addABlock();
+    autoCalculA();
+}
+
+function collectModeGData() {
+    const blocks = document.querySelectorAll('#multiGContainer .ref-block');
+    return Array.from(blocks).map(block => {
+        const lines = Array.from(block.querySelectorAll('.ligne-tva')).map(line => ({
+            libelle: line.querySelector('.libelleG')?.value || '',
+            valeur: line.querySelector('.valeurG')?.value || '0',
+            type: line.querySelector('.typeG')?.value || 'HT',
+            tva: line.querySelector('.tvaIndividuelleG')?.value || '20'
+        }));
+        
+        return {
+            nom: block.querySelector('.bloc-nom-input')?.value || '',
+            tvaGlobale: block.querySelector('.global-tva-input')?.value || '20',
+            lignes: lines
+        };
+    });
+}
+
+function restoreModeGData(data) {
+    const container = document.getElementById('multiGContainer');
+    container.innerHTML = '';
+    
+    data.forEach(blockData => {
+        const blockId = 'gblock-' + Date.now();
+        const div = document.createElement('div');
+        div.className = 'ref-block';
+        div.id = blockId;
+        
+        let linesHTML = '';
+        blockData.lignes.forEach(line => {
+            linesHTML += `
+                <div class="ligne-tva" style="display:flex; gap:10px; align-items:center;">
+                    <input type="text" class="libelleG" placeholder="Libellé" value="${line.libelle}" style="flex:1;" oninput="autoCalculG()">
+                    <input type="number" class="valeurG" placeholder="Montant" value="${line.valeur}" style="width:110px;" oninput="autoCalculG()">
+                    <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+                        <option value="HT" ${line.type === 'HT' ? 'selected' : ''}>HT</option>
+                        <option value="TTC" ${line.type === 'TTC' ? 'selected' : ''}>TTC</option>
+                    </select>
+                    <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="${line.tva}" style="width:80px;" oninput="autoCalculG()">
+                    <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-times"></i></button>
+                </div>
+            `;
+        });
+        
+        div.innerHTML = `
+            <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                <input type="text" class="bloc-nom-input" value="${blockData.nom}" placeholder="Nom du bloc" style="flex:1;" oninput="autoCalculG()">
+                <label style="color: var(--text-primary);">TVA Globale (%): <input type="number" class="global-tva-input" value="${blockData.tvaGlobale}" style="width:70px;" oninput="autoCalculG()"></label>
+                <button onclick="addGLigneToBlock('${blockId}')" class="secondary"><i class="fas fa-plus"></i> Ligne</button>
+                <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+                ${linesHTML}
+            </div>
+        `;
+        
+        container.appendChild(div);
+    });
+    
+    if (data.length === 0) addGBlock();
+    autoCalculG();
+}
+
+// ============================================
+// MODAL DES SAUVEGARDES
+// ============================================
+function showBackupModal() {
+    document.getElementById('backupModal').classList.remove('hidden');
+    displayBackupList();
+}
+
+function closeBackupModal() {
+    document.getElementById('backupModal').classList.add('hidden');
+}
+
+// ============================================
+// FONCTIONS DES MODES EXISTANTS
+// ============================================
+function initModes() {
+    if (cBlocks.length === 0) addCBlock();
+    updateCResults();
+    updateConversionHistoryDisplay();
+}
+
+function updateAllModes() {
+    if (cBlocks.length > 0) {
+        renderCBlocks();
+        updateCResults();
+    }
+    if (dDates.length > 0) updateDTable();
+    if (historiqueF.length > 0) autoCalculF();
+    autoCalculG();
+}
+
+function showMode(id){
+    document.querySelectorAll('.mode-content').forEach(el => el.classList.add('hidden'));
+    if (id !== 'none') {
+        document.getElementById(id).classList.remove('hidden');
+        
+        if (id === 'modeC' && cBlocks.length === 0) addCBlock();
+        if (id === 'modeH') loadExchangeRates();
+        if (id === 'modeF') autoCalculF();
+    }
+}
+
+function removeNode(btn){ 
+    btn.parentNode.remove();
+    if (btn.closest('#multiFContainer')) autoCalculF();
+    if (btn.closest('#multiGContainer')) autoCalculG();
+    if (btn.closest('#multiCContainer')) updateCResults();
+}
+
+function parseNumber(value) {
+    if (typeof value === 'string') value = value.replace(',', '.');
+    const num = parseFloat(value);
+    return isNaN(num) ? 0 : num;
+}
+
+// ============================================
+// FONCTIONS EXISTANTES DES MODES
+// ============================================
+
+// Mode A
+function addABlock(){
+    const cont = document.getElementById("multiAContainer");
+    const div = document.createElement("div"); 
+    div.className = "ref-block";
+    div.innerHTML = `
+        <input type="number" class="refA" placeholder="Référence" value="100" style="width:100px;" oninput="autoCalculA()">
+        <input type="text" class="valsA" placeholder="Valeurs (séparées par espaces)" value="80 120 100" style="flex:1;" oninput="autoCalculA()">
+        <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+    `;
+    cont.appendChild(div);
+}
+
+function autoCalculA(){
+    const cont = document.getElementById("multiAContainer");
+    const resDiv = document.getElementById("resultA"); 
+    resDiv.innerHTML = "";
+    
+    Array.from(cont.getElementsByClassName("ref-block")).forEach((block, index) => {
+        const ref = parseNumber(block.querySelector(".refA").value);
+        const raw = (block.querySelector(".valsA").value || "").trim();
+        if(raw === "") return;
+        const vals = raw.split(/\s+/).map(parseNumber).filter(v => v !== null); 
+        
+        let html = `<div style="margin:15px 0;"><h4>Bloc ${index + 1} - Référence : ${ref.toFixed(2)}€</h4>`;
+        html += `<table style="width:100%;"><tr><th>Valeur</th><th>Différence</th><th>%</th></tr>`;
+        
+        vals.forEach(v => {
+            const diff = v - ref;
+            const pct = (ref === 0) ? null : (diff / ref * 100);
+            const col = diff > 0 ? "var(--success-color)" : diff < 0 ? "var(--error-color)" : "var(--text-muted)";
+            html += `<tr style="background:${col}; color:#fff;">
+                <td>${v.toFixed(2)} €</td>
+                <td>${diff>=0?'+':''}${diff.toFixed(2)} €</td>
+                <td>${pct===null?'—':pct.toFixed(2)+'%'}</td>
+            </tr>`;
+        });
+        html += "</table></div>";
+        resDiv.innerHTML += html;
+    });
+}
+
+// Mode C
+function addCBlock() {
+    const blockId = Date.now();
+    const block = {
+        id: blockId,
+        name: `Bloc ${cBlockCounter}`,
+        blockPercent: 0,
+        variables: [
+            { id: Date.now() + 1, name: `Variable 1`, value: 100, percent: 0 },
+            { id: Date.now() + 2, name: `Variable 2`, value: 200, percent: 0 }
+        ]
+    };
+    
+    cBlocks.push(block);
+    cBlockCounter++;
+    renderCBlocks();
+    updateCResults();
+}
+
+function renderCBlocks() {
+    const container = document.getElementById('multiCContainer');
+    if (cBlocks.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Ajoutez un premier bloc</p>';
+        return;
+    }
+    
+    let html = '';
+    
+    cBlocks.forEach((block) => {
+        html += `
+            <div class="c-block" data-block-id="${block.id}">
+                <div class="c-block-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" value="${block.name}" onchange="updateCBlockName(${block.id}, this.value)" 
+                           style="flex:1; min-width: 150px; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);" placeholder="Nom du bloc">
+                    <span style="font-weight:bold; color: var(--text-primary);">% bloc:</span>
+                    <input type="range" class="c-block-slider" min="-100" max="100" value="${block.blockPercent}" 
+                           oninput="updateBlockPercent(${block.id}, this.value)" style="flex: 2;">
+                    <span style="width:50px; text-align:center; font-weight:bold; color:var(--accent-color);">${block.blockPercent}%</span>
+                    <button onclick="removeCBlock(${block.id})" class="delete-btn"><i class="fas fa-trash"></i></button>
+                </div>
+                
+                ${block.variables.map(variable => `
+                    <div class="c-variable-item" style="display: flex; align-items: center; gap: 10px; margin: 8px 0; padding: 10px; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 5px;">
+                        <input type="number" value="${variable.value}" style="width:100px; padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-secondary); color: var(--text-primary);"
+                               onchange="updateVariableValue(${block.id}, ${variable.id}, this.value)">
+                        <span style="width:120px; text-align:left; color: var(--text-primary);">${variable.name}</span>
+                        <input type="range" class="c-var-slider" min="-100" max="100" value="${variable.percent}"
+                               oninput="updateVariablePercent(${block.id}, ${variable.id}, this.value)" style="flex: 2;">
+                        <span class="c-var-value" style="min-width: 60px; text-align: center; font-weight: bold; color:${variable.percent >= 0 ? 'var(--success-color)' : 'var(--error-color)'}">
+                            ${variable.percent >= 0 ? '+' : ''}${variable.percent}%
+                        </span>
+                        <button onclick="removeVariable(${block.id}, ${variable.id})" class="delete-btn" style="padding: 5px 10px;"><i class="fas fa-times"></i></button>
+                    </div>
+                `).join('')}
+                
+                <button onclick="addVariableToBlock(${block.id})" class="secondary" style="width:100%; margin-top:10px; padding: 8px;">
+                    <i class="fas fa-plus"></i> Ajouter une variable
+                </button>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function updateCBlockName(blockId, newName) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) block.name = newName;
+}
+
+function updateBlockPercent(blockId, newPercent) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        let percent = parseInt(newPercent) || 0;
+        if (percent > 100) percent = 100;
+        if (percent < -100) percent = -100;
+        
+        block.blockPercent = percent;
+        block.variables.forEach(variable => {
+            variable.percent = percent;
+        });
+        renderCBlocks();
+        updateCResults();
+    }
+}
+
+function updateVariableValue(blockId, variableId, newValue) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        const variable = block.variables.find(v => v.id === variableId);
+        if (variable) {
+            variable.value = parseFloat(newValue) || 0;
+            updateCResults();
+        }
+    }
+}
+
+function updateVariablePercent(blockId, variableId, newPercent) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        const variable = block.variables.find(v => v.id === variableId);
+        if (variable) {
+            let percent = parseInt(newPercent) || 0;
+            if (percent > 100) percent = 100;
+            if (percent < -100) percent = -100;
+            
+            variable.percent = percent;
+            renderCBlocks();
+            updateCResults();
+        }
+    }
+}
+
+function addVariableToBlock(blockId) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block) {
+        block.variables.push({
+            id: Date.now(),
+            name: `Variable ${block.variables.length + 1}`,
+            value: 100,
+            percent: block.blockPercent
+        });
+        renderCBlocks();
+        updateCResults();
+    }
+}
+
+function removeVariable(blockId, variableId) {
+    const block = cBlocks.find(b => b.id === blockId);
+    if (block && block.variables.length > 1) {
+        block.variables = block.variables.filter(v => v.id !== variableId);
+        renderCBlocks();
+        updateCResults();
+    } else {
+        showNotification('Un bloc doit avoir au moins une variable', 'warning');
+    }
+}
+
+function removeCBlock(blockId) {
+    if (cBlocks.length <= 1) {
+        showNotification('Vous devez garder au moins un bloc', 'warning');
+        return;
+    }
+    
+    if (confirm('Voulez-vous vraiment supprimer ce bloc ?')) {
+        cBlocks = cBlocks.filter(b => b.id !== blockId);
+        renderCBlocks();
+        updateCResults();
+        showNotification('Bloc supprimé avec succès', 'success');
+    }
+}
+
+function updateCResults() {
+    const tbody = document.getElementById('cResultsBody');
+    const tfoot = document.getElementById('cResultsTotal');
+    let html = '';
+    
+    let totalInitial = 0;
+    let totalFinal = 0;
+    let totalVariation = 0;
+    
+    cBlocks.forEach(block => {
+        block.variables.forEach(variable => {
+            const initial = variable.value;
+            const final = initial * (1 + variable.percent / 100);
+            const variation = final - initial;
+            
+            totalInitial += initial;
+            totalFinal += final;
+            totalVariation += variation;
+            
+            html += `<tr>
+                <td>${block.name}</td>
+                <td>${variable.name}</td>
+                <td>${initial.toFixed(2)}</td>
+                <td>${variable.percent >= 0 ? '+' : ''}${variable.percent}%</td>
+                <td>${final.toFixed(2)}</td>
+                <td class="${variation >= 0 ? 'positive' : 'negative'}">${variation >= 0 ? '+' : ''}${variation.toFixed(2)}</td>
+            </tr>`;
+        });
+    });
+    
+    tbody.innerHTML = html;
+    
+    tfoot.innerHTML = `
+        <tr class="total-row">
+            <td colspan="2"><strong>TOTAL GLOBAL</strong></td>
+            <td><strong>${totalInitial.toFixed(2)}</strong></td>
+            <td></td>
+            <td><strong>${totalFinal.toFixed(2)}</strong></td>
+            <td class="${totalVariation >= 0 ? 'positive' : 'negative'}">
+                <strong>${totalVariation >= 0 ? '+' : ''}${totalVariation.toFixed(2)}</strong>
+            </td>
+        </tr>
+    `;
+}
+
+// Mode D
+function addDDate() {
+    const date = new Date().toISOString().split('T')[0];
+    const id = Date.now();
+    dDates.push({ id, date });
+    updateDTable();
+}
+
+function removeDDate(id) {
+    dDates = dDates.filter(d => d.id !== id);
+    dSeries.forEach(s => {
+        delete s.values[id];
+    });
+    updateDTable();
+}
+
+function addDSeries() {
+    const newSeries = {
+        id: Date.now(),
+        name: `Série ${dSeries.length + 1}`,
+        values: {},
+        color: '#' + Math.floor(Math.random()*16777215).toString(16)
+    };
+    dDates.forEach(d => {
+        newSeries.values[d.id] = 0;
+    });
+    dSeries.push(newSeries);
+    updateDTable();
+}
+
+function removeDSeries(id) {
+    dSeries = dSeries.filter(s => s.id !== id);
+    updateDTable();
+}
+
+function updateDDate(id, newDate) {
+    const dateObj = dDates.find(d => d.id === id);
+    if (dateObj) dateObj.date = newDate;
+}
+
+function updateDSeriesName(id, newName) {
+    const series = dSeries.find(s => s.id === id);
+    if (series) series.name = newName;
+}
+
+function updateDSeriesColor(id, newColor) {
+    const series = dSeries.find(s => s.id === id);
+    if (series) series.color = newColor;
+}
+
+function updateDSeriesValue(seriesId, dateId, newValue) {
+    const series = dSeries.find(s => s.id === seriesId);
+    if (series) series.values[dateId] = parseFloat(newValue) || 0;
+}
+
+function updateDTable() {
+    const dateHeader = document.getElementById('dateHeaderRow');
+    const seriesBody = document.getElementById('seriesBody');
+    
+    let headerHTML = '<th style="min-width: 160px;">Série / Date</th>';
+    dDates.forEach(d => {
+        headerHTML += `
+            <th>
+                <input type="date" value="${d.date}" onchange="updateDDate(${d.id}, this.value)" style="width:120px; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color);">
+                <button onclick="removeDDate(${d.id})" style="padding:2px 6px;font-size:11px; background: var(--error-color); color: white; border: none; border-radius: 3px; cursor: pointer;">✖</button>
+            </th>
+        `;
+    });
+    dateHeader.innerHTML = headerHTML;
+    
+    seriesBody.innerHTML = '';
+    dSeries.forEach(s => {
+        let row = document.createElement('tr');
+        let rowHTML = `
+            <td>
+                <input type="text" value="${s.name}" onchange="updateDSeriesName(${s.id}, this.value)" style="width:120px; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color);">
+                <input type="color" value="${s.color}" onchange="updateDSeriesColor(${s.id}, this.value)" title="Couleur" style="width: 30px; height: 30px;">
+                <button onclick="removeDSeries(${s.id})" style="padding:2px 6px;font-size:11px; background: var(--error-color); color: white; border: none; border-radius: 3px; cursor: pointer;">✖</button>
+            </td>
+        `;
+        
+        dDates.forEach(d => {
+            const val = s.values[d.id] || 0;
+            rowHTML += `
+                <td>
+                    <input type="number" value="${val}" 
+                           onchange="updateDSeriesValue(${s.id}, ${d.id}, this.value)" 
+                           style="width:80px; background: var(--bg-secondary); color: var(--text-primary); border: 1px solid var(--border-color);" step="0.01">
+                </td>
+            `;
+        });
+        
+        row.innerHTML = rowHTML;
+        seriesBody.appendChild(row);
+    });
+}
+
+function sortDDates() {
+    dDates.sort((a, b) => new Date(a.date) - new Date(b.date));
+    updateDTable();
+}
+
+function calculerD() {
+    const ctx = document.getElementById('graphD')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartD) chartD.destroy();
+    
+    const labels = dDates.map(d => d.date);
+    const datasets = dSeries.map(s => ({
+        label: s.name,
+        data: dDates.map(d => s.values[d.id] || 0),
+        borderColor: s.color,
+        backgroundColor: s.color + '20',
+        fill: false,
+        tension: 0.1
+    }));
+    
+    chartD = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Évolution temporelle' }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'var(--border-light)' } },
+                x: { grid: { color: 'var(--border-light)' } }
+            }
+        }
+    });
+}
+
+// Mode E
+function addEBlock() {
+    const cont = document.getElementById("multiEContainer");
+    const div = document.createElement("div"); 
+    div.className = "ref-block";
+    div.innerHTML = `
+        <input type="text" class="labelE" placeholder="Nom de la série" oninput="autoCalculE()" style="width:150px;">
+        <input type="text" class="valsE" placeholder="Valeurs (séparées par espaces)" oninput="autoCalculE()" style="flex:1;">
+        <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+    `;
+    cont.appendChild(div);
+}
+
+function autoCalculE() { calculerE(); }
+
+function calculerE() {
+    const ctx = document.getElementById('graphE')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartE) chartE.destroy();
+    
+    const blocks = Array.from(document.querySelectorAll('#multiEContainer .ref-block'));
+    const seriesData = [];
+    
+    blocks.forEach(block => {
+        const label = block.querySelector('.labelE').value || 'Série sans nom';
+        const raw = (block.querySelector('.valsE').value || "").trim();
+        if (raw === "") return;
+        
+        const values = raw.split(/\s+/).map(parseNumber).filter(v => v !== null);
+        if (values.length > 0) {
+            seriesData.push({
+                label: label,
+                data: values,
+                borderColor: '#' + Math.floor(Math.random()*16777215).toString(16),
+                backgroundColor: 'var(--accent-color)20',
+                fill: false,
+                tension: 0.1
+            });
+        }
+    });
+    
+    if (seriesData.length === 0) return;
+    
+    const maxLength = Math.max(...seriesData.map(s => s.data.length));
+    const labels = Array.from({length: maxLength}, (_, i) => `Point ${i + 1}`);
+    
+    chartE = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets: seriesData },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Graphique linéaire multi-séries' }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: 'var(--border-light)' } },
+                x: { grid: { color: 'var(--border-light)' } }
+            }
+        }
+    });
+}
+
+// Mode F
+function addFBlock() {
+    const container = document.getElementById("multiFContainer");
+    const id = Date.now();
+    
+    const div = document.createElement("div");
+    div.className = "ref-block";
+    div.setAttribute('data-category-id', id);
+    div.innerHTML = `
+        <input type="text" class="labelF" placeholder="Catégorie" value="Catégorie" style="width:150px;" oninput="autoCalculF()">
+        <input type="number" class="valF" placeholder="Valeur" value="100" style="width:100px;" oninput="autoCalculF()">
+        <input type="color" class="colorF" value="#${Math.floor(Math.random()*16777215).toString(16)}" oninput="autoCalculF()">
+        <div class="fusion-toggle-btn" onclick="toggleFusionSelection(this)" data-selected="false" style="width: 32px; height: 32px; border: 2px solid var(--border-color); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;">✗</div>
+        <button onclick="removeF(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+    `;
+    
+    container.appendChild(div);
+    autoCalculF();
+    updateSelectedCount();
+}
+
+function removeF(btn) {
+    const block = btn.closest('.ref-block');
+    block.remove();
+    autoCalculF();
+    updateSelectedCount();
+}
+
+function autoCalculF() { calculerF(); }
+
+function calculerF() {
+    const ctx = document.getElementById('graphF')?.getContext('2d');
+    if (!ctx) return;
+    
+    if (chartF) chartF.destroy();
+    
+    historiqueF = [];
+    const blocks = document.querySelectorAll('#multiFContainer .ref-block');
+    blocks.forEach(block => {
+        historiqueF.push({
+            label: block.querySelector('.labelF').value,
+            val: parseFloat(block.querySelector('.valF').value) || 0,
+            color: block.querySelector('.colorF').value
+        });
+    });
+    
+    if (historiqueF.length === 0) return;
+    
+    const total = historiqueF.reduce((sum, cat) => sum + cat.val, 0);
+    
+    const data = {
+        labels: historiqueF.map(cat => cat.label),
+        datasets: [{
+            data: historiqueF.map(cat => cat.val),
+            backgroundColor: historiqueF.map(cat => cat.color),
+            borderWidth: 2,
+            borderColor: 'var(--bg-secondary)'
+        }]
+    };
+    
+    chartF = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right' },
+                title: { display: true, text: `Répartition - Total: ${total.toFixed(2)}` },
+                datalabels: {
+                    formatter: (value) => {
+                        if (total === 0) return '0%';
+                        return `${(value / total * 100).toFixed(1)}%`;
+                    },
+                    color: '#fff',
+                    font: { weight: 'bold', size: 12 }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+    
+    const tbody = document.querySelector('#tableauF tbody');
+    const tfoot = document.getElementById('tableauFTotal');
+    
+    tbody.innerHTML = '';
+    historiqueF.forEach(cat => {
+        const percentage = total === 0 ? 0 : (cat.val / total * 100);
+        tbody.innerHTML += `<tr>
+            <td><span style="display:inline-block;width:12px;height:12px;background:${cat.color};margin-right:8px;border-radius:2px;"></span>${cat.label}</td>
+            <td>${cat.val.toFixed(2)}</td>
+            <td>${percentage.toFixed(1)}%</td>
+        </tr>`;
+    });
+    
+    tfoot.innerHTML = `
+        <tr style="font-weight: bold; background: rgba(52, 152, 219, 0.1);">
+            <td>TOTAL</td>
+            <td>${total.toFixed(2)}</td>
+            <td>100%</td>
+        </tr>
+    `;
+}
+
+function toggleFusionSelection(btn) {
+    const isSelected = btn.getAttribute('data-selected') === 'true';
+    if (isSelected) {
+        btn.textContent = '✗';
+        btn.classList.remove('selected');
+        btn.setAttribute('data-selected', 'false');
+    } else {
+        btn.textContent = '✓';
+        btn.classList.add('selected');
+        btn.setAttribute('data-selected', 'true');
+    }
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const selected = document.querySelectorAll('.fusion-toggle-btn[data-selected="true"]');
+    document.getElementById('selectedCount').textContent = selected.length;
+}
+
+function selectAllForFusion(select) {
+    document.querySelectorAll('.fusion-toggle-btn').forEach(btn => {
+        if (select) {
+            btn.textContent = '✓';
+            btn.classList.add('selected');
+            btn.setAttribute('data-selected', 'true');
+        } else {
+            btn.textContent = '✗';
+            btn.classList.remove('selected');
+            btn.setAttribute('data-selected', 'false');
+        }
+    });
+    updateSelectedCount();
+}
+
+function mergeSelectedCategories() {
+    const selected = Array.from(document.querySelectorAll('.fusion-toggle-btn[data-selected="true"]'));
+    if (selected.length < 2) {
+        showNotification('Sélectionnez au moins 2 catégories à fusionner.', 'warning');
+        return;
+    }
+    
+    const fusionName = document.getElementById('fusionName').value || 'Fusionnée';
+    let totalVal = 0;
+    let color = 'var(--accent-color)';
+    
+    selected.forEach((btn, index) => {
+        const block = btn.closest('.ref-block');
+        const val = parseFloat(block.querySelector('.valF').value) || 0;
+        totalVal += val;
+        if (index === 0) color = block.querySelector('.colorF').value;
+        block.remove();
+    });
+    
+    addFBlock();
+    const lastBlock = document.querySelector('#multiFContainer .ref-block:last-child');
+    lastBlock.querySelector('.labelF').value = fusionName;
+    lastBlock.querySelector('.valF').value = totalVal;
+    lastBlock.querySelector('.colorF').value = color;
+    
+    document.getElementById('fusionName').value = '';
+    showNotification(`Catégories fusionnées en "${fusionName}"`, 'success');
+}
+
+// Mode G
+function addGBlock() {
+    const container = document.getElementById("multiGContainer");
+    const blockId = 'gblock-' + Date.now();
+    
+    const div = document.createElement("div");
+    div.className = "ref-block";
+    div.id = blockId;
+    div.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px; width:100%;">
+            <input type="text" class="bloc-nom-input" value="Nouveau bloc" placeholder="Nom du bloc" style="flex:1;" oninput="autoCalculG()">
+            <label style="color: var(--text-primary);">TVA Globale (%): <input type="number" class="global-tva-input" value="20" style="width:70px;" oninput="autoCalculG()"></label>
+            <button onclick="addGLigneToBlock('${blockId}')" class="secondary"><i class="fas fa-plus"></i> Ligne</button>
+            <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-trash"></i></button>
+        </div>
+        <div class="ligneGContainer" style="display:flex; flex-direction:column; gap:10px; margin-top:15px;">
+            <div class="ligne-tva" style="display:flex; gap:10px; align-items:center;">
+                <input type="text" class="libelleG" placeholder="Libellé" value="Produit" style="flex:1;" oninput="autoCalculG()">
+                <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+                <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+                    <option value="HT">HT</option><option value="TTC" selected>TTC</option>
+                </select>
+                <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+                <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(div);
+    autoCalculG();
+}
+
+function addGLigneToBlock(blockId) {
+    const block = document.getElementById(blockId);
+    if (!block) return;
+    
+    const container = block.querySelector('.ligneGContainer');
+    const ligneDiv = document.createElement("div");
+    ligneDiv.className = "ligne-tva";
+    ligneDiv.style.cssText = "display:flex; gap:10px; align-items:center;";
+    ligneDiv.innerHTML = `
+        <input type="text" class="libelleG" placeholder="Libellé" style="flex:1;" oninput="autoCalculG()">
+        <input type="number" class="valeurG" placeholder="Montant" value="100" style="width:110px;" oninput="autoCalculG()">
+        <select class="typeG" style="width:90px;" onchange="autoCalculG()">
+            <option value="HT">HT</option><option value="TTC" selected>TTC</option>
+        </select>
+        <input type="number" class="tvaIndividuelleG" placeholder="TVA (%)" value="20" style="width:80px;" oninput="autoCalculG()">
+        <button onclick="removeNode(this)" class="delete-btn"><i class="fas fa-times"></i></button>
+    `;
+    
+    container.appendChild(ligneDiv);
+    autoCalculG();
+}
+
+function autoCalculG() { calculerG(); }
+
+function calculerG() {
+    const resultDiv = document.getElementById("resultG");
+    const blocks = document.querySelectorAll('#multiGContainer .ref-block');
+    
+    let globalHTML = "";
+    
+    blocks.forEach((block, blockIndex) => {
+        const blocNom = block.querySelector('.bloc-nom-input').value || `Bloc ${blockIndex + 1}`;
+        const globalTVA = parseFloat(block.querySelector('.global-tva-input').value) || 20;
+        
+        const lignes = block.querySelectorAll('.ligne-tva');
+        let totalHT = 0;
+        let totalTVA = 0;
+        let totalTTC = 0;
+        
+        let tableHTML = `
+            <div style="margin: 20px 0; padding: 15px; background: var(--bg-tertiary); border-radius: 10px;">
+                <h4 style="color: var(--text-primary);">${blocNom} (TVA par défaut: ${globalTVA}%)</h4>
+                <table style="width:100%; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th>Libellé</th><th>Montant</th><th>Type</th><th>TVA</th>
+                            <th>HT</th><th>TVA (€)</th><th>TTC</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        lignes.forEach(ligne => {
+            const libelle = ligne.querySelector('.libelleG').value || "";
+            const valeur = parseFloat(ligne.querySelector('.valeurG').value) || 0;
+            const type = ligne.querySelector('.typeG').value;
+            const tva = parseFloat(ligne.querySelector('.tvaIndividuelleG').value) || globalTVA;
+            
+            let ht, ttc, tvaEur;
+            
+            if (type === "HT") {
+                ht = valeur;
+                tvaEur = ht * (tva / 100);
+                ttc = ht + tvaEur;
+            } else {
+                ttc = valeur;
+                ht = ttc / (1 + (tva / 100));
+                tvaEur = ttc - ht;
+            }
+            
+            totalHT += ht;
+            totalTVA += tvaEur;
+            totalTTC += ttc;
+            
+            tableHTML += `
+                <tr>
+                    <td>${libelle}</td>
+                    <td>${valeur.toFixed(2)} €</td>
+                    <td>${type}</td>
+                    <td>${tva.toFixed(1)}%</td>
+                    <td>${ht.toFixed(2)} €</td>
+                    <td>${tvaEur.toFixed(2)} €</td>
+                    <td>${ttc.toFixed(2)} €</td>
+                </tr>
+            `;
+        });
+        
+        tableHTML += `
+                    </tbody>
+                    <tfoot style="font-weight:bold; background:rgba(52, 152, 219, 0.1);">
+                        <tr>
+                            <td colspan="4">TOTAUX</td>
+                            <td>${totalHT.toFixed(2)} €</td>
+                            <td>${totalTVA.toFixed(2)} €</td>
+                            <td>${totalTTC.toFixed(2)} €</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        `;
+        
+        globalHTML += tableHTML;
+    });
+    
+    resultDiv.innerHTML = globalHTML;
+}
+
+// Mode H
+function loadExchangeRates() {
+    exchangeRates = {
+        'EUR': 1, 'USD': 1.08, 'GBP': 0.85, 'JPY': 160, 'CHF': 0.95,
+        'CAD': 1.46, 'AUD': 1.64, 'CNY': 7.78, 'INR': 89.5, 'RUB': 98.2,
+        'BRL': 5.45, 'KRW': 1445, 'MXN': 18.2, 'SGD': 1.45, 'HKD': 8.45,
+        'NZD': 1.78, 'SEK': 11.2, 'NOK': 11.5, 'DKK': 7.45, 'PLN': 4.32,
+        'TRY': 34.8, 'THB': 38.9, 'IDR': 17200, 'MYR': 5.12, 'PHP': 60.8,
+        'VND': 27000, 'AED': 3.97, 'SAR': 4.05, 'ZAR': 20.1, 'EGP': 50.8
+    };
+    
+    updateCurrencySelects();
+    convertCurrency();
+    updateAllRates();
+}
+
+function updateCurrencySelects() {
+    const fromSelect = document.getElementById('fromCurrency');
+    const toSelect = document.getElementById('toCurrency');
+    
+    fromSelect.innerHTML = '';
+    toSelect.innerHTML = '';
+    
+    Object.keys(exchangeRates).sort().forEach(currency => {
+        const option1 = document.createElement('option');
+        option1.value = currency;
+        option1.textContent = `${currency}`;
+        fromSelect.appendChild(option1);
+        
+        const option2 = document.createElement('option');
+        option2.value = currency;
+        option2.textContent = `${currency}`;
+        toSelect.appendChild(option2);
+    });
+    
+    fromSelect.value = 'EUR';
+    toSelect.value = 'USD';
+    updateFlags();
+}
+
+function getCurrencyName(code) {
+    const names = {
+        'EUR': 'Euro', 'USD': 'Dollar US', 'GBP': 'Livre Sterling', 
+        'JPY': 'Yen Japonais', 'CHF': 'Franc Suisse', 'CAD': 'Dollar Canadien',
+        'AUD': 'Dollar Australien', 'CNY': 'Yuan Chinois', 'INR': 'Roupie Indienne',
+        'RUB': 'Rouble Russe', 'BRL': 'Real Brésilien', 'KRW': 'Won Sud-Coréen',
+        'MXN': 'Peso Mexicain', 'SGD': 'Dollar de Singapour', 'HKD': 'Dollar de Hong Kong',
+        'NZD': 'Dollar Néo-Zélandais', 'SEK': 'Couronne Suédoise', 'NOK': 'Couronne Norvégienne',
+        'DKK': 'Couronne Danoise', 'PLN': 'Zloty Polonais', 'TRY': 'Livre Turque',
+        'THB': 'Baht Thaïlandais', 'IDR': 'Roupie Indonésienne', 'MYR': 'Ringgit Malaisien',
+        'PHP': 'Peso Philippin', 'VND': 'Dong Vietnamien', 'AED': 'Dirham des Émirats',
+        'SAR': 'Riyal Saoudien', 'ZAR': 'Rand Sud-Africain', 'EGP': 'Livre Égyptienne'
+    };
+    return names[code] || code;
+}
+
+function updateFlags() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    
+    const fromFlag = document.getElementById('fromFlag');
+    const toFlag = document.getElementById('toFlag');
+    
+    if (currencyFlags[fromCurrency]) {
+        fromFlag.src = `https://flagcdn.com/w20/${currencyFlags[fromCurrency]}.png`;
+        fromFlag.style.display = 'block';
+    } else {
+        fromFlag.style.display = 'none';
+    }
+    
+    if (currencyFlags[toCurrency]) {
+        toFlag.src = `https://flagcdn.com/w20/${currencyFlags[toCurrency]}.png`;
+        toFlag.style.display = 'block';
+    } else {
+        toFlag.style.display = 'none';
+    }
+    
+    convertCurrency();
+}
+
+function convertCurrency() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
+    
+    if (!exchangeRates[fromCurrency] || !exchangeRates[toCurrency]) {
+        document.getElementById('toAmount').value = '0.00';
+        return;
+    }
+    
+    const amountInEur = fromAmount / exchangeRates[fromCurrency];
+    const convertedAmount = amountInEur * exchangeRates[toCurrency];
+    
+    document.getElementById('toAmount').value = convertedAmount.toFixed(2);
+    
+    const rate = (exchangeRates[toCurrency] / exchangeRates[fromCurrency]).toFixed(4);
+    document.getElementById('rateInfo').innerHTML = `
+        Taux de change: 1 ${fromCurrency} = ${rate} ${toCurrency}
+    `;
+}
+
+function switchCurrencies() {
+    const fromCurrency = document.getElementById('fromCurrency');
+    const toCurrency = document.getElementById('toCurrency');
+    const fromAmount = document.getElementById('fromAmount');
+    const toAmount = document.getElementById('toAmount');
+    
+    const tempCurrency = fromCurrency.value;
+    fromCurrency.value = toCurrency.value;
+    toCurrency.value = tempCurrency;
+    
+    const tempAmount = fromAmount.value;
+    fromAmount.value = toAmount.value;
+    
+    updateFlags();
+    convertCurrency();
+}
+
+function updateAllRates() {
+    const container = document.getElementById('allRatesGrid');
+    if (!container) return;
+    
+    let html = '';
+    const baseCurrency = 'EUR';
+    
+    Object.entries(exchangeRates)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .forEach(([currency, rate]) => {
+            if (currency === baseCurrency) return;
+            
+            html += `
+                <div style="padding: 10px; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div style="font-weight: bold; color: var(--text-primary);">${currency}</div>
+                    <div style="font-size: 18px; color: var(--accent-color); margin-top: 5px;">${rate.toFixed(4)}</div>
+                    <div style="font-size: 12px; color: var(--text-muted);">1 ${baseCurrency} = ${rate.toFixed(2)} ${currency}</div>
+                </div>
+            `;
+        });
+    
+    container.innerHTML = html;
+}
+
+function saveConversionToHistory() {
+    const fromCurrency = document.getElementById('fromCurrency').value;
+    const toCurrency = document.getElementById('toCurrency').value;
+    const fromAmount = parseFloat(document.getElementById('fromAmount').value) || 0;
+    const toAmount = parseFloat(document.getElementById('toAmount').value) || 0;
+    
+    if (fromAmount === 0) {
+        showNotification('Entrez un montant à convertir', 'warning');
+        return;
+    }
+    
+    const conversion = {
+        id: Date.now(),
+        date: new Date().toLocaleString('fr-FR'),
+        from: { currency: fromCurrency, amount: fromAmount },
+        to: { currency: toCurrency, amount: toAmount },
+        rate: (toAmount / fromAmount).toFixed(4)
+    };
+    
+    conversionHistory.unshift(conversion);
+    if (conversionHistory.length > 20) {
+        conversionHistory = conversionHistory.slice(0, 20);
+    }
+    
+    localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
+    updateConversionHistoryDisplay();
+    showNotification('Conversion sauvegardée', 'success');
+}
+
+function updateConversionHistoryDisplay() {
+    const container = document.getElementById('conversionHistoryList');
+    if (!container) return;
+    
+    if (conversionHistory.length === 0) {
+        container.innerHTML = `
+            <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+                Aucune conversion dans l'historique
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    
+    conversionHistory.forEach(conv => {
+        html += `
+            <div class="history-item" style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 10px; padding: 10px; border-bottom: 1px solid var(--border-color); align-items: center;">
+                <div style="font-size: 12px; color: var(--text-muted);">${conv.date}</div>
+                <div style="font-weight: bold; color: var(--text-primary);">${conv.from.amount.toFixed(2)} ${conv.from.currency}</div>
+                <div style="text-align: center; color: var(--text-primary);">→</div>
+                <div style="font-weight: bold; color: var(--success-color);">${conv.to.amount.toFixed(2)} ${conv.to.currency}</div>
+                <div style="font-size: 12px; color: var(--text-muted); grid-column: 1 / -1;">Taux: ${conv.rate}</div>
+                <button onclick="deleteConversion(${conv.id})" style="padding: 4px 8px; background: var(--error-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; grid-column: 4;">
+                    Supprimer
+                </button>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function deleteConversion(id) {
+    conversionHistory = conversionHistory.filter(conv => conv.id !== id);
+    localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
+    updateConversionHistoryDisplay();
+    showNotification('Conversion supprimée', 'success');
+}
+
+function clearConversionHistory() {
+    if (conversionHistory.length === 0) return;
+    
+    if (confirm('Effacer tout l\'historique des conversions ?')) {
+        conversionHistory = [];
+        localStorage.setItem('conversionHistory', JSON.stringify([]));
+        updateConversionHistoryDisplay();
+        showNotification('Historique effacé', 'success');
+    }
+}
+
+function exportHistoryToCSV() {
+    if (conversionHistory.length === 0) {
+        showNotification('Historique vide', 'warning');
+        return;
+    }
+    
+    let csv = 'Date;Montant Source;Devise Source;Montant Cible;Devise Cible;Taux de change\n';
+    
+    conversionHistory.forEach(conv => {
+        csv += `${conv.date};${conv.from.amount};${conv.from.currency};${conv.to.amount};${conv.to.currency};${conv.rate}\n`;
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    
+    link.setAttribute('href', url);
+    link.setAttribute('download', `historique_conversions_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    showNotification('Historique exporté en CSV', 'success');
+}
+
+console.log('✅ Calculateur Global Pro - Phase 1 complète !');
+</script>
+</body>
+</html>
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_12.html ---
+

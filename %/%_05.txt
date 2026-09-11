@@ -1,0 +1,312 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/%
+  ├── %_05.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_05.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Calculateur de Pourcentages</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+body { font-family: Arial; margin:20px; background:#f4f7fa; color:#333; }
+h1 { text-align:center; color:#2c3e50; }
+.menu { text-align:center; margin-bottom:20px; }
+.menu button { margin:5px; padding:10px 20px; font-size:16px; border:none; border-radius:12px; background:#3498db; color:white; cursor:pointer; }
+.menu button:hover { background:#2980b9; }
+.hidden { display:none; }
+input,textarea { width:95%; margin:5px 0; padding:8px; border-radius:5px; border:1px solid #ccc; box-sizing:border-box; }
+canvas { display:block; margin:20px auto; max-width:600px; max-height:600px; }
+table { border-collapse:collapse; width:95%; margin-top:10px; border-radius:10px; overflow:hidden; }
+th,td { border:1px solid #ccc; padding:8px; text-align:center; }
+th { background:#ecf0f1; }
+.download-buttons { text-align:center; margin-top:10px; }
+select, .download-buttons button, button { margin:5px; padding:8px 15px; border:none; border-radius:12px; cursor:pointer; font-size:15px; }
+select { background:#f0f0f0; color:#333; border:1px solid #ccc; }
+#previewContainer { background:white; padding:20px; border-radius:12px; margin-top:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+#previewContainer h3 { border-bottom:2px solid #3498db; padding-bottom:4px; color:#2c3e50; }
+.preview-section { margin-bottom:20px; }
+.ref-block { display:flex; gap:10px; margin-bottom:5px; align-items:center; }
+.ref-block input { padding:5px; width:150px; border-radius:5px; border:1px solid #ccc; }
+.ref-block button { padding:5px 10px; cursor:pointer; border-radius:8px; }
+.ref-block .rangeE { width:150px; }
+.ref-block .pctDisplay { width:40px; display:inline-block; text-align:center; }
+</style>
+</head>
+<body>
+<h1>📊 Calculateur de Pourcentages</h1>
+
+<div class="menu">
+<button onclick="showMode('modeA')">Mode A</button>
+<button onclick="showMode('modeB')">Mode B</button>
+<button onclick="showMode('modeC')">Mode C</button>
+<button onclick="showMode('modeD')">Mode D</button>
+<button onclick="showMode('modeE')">Mode E</button>
+<button onclick="showMode('modeF')">Rapport Global</button>
+</div>
+
+<!-- MODE A -->
+<div id="modeA" class="hidden">
+<h3>Mode A : Comparer à des valeurs de référence</h3>
+<div id="multiAContainer">
+  <div class="ref-block">
+    <input type="number" class="refA" placeholder="Valeur de référence">
+    <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150)">
+    <button type="button" onclick="removeRef(this)">🗑️</button>
+  </div>
+</div>
+<button type="button" onclick="addABlock()">➕ Ajouter une valeur de référence</button>
+<button onclick="calculerA()">Calculer</button>
+<div id="resultA"></div>
+</div>
+
+<!-- MODE B -->
+<div id="modeB" class="hidden">
+<h3>Mode B : Gains et pertes appliqués</h3>
+<div id="multiBContainer">
+  <div class="ref-block">
+    <input type="number" class="valeurB" placeholder="Valeur de départ">
+    <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+    <button type="button" onclick="removeRef(this)">🗑️</button>
+  </div>
+</div>
+<button type="button" onclick="addBBlock()">➕ Ajouter une valeur</button>
+<button onclick="calculerB()">Calculer</button>
+<div id="resultB"></div>
+</div>
+
+<!-- MODE C -->
+<div id="modeC" class="hidden">
+<h3>Mode C : Graphique linéaire</h3>
+<input type="text" id="titreC" placeholder="Titre du graphique">
+<textarea id="seriesC" rows="5" placeholder="Série1 100 120 130&#10;Série2 80 100 110"></textarea>
+<button onclick="calculerC()">Calculer</button>
+<canvas id="graphC"></canvas>
+</div>
+
+<!-- MODE D -->
+<div id="modeD" class="hidden">
+<h3>Mode D : Graphique circulaire</h3>
+<textarea id="categoriesD" rows="6" placeholder="Titre&#10;Catégorie1 100&#10;Catégorie2 150"></textarea>
+<button onclick="calculerD()">Afficher le graphique</button>
+<canvas id="graphD"></canvas>
+</div>
+
+<!-- MODE E : Curseur pourcentage par bloc -->
+<div id="modeE" class="hidden">
+<h3>Mode E : Appliquer un pourcentage par bloc</h3>
+<div id="multiEContainer">
+  <div class="ref-block">
+    <input type="text" class="valsE" placeholder="Valeurs (ex: 100 150 200)">
+    <input type="range" class="rangeE" min="-100" max="100" value="0" step="1" oninput="updateEBlock(this)">
+    <span class="pctDisplay">0%</span>
+    <button type="button" onclick="removeRef(this)">🗑️</button>
+  </div>
+</div>
+<button type="button" onclick="addEBlock()">➕ Ajouter un bloc de valeurs</button>
+<div id="resultE" style="margin-top:10px;"></div>
+</div>
+
+<!-- MODE F : Rapport global -->
+<div id="modeF" class="hidden">
+<h3>Rapport Global</h3>
+<label>Inclure Mode A<input type="checkbox" id="includeA"></label><br>
+<label>Inclure Mode B<input type="checkbox" id="includeB"></label><br>
+<label>Inclure Mode C<input type="checkbox" id="includeC"></label><br>
+<label>Inclure Mode D<input type="checkbox" id="includeD"></label><br>
+<label>Inclure Mode E<input type="checkbox" id="includeE"></label><br>
+<button onclick="previsualiserRapport()">👀 Prévisualiser</button>
+<button onclick="genererRapport()">📄 Télécharger PDF</button>
+<div id="previewContainer"></div>
+</div>
+
+<script>
+let chartC, chartD;
+let historique={A:'',B:'',C:'',D:'',E:''};
+
+function showMode(id){
+  ["modeA","modeB","modeC","modeD","modeE","modeF"].forEach(m=>document.getElementById(m).classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+/* Ajout de blocs */
+function addABlock(){
+  const cont=document.getElementById("multiAContainer");
+  const div=document.createElement("div"); div.className="ref-block";
+  div.innerHTML=`<input type="number" class="refA" placeholder="Valeur de référence">
+  <input type="text" class="valsA" placeholder="Valeurs à comparer (ex: 90 150)">
+  <button type="button" onclick="removeRef(this)">🗑️</button>`;
+  cont.appendChild(div);
+}
+function addBBlock(){
+  const cont=document.getElementById("multiBContainer");
+  const div=document.createElement("div"); div.className="ref-block";
+  div.innerHTML=`<input type="number" class="valeurB" placeholder="Valeur de départ">
+  <input type="text" class="pourcentB" placeholder="Pourcentages (ex: 10 -5 20)">
+  <button type="button" onclick="removeRef(this)">🗑️</button>`;
+  cont.appendChild(div);
+}
+function addEBlock(){
+  const cont=document.getElementById("multiEContainer");
+  const div=document.createElement("div"); div.className="ref-block";
+  div.innerHTML=`<input type="text" class="valsE" placeholder="Valeurs (ex: 100 150 200)">
+  <input type="range" class="rangeE" min="-100" max="100" value="0" step="1" oninput="updateEBlock(this)">
+  <span class="pctDisplay">0%</span>
+  <button type="button" onclick="removeRef(this)">🗑️</button>`;
+  cont.appendChild(div);
+  updateE();
+}
+
+/* Supprimer un bloc */
+function removeRef(btn){btn.parentNode.remove(); updateE();}
+
+/* MODE A */
+function calculerA(){
+  const cont=document.getElementById("multiAContainer"); const resDiv=document.getElementById("resultA"); resDiv.innerHTML="";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach(block=>{
+    const ref=parseFloat(block.querySelector(".refA").value);
+    const vals=block.querySelector(".valsA").value.trim().split(/\s+/).map(Number);
+    if(isNaN(ref)||vals.length===0) return;
+    let html=`<h4>Analyse pour ${ref.toFixed(2)}€</h4><table><tr><th>Valeur</th><th>Différence (€)</th><th>%</th></tr>`;
+    vals.forEach(v=>{
+      if(!isNaN(v)){
+        const diff=v-ref; const pct=(diff/ref*100);
+        const col=diff>0?"#2ecc71":diff<0?"#e74c3c":"#95a5a6";
+        html+=`<tr style="background:${col};color:white;"><td>${v}</td><td>${diff>=0?'+':''}${diff.toFixed(2)}</td><td>${pct.toFixed(2)}%</td></tr>`;
+      }
+    });
+    html+="</table>";
+    resDiv.innerHTML+=html;
+  });
+  historique.A=resDiv.innerHTML;
+}
+
+/* MODE B */
+function calculerB(){
+  const cont=document.getElementById("multiBContainer"); const resDiv=document.getElementById("resultB"); resDiv.innerHTML="";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach(block=>{
+    const val=parseFloat(block.querySelector(".valeurB").value);
+    const taux=block.querySelector(".pourcentB").value.trim().split(/\s+/).map(Number);
+    if(isNaN(val)||taux.length===0) return;
+    let html=`<h4>Analyse pour ${val.toFixed(2)}€</h4><table><tr><th>Taux (%)</th><th>Résultat (€)</th></tr>`;
+    taux.forEach(p=>{
+      if(!isNaN(p)){
+        const r=val*(1+p/100);
+        const col=p>0?"#2ecc71":p<0?"#e74c3c":"#95a5a6";
+        html+=`<tr style="background:${col};color:white;"><td>${p}%</td><td>${r.toFixed(2)}</td></tr>`;
+      }
+    });
+    html+="</table>"; resDiv.innerHTML+=html;
+  });
+  historique.B=resDiv.innerHTML;
+}
+
+/* MODE C */
+function calculerC(){
+  const titre=document.getElementById("titreC").value.trim()||"Graphique";
+  const lignes=document.getElementById("seriesC").value.trim().split("\n").filter(l=>l.trim().length);
+  if(!lignes.length)return alert("Ajoute au moins une série");
+  const series=lignes.map(l=>{const p=l.split(/\s+/); return {nom:p[0],valeurs:p.slice(1).map(Number)}}); 
+  const maxLen=Math.max(...series.map(s=>s.valeurs.length));
+  const labels=Array.from({length:maxLen},(_,i)=>"Étape "+(i+1));
+  const ctx=document.getElementById("graphC").getContext("2d");
+  if(chartC) chartC.destroy();
+  chartC=new Chart(ctx,{type:"line",data:{labels,datasets:series.map((s,i)=>({label:s.nom,data:s.valeurs,borderColor:`hsl(${i*60},70%,50%)`,fill:false,tension:0.2}))},options:{plugins:{title:{display:true,text:titre},legend:{position:"bottom"}}}});
+  historique.C=titre;
+}
+
+/* MODE D */
+function calculerD(){
+  const raw=document.getElementById("categoriesD").value.trim();
+  if(!raw)return alert("Merci d’entrer des données");
+  const lignes=raw.split("\n").filter(l=>l.trim().length);
+  const titre=lignes[0]; 
+  const labels=[]; const valeurs=[];
+  lignes.slice(1).forEach(l=>{const p=l.split(/\s+/); labels.push(p.slice(0,-1).join(" ")); valeurs.push(parseFloat(p[p.length-1]));});
+  const ctx=document.getElementById("graphD").getContext("2d");
+  if(chartD) chartD.destroy();
+  chartD=new Chart(ctx,{
+    type:'pie',
+    data:{labels,datasets:[{data:valeurs,backgroundColor:labels.map((_,i)=>`hsl(${i*60},70%,60%)`)}]},
+    options:{plugins:{
+      title:{display:true,text:titre},
+      legend:{position:"bottom"},
+      datalabels:{color:'#fff',formatter:(val,ctx)=>((val/ctx.chart.data.datasets[0].data.reduce((a,b)=>a+b,0))*100).toFixed(1)+'%'}
+    }},
+    plugins:[ChartDataLabels]
+  });
+  historique.D={titre,labels,valeurs};
+}
+
+/* MODE E : curseur par bloc */
+function updateEBlock(rangeInput){
+  const pct = parseFloat(rangeInput.value);
+  rangeInput.nextElementSibling.innerText = pct + "%";
+  updateE();
+}
+function updateE(){
+  const cont=document.getElementById("multiEContainer");
+  let html="";
+  Array.from(cont.getElementsByClassName("ref-block")).forEach((block,i)=>{
+    const valsStr = block.querySelector(".valsE").value.trim();
+    const vals = valsStr.split(/\s+/).map(Number).filter(v=>!isNaN(v));
+    const pct = parseFloat(block.querySelector(".rangeE").value);
+    if(vals.length){
+      html += `<h4>Bloc ${i+1} (appliqué ${pct}%)</h4><table><tr><th>Valeur</th><th>Résultat</th></tr>`;
+      vals.forEach(v=>{
+        const r = v*(1+pct/100);
+        const col = pct>0?"#2ecc71":pct<0?"#e74c3c":"#95a5a6";
+        html+=`<tr style="background:${col};color:white;"><td>${v}</td><td>${r.toFixed(2)}</td></tr>`;
+      });
+      html += "</table>";
+    }
+  });
+  document.getElementById("resultE").innerHTML = html;
+  historique.E = html;
+}
+
+/* Rapport global */
+function previsualiserRapport(){
+  const cont=document.getElementById("previewContainer"); cont.innerHTML="";
+  if(document.getElementById("includeA").checked)
+    cont.innerHTML+=`<div class='preview-section'><h3>Mode A</h3>${historique.A||"<i>Pas de données</i>"}</div>`;
+  if(document.getElementById("includeB").checked)
+    cont.innerHTML+=`<div class='preview-section'><h3>Mode B</h3>${historique.B||"<i>Pas de données</i>"}</div>`;
+  if(document.getElementById("includeC").checked && chartC)
+    cont.innerHTML+=`<div class='preview-section'><h3>Mode C : ${historique.C}</h3><img src='${chartC.toBase64Image()}' width='500'></div>`;
+  if(document.getElementById("includeD").checked && chartD)
+    cont.innerHTML+=`<div class='preview-section'><h3>Mode D : ${historique.D.titre}</h3><img src='${chartD.toBase64Image()}' width='400'></div>`;
+  if(document.getElementById("includeE").checked)
+    cont.innerHTML+=`<div class='preview-section'><h3>Mode E</h3>${historique.E||"<i>Pas de données</i>"}</div>`;
+}
+
+async function genererRapport(){
+  const cont=document.getElementById("previewContainer");
+  if(!cont.innerHTML) return alert("Rien à exporter !");
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p','mm','a4');
+  const canvas = await html2canvas(cont,{scale:2});
+  const img = canvas.toDataURL("image/png");
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+  pdf.addImage(img, 'PNG', 0, 0, pdfWidth, pdfHeight);
+  pdf.save("rapport_global.pdf");
+}
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/%\%_05.html ---
+

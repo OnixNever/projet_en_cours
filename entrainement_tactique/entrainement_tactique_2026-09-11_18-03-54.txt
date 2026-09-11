@@ -1,0 +1,1429 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique
+  ├── entrainement-tactique.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique\entrainement-tactique.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Entraînement Tactique</title>
+<style>
+  :root{
+    --bg:#0c0f0d;
+    --panel:#141815;
+    --panel-2:#1b201c;
+    --line:#2a322c;
+    --text:#e8ece7;
+    --muted:#8a948b;
+    --accent:#c8a24a;
+    --accent-dim:#7a672f;
+    --danger:#b23a2f;
+    --ok:#4a7a4f;
+    --mono: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{margin:0; padding:0; background:var(--bg); color:var(--text); font-family:var(--sans); height:100%; overflow-x:hidden;}
+  button{font-family:inherit;}
+  #app{min-height:100vh; min-height:100dvh; display:flex; flex-direction:column;}
+
+  /* ---------- CONFIG SCREEN ---------- */
+  .topbar{
+    padding:18px 20px 14px; border-bottom:1px solid var(--line);
+    display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+  .topbar h1{font-size:15px; letter-spacing:.14em; text-transform:uppercase; margin:0; font-weight:700; color:var(--accent);}
+  .topbar .sub{font-family:var(--mono); font-size:11px; color:var(--muted); letter-spacing:.05em;}
+
+  #config{flex:1; padding:14px 14px 100px; max-width:720px; margin:0 auto; width:100%;}
+
+  .block{background:var(--panel); border:1px solid var(--line); border-radius:10px; margin-bottom:12px; overflow:hidden; transition:border-color .15s, opacity .15s;}
+  .block.active{border-color:var(--accent-dim);}
+  .block.locked{opacity:.38; pointer-events:none;}
+  .block.special{border-color:#4a5a3a;}
+  .block-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:13px 15px; cursor:pointer; user-select:none;
+  }
+  .block-head-left{display:flex; align-items:center; gap:11px;}
+  .block-title{font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;}
+  .block-desc{font-size:11px; color:var(--muted); margin-top:2px;}
+  .block-body{padding:0 15px 15px; display:none;}
+  .block.open .block-body{display:block;}
+  .chev{color:var(--muted); font-size:11px; transition:transform .15s;}
+  .block.open .chev{transform:rotate(90deg);}
+
+  .toggle{
+    position:relative; width:40px; height:22px; border-radius:11px; background:#31382f;
+    border:1px solid var(--line); flex:none; cursor:pointer; transition:background .15s, opacity .15s;
+  }
+  .toggle.on{background:var(--accent-dim);}
+  .toggle.locked{opacity:.35; pointer-events:none;}
+  .toggle::after{
+    content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%;
+    background:#9aa398; transition:transform .15s, background .15s;
+  }
+  .toggle.on::after{transform:translateX(18px); background:var(--accent);}
+
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px;}
+  .chip{
+    padding:8px 13px; border-radius:7px; border:1px solid var(--line); background:var(--panel-2);
+    font-size:12px; color:var(--muted); cursor:pointer; user-select:none; transition:.12s;
+  }
+  .chip.on{color:#0c0f0d; font-weight:700; border-color:transparent;}
+  .chip[data-color="Rouge"].on{background:#c0453a;}
+  .chip[data-color="Bleu"].on{background:#3a6fc0;}
+  .chip[data-color="Vert"].on{background:#4a9a52;}
+  .chip[data-color="Jaune"].on{background:#d4b23c;}
+  .chip[data-color="Orange"].on{background:#d4813c;}
+  .chip[data-color="Violet"].on{background:#9a5cc0;}
+  .chip[data-color="Noir"].on{background:#141414; color:#eee; border:1px solid #5a5a5a;}
+  .chip[data-color="Blanc"].on{background:#eae7dd; color:#141712;}
+  .chip:not([data-color]).on{background:var(--accent);}
+
+  .miniall{font-size:10.5px; color:var(--accent); text-decoration:underline; cursor:pointer; margin-left:auto;}
+
+  .field-row{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--line); font-size:12.5px;}
+  .field-row:first-child{border-top:none;}
+  .field-label{color:var(--text);}
+  .field-help{color:var(--muted); font-size:10.5px; margin-top:1px;}
+  .field-row input[type=number]{
+    width:64px; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    padding:6px 7px; border-radius:6px; font-family:var(--mono); font-size:12px; text-align:center;
+  }
+  input[type=range]{accent-color: var(--accent); flex:1;}
+  .rangeval{font-family:var(--mono); font-size:11px; color:var(--accent); width:38px; text-align:right;}
+
+  .subnote{font-size:10.5px; color:var(--muted); line-height:1.5; background:var(--panel-2); border:1px solid var(--line); border-radius:7px; padding:8px 10px; margin-top:10px;}
+
+  .segmented{display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .segmented > div{flex:1; text-align:center; padding:9px 4px; font-size:12px; cursor:pointer; color:var(--muted); background:var(--panel-2);}
+  .segmented > div.on{background:var(--accent-dim); color:var(--text); font-weight:700;}
+  .segmented > div + div{border-left:1px solid var(--line);}
+
+  .time-input{display:flex; align-items:center; gap:6px; font-family:var(--mono);}
+  .time-input input{width:44px; background:var(--panel-2); border:1px solid var(--line); color:var(--text); padding:6px; border-radius:6px; text-align:center; font-family:var(--mono);}
+
+  .savebar{display:flex; gap:8px; margin-top:6px; flex-wrap:wrap;}
+  .savebar input[type=text]{flex:1; min-width:120px; background:var(--panel-2); border:1px solid var(--line); color:var(--text); padding:8px 10px; border-radius:7px; font-size:12px;}
+  .btn{background:var(--panel-2); border:1px solid var(--line); color:var(--text); padding:8px 13px; border-radius:7px; font-size:12px; cursor:pointer;}
+  .btn:active{transform:scale(.97);}
+  .btn.primary{background:var(--accent); color:#141712; font-weight:700; border-color:var(--accent);}
+  .btn.ghost{background:transparent;}
+  .savedlist{display:flex; flex-direction:column; gap:6px; margin-top:8px;}
+  .saveditem{display:flex; align-items:center; justify-content:space-between; background:var(--panel-2); border:1px solid var(--line); border-radius:7px; padding:7px 10px; font-size:12px;}
+  .saveditem .name{font-family:var(--mono);}
+  .saveditem .acts{display:flex; gap:6px;}
+  .saveditem .acts span{cursor:pointer; color:var(--accent); font-size:11px;}
+  .saveditem .acts span.del{color:var(--danger);}
+
+  .footerbar{
+    position:fixed; bottom:0; left:0; right:0; padding:14px 16px calc(14px + env(safe-area-inset-bottom));
+    background:linear-gradient(0deg, var(--bg) 60%, transparent); display:flex; justify-content:center;
+  }
+  .startbtn{
+    width:100%; max-width:690px; padding:16px; border-radius:10px; border:1px solid var(--accent);
+    background:var(--accent); color:#141712; font-size:14px; font-weight:800; letter-spacing:.08em;
+    text-transform:uppercase; cursor:pointer;
+  }
+  .startbtn:active{transform:scale(.985);}
+
+  /* ---------- SESSION SCREEN ---------- */
+  #session{
+    position:fixed; inset:0; background:#000; display:none; flex-direction:column;
+    align-items:center; justify-content:space-between; z-index:50; transition:background-color .25s ease;
+  }
+  #session.live{display:flex;}
+  .sess-top{width:100%; padding:20px 20px 0; display:flex; justify-content:space-between; align-items:flex-start;}
+  .sess-timer{font-family:var(--mono); font-size:20px; color:rgba(255,255,255,.55); letter-spacing:.05em;}
+  .sess-status{font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.35); text-align:right; line-height:1.6; white-space:pre-line;}
+  .sess-exercise{display:none; text-align:center; font-family:var(--mono); font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.55); padding:8px 0 0;}
+  .sess-exercise.show{display:block;}
+  .sess-center{flex:1; display:flex; align-items:center; justify-content:center; width:100%; padding:20px;}
+  .sess-word{
+    font-size:13vw; font-weight:900; letter-spacing:.03em; text-transform:uppercase;
+    text-align:center; text-shadow:0 0 40px rgba(0,0,0,.4);
+  }
+  .sess-word.small{font-size:9vw;}
+  .sess-hint{position:absolute; top:14px; left:0; right:0; text-align:center; font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.3); letter-spacing:.15em;}
+  .sess-bottom{width:100%; padding:0 18px calc(22px + env(safe-area-inset-bottom)); display:flex; gap:10px;}
+  .sess-btn{
+    flex:1; padding:15px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06);
+    color:rgba(255,255,255,.85); font-size:12px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; cursor:pointer;
+  }
+  #session.paused .sess-center{opacity:.25;}
+  .pausecard{
+    position:absolute; padding:22px 30px; border:1px solid rgba(255,255,255,.25); border-radius:12px;
+    background:rgba(0,0,0,.55); font-family:var(--mono); letter-spacing:.15em; color:#fff; font-size:13px; display:none;
+  }
+  #session.paused .pausecard{display:block;}
+
+  ::-webkit-scrollbar{width:0px;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div class="topbar">
+    <div>
+      <h1>Entraînement Tactique</h1>
+      <div class="sub">100% hors-ligne · configuration de séance</div>
+    </div>
+    <div class="sub" id="statusline">prêt</div>
+  </div>
+
+  <div id="config">
+
+    <!-- DIFFICULTÉ -->
+    <div class="block open" data-block="difficulty">
+      <div class="block-head" onclick="toggleBlock('difficulty')">
+        <div class="block-head-left">
+          <div>
+            <div class="block-title">Niveau de difficulté</div>
+            <div class="block-desc" id="difficultyLabel">Moyen</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="segmented" id="difficultySeg">
+          <div data-diff="facile" onclick="setDifficulty('facile')">Facile</div>
+          <div class="on" data-diff="moyen" onclick="setDifficulty('moyen')">Moyen</div>
+          <div data-diff="difficile" onclick="setDifficulty('difficile')">Difficile</div>
+        </div>
+        <div class="subnote">
+          Facile : intervalles longs et réguliers, pas de leurres, pas de cibles multiples, une seule couleur à la fois.<br>
+          Moyen : fatigue progressive et leurres occasionnels, intervalles modérés.<br>
+          Difficile : cibles multiples activées par défaut, intervalles resserrés, temporisations plus courtes.<br>
+          Choisir un niveau règle automatiquement les modules Fatigue / Leurres / Cibles multiples — modifiables ensuite manuellement.
+        </div>
+      </div>
+    </div>
+
+    <!-- CIBLES / COULEURS -->
+    <div class="block open active" data-block="colors">
+      <div class="block-head" onclick="toggleBlock('colors')">
+        <div class="block-head-left">
+          <div class="toggle on" id="tg-colors" onclick="event.stopPropagation(); toggleModule('colors')"></div>
+          <div>
+            <div class="block-title">Cibles / Couleurs</div>
+            <div class="block-desc">Annonces de couleurs à engager</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="chip-row" id="colorChips">
+          <span class="miniall" onclick="event.stopPropagation(); toggleAllChips('colorChips', state.colorsSelected)">tout sélectionner</span>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Intervalle entre annonces</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="colorMin" value="15" min="2" max="120"> – <input type="number" id="colorMax" value="25" min="2" max="120">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Volume voix</div>
+          <input type="range" id="volVoice" min="0" max="100" value="100" oninput="syncRangeLabel('volVoice')">
+          <div class="rangeval" id="volVoiceVal">100%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SONS DE TIR -->
+    <div class="block open active" data-block="shots">
+      <div class="block-head" onclick="toggleBlock('shots')">
+        <div class="block-head-left">
+          <div class="toggle on" id="tg-shots" onclick="event.stopPropagation(); toggleModule('shots')"></div>
+          <div>
+            <div class="block-title">Sons de tir</div>
+            <div class="block-desc">Piste action — courte portée, sniper, rafale</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="chip-row" id="shotChips">
+          <span class="chip on" data-shot="semi">Courte portée</span>
+          <span class="chip on" data-shot="sniper">Longue portée (sniper)</span>
+          <span class="chip on" data-shot="rafale">Rafale</span>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Pause entre tirs</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="shotMin" value="4" min="1" max="60"> – <input type="number" id="shotMax" value="10" min="1" max="60">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Volume tirs</div>
+          <input type="range" id="volShots" min="0" max="100" value="80" oninput="syncRangeLabel('volShots')">
+          <div class="rangeval" id="volShotsVal">80%</div>
+        </div>
+        <div class="field-row">
+          <div>
+            <div class="field-label">Spatialisation (gauche / droite)</div>
+            <div class="field-help">S'applique uniquement aux tirs — jamais aux annonces ou aux ordres</div>
+          </div>
+          <div class="toggle" id="tg-spatial" onclick="toggleFlag('spatial')"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDRES DE MOUVEMENT -->
+    <div class="block" data-block="orders">
+      <div class="block-head" onclick="toggleBlock('orders')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-orders" onclick="event.stopPropagation(); toggleModule('orders')"></div>
+          <div>
+            <div class="block-title">Ordres de mouvement</div>
+            <div class="block-desc">Postures, immobilisation et déplacements</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="chip-row" id="orderChips">
+          <span class="chip on" data-order="couche">Couché</span>
+          <span class="chip on" data-order="genoux">À genoux</span>
+          <span class="chip on" data-order="accroupi">Accroupi</span>
+          <span class="chip on" data-order="fige">Ne pas bouger</span>
+          <span class="chip on" data-order="avancer">Avancer</span>
+          <span class="chip on" data-order="reculer">Reculer</span>
+          <span class="chip on" data-order="bouger">Bouger / changer de position</span>
+        </div>
+        <div class="subnote">
+          Couché / à genoux / accroupi restent compatibles avec une annonce de couleur simultanée.<br>
+          « Ne pas bouger » bloque les annonces de couleur pendant sa durée (son continu discret en fond marquant début/fin) — un tir peut survenir pendant ce temps, à vous de juger si vous étiez à couvert.<br>
+          Avancer / reculer / bouger bloquent aussi les annonces de couleur (mais pas les tirs) et utilisent une plage de temps dédiée, plus longue, pour laisser le temps physique de se déplacer.
+        </div>
+        <div class="field-row">
+          <div class="field-label">Temporisation aléatoire (postures)</div>
+          <div class="toggle on" id="tg-randomHold" onclick="toggleFlag('randomHold')"></div>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Durée de maintien (postures)</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="holdMin" value="3" min="1" max="60"> – <input type="number" id="holdMax" value="15" min="1" max="60">
+          </div>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Durée d'exécution (avancer / reculer / bouger)</div><div class="field-help">secondes, min – max, 5 s minimum recommandé</div></div>
+          <div class="time-input">
+            <input type="number" id="moveMin" value="5" min="1" max="60"> – <input type="number" id="moveMax" value="10" min="1" max="60">
+          </div>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Intervalle entre ordres</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="orderMin" value="15" min="2" max="120"> – <input type="number" id="orderMax" value="20" min="2" max="120">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CIBLES MULTIPLES -->
+    <div class="block" data-block="multi">
+      <div class="block-head" onclick="toggleBlock('multi')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-multi" onclick="event.stopPropagation(); toggleModule('multi')"></div>
+          <div>
+            <div class="block-title">Cibles multiples</div>
+            <div class="block-desc">2 à 3 couleurs annoncées à traiter dans l'ordre</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="subnote">
+          Vient se mélanger aux cibles simples : de temps en temps, au lieu d'une seule couleur, une séquence de 2 à 3 couleurs à engager dans l'ordre. Actif par défaut en mode Difficile, désactivable manuellement.
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Fréquence des cibles multiples</div><div class="field-help">% de chance à chaque annonce (le reste : cible simple)</div></div>
+          <input type="range" id="multiFreq" min="10" max="100" value="40" oninput="syncRangeLabel('multiFreq')" style="max-width:110px;">
+          <div class="rangeval" id="multiFreqVal">40%</div>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Temps de battement après la séquence</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="multiBattMin" value="5" min="1" max="60"> – <input type="number" id="multiBattMax" value="10" min="1" max="60">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FATIGUE -->
+    <div class="block" data-block="fatigue">
+      <div class="block-head" onclick="toggleBlock('fatigue')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-fatigue" onclick="event.stopPropagation(); toggleModule('fatigue')"></div>
+          <div>
+            <div class="block-title">Fatigue progressive</div>
+            <div class="block-desc">Escalade automatique pendant la séance</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="subnote">
+          Toutes les 30 secondes, la difficulté augmente de 10% (intervalles réduits, part de rafale accrue, fréquence des leurres et densité des cibles augmentées), jusqu'à un plafond de +90%. Désactivé = intensité stable du début à la fin.
+        </div>
+      </div>
+    </div>
+
+    <!-- LEURRES -->
+    <div class="block" data-block="decoys">
+      <div class="block-head" onclick="toggleBlock('decoys')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-decoys" onclick="event.stopPropagation(); toggleModule('decoys')"></div>
+          <div>
+            <div class="block-title">Leurres</div>
+            <div class="block-desc">Fausses annonces de couleur, indépendantes</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="field-row">
+          <div><div class="field-label">Fréquence de base</div><div class="field-help">% de chance par minute</div></div>
+          <input type="range" id="decoyFreq" min="0" max="60" value="15" oninput="syncRangeLabel('decoyFreq')" style="max-width:110px;">
+          <div class="rangeval" id="decoyFreqVal">15%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECHARGEMENT -->
+    <div class="block" data-block="reload">
+      <div class="block-head" onclick="toggleBlock('reload')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-reload" onclick="event.stopPropagation(); toggleModule('reload')"></div>
+          <div>
+            <div class="block-title">Rechargement</div>
+            <div class="block-desc">Signal périodique — mimer le geste avant de réagir</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="field-row">
+          <div><div class="field-label">Intervalle entre signaux</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="reloadMin" value="10" min="2" max="120"> – <input type="number" id="reloadMax" value="25" min="2" max="120">
+          </div>
+        </div>
+        <div class="subnote">Bloque brièvement les annonces de couleur le temps de mimer le rechargement.</div>
+      </div>
+    </div>
+
+    <!-- AMBIANCE SONORE -->
+    <div class="block" data-block="ambiance">
+      <div class="block-head" onclick="toggleBlock('ambiance')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-ambiance" onclick="event.stopPropagation(); toggleModule('ambiance')"></div>
+          <div>
+            <div class="block-title">Ambiance sonore</div>
+            <div class="block-desc">Bruits de fond en boucle, faible volume</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="chip-row" id="ambianceChips">
+          <span class="miniall" onclick="event.stopPropagation(); toggleAllChips('ambianceChips', state.ambianceSelected)">tout sélectionner</span>
+        </div>
+        <div class="field-row">
+          <div class="field-label">Volume ambiance</div>
+          <input type="range" id="ambianceVol" min="0" max="100" value="30" oninput="syncRangeLabel('ambianceVol')">
+          <div class="rangeval" id="ambianceVolVal">30%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRÉPARATION PHYSIQUE -->
+    <div class="block special" data-block="prep">
+      <div class="block-head" onclick="toggleBlock('prep')">
+        <div class="block-head-left">
+          <div class="toggle" id="tg-prep" onclick="event.stopPropagation(); togglePrepPhysique()"></div>
+          <div>
+            <div class="block-title">Préparation physique</div>
+            <div class="block-desc">Séries d'exercices + cibles — désactive les autres modules</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="subnote">
+          Une fois activé, désactive automatiquement les tirs, ordres classiques, leurres, fatigue et rechargement. Le module Couleurs reste actif (obligatoire) et l'Ambiance sonore reste disponible en option.
+        </div>
+        <div class="chip-row" id="prepChips">
+          <span class="miniall" onclick="event.stopPropagation(); toggleAllChips('prepChips', state.prepExercisesSelected)">tout sélectionner</span>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Durée d'une série</div><div class="field-help">secondes</div></div>
+          <div class="time-input">
+            <input type="number" id="prepSeriesDur" value="40" min="10" max="600">
+          </div>
+        </div>
+        <div class="field-row">
+          <div><div class="field-label">Intervalle des annonces pendant la série</div><div class="field-help">secondes, min – max</div></div>
+          <div class="time-input">
+            <input type="number" id="prepColorMin" value="10" min="3" max="120"> – <input type="number" id="prepColorMax" value="15" min="3" max="120">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODE TEMPS -->
+    <div class="block" data-block="time">
+      <div class="block-head" onclick="toggleBlock('time')">
+        <div class="block-head-left">
+          <div>
+            <div class="block-title">Durée de séance</div>
+            <div class="block-desc" id="timeModeLabel">Mode continu</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="segmented" id="timeSeg">
+          <div class="on" data-timemode="continu" onclick="setTimeMode('continu')">Continu</div>
+          <div data-timemode="chrono" onclick="setTimeMode('chrono')">Chronométré</div>
+        </div>
+        <div class="field-row" id="chronoRow" style="display:none;">
+          <div class="field-label">Durée</div>
+          <div class="time-input">
+            <input type="number" id="chronoMin" value="5" min="1" max="120"> min
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIGURATIONS SAUVEGARDÉES -->
+    <div class="block" data-block="save">
+      <div class="block-head" onclick="toggleBlock('save')">
+        <div class="block-head-left">
+          <div>
+            <div class="block-title">Configurations</div>
+            <div class="block-desc">Sauvegarder / recharger</div>
+          </div>
+        </div>
+        <div class="chev">▸</div>
+      </div>
+      <div class="block-body">
+        <div class="savebar">
+          <input type="text" id="saveName" placeholder="Nom de la configuration">
+          <button class="btn" onclick="saveConfig()">Enregistrer</button>
+        </div>
+        <div class="savedlist" id="savedList"></div>
+        <div class="savebar" style="margin-top:14px;">
+          <button class="btn ghost" style="flex:1;" onclick="resetConfig()">Reset — configuration vierge</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footerbar">
+    <button class="startbtn" onclick="startSession()">Démarrer la session</button>
+  </div>
+</div>
+
+<!-- ---------- SESSION SCREEN ---------- -->
+<div id="session">
+  <div class="sess-hint" id="sessHint">EN ATTENTE</div>
+  <div class="sess-top">
+    <div class="sess-timer" id="sessTimer">∞</div>
+    <div class="sess-status" id="sessStatus">fatigue: —</div>
+  </div>
+  <div class="sess-exercise" id="sessExercise"></div>
+  <div class="sess-center">
+    <div class="sess-word" id="sessWord"></div>
+    <div class="pausecard">PAUSE</div>
+  </div>
+  <div class="sess-bottom">
+    <button class="sess-btn" id="pauseBtn" onclick="togglePause()">Pause</button>
+    <button class="sess-btn" onclick="quitSession()">Quitter</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   ÉTAT / CONFIG
+   ========================================================= */
+const ALL_COLORS = ["Rouge","Bleu","Vert","Jaune","Orange","Violet","Noir","Blanc"];
+const AMBIANCE_KEYS = ["vent","mer","circulation","animaux"];
+const AMBIANCE_LABELS = { vent:"Vent", mer:"Mer", circulation:"Circulation", animaux:"Animaux" };
+const PREP_EXERCISES = ["pompes","squats","tractions"];
+const PREP_LABELS = { pompes:"Pompes", squats:"Squats", tractions:"Tractions" };
+const PREP_LOCKED_OFF = ['shots','orders','fatigue','decoys','reload'];
+
+const state = {
+  modules: { colors:true, shots:true, orders:false, fatigue:false, decoys:false, multi:false, reload:false, ambiance:false },
+  flags: { spatial:false, randomHold:true },
+  prepPhysique: false,
+  colorsSelected: new Set(["Rouge","Bleu","Vert","Jaune"]),
+  shotsSelected: new Set(["semi","sniper","rafale"]),
+  ordersSelected: new Set(["couche","genoux","accroupi","fige","avancer","reculer","bouger"]),
+  ambianceSelected: new Set(["vent","mer"]),
+  prepExercisesSelected: new Set(["pompes","squats","tractions"]),
+  timeMode: "continu",
+  chronoMinutes: 5,
+  difficulty: "moyen",
+};
+
+/* ---------- chip builders (couleurs / ambiance / exercices) ---------- */
+function buildChips(containerId, items, selectedSet, labelMap, dataAttr){
+  const wrap = document.getElementById(containerId);
+  items.forEach(key=>{
+    const el = document.createElement('span');
+    el.className = 'chip' + (selectedSet.has(key) ? ' on' : '');
+    el.dataset[dataAttr] = key;
+    el.textContent = labelMap ? labelMap[key] : key;
+    el.onclick = ()=>{
+      el.classList.toggle('on');
+      if(el.classList.contains('on')) selectedSet.add(key); else selectedSet.delete(key);
+    };
+    wrap.appendChild(el);
+  });
+}
+buildChips('colorChips', ALL_COLORS, state.colorsSelected, null, 'color');
+buildChips('ambianceChips', AMBIANCE_KEYS, state.ambianceSelected, AMBIANCE_LABELS, 'amb');
+buildChips('prepChips', PREP_EXERCISES, state.prepExercisesSelected, PREP_LABELS, 'ex');
+
+document.querySelectorAll('#shotChips .chip').forEach(el=>{
+  el.onclick = ()=>{
+    el.classList.toggle('on');
+    const k = el.dataset.shot;
+    if(el.classList.contains('on')) state.shotsSelected.add(k); else state.shotsSelected.delete(k);
+  };
+});
+document.querySelectorAll('#orderChips .chip').forEach(el=>{
+  el.onclick = ()=>{
+    el.classList.toggle('on');
+    const k = el.dataset.order;
+    if(el.classList.contains('on')) state.ordersSelected.add(k); else state.ordersSelected.delete(k);
+  };
+});
+
+function toggleAllChips(containerId, selectedSet){
+  const wrap = document.getElementById(containerId);
+  const chips = wrap.querySelectorAll('.chip');
+  const allOn = Array.from(chips).every(c=>c.classList.contains('on'));
+  chips.forEach(c=>{
+    if(allOn) c.classList.remove('on'); else c.classList.add('on');
+    const key = c.dataset.color || c.dataset.amb || c.dataset.ex;
+    if(key){ if(!allOn) selectedSet.add(key); else selectedSet.delete(key); }
+  });
+}
+
+function toggleBlock(name){
+  document.querySelector(`.block[data-block="${name}"]`).classList.toggle('open');
+}
+function setModuleState(name, val){
+  state.modules[name] = val;
+  const tg = document.getElementById('tg-'+name); if(tg) tg.classList.toggle('on', val);
+  const blk = document.querySelector(`.block[data-block="${name}"]`); if(blk) blk.classList.toggle('active', val);
+}
+function toggleModule(name){
+  if(state.prepPhysique && (PREP_LOCKED_OFF.includes(name) || name==='colors')) return; // verrouillé pendant la préparation physique
+  setModuleState(name, !state.modules[name]);
+}
+function toggleFlag(name){
+  state.flags[name] = !state.flags[name];
+  document.getElementById('tg-'+name).classList.toggle('on', state.flags[name]);
+}
+function syncRangeLabel(id){
+  document.getElementById(id+'Val').textContent = document.getElementById(id).value + '%';
+}
+
+function togglePrepPhysique(){
+  state.prepPhysique = !state.prepPhysique;
+  document.getElementById('tg-prep').classList.toggle('on', state.prepPhysique);
+  document.querySelector('.block[data-block="prep"]').classList.toggle('active', state.prepPhysique);
+  if(state.prepPhysique){
+    PREP_LOCKED_OFF.forEach(m=> setModuleState(m, false));
+    setModuleState('colors', true);
+  }
+  updateLockVisuals();
+}
+function updateLockVisuals(){
+  PREP_LOCKED_OFF.forEach(m=>{
+    const blk = document.querySelector(`.block[data-block="${m}"]`);
+    if(blk) blk.classList.toggle('locked', state.prepPhysique);
+  });
+  const colorToggle = document.getElementById('tg-colors');
+  if(colorToggle) colorToggle.classList.toggle('locked', state.prepPhysique);
+  document.getElementById('sessExercise').classList.toggle('show', false);
+}
+
+function setDifficulty(d){
+  state.difficulty = d;
+  document.querySelectorAll('#difficultySeg > div').forEach(el=>el.classList.toggle('on', el.dataset.diff===d));
+  const labels = {facile:'Facile', moyen:'Moyen', difficile:'Difficile'};
+  document.getElementById('difficultyLabel').textContent = labels[d];
+  applyDifficultyDefaults(d);
+}
+function applyDifficultyDefaults(d){
+  if(state.prepPhysique) return; // la préparation physique garde ses propres réglages
+  if(d==='facile'){
+    setModuleState('decoys', false);
+    setModuleState('multi', false);
+    setModuleState('fatigue', false);
+  } else if(d==='moyen'){
+    setModuleState('fatigue', true);
+    setModuleState('decoys', true);
+    setModuleState('multi', false);
+  } else if(d==='difficile'){
+    setModuleState('fatigue', true);
+    setModuleState('decoys', true);
+    setModuleState('multi', true);
+  }
+}
+// >1 = pauses plus longues (facile) · <1 = pauses plus courtes, plus d'événements (difficile)
+function difficultyMult(){
+  return state.difficulty==='facile' ? 1.4 : state.difficulty==='difficile' ? 0.6 : 1.0;
+}
+function difficultyDecoyMult(){
+  return state.difficulty==='facile' ? 0.6 : state.difficulty==='difficile' ? 1.7 : 1.0;
+}
+function setTimeMode(mode){
+  state.timeMode = mode;
+  document.querySelectorAll('#timeSeg > div').forEach(d=>d.classList.toggle('on', d.dataset.timemode===mode));
+  document.getElementById('chronoRow').style.display = mode==='chrono' ? 'flex' : 'none';
+  document.getElementById('timeModeLabel').textContent = mode==='chrono' ? 'Mode chronométré' : 'Mode continu';
+}
+
+/* =========================================================
+   SAUVEGARDE DE CONFIGURATIONS (localStorage)
+   ========================================================= */
+const STORAGE_KEY = 'tacti_configs_v2';
+
+function collectConfig(){
+  return {
+    modules: {...state.modules},
+    flags: {...state.flags},
+    prepPhysique: state.prepPhysique,
+    colorsSelected: Array.from(state.colorsSelected),
+    shotsSelected: Array.from(state.shotsSelected),
+    ordersSelected: Array.from(state.ordersSelected),
+    ambianceSelected: Array.from(state.ambianceSelected),
+    prepExercisesSelected: Array.from(state.prepExercisesSelected),
+    timeMode: state.timeMode,
+    difficulty: state.difficulty,
+    chronoMinutes: parseInt(document.getElementById('chronoMin').value)||5,
+    colorMin: +document.getElementById('colorMin').value,
+    colorMax: +document.getElementById('colorMax').value,
+    shotMin: +document.getElementById('shotMin').value,
+    shotMax: +document.getElementById('shotMax').value,
+    holdMin: +document.getElementById('holdMin').value,
+    holdMax: +document.getElementById('holdMax').value,
+    moveMin: +document.getElementById('moveMin').value,
+    moveMax: +document.getElementById('moveMax').value,
+    orderMin: +document.getElementById('orderMin').value,
+    orderMax: +document.getElementById('orderMax').value,
+    decoyFreq: +document.getElementById('decoyFreq').value,
+    reloadMin: +document.getElementById('reloadMin').value,
+    reloadMax: +document.getElementById('reloadMax').value,
+    multiFreq: +document.getElementById('multiFreq').value,
+    multiBattMin: +document.getElementById('multiBattMin').value,
+    multiBattMax: +document.getElementById('multiBattMax').value,
+    ambianceVol: +document.getElementById('ambianceVol').value,
+    prepSeriesDur: +document.getElementById('prepSeriesDur').value,
+    prepColorMin: +document.getElementById('prepColorMin').value,
+    prepColorMax: +document.getElementById('prepColorMax').value,
+    volVoice: +document.getElementById('volVoice').value,
+    volShots: +document.getElementById('volShots').value,
+  };
+}
+function applyConfig(cfg){
+  state.modules = {...cfg.modules};
+  state.flags = {...cfg.flags};
+  state.prepPhysique = !!cfg.prepPhysique;
+  state.colorsSelected = new Set(cfg.colorsSelected);
+  state.shotsSelected = new Set(cfg.shotsSelected);
+  state.ordersSelected = new Set(cfg.ordersSelected);
+  state.ambianceSelected = new Set(cfg.ambianceSelected || []);
+  state.prepExercisesSelected = new Set(cfg.prepExercisesSelected || PREP_EXERCISES);
+  state.timeMode = cfg.timeMode;
+  setDifficulty(cfg.difficulty || 'moyen');
+  state.modules = {...cfg.modules}; // setDifficulty peut avoir réappliqué des défauts — on restaure la config exacte
+  state.prepPhysique = !!cfg.prepPhysique;
+
+  Object.keys(state.modules).forEach(k=>{
+    const tg = document.getElementById('tg-'+k); if(tg) tg.classList.toggle('on', state.modules[k]);
+    const blk = document.querySelector(`.block[data-block="${k}"]`); if(blk) blk.classList.toggle('active', state.modules[k]);
+  });
+  document.getElementById('tg-prep').classList.toggle('on', state.prepPhysique);
+  document.querySelector('.block[data-block="prep"]').classList.toggle('active', state.prepPhysique);
+  document.getElementById('tg-spatial').classList.toggle('on', state.flags.spatial);
+  document.getElementById('tg-randomHold').classList.toggle('on', state.flags.randomHold);
+  updateLockVisuals();
+
+  document.querySelectorAll('#colorChips .chip').forEach(el=> el.classList.toggle('on', state.colorsSelected.has(el.dataset.color)));
+  document.querySelectorAll('#shotChips .chip').forEach(el=> el.classList.toggle('on', state.shotsSelected.has(el.dataset.shot)));
+  document.querySelectorAll('#orderChips .chip').forEach(el=> el.classList.toggle('on', state.ordersSelected.has(el.dataset.order)));
+  document.querySelectorAll('#ambianceChips .chip').forEach(el=> el.classList.toggle('on', state.ambianceSelected.has(el.dataset.amb)));
+  document.querySelectorAll('#prepChips .chip').forEach(el=> el.classList.toggle('on', state.prepExercisesSelected.has(el.dataset.ex)));
+
+  setTimeMode(cfg.timeMode);
+  document.getElementById('chronoMin').value = cfg.chronoMinutes;
+  document.getElementById('colorMin').value = cfg.colorMin;
+  document.getElementById('colorMax').value = cfg.colorMax;
+  document.getElementById('shotMin').value = cfg.shotMin;
+  document.getElementById('shotMax').value = cfg.shotMax;
+  document.getElementById('holdMin').value = cfg.holdMin;
+  document.getElementById('holdMax').value = cfg.holdMax;
+  document.getElementById('moveMin').value = cfg.moveMin ?? 5;
+  document.getElementById('moveMax').value = cfg.moveMax ?? 10;
+  document.getElementById('orderMin').value = cfg.orderMin;
+  document.getElementById('orderMax').value = cfg.orderMax;
+  document.getElementById('decoyFreq').value = cfg.decoyFreq;
+  document.getElementById('reloadMin').value = cfg.reloadMin ?? 10;
+  document.getElementById('reloadMax').value = cfg.reloadMax ?? 25;
+  document.getElementById('multiFreq').value = cfg.multiFreq ?? 40;
+  document.getElementById('multiBattMin').value = cfg.multiBattMin ?? 5;
+  document.getElementById('multiBattMax').value = cfg.multiBattMax ?? 10;
+  document.getElementById('ambianceVol').value = cfg.ambianceVol ?? 30;
+  document.getElementById('prepSeriesDur').value = cfg.prepSeriesDur ?? 40;
+  document.getElementById('prepColorMin').value = cfg.prepColorMin ?? 10;
+  document.getElementById('prepColorMax').value = cfg.prepColorMax ?? 15;
+  document.getElementById('volVoice').value = cfg.volVoice;
+  document.getElementById('volShots').value = cfg.volShots;
+  syncRangeLabel('decoyFreq'); syncRangeLabel('volVoice'); syncRangeLabel('volShots'); syncRangeLabel('ambianceVol'); syncRangeLabel('multiFreq');
+}
+
+function loadAllConfigs(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }catch(e){ return {}; }
+}
+function renderSavedList(){
+  const all = loadAllConfigs();
+  const wrap = document.getElementById('savedList');
+  wrap.innerHTML = '';
+  Object.keys(all).forEach(name=>{
+    const row = document.createElement('div');
+    row.className = 'saveditem';
+    row.innerHTML = `<span class="name">${name}</span>
+      <span class="acts"><span onclick="loadConfigByName('${name}')">charger</span><span class="del" onclick="deleteConfigByName('${name}')">suppr.</span></span>`;
+    wrap.appendChild(row);
+  });
+}
+function saveConfig(){
+  const name = document.getElementById('saveName').value.trim();
+  if(!name){ return; }
+  const all = loadAllConfigs();
+  all[name] = collectConfig();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+  document.getElementById('saveName').value = '';
+  renderSavedList();
+}
+function loadConfigByName(name){
+  const all = loadAllConfigs();
+  if(all[name]) applyConfig(all[name]);
+}
+function deleteConfigByName(name){
+  const all = loadAllConfigs();
+  delete all[name];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+  renderSavedList();
+}
+function resetConfig(){
+  applyConfig({
+    modules:{colors:true,shots:true,orders:false,fatigue:false,decoys:false,multi:false,reload:false,ambiance:false},
+    flags:{spatial:false,randomHold:true},
+    prepPhysique:false,
+    colorsSelected:["Rouge","Bleu","Vert","Jaune"],
+    shotsSelected:["semi","sniper","rafale"],
+    ordersSelected:["couche","genoux","accroupi","fige","avancer","reculer","bouger"],
+    ambianceSelected:["vent","mer"],
+    prepExercisesSelected:["pompes","squats","tractions"],
+    timeMode:"continu", difficulty:"moyen", chronoMinutes:5,
+    colorMin:15,colorMax:25, shotMin:4,shotMax:10, holdMin:3,holdMax:15, moveMin:5,moveMax:10,
+    orderMin:15,orderMax:20, decoyFreq:15, reloadMin:10,reloadMax:25, multiFreq:40, multiBattMin:5,multiBattMax:10,
+    ambianceVol:30, prepSeriesDur:40, prepColorMin:10, prepColorMax:15,
+    volVoice:100, volShots:80
+  });
+}
+renderSavedList();
+
+/* =========================================================
+   MOTEUR AUDIO (Web Audio API — sons synthétisés, 100% local)
+   ========================================================= */
+let actx = null;
+function ensureAudio(){ if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)(); return actx; }
+
+function noiseBuffer(ctx, duration){
+  const buf = ctx.createBuffer(1, Math.max(1, Math.floor(ctx.sampleRate*duration)), ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i] = (Math.random()*2-1);
+  return buf;
+}
+
+// panner: -1 (gauche) .. 0 (centre) .. 1 (droite)
+function makeOutputChain(ctx, gainVal, pan){
+  const gain = ctx.createGain(); gain.gain.value = gainVal;
+  const panner = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+  if(panner){ panner.pan.value = pan; gain.connect(panner); panner.connect(ctx.destination); return gain; }
+  gain.connect(ctx.destination); return gain;
+}
+
+function shotVolume(){ return (+document.getElementById('volShots').value)/100; }
+function voiceVolume(){ return (+document.getElementById('volVoice').value)/100; }
+
+/* ---- Impact sec et réaliste : bruit filtré dominant + très courte impulsion basse (pas de "note" de percussion) ----
+   Corrige le bug signalé : les anciennes versions "courte portée" / "sniper" sonnaient comme un coup de
+   basse/percussion cartoon. La composante grave est désormais du bruit filtré très bref, pas un oscillateur
+   accordé, pour éviter tout effet "note de musique". */
+function shotCrack(ctx, t0, out, hardness){
+  // claquement dominant : bruit passe-bande, attaque quasi instantanée, decay très court
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(ctx, 0.1);
+  const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 700;
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 1900*hardness; bp.Q.value = 1.1;
+  const env = ctx.createGain();
+  env.gain.setValueAtTime(0.0001, t0);
+  env.gain.exponentialRampToValueAtTime(1, t0+0.0015);
+  env.gain.exponentialRampToValueAtTime(0.0001, t0+0.075);
+  src.connect(hp); hp.connect(bp); bp.connect(env); env.connect(out);
+  src.start(t0); src.stop(t0+0.1);
+
+  // impulsion grave très brève (bruit passe-bas, pas un ton) — donne du "corps" sans sonner comme un tambour
+  const psrc = ctx.createBufferSource();
+  psrc.buffer = noiseBuffer(ctx, 0.04);
+  const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 200*hardness;
+  const penv = ctx.createGain();
+  penv.gain.setValueAtTime(0.0001, t0);
+  penv.gain.exponentialRampToValueAtTime(0.45, t0+0.002);
+  penv.gain.exponentialRampToValueAtTime(0.0001, t0+0.035);
+  psrc.connect(lp); lp.connect(penv); penv.connect(out);
+  psrc.start(t0); psrc.stop(t0+0.04);
+}
+
+function playSemiAuto(pan){
+  const ctx = ensureAudio();
+  const out = makeOutputChain(ctx, shotVolume()*0.95, pan);
+  shotCrack(ctx, ctx.currentTime, out, 1.0);
+}
+
+function playSniper(pan){
+  const ctx = ensureAudio(); const t0 = ctx.currentTime;
+  const vol = shotVolume();
+  const out = makeOutputChain(ctx, vol*0.95, pan);
+
+  // claquement initial, plus dur que les autres tirs
+  shotCrack(ctx, t0, out, 1.9);
+
+  // impact grave et long — bruit passe-bas avec fréquence de coupure qui chute, sans oscillateur accordé
+  const boomOut = makeOutputChain(ctx, vol*0.7, pan);
+  const boomSrc = ctx.createBufferSource(); boomSrc.buffer = noiseBuffer(ctx, 0.5);
+  const boomFilter = ctx.createBiquadFilter(); boomFilter.type='lowpass';
+  boomFilter.frequency.setValueAtTime(220, t0);
+  boomFilter.frequency.exponentialRampToValueAtTime(60, t0+0.4);
+  const boomEnv = ctx.createGain();
+  boomEnv.gain.setValueAtTime(0.0001, t0);
+  boomEnv.gain.exponentialRampToValueAtTime(1, t0+0.012);
+  boomEnv.gain.exponentialRampToValueAtTime(0.0001, t0+0.5);
+  boomSrc.connect(boomFilter); boomFilter.connect(boomEnv); boomEnv.connect(boomOut);
+  boomSrc.start(t0); boomSrc.stop(t0+0.5);
+
+  // sifflement aigu qui traverse l'air
+  const crackOut = makeOutputChain(ctx, vol*0.55, pan);
+  const crackSrc = ctx.createBufferSource(); crackSrc.buffer = noiseBuffer(ctx, 0.6);
+  const crackFilter = ctx.createBiquadFilter(); crackFilter.type='highpass'; crackFilter.frequency.value=2500;
+  const crackEnv = ctx.createGain();
+  crackEnv.gain.setValueAtTime(0.0001, t0+0.02);
+  crackEnv.gain.exponentialRampToValueAtTime(0.45, t0+0.03);
+  crackEnv.gain.exponentialRampToValueAtTime(0.0001, t0+0.5);
+  crackSrc.connect(crackFilter); crackFilter.connect(crackEnv); crackEnv.connect(crackOut);
+  crackSrc.start(t0+0.02); crackSrc.stop(t0+0.6);
+
+  // écho distant — signature reconnaissable du sniper
+  [0.16, 0.34].forEach((delay, i)=>{
+    const echoOut = makeOutputChain(ctx, vol*(0.28 - i*0.11), pan);
+    const echoSrc = ctx.createBufferSource(); echoSrc.buffer = noiseBuffer(ctx, 0.3);
+    const echoFilter = ctx.createBiquadFilter(); echoFilter.type='lowpass'; echoFilter.frequency.value=600;
+    const echoEnv = ctx.createGain();
+    echoEnv.gain.setValueAtTime(0.0001, t0+delay);
+    echoEnv.gain.exponentialRampToValueAtTime(1, t0+delay+0.01);
+    echoEnv.gain.exponentialRampToValueAtTime(0.0001, t0+delay+0.26);
+    echoSrc.connect(echoFilter); echoFilter.connect(echoEnv); echoEnv.connect(echoOut);
+    echoSrc.start(t0+delay); echoSrc.stop(t0+delay+0.3);
+  });
+}
+
+function playRafale(pan){
+  const ctx = ensureAudio();
+  const out = makeOutputChain(ctx, shotVolume()*0.85, pan);
+  const n = 6 + Math.floor(Math.random()*6); // 6 à 11 impacts
+  let t = 0;
+  for(let i=0;i<n;i++){
+    shotCrack(ctx, ctx.currentTime + t, out, 0.85 + Math.random()*0.15);
+    t += 0.075 + Math.random()*0.035; // léger jitter pour une cadence naturelle
+  }
+}
+
+function randomPan(){
+  if(!state.flags.spatial) return 0;
+  const r = Math.random();
+  if(r < 0.34) return -0.85;
+  if(r < 0.68) return 0.85;
+  return 0; // tir "de face" reste centré
+}
+
+function fireShot(){
+  const types = Array.from(state.shotsSelected);
+  if(types.length===0) return;
+  const w = {semi:40, sniper:30, rafale:30};
+  w.rafale += fatigueLevel*5; w.semi -= fatigueLevel*2; w.sniper -= fatigueLevel*3;
+  if(state.difficulty==='difficile'){ w.rafale += 18; w.semi -= 10; w.sniper -= 8; }
+  else if(state.difficulty==='facile'){ w.rafale -= 12; w.semi += 12; }
+  const pool = [];
+  types.forEach(t=>{ const weight = Math.max(5, w[t]||30); for(let i=0;i<weight;i++) pool.push(t); });
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  const pan = randomPan();
+  if(pick==='semi') playSemiAuto(pan);
+  else if(pick==='sniper') playSniper(pan);
+  else playRafale(pan);
+}
+
+/* voix off — annonces couleurs & ordres, jamais spatialisées */
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'fr-FR'; u.rate = 1.0; u.pitch = 1.0;
+  u.volume = voiceVolume();
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(u);
+}
+
+/* drone continu pour "ne pas bouger" uniquement */
+let droneNode = null, droneGain = null;
+function startDrone(){
+  const ctx = ensureAudio();
+  droneNode = ctx.createOscillator(); droneNode.type='sine'; droneNode.frequency.value = 90;
+  droneGain = ctx.createGain(); droneGain.gain.value = 0.0001;
+  droneNode.connect(droneGain); droneGain.connect(ctx.destination);
+  droneNode.start();
+  droneGain.gain.exponentialRampToValueAtTime(0.06*voiceVolume()+0.001, ctx.currentTime+0.4);
+}
+function stopDrone(){
+  if(!droneNode) return;
+  const ctx = ensureAudio();
+  droneGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.4);
+  const n = droneNode;
+  setTimeout(()=>{ try{n.stop();}catch(e){} }, 500);
+  droneNode = null;
+}
+
+/* ---- AMBIANCE SONORE (boucles synthétisées, 100% locales) ----
+   Banque facilement incrémentable : pour ajouter une ambiance, ajouter une clé à AMBIANCE_KEYS / AMBIANCE_LABELS
+   et une fonction ambiance<Nom>(ctx, vol) ci-dessous qui retourne { stop() }.
+   Pour brancher un jour de vrais fichiers audio libres de droits : remplacer le corps de la fonction par un
+   <audio>/AudioBufferSourceNode chargé via fetch() + decodeAudioData() sur un fichier local embarqué. */
+const ambianceNodes = {};
+function ambianceVolume(){ return (+document.getElementById('ambianceVol').value)/100; }
+
+function ambianceVent(ctx, vol){
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(ctx, 4); src.loop = true;
+  const filter = ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=500;
+  const gain = ctx.createGain(); gain.gain.value = vol*0.35;
+  const lfo = ctx.createOscillator(); lfo.frequency.value=0.08;
+  const lfoGain = ctx.createGain(); lfoGain.gain.value=250;
+  lfo.connect(lfoGain); lfoGain.connect(filter.frequency);
+  src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+  src.start(); lfo.start();
+  return { stop(){ try{src.stop(); lfo.stop();}catch(e){} } };
+}
+function ambianceMer(ctx, vol){
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(ctx, 4); src.loop = true;
+  const filter = ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=700;
+  const gain = ctx.createGain(); gain.gain.value = vol*0.08;
+  const lfo = ctx.createOscillator(); lfo.type='sine'; lfo.frequency.value=0.12;
+  const lfoGain = ctx.createGain(); lfoGain.gain.value = vol*0.26;
+  lfo.connect(lfoGain); lfoGain.connect(gain.gain);
+  src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+  src.start(); lfo.start();
+  return { stop(){ try{src.stop(); lfo.stop();}catch(e){} } };
+}
+function ambianceCirculation(ctx, vol){
+  const src = ctx.createBufferSource();
+  src.buffer = noiseBuffer(ctx, 4); src.loop = true;
+  const filter = ctx.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=220;
+  const gain = ctx.createGain(); gain.gain.value = vol*0.3;
+  src.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+  src.start();
+  let stopped = false;
+  function scheduleSwoosh(){
+    if(stopped) return;
+    const delay = 4000+Math.random()*9000;
+    setTimeout(()=>{
+      if(stopped) return;
+      const s = ctx.createBufferSource(); s.buffer = noiseBuffer(ctx, 1.2);
+      const f2 = ctx.createBiquadFilter(); f2.type='bandpass'; f2.frequency.value=500; f2.Q.value=0.6;
+      const g2 = ctx.createGain();
+      g2.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g2.gain.exponentialRampToValueAtTime(vol*0.5, ctx.currentTime+0.5);
+      g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+1.2);
+      s.connect(f2); f2.connect(g2); g2.connect(ctx.destination);
+      s.start(); s.stop(ctx.currentTime+1.2);
+      scheduleSwoosh();
+    }, delay);
+  }
+  scheduleSwoosh();
+  return { stop(){ stopped=true; try{src.stop();}catch(e){} } };
+}
+function ambianceAnimaux(ctx, vol){
+  let stopped = false;
+  function chirp(){
+    if(stopped) return;
+    const delay = 1500+Math.random()*5000;
+    setTimeout(()=>{
+      if(stopped) return;
+      const o = ctx.createOscillator(); o.type='sine';
+      const base = 1800+Math.random()*1200;
+      o.frequency.setValueAtTime(base, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(base*0.7, ctx.currentTime+0.09);
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.0001, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(vol*0.25, ctx.currentTime+0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.1);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(); o.stop(ctx.currentTime+0.12);
+      chirp();
+    }, delay);
+  }
+  chirp();
+  return { stop(){ stopped = true; } };
+}
+const AMBIANCE_FN = { vent:ambianceVent, mer:ambianceMer, circulation:ambianceCirculation, animaux:ambianceAnimaux };
+
+function startAmbiance(key){
+  const ctx = ensureAudio();
+  const fn = AMBIANCE_FN[key];
+  if(fn) ambianceNodes[key] = fn(ctx, ambianceVolume());
+}
+function stopAllAmbiance(){
+  Object.keys(ambianceNodes).forEach(k=>{ try{ambianceNodes[k].stop();}catch(e){} delete ambianceNodes[k]; });
+}
+
+/* =========================================================
+   MOTEUR DE SESSION
+   ========================================================= */
+const ORDER_LABELS = {
+  couche:'Couché', genoux:'À genoux', accroupi:'Accroupi', fige:'Ne pas bouger',
+  avancer:'Avancer', reculer:'Reculer', bouger:'Bouger'
+};
+const MOVE_ORDERS = ['avancer','reculer','bouger'];
+const BLOCKING_ORDERS = ['fige', ...MOVE_ORDERS];
+
+const COLOR_HEX = {Rouge:'#7a1f18',Bleu:'#173d6b',Vert:'#1f5c26',Jaune:'#7a6a12',Orange:'#7a4712',Violet:'#4a1f6b',Noir:'#2b2b2b',Blanc:'#dedad0'};
+function colorToHex(name){ return COLOR_HEX[name]; }
+function colorToTextColor(name){ return name==='Blanc' ? '#141712' : 'rgba(255,255,255,.92)'; }
+
+let sessionTimers = [];
+let running = false, paused = false;
+let sessionStartTime = 0, pauseAccum = 0, pauseStartedAt = 0;
+let chronoTotalMs = 0;
+let fatigueLevel = 0;
+let fatigueTicker = null;
+let clockTicker = null;
+const blockReasons = new Set(); // bloque uniquement les annonces de couleur ('order' | 'reload')
+let blockLabel = '';
+
+let prepCurrentExercise = null;
+let prepSeriesEndAt = 0;
+let prepDisplayTicker = null;
+
+function clearAllTimers(){ sessionTimers.forEach(t=>clearTimeout(t)); sessionTimers = []; }
+function schedule(fn, delayMs){ const id = setTimeout(fn, delayMs); sessionTimers.push(id); return id; }
+function randRange(min,max){ return min + Math.random()*(max-min); }
+function fatigueMult(){ return Math.max(0.15, 1 - (fatigueLevel*0.10)); }
+
+function addBlock(reason, label){ blockReasons.add(reason); if(label) blockLabel = label; updateStatusLine(); }
+function removeBlock(reason){ blockReasons.delete(reason); if(blockReasons.size===0) blockLabel=''; updateStatusLine(); }
+
+function startSession(){
+  if(state.modules.colors && state.colorsSelected.size===0){
+    alert("Sélectionnez au moins une couleur, ou désactivez le module Cibles/Couleurs.");
+    return;
+  }
+  if(state.modules.shots && state.shotsSelected.size===0){
+    alert("Sélectionnez au moins un type de tir, ou désactivez le module Sons de tir.");
+    return;
+  }
+  if(state.modules.ambiance && state.ambianceSelected.size===0){
+    alert("Sélectionnez au moins une ambiance, ou désactivez le module Ambiance sonore.");
+    return;
+  }
+  if(state.prepPhysique && state.prepExercisesSelected.size===0){
+    alert("Sélectionnez au moins un exercice pour la préparation physique.");
+    return;
+  }
+  ensureAudio();
+  if(actx.state==='suspended') actx.resume();
+
+  fatigueLevel = 0; paused = false; running = true;
+  blockReasons.clear(); blockLabel = '';
+  pauseAccum = 0; sessionStartTime = Date.now();
+
+  chronoTotalMs = state.timeMode==='chrono' ? (parseInt(document.getElementById('chronoMin').value)||5)*60000 : 0;
+
+  document.getElementById('session').classList.add('live');
+  document.getElementById('sessWord').textContent = '';
+  document.getElementById('sessHint').textContent = 'SESSION EN COURS';
+  document.getElementById('sessExercise').classList.toggle('show', state.prepPhysique);
+  updateStatusLine();
+
+  clockTicker = setInterval(updateClock, 250);
+
+  if(state.modules.fatigue && !state.prepPhysique){
+    fatigueTicker = setInterval(()=>{
+      if(paused) return;
+      fatigueLevel = Math.min(9, fatigueLevel+1);
+      updateStatusLine();
+    }, 30000);
+  }
+
+  if(state.modules.ambiance){
+    Array.from(state.ambianceSelected).forEach(k=> startAmbiance(k));
+  }
+
+  if(state.modules.shots && !state.prepPhysique) scheduleNextShot();
+  if(state.modules.colors) scheduleNextColor();
+  if(state.modules.orders && !state.prepPhysique) scheduleNextOrder();
+  if(state.modules.decoys && !state.prepPhysique) scheduleNextDecoy();
+  if(state.modules.reload && !state.prepPhysique) scheduleNextReload();
+  if(state.prepPhysique) startPrepSeries();
+
+  if('mediaSession' in navigator){
+    try{
+      navigator.mediaSession.setActionHandler('play', ()=>{ if(paused) togglePause(); });
+      navigator.mediaSession.setActionHandler('pause', ()=>{ if(!paused) togglePause(); });
+      navigator.mediaSession.playbackState = 'playing';
+    }catch(e){}
+  }
+}
+
+function updateStatusLine(){
+  const el = document.getElementById('sessStatus');
+  const f = state.modules.fatigue ? `fatigue: +${fatigueLevel*10}%` : 'fatigue: off';
+  el.textContent = f + (blockLabel ? '\n'+blockLabel : '');
+}
+
+function updateClock(){
+  const el = document.getElementById('sessTimer');
+  if(state.prepPhysique){
+    const remain = Math.max(0, Math.ceil((prepSeriesEndAt - Date.now())/1000));
+    const mm = String(Math.floor(remain/60)).padStart(2,'0');
+    const ss = String(remain%60).padStart(2,'0');
+    document.getElementById('sessExercise').textContent = `${PREP_LABELS[prepCurrentExercise]||''} — ${mm}:${ss}`;
+  }
+  if(state.timeMode==='continu'){ el.textContent = '∞'; return; }
+  const elapsed = (Date.now() - sessionStartTime - pauseAccum);
+  const remain = Math.max(0, chronoTotalMs - elapsed);
+  const s = Math.ceil(remain/1000);
+  const mm = String(Math.floor(s/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  el.textContent = `${mm}:${ss}`;
+  if(remain<=0) quitSession();
+}
+
+/* ---- SONS DE TIR ---- */
+function scheduleNextShot(){
+  if(!running) return;
+  const min = +document.getElementById('shotMin').value, max = +document.getElementById('shotMax').value;
+  const delay = randRange(min,max) * 1000 * fatigueMult() * difficultyMult();
+  schedule(()=>{
+    if(!paused && running){ fireShot(); }
+    scheduleNextShot();
+  }, delay);
+}
+
+/* ---- COULEURS ---- */
+function colorIntervalRange(){
+  if(state.prepPhysique) return [+document.getElementById('prepColorMin').value, +document.getElementById('prepColorMax').value];
+  return [+document.getElementById('colorMin').value, +document.getElementById('colorMax').value];
+}
+function scheduleNextColor(){
+  if(!running) return;
+  const [min,max] = colorIntervalRange();
+  const mult = state.prepPhysique ? 1 : (fatigueMult() * difficultyMult());
+  const delay = randRange(min,max) * 1000 * mult;
+  schedule(()=>{
+    if(!paused && running && blockReasons.size===0){
+      const multiFreq = state.modules.multi ? (+document.getElementById('multiFreq').value) : 0;
+      if(state.modules.multi && !state.prepPhysique && Math.random()*100 < multiFreq){
+        fireMultiTarget(()=> scheduleNextColor());
+        return;
+      } else {
+        fireSingleTarget();
+      }
+    }
+    scheduleNextColor();
+  }, delay);
+}
+function fireSingleTarget(){
+  const arr = Array.from(state.colorsSelected);
+  if(arr.length===0) return;
+  const c = arr[Math.floor(Math.random()*arr.length)];
+  announceColor(c);
+}
+function fireMultiTarget(afterBattement){
+  const arr = Array.from(state.colorsSelected);
+  if(arr.length===0){ afterBattement(); return; }
+  const count = Math.min(arr.length, 2 + Math.floor(Math.random()*2)); // 2 ou 3
+  const shuffled = [...arr].sort(()=>Math.random()-0.5).slice(0,count);
+  shuffled.forEach((c,i)=>{
+    schedule(()=> announceColor(c), i*1300);
+  });
+  const battMin = +document.getElementById('multiBattMin').value, battMax = +document.getElementById('multiBattMax').value;
+  const totalDelay = shuffled.length*1300 + randRange(battMin,battMax)*1000;
+  schedule(afterBattement, totalDelay);
+}
+function announceColor(c){
+  speak(c);
+  flashWord(c, false);
+}
+function flashWord(text, small){
+  const w = document.getElementById('sessWord');
+  w.textContent = text;
+  w.classList.toggle('small', !!small);
+  w.style.color = colorToTextColor(text);
+  document.getElementById('session').style.backgroundColor = colorToHex(text) || '#111';
+  clearTimeout(window.__wordClear);
+  window.__wordClear = setTimeout(()=>{
+    document.getElementById('session').style.backgroundColor = '#000';
+    document.getElementById('sessWord').textContent='';
+  }, 1600);
+}
+
+/* ---- LEURRES : indépendants, mêmes annonces, sans lien avec le terrain réel ---- */
+function scheduleNextDecoy(){
+  if(!running) return;
+  const delay = randRange(18,35) * 1000 * difficultyMult();
+  schedule(()=>{
+    if(!paused && running && blockReasons.size===0){
+      const freq = ((+document.getElementById('decoyFreq').value) + fatigueLevel*5) * difficultyDecoyMult();
+      if(Math.random()*100 < freq){
+        const c = ALL_COLORS[Math.floor(Math.random()*ALL_COLORS.length)];
+        announceColor(c); // visuellement indiscernable — l'utilisateur doit vérifier le terrain
+      }
+    }
+    scheduleNextDecoy();
+  }, delay);
+}
+
+/* ---- ORDRES DE MOUVEMENT ---- */
+function scheduleNextOrder(){
+  if(!running) return;
+  const min = +document.getElementById('orderMin').value, max = +document.getElementById('orderMax').value;
+  const delay = randRange(min,max) * 1000 * difficultyMult();
+  schedule(()=>{
+    if(!paused && running){
+      const pool = Array.from(state.ordersSelected);
+      if(pool.length>0){
+        triggerOrder(pool[Math.floor(Math.random()*pool.length)]);
+        return; // triggerOrder se charge de reprogrammer après sa propre durée
+      }
+    }
+    scheduleNextOrder();
+  }, delay);
+}
+function triggerOrder(o){
+  const isMove = MOVE_ORDERS.includes(o);
+  const isBlocking = BLOCKING_ORDERS.includes(o);
+  let duration;
+  if(isMove){
+    const mn = +document.getElementById('moveMin').value, mx = +document.getElementById('moveMax').value;
+    duration = randRange(mn,mx);
+  } else {
+    const hn = +document.getElementById('holdMin').value, hx = +document.getElementById('holdMax').value;
+    duration = state.flags.randomHold ? randRange(hn,hx) : hn;
+  }
+  speak(ORDER_LABELS[o]);
+  flashWord(ORDER_LABELS[o], true);
+  document.getElementById('session').style.backgroundColor = '#111';
+
+  if(isBlocking) addBlock('order', ORDER_LABELS[o].toUpperCase());
+  if(o==='fige') startDrone();
+
+  schedule(()=>{
+    if(o==='fige') stopDrone();
+    if(isBlocking) removeBlock('order');
+    scheduleNextOrder();
+  }, duration*1000);
+}
+
+/* ---- RECHARGEMENT ---- */
+function scheduleNextReload(){
+  if(!running) return;
+  const min = +document.getElementById('reloadMin').value, max = +document.getElementById('reloadMax').value;
+  const delay = randRange(min,max) * 1000;
+  schedule(()=>{
+    if(!paused && running){
+      speak('Reloading');
+      flashWord('Reloading', true);
+      document.getElementById('session').style.backgroundColor = '#111';
+      addBlock('reload', 'RELOADING');
+      schedule(()=> removeBlock('reload'), 3000);
+    }
+    scheduleNextReload();
+  }, delay);
+}
+
+/* ---- PRÉPARATION PHYSIQUE ---- */
+function startPrepSeries(){
+  if(!running) return;
+  const pool = Array.from(state.prepExercisesSelected);
+  if(pool.length===0) return;
+  prepCurrentExercise = pool[Math.floor(Math.random()*pool.length)];
+  const dur = (+document.getElementById('prepSeriesDur').value)||40;
+  prepSeriesEndAt = Date.now() + dur*1000;
+  schedule(()=>{ if(running) startPrepSeries(); }, dur*1000);
+}
+
+/* ---- PAUSE / QUIT ---- */
+function togglePause(){
+  paused = !paused;
+  document.getElementById('session').classList.toggle('paused', paused);
+  document.getElementById('pauseBtn').textContent = paused ? 'Reprendre' : 'Pause';
+  if(paused){
+    pauseStartedAt = Date.now();
+    window.speechSynthesis && window.speechSynthesis.cancel();
+    if(actx) actx.suspend();
+  } else {
+    pauseAccum += Date.now() - pauseStartedAt;
+    if(actx) actx.resume();
+  }
+  if('mediaSession' in navigator) navigator.mediaSession.playbackState = paused ? 'paused' : 'playing';
+}
+function quitSession(){
+  running = false;
+  clearAllTimers();
+  clearInterval(fatigueTicker);
+  clearInterval(clockTicker);
+  stopDrone();
+  stopAllAmbiance();
+  blockReasons.clear(); blockLabel = '';
+  window.speechSynthesis && window.speechSynthesis.cancel();
+  document.getElementById('session').classList.remove('live','paused');
+  document.getElementById('sessWord').textContent = '';
+  document.getElementById('sessExercise').classList.remove('show');
+  document.getElementById('session').style.backgroundColor = '#000';
+}
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique\entrainement-tactique.html ---
+
