@@ -2,7 +2,7 @@
 STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
 =========================================
 
-[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03
   ├── gestion_serveur.html
   ├── serveur.py
   ├── start tout.bat
@@ -19,7 +19,7 @@ STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
 CONTENU COMPLET DES FICHIERS
 =========================================
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\gestion_serveur.html ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\gestion_serveur.html ---
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -2474,12 +2474,13 @@ body {
 </body>
 </html>
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\gestion_serveur.html ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\gestion_serveur.html ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\serveur.py ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\serveur.py ---
 from fastapi import FastAPI, HTTPException, UploadFile, File, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from typing import Optional, Dict, List
 import json
 import os
@@ -2775,8 +2776,21 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 # Routes principales
+# Sert la page de chat directement : ouvrir http://<IP>:<PORT>/ depuis
+# n'importe quel appareil (PC ou mobile) suffit, plus besoin d'avoir
+# utilisateur.html en local sur chaque appareil.
 @app.get("/")
-async def root():
+async def serve_client():
+    return FileResponse(os.path.join(BASE_DIR, "utilisateur.html"))
+
+# Idem pour la page d'admin, accessible via http://<IP>:<PORT>/gestion_serveur.html
+@app.get("/gestion_serveur.html")
+async def serve_admin():
+    return FileResponse(os.path.join(BASE_DIR, "gestion_serveur.html"))
+
+# Ancien contenu de "/" (statut JSON), déplacé pour ne rien casser
+@app.get("/api/status")
+async def api_status():
     return {
         "name": "Serveur Messagerie",
         "status": "online",
@@ -3604,9 +3618,10 @@ if __name__ == "__main__":
     
     uvicorn.run(app, host="0.0.0.0", port=8001)
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\serveur.py ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\start tout.bat ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\serveur.py ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\start tout.bat ---
 @echo off
 title Lancement du système - Serveur & Interfaces
 color 0A
@@ -3663,9 +3678,9 @@ echo.
 
 
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\start tout.bat ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\start tout.bat ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\start.bat ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\start.bat ---
 @echo off
 title Lancement du système - Serveur & Interfaces
 color 0A
@@ -3703,9 +3718,9 @@ echo [INFO] Lancement du serveur...
 start "Serveur Python" cmd /k python serveur.py
 
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\start.bat ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\start.bat ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\utilisateur.html ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\utilisateur.html ---
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6073,8 +6088,13 @@ start "Serveur Python" cmd /k python serveur.py
 <script>
     // Configuration
     const CONFIG = {
-        SERVER_IP: localStorage.getItem('chat_server_ip') || '192.168.129.5',
-        SERVER_PORT: localStorage.getItem('chat_server_port') || '8000',
+        // Détecte automatiquement l'adresse du serveur depuis l'URL utilisée
+        // pour charger cette page. Ça marche aussi bien en local (ex:
+        // http://192.168.1.50:8001/) qu'à travers un tunnel (ex: ngrok,
+        // https://xxxx.ngrok.io) puisque le tunnel redirige déjà tout le
+        // trafic de cette adresse vers le bon port sur le PC.
+        SERVER_IP: window.location.hostname || localStorage.getItem('chat_server_ip') || '192.168.129.5',
+        SERVER_PORT: window.location.port || localStorage.getItem('chat_server_port') || '8000',
         AUTO_RECONNECT: true,
         MAX_RECONNECT_ATTEMPTS: 5,
         RECONNECT_DELAY: 3000,
@@ -6086,6 +6106,35 @@ start "Serveur Python" cmd /k python serveur.py
         LONG_PRESS_DURATION: 1500, // 1.5 secondes pour l'appui long
         AUTO_SCROLL_ENABLED: true,
         MAX_MESSAGE_LENGTH: 100000000000000000000 // Longueur max très augmentée
+    };
+
+    // Construit l'URL du serveur à partir d'une adresse et d'un port.
+    // Reprend automatiquement le protocole de la page (http/https), et
+    // n'ajoute le port dans l'URL que s'il est réellement spécifié : un
+    // tunnel comme ngrok expose une adresse sans port (https standard),
+    // alors qu'un accès direct en réseau local en a besoin (ex: :8001).
+    function buildServerUrl(ip, port) {
+        const protocol = window.location.protocol === 'https:' ? 'https:' : 'http:';
+        return port ? `${protocol}//${ip}:${port}` : `${protocol}//${ip}`;
+    }
+
+    function buildWsUrl(ip, port, path) {
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const base = port ? `${wsProtocol}//${ip}:${port}` : `${wsProtocol}//${ip}`;
+        return `${base}${path}`;
+    }
+
+    // Certains tunnels (LocalTunnel / loca.lt notamment) affichent une page
+    // d'avertissement intermédiaire tant qu'un en-tête spécial n'est pas
+    // envoyé, ce qui fait passer le serveur pour "inaccessible" alors qu'il
+    // tourne très bien. On ajoute cet en-tête à toutes les requêtes de la
+    // page pour contourner ça automatiquement (inoffensif si le tunnel
+    // utilisé n'en a pas besoin, ex: ngrok ou accès direct en réseau local).
+    const _originalFetch = window.fetch;
+    window.fetch = function (input, init = {}) {
+        const headers = new Headers(init.headers || {});
+        headers.set('Bypass-Tunnel-Reminder', 'true');
+        return _originalFetch(input, { ...init, headers });
     };
 
     // État de l'application
@@ -6553,7 +6602,7 @@ start "Serveur Python" cmd /k python serveur.py
         STATE.userColor = savedColor;
         STATE.userRole = savedRole || 'user';
         STATE.sessionToken = savedToken;
-        STATE.serverUrl = `http://${CONFIG.SERVER_IP}:${CONFIG.SERVER_PORT}`;
+        STATE.serverUrl = buildServerUrl(CONFIG.SERVER_IP, CONFIG.SERVER_PORT);
         
         try {
             const response = await fetch(`${STATE.serverUrl}/verify_token`, {
@@ -6884,7 +6933,7 @@ start "Serveur Python" cmd /k python serveur.py
 
     // Tester la connexion au serveur
     async function testServerConnection() {
-        const serverUrl = `http://${CONFIG.SERVER_IP}:${CONFIG.SERVER_PORT}`;
+        const serverUrl = buildServerUrl(CONFIG.SERVER_IP, CONFIG.SERVER_PORT);
         
         try {
             const response = await fetch(`${serverUrl}/health`, { timeout: 3000 });
@@ -6992,7 +7041,7 @@ start "Serveur Python" cmd /k python serveur.py
         CONFIG.SERVER_IP = serverIP;
         CONFIG.SERVER_PORT = serverPort;
         
-        STATE.serverUrl = `http://${serverIP}:${serverPort}`;
+        STATE.serverUrl = buildServerUrl(serverIP, serverPort);
 
         // Afficher le chargement
         DOM.loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion...';
@@ -7123,8 +7172,7 @@ start "Serveur Python" cmd /k python serveur.py
         if (!STATE.currentUser || !STATE.serverUrl) return;
 
         try {
-            const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsUrl = `${wsProtocol}//${CONFIG.SERVER_IP}:${CONFIG.SERVER_PORT}/ws/${STATE.currentUser}`;
+            const wsUrl = buildWsUrl(CONFIG.SERVER_IP, CONFIG.SERVER_PORT, `/ws/${STATE.currentUser}`);
             
             STATE.websocket = new WebSocket(wsUrl);
             
@@ -8188,7 +8236,10 @@ start "Serveur Python" cmd /k python serveur.py
             return;
         }
         
-        if (!port || port < 1 || port > 65535) {
+        // Le port est optionnel : un tunnel (LocalTunnel, ngrok...) expose
+        // une adresse en HTTPS standard sans port visible. On ne valide le
+        // port que s'il a été renseigné.
+        if (port && (port < 1 || port > 65535)) {
             showNotification('Port invalide', 'error');
             return;
         }
@@ -9247,9 +9298,10 @@ start "Serveur Python" cmd /k python serveur.py
 </body>
 </html>
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\utilisateur.html ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\config.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\utilisateur.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\config.json ---
 {
   "min_username_length": 1,
   "max_username_length": 20,
@@ -9258,16 +9310,16 @@ start "Serveur Python" cmd /k python serveur.py
   "default_user_color": "#6366f1"
 }
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\config.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\config.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\messages.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\messages.json ---
 {
   "messages": [],
   "last_id": 0
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\messages.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\messages.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\projects.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\projects.json ---
 {
   "73ae373093be422b9ad38fa497b38365": {
     "id": "73ae373093be422b9ad38fa497b38365",
@@ -9461,9 +9513,9 @@ start "Serveur Python" cmd /k python serveur.py
     }
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\projects.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\projects.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\sessions.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\sessions.json ---
 {
   "qJBY9b7FzRwHkXDVIB9TKsGoPkHY2rN2nB8IO6i_9Gc": {
     "username": "test",
@@ -9504,20 +9556,40 @@ start "Serveur Python" cmd /k python serveur.py
     "username": "test",
     "created_at": "2026-09-13T15:34:45.948571",
     "expires_at": "2026-10-13T15:34:45.948571"
+  },
+  "CYfqVSmzU5uyNhAvbPt7Ql8QnhhpYtW78xn-dFRSiRo": {
+    "username": "test",
+    "created_at": "2026-09-20T12:43:18.368284",
+    "expires_at": "2026-10-20T12:43:18.368284"
+  },
+  "rNuU6lGE2G8eOVwejAcjIlffkbUTv60Ija-HGrItnvU": {
+    "username": "test",
+    "created_at": "2026-09-20T14:04:49.114667",
+    "expires_at": "2026-10-20T14:04:49.114667"
+  },
+  "w0yMARa6zskb-LwQrXqx_k6miNB6PXDfn_N2mpp9DuU": {
+    "username": "test",
+    "created_at": "2026-09-20T14:05:19.502575",
+    "expires_at": "2026-10-20T14:05:19.502575"
+  },
+  "Dk6uNwRpdFHtxl84glEmbUyS-ds76-pqiDi89rBfJsk": {
+    "username": "test",
+    "created_at": "2026-09-20T14:29:06.340396",
+    "expires_at": "2026-10-20T14:29:06.340396"
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\sessions.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\sessions.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\users.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\users.json ---
 {
   "test": {
     "password": "test",
-    "online": true,
+    "online": false,
     "created_at": "2026-01-25T16:50:20.365809",
-    "last_login": "2026-09-13T15:34:45.948571",
+    "last_login": "2026-09-20T14:29:06.338393",
     "role": "user",
     "color": "#f97316",
-    "last_logout": "2026-09-12T18:44:51.200030"
+    "last_logout": "2026-09-20T12:23:37.229253"
   },
   "admin": {
     "password": "admin123",
@@ -9532,11 +9604,11 @@ start "Serveur Python" cmd /k python serveur.py
     "password": "a",
     "online": false,
     "created_at": "2026-01-25T17:38:53.542322",
-    "last_login": "2026-09-12T18:44:56.457997",
+    "last_login": "2026-09-20T12:35:21.350362",
     "role": "user",
     "color": "#902195",
-    "last_logout": "2026-09-12T18:45:52.261131"
+    "last_logout": "2026-09-20T12:37:50.832128"
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_02\data\users.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_03\data\users.json ---
 

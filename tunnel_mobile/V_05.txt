@@ -1,0 +1,2036 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05
+  ├── README.md
+  ├── access.key
+  ├── index.js
+  ├── package-lock.json
+  ├── package.json
+  ├── start.bat
+  ├── start.sh
+  ├── tunnels.config.json
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\README.md ---
+# Tunnel Manager
+
+Un seul fichier à lancer, une seule URL à ouvrir sur ton téléphone. Pas de terminal à toucher côté mobile.
+
+## Mise en route (une seule fois)
+
+1. Dézippe le dossier où tu veux sur ton PC.
+2. Réserve un domaine Ngrok fixe (gratuit) :
+   - Va sur ton dashboard Ngrok → **Universal Edge > Domains**
+   - **+ New Domain**, choisis un nom, ex. `mon-pc-perso`
+   - Tu obtiens `mon-pc-perso.ngrok-free.app`
+3. Ouvre `tunnels.config.json` et colle ce domaine dans `ngrok.staticDomain` :
+
+```json
+{
+  "statusServerPort": 4041,
+  "ngrok": { "staticDomain": "mon-pc-perso.ngrok-free.app" },
+  "tunnels": [],
+  "fileBrowser": { "enabled": true, "roots": [] }
+}
+```
+
+(Tu peux laisser `staticDomain` vide si tu n'as pas encore de domaine — Ngrok démarrera quand même, mais avec une URL aléatoire qui changera à chaque relance.)
+
+## Démarrer
+
+**Windows :** double-clique sur `start.bat`
+**Linux/Mac :** `./start.sh`
+
+Ce fichier fait tout, à chaque fois : il installe automatiquement ce qui manque la première fois, lance Ngrok, et démarre l'interface. Laisse la fenêtre ouverte tant que tu veux garder tes tunnels actifs.
+
+## Clé d'accès (important, à lire)
+
+Toute l'interface — gestion des tunnels **et** explorateur de fichiers — est maintenant protégée par une clé.
+
+- Au tout premier lancement, le programme génère une clé aléatoire et l'affiche dans le terminal, en plus de l'écrire dans un fichier `access.key` créé à côté d'`index.js`.
+- La première fois que tu ouvres l'URL sur ton téléphone, un écran de verrouillage te la demande. Une fois entrée, elle reste enregistrée sur ce téléphone (dans le navigateur) — tu n'as plus à la retaper.
+- **Ne partage jamais** le lien Ngrok et la clé dans le même message ou au même endroit : si les deux fuitent ensemble, n'importe qui peut accéder à ton PC.
+- Ne commite jamais `access.key` sur un dépôt public, et ne l'envoie à personne.
+- Si tu veux forcer une nouvelle clé (par exemple si tu penses qu'elle a fuité), supprime le fichier `access.key` et relance le programme : une nouvelle sera générée. Il faudra alors la ressaisir sur tous tes appareils.
+
+## Depuis ton téléphone
+
+Ouvre `https://mon-pc-perso.ngrok-free.app` (ton domaine fixe) dans un navigateur, entre la clé une fois. C'est la seule adresse à retenir, mets-la en favori.
+
+### Onglet Tunnels
+
+- **+ Nouveau port** : donne un nom et le port local de ton programme, le tunnel démarre immédiatement
+  - Coche **"Mon programme tourne en HTTPS en local"** si ton programme répond en `https://` sur ton PC (et pas en `http://`). Sans ça, le tunnel essaiera de lui parler en http et ça échouera.
+- Le lien généré pour chaque tunnel, avec un bouton **Copier**
+- Un badge **HTTPS** sur les tunnels concernés, pour t'y retrouver
+- Un bouton **Retirer** pour fermer un tunnel
+
+### Onglet Fichiers
+
+Explorateur de fichiers limité aux dossiers que tu autorises explicitement (voir ci-dessous). Tu peux naviguer dedans et appuyer sur **Lancer** pour ouvrir un fichier sur le PC, comme si tu avais double-cliqué dessus.
+
+**Configurer les dossiers accessibles** — édite `fileBrowser.roots` dans `tunnels.config.json` :
+
+```json
+"fileBrowser": {
+  "enabled": true,
+  "roots": [
+    "C:/Users/Oniix/Desktop",
+    "C:/Users/Oniix/Documents/MesProgrammes"
+  ]
+}
+```
+
+- Si `roots` est vide, ton dossier utilisateur complet est utilisé par défaut.
+- **Recommandation :** limite `roots` aux dossiers dont tu as vraiment besoin (ex. juste le dossier contenant les programmes que tu veux lancer à distance), plutôt que tout `C:/`. Impossible de sortir de ces dossiers depuis l'interface, donc plus la liste est restreinte, plus la surface exposée est petite.
+- Mets `"enabled": false` pour désactiver complètement l'explorateur si tu ne l'utilises pas.
+
+Tout se fait depuis cette page, sans jamais retoucher au PC ni à un terminal.
+
+## Si "Cannot find module" apparaît
+
+Ça veut dire que les dépendances n'ont pas été installées dans ce dossier. `start.bat`/`start.sh` s'en occupe automatiquement à chaque lancement s'il détecte qu'elles manquent — donc si ça arrive quand même, vérifie que tu lances bien le `.bat`/`.sh` qui se trouve **dans le même dossier** que `index.js`, `package.json` et `tunnels.config.json` (ne les déplace pas séparément).
+
+## Si ton programme local est en HTTPS
+
+Si tu ouvres normalement ton programme dans le navigateur avec une adresse en `https://localhost:PORT`, alors coche la case HTTPS quand tu crées le tunnel. Sinon laisse-la décochée. Un certificat auto-signé (le genre qui affiche "connexion non sécurisée" en local) est géré automatiquement, pas besoin de rien configurer de plus.
+
+## Page de confirmation Local Tunnel
+
+La première fois que tu ouvres un lien `.loca.lt` depuis un nouvel appareil, Local Tunnel demande de confirmer l'IP publique du PC (mesure anti-abus, pas un bug). Récupère-la sur ton PC avec :
+
+```
+curl ipv4.icanhazip.com
+```
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\README.md ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\access.key ---
+f3d009ef8b05ec10a552f79dd931d37aefaba1594e11eef1
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\access.key ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\index.js ---
+/**
+ * Tunnel Manager — une seule commande à lancer sur le PC (start.bat / start.sh).
+ * Ouvre ensuite l'URL Ngrok fixe depuis le téléphone : tout se pilote depuis là.
+ */
+
+const localtunnel = require('localtunnel');
+const express = require('express');
+const { spawn } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const os = require('os');
+
+const CONFIG_PATH = path.join(__dirname, 'tunnels.config.json');
+const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+const STATUS_PORT = config.statusServerPort || 4041; // différent de 4040 (déjà utilisé par Ngrok lui-même)
+
+let tunnels = {};      // { id: { id, name, port, url, error, handle } }
+let ngrokPublicUrl = null;
+let ngrokError = null;
+
+function log(...args) {
+  console.log(new Date().toLocaleTimeString(), '-', ...args);
+}
+
+// ---------- Clé d'accès ----------
+// Générée une seule fois au premier lancement, stockée dans access.key.
+// Le téléphone doit la fournir (header x-access-key) pour toute requête /api/*.
+
+const KEY_PATH = path.join(__dirname, 'access.key');
+
+function loadOrCreateAccessKey() {
+  if (fs.existsSync(KEY_PATH)) return fs.readFileSync(KEY_PATH, 'utf8').trim();
+  const key = crypto.randomBytes(24).toString('hex');
+  fs.writeFileSync(KEY_PATH, key, 'utf8');
+  return key;
+}
+
+const ACCESS_KEY = loadOrCreateAccessKey();
+
+log('========================================================');
+log(" Cle d'acces (a entrer UNE SEULE FOIS sur ton telephone) :");
+log(' ' + ACCESS_KEY);
+log(' (egalement dans le fichier access.key, a ne jamais partager)');
+log('========================================================');
+
+function checkKey(req, res, next) {
+  const provided = String(req.headers['x-access-key'] || '');
+  const a = Buffer.from(provided);
+  const b = Buffer.from(ACCESS_KEY);
+  const valid = a.length === b.length && crypto.timingSafeEqual(a, b);
+  if (!valid) return res.status(401).json({ error: 'cle invalide' });
+  next();
+}
+
+// ---------- Ngrok ----------
+
+function startNgrok() {
+  const args = ['http', String(STATUS_PORT)];
+  if (config.ngrok && config.ngrok.staticDomain) {
+    args.push(`--url=${config.ngrok.staticDomain}`);
+  }
+
+  log('Lancement de Ngrok...');
+  const ngrokProcess = spawn('ngrok', args, { shell: true });
+
+  ngrokProcess.stdout.on('data', () => {}); // silencieux, on lit l'URL via l'API locale de ngrok
+  ngrokProcess.stderr.on('data', (d) => process.stderr.write(`[ngrok] ${d}`));
+
+  ngrokProcess.on('error', (err) => {
+    ngrokError = `Ngrok introuvable (${err.message}). Vérifie qu'il est bien installé et accessible en tapant "ngrok" dans un terminal.`;
+    log('ERREUR:', ngrokError);
+  });
+
+  ngrokProcess.on('exit', (code) => {
+    log(`Ngrok s'est arrêté (code ${code}), relance dans 5s...`);
+    ngrokPublicUrl = null;
+    setTimeout(startNgrok, 5000);
+  });
+
+  setTimeout(fetchNgrokUrl, 2000);
+}
+
+async function fetchNgrokUrl(retries = 12) {
+  try {
+    const res = await fetch('http://127.0.0.1:4040/api/tunnels');
+    const data = await res.json();
+    const t = (data.tunnels || []).find((x) => x.proto === 'https') || (data.tunnels || [])[0];
+    if (t) {
+      ngrokPublicUrl = t.public_url;
+      ngrokError = null;
+      log('URL Ngrok publique :', ngrokPublicUrl);
+      return;
+    }
+    throw new Error('pas encore de tunnel');
+  } catch (err) {
+    if (retries > 0) setTimeout(() => fetchNgrokUrl(retries - 1), 1500);
+    else { ngrokError = "Impossible de récupérer l'URL Ngrok."; log('ERREUR:', ngrokError, err.message); }
+  }
+}
+
+// ---------- Local Tunnel ----------
+
+function nextId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+async function startTunnel({ id, name, port, https }) {
+  tunnels[id] = { id, name, port, https: !!https, url: null, error: null, handle: null };
+
+  try {
+    const options = { port };
+    if (https) {
+      options.local_https = true;
+      options.allow_invalid_cert = true; // accepte les certificats auto-signés (courant en local)
+    }
+    const handle = await localtunnel(options);
+    if (!tunnels[id]) { handle.close(); return; } // retiré entre-temps
+    tunnels[id].handle = handle;
+    tunnels[id].url = handle.url;
+    tunnels[id].error = null;
+    log(`[${name}] actif :`, handle.url);
+
+    handle.on('close', () => {
+      if (!tunnels[id]) return;
+      log(`[${name}] fermé, relance dans 5s...`);
+      tunnels[id].url = null;
+      tunnels[id].error = 'reconnexion...';
+      setTimeout(() => { if (tunnels[id]) startTunnel(tunnels[id]); }, 5000);
+    });
+    handle.on('error', (err) => { if (tunnels[id]) tunnels[id].error = err.message; });
+  } catch (err) {
+    if (!tunnels[id]) return;
+    tunnels[id].error = err.message;
+    log(`[${name}] échec :`, err.message, '- nouvelle tentative dans 10s');
+    setTimeout(() => { if (tunnels[id]) startTunnel(tunnels[id]); }, 10000);
+  }
+}
+
+function stopTunnel(id) {
+  const t = tunnels[id];
+  if (!t) return;
+  if (t.handle) { try { t.handle.close(); } catch (e) {} }
+  delete tunnels[id];
+}
+
+// ---------- Explorateur de fichiers ----------
+// Limité aux dossiers listés dans tunnels.config.json -> fileBrowser.roots
+// (par défaut : ton dossier utilisateur). Impossible de sortir de ces dossiers.
+
+const fbConfig = config.fileBrowser || {};
+const FB_ENABLED = fbConfig.enabled !== false;
+const FB_ROOTS = (fbConfig.roots && fbConfig.roots.length ? fbConfig.roots : [os.homedir()])
+  .map((p) => path.resolve(p))
+  .filter((p) => {
+    try { return fs.statSync(p).isDirectory(); } catch (e) { log('ATTENTION dossier racine introuvable ignoré :', p); return false; }
+  });
+
+function isPathAllowed(target) {
+  const resolved = path.resolve(target);
+  return FB_ROOTS.some((root) => resolved === root || resolved.startsWith(root + path.sep));
+}
+
+function listRootsEntries() {
+  return FB_ROOTS.map((root) => ({ name: root, path: root, type: 'dir', size: 0, mtime: 0 }));
+}
+
+function listDir(dirPath) {
+  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  const result = [];
+  for (const entry of entries) {
+    if (entry.name.startsWith('.')) continue; // fichiers/dossiers cachés ignorés
+    const full = path.join(dirPath, entry.name);
+    let stat;
+    try { stat = fs.statSync(full); } catch (e) { continue; } // lien cassé, permission refusée...
+    result.push({
+      name: entry.name,
+      path: full,
+      type: entry.isDirectory() ? 'dir' : 'file',
+      size: stat.size,
+      mtime: stat.mtimeMs,
+    });
+  }
+  result.sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1));
+  return result;
+}
+
+function launchFile(filePath) {
+  if (process.platform === 'win32') {
+    // "start" ouvre le fichier avec son programme associé, comme un double-clic
+    spawn('cmd.exe', ['/c', 'start', '""', filePath], { detached: true, stdio: 'ignore', windowsHide: true }).unref();
+  } else if (process.platform === 'darwin') {
+    spawn('open', [filePath], { detached: true, stdio: 'ignore' }).unref();
+  } else {
+    spawn('xdg-open', [filePath], { detached: true, stdio: 'ignore' }).unref();
+  }
+}
+
+// ---------- Démarrage ----------
+
+startNgrok();
+(config.tunnels || []).forEach((t) => startTunnel({ id: nextId(), ...t }));
+
+// ---------- Interface mobile ----------
+
+const app = express();
+app.use(express.json());
+app.use('/api', checkKey); // toutes les routes /api/* exigent la clé d'accès
+
+app.get('/', (req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes Tunnels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root {
+    --bg: #0b0d12; --card: #161a22; --border: #262b36; --text: #f1f3f6;
+    --muted: #8b93a3; --accent: #4f8cff; --green: #35c46b; --red: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top,0) 1rem env(safe-area-inset-bottom,0);
+    max-width: 480px; margin-inline: auto;
+  }
+  header { padding: 1.5rem 0 1rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  .status-line { color: var(--muted); font-size: .85rem; display: flex; align-items: center; gap: .4rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .dot.off { background: var(--red); }
+  .dot.wait { background: #e0b93e; }
+
+  .tabs { display: flex; gap: .5rem; margin-bottom: 1rem; }
+  .tab-btn {
+    flex: 1; padding: .7rem; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted); font-weight: 600; font-size: .9rem; cursor: pointer;
+  }
+  .tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1rem; margin-bottom: .75rem;
+  }
+  .card .top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  .card .name { font-weight: 600; font-size: 1.05rem; }
+  .card .port { color: var(--muted); font-size: .8rem; }
+  .card .url {
+    margin-top: .6rem; display: block; word-break: break-all;
+    color: var(--accent); font-size: .95rem; text-decoration: none;
+  }
+  .card .err { margin-top: .6rem; color: var(--red); font-size: .85rem; }
+  .card .actions { margin-top: .75rem; display: flex; gap: .5rem; }
+  .btn {
+    border: none; border-radius: 10px; padding: .6rem .9rem; font-size: .85rem;
+    font-weight: 600; cursor: pointer;
+  }
+  .btn-copy { background: #232838; color: var(--text); flex: 1; }
+  .btn-remove { background: #2a1a1a; color: var(--red); }
+
+  .empty { text-align: center; color: var(--muted); padding: 2rem 0; }
+
+  .fab {
+    position: fixed; bottom: calc(1.5rem + env(safe-area-inset-bottom,0));
+    left: 50%; transform: translateX(-50%); width: min(440px, calc(100% - 2rem));
+    background: var(--accent); color: white; border: none; border-radius: 16px;
+    padding: 1rem; font-size: 1rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(79,140,255,.4);
+  }
+
+  .sheet-backdrop {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 10;
+  }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; background: var(--card);
+    border-radius: 18px 18px 0 0; padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom,0));
+    z-index: 11; max-width: 480px; margin-inline: auto;
+  }
+  .sheet h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+  .sheet label { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .3rem; }
+  .sheet input {
+    width: 100%; padding: .8rem; border-radius: 10px; border: 1px solid var(--border);
+    background: #10141c; color: var(--text); font-size: 1rem; margin-bottom: 1rem;
+  }
+  .switch-label {
+    display: flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem;
+    font-size: .9rem; color: var(--text); cursor: pointer;
+  }
+  .switch-input { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; }
+  .badge-https {
+    display: inline-block; margin-left: .4rem; font-size: .68rem; font-weight: 700;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 6px;
+    padding: .1rem .35rem; vertical-align: middle;
+  }
+  .sheet .row { display: flex; gap: .75rem; }
+  .sheet .row .btn { flex: 1; padding: .9rem; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-cancel { background: #232838; color: var(--text); }
+
+  .breadcrumb { color: var(--muted); font-size: .8rem; margin-bottom: .75rem; word-break: break-all; }
+  .file-row {
+    display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: .8rem .9rem; margin-bottom: .5rem;
+  }
+  .file-row .left { display: flex; align-items: center; gap: .7rem; min-width: 0; flex: 1; }
+  .file-row .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .file-row .name { font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-row.dir { cursor: pointer; }
+  .btn-launch { background: var(--green); color: #06210f; flex-shrink: 0; padding: .5rem .8rem; font-size: .8rem; }
+  .btn-back { background: #232838; color: var(--text); margin-bottom: .75rem; padding: .6rem 1rem; }
+
+  .lock-screen {
+    position: fixed; inset: 0; background: var(--bg); z-index: 50;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 1.5rem;
+  }
+  .lock-screen h2 { margin-bottom: .3rem; }
+  .lock-screen p { color: var(--muted); font-size: .85rem; text-align: center; margin-bottom: 1.5rem; max-width: 320px; }
+  .lock-screen input {
+    width: 100%; max-width: 320px; padding: .9rem; border-radius: 10px; border: 1px solid var(--border);
+    background: #10141c; color: var(--text); font-size: 1rem; margin-bottom: .8rem; text-align: center;
+  }
+  .lock-screen .btn-primary { width: 100%; max-width: 320px; padding: .9rem; }
+  .lock-error { color: var(--red); font-size: .82rem; margin-bottom: .8rem; min-height: 1.1em; }
+
+  #bottomSpace { height: 6rem; }
+</style>
+</head>
+<body>
+
+<div class="lock-screen" id="lockScreen">
+  <h2>🔒 Accès verrouillé</h2>
+  <p>Entre la clé affichée dans le terminal sur ton PC (ou dans le fichier access.key) pour déverrouiller cette interface.</p>
+  <input id="keyInput" placeholder="Clé d'accès" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <div class="lock-error" id="lockError"></div>
+  <button class="btn btn-primary" onclick="tryUnlock()">Déverrouiller</button>
+</div>
+
+<div id="app" style="display:none">
+<header>
+  <h1>Tunnel Manager</h1>
+  <div class="status-line" id="ngrokStatus">
+    <span class="dot wait"></span> Connexion en cours...
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" id="tabTunnelsBtn" onclick="showTab('tunnels')">Tunnels</button>
+  <button class="tab-btn" id="tabFilesBtn" onclick="showTab('files')">Fichiers</button>
+</div>
+
+<div class="view active" id="tunnelsView">
+  <div id="list"><div class="empty">Chargement...</div></div>
+  <div id="bottomSpace"></div>
+  <button class="fab" onclick="openSheet()">+ Nouveau port</button>
+</div>
+
+<div class="view" id="filesView">
+  <div id="fbBack"></div>
+  <div class="breadcrumb" id="fbPath">Dossiers autorisés</div>
+  <div id="fbList"><div class="empty">Chargement...</div></div>
+  <div id="bottomSpace2" style="height:2rem"></div>
+</div>
+</div>
+
+<div class="sheet-backdrop" id="backdrop" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet" style="display:none">
+  <h2>Exposer un nouveau port</h2>
+  <label>Nom (pour t'y retrouver)</label>
+  <input id="inputName" placeholder="Ex : Mon serveur web" autocomplete="off">
+  <label>Port local</label>
+  <input id="inputPort" type="number" inputmode="numeric" placeholder="Ex : 8000">
+  <label class="switch-label">
+    <input id="inputHttps" type="checkbox" class="switch-input">
+    <span>Mon programme tourne en HTTPS en local</span>
+  </label>
+  <div class="row">
+    <button class="btn btn-cancel" onclick="closeSheet()">Annuler</button>
+    <button class="btn btn-primary" onclick="addTunnel()">Créer</button>
+  </div>
+</div>
+
+<script>
+let currentFbPath = null; // null = racine (liste des dossiers autorisés)
+
+// ---------- Clé / déverrouillage ----------
+
+function getKey() { return localStorage.getItem('tm_key') || ''; }
+
+function authHeaders() {
+  return { 'x-access-key': getKey(), 'Content-Type': 'application/json' };
+}
+
+async function tryUnlock() {
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) return;
+  localStorage.setItem('tm_key', key);
+  const ok = await checkAuth();
+  if (ok) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    refresh();
+  } else {
+    document.getElementById('lockError').textContent = 'Clé incorrecte.';
+    localStorage.removeItem('tm_key');
+  }
+}
+
+async function checkAuth() {
+  try {
+    const res = await fetch('/api/status', { headers: authHeaders() });
+    return res.status === 200;
+  } catch (e) { return false; }
+}
+
+async function boot() {
+  if (getKey()) {
+    const ok = await checkAuth();
+    if (ok) {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      refresh();
+      return;
+    }
+  }
+  document.getElementById('lockScreen').style.display = 'flex';
+}
+
+// ---------- Onglets ----------
+
+function showTab(tab) {
+  document.getElementById('tabTunnelsBtn').classList.toggle('active', tab === 'tunnels');
+  document.getElementById('tabFilesBtn').classList.toggle('active', tab === 'files');
+  document.getElementById('tunnelsView').classList.toggle('active', tab === 'tunnels');
+  document.getElementById('filesView').classList.toggle('active', tab === 'files');
+  if (tab === 'files') loadFiles(currentFbPath);
+}
+
+// ---------- Tunnels ----------
+
+function openSheet() {
+  document.getElementById('sheet').style.display = 'block';
+  document.getElementById('backdrop').style.display = 'block';
+  document.getElementById('inputName').value = '';
+  document.getElementById('inputPort').value = '';
+  document.getElementById('inputHttps').checked = false;
+}
+function closeSheet() {
+  document.getElementById('sheet').style.display = 'none';
+  document.getElementById('backdrop').style.display = 'none';
+}
+
+async function addTunnel() {
+  const name = document.getElementById('inputName').value.trim() || 'Sans nom';
+  const port = parseInt(document.getElementById('inputPort').value, 10);
+  const https = document.getElementById('inputHttps').checked;
+  if (!port || port < 1 || port > 65535) { alert('Entre un port valide (ex : 8000)'); return; }
+  await fetch('/api/tunnels', {
+    method: 'POST', headers: authHeaders(),
+    body: JSON.stringify({ name, port, https })
+  });
+  closeSheet();
+  refresh();
+}
+
+async function removeTunnel(id) {
+  await fetch('/api/tunnels/' + id, { method: 'DELETE', headers: authHeaders() });
+  refresh();
+}
+
+function copyUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    const old = btn.textContent;
+    btn.textContent = 'Copié !';
+    setTimeout(() => btn.textContent = old, 1200);
+  });
+}
+
+async function refresh() {
+  try {
+    const res = await fetch('/api/status', { headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+
+    const s = document.getElementById('ngrokStatus');
+    if (data.ngrok.url) {
+      s.innerHTML = '<span class="dot"></span> Connecté';
+    } else if (data.ngrok.error) {
+      s.innerHTML = '<span class="dot off"></span> ' + data.ngrok.error;
+    } else {
+      s.innerHTML = '<span class="dot wait"></span> Connexion en cours...';
+    }
+
+    const list = document.getElementById('list');
+    if (data.tunnels.length === 0) {
+      list.innerHTML = '<div class="empty">Aucun tunnel actif.<br>Appuie sur "+ Nouveau port" pour en créer un.</div>';
+      return;
+    }
+    list.innerHTML = data.tunnels.map(t => \`
+      <div class="card">
+        <div class="top">
+          <div>
+            <div class="name">\${t.name}\${t.https ? '<span class="badge-https">HTTPS</span>' : ''}</div>
+            <div class="port">Port local \${t.port}</div>
+          </div>
+        </div>
+        \${t.url
+          ? \`<a class="url" href="\${t.url}" target="_blank">\${t.url}</a>\`
+          : \`<div class="err">\${t.error || 'Démarrage en cours...'}</div>\`
+        }
+        <div class="actions">
+          \${t.url ? \`<button class="btn btn-copy" onclick="copyUrl('\${t.url}', this)">Copier le lien</button>\` : ''}
+          <button class="btn btn-remove" onclick="removeTunnel('\${t.id}')">Retirer</button>
+        </div>
+      </div>
+    \`).join('');
+  } catch (e) { /* silencieux, on réessaiera */ }
+}
+
+// ---------- Fichiers ----------
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+async function loadFiles(dirPath) {
+  const fbList = document.getElementById('fbList');
+  const fbPathEl = document.getElementById('fbPath');
+  const fbBack = document.getElementById('fbBack');
+  fbList.innerHTML = '<div class="empty">Chargement...</div>';
+
+  const url = dirPath ? '/api/fb/list?path=' + encodeURIComponent(dirPath) : '/api/fb/list';
+  try {
+    const res = await fetch(url, { headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { fbList.innerHTML = '<div class="empty">' + escapeHtml(data.error) + '</div>'; return; }
+
+    currentFbPath = data.path;
+    fbPathEl.textContent = data.path || 'Dossiers autorisés';
+    fbBack.innerHTML = data.parent !== undefined && data.parent !== null
+      ? '<button class="btn btn-back" data-path="' + encodeURIComponent(data.parent) + '" onclick="loadFiles(decodeURIComponent(this.dataset.path))">← Retour</button>'
+      : (data.path ? '<button class="btn btn-back" onclick="loadFiles(null)">← Retour</button>' : '');
+
+    if (data.entries.length === 0) {
+      fbList.innerHTML = '<div class="empty">Dossier vide.</div>';
+      return;
+    }
+
+    fbList.innerHTML = data.entries.map(e => {
+      const encPath = encodeURIComponent(e.path);
+      if (e.type === 'dir') {
+        return '<div class="file-row dir" data-path="' + encPath + '" onclick="loadFiles(decodeURIComponent(this.dataset.path))">' +
+          '<div class="left"><span class="icon">📁</span><span class="name">' + escapeHtml(e.name) + '</span></div>' +
+        '</div>';
+      }
+      return '<div class="file-row">' +
+        '<div class="left"><span class="icon">📄</span><span class="name">' + escapeHtml(e.name) + '</span></div>' +
+        '<button class="btn btn-launch" data-path="' + encPath + '" onclick="launchFile(decodeURIComponent(this.dataset.path))">Lancer</button>' +
+      '</div>';
+    }).join('');
+  } catch (e) {
+    fbList.innerHTML = '<div class="empty">Erreur de chargement.</div>';
+  }
+}
+
+async function launchFile(filePath) {
+  if (!confirm('Lancer ce fichier sur ton PC ?\\n' + filePath)) return;
+  try {
+    const res = await fetch('/api/fb/launch', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: filePath })
+    });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) alert('Erreur : ' + data.error);
+  } catch (e) { alert('Erreur de connexion.'); }
+}
+
+function logout() {
+  localStorage.removeItem('tm_key');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('lockScreen').style.display = 'flex';
+  document.getElementById('lockError').textContent = 'Session expirée, ressaisis la clé.';
+}
+
+boot();
+setInterval(() => { if (document.getElementById('app').style.display !== 'none') refresh(); }, 3000);
+</script>
+</body>
+</html>`);
+});
+
+app.get('/api/status', (req, res) => {
+  res.json({
+    ngrok: { url: ngrokPublicUrl, error: ngrokError },
+    tunnels: Object.values(tunnels).map(({ handle, ...t }) => t),
+  });
+});
+
+app.post('/api/tunnels', (req, res) => {
+  const { name, port, https } = req.body || {};
+  if (!port) return res.status(400).json({ error: 'port requis' });
+  startTunnel({ id: nextId(), name: name || `Port ${port}`, port: parseInt(port, 10), https: !!https });
+  res.json({ ok: true });
+});
+
+app.delete('/api/tunnels/:id', (req, res) => {
+  stopTunnel(req.params.id);
+  res.json({ ok: true });
+});
+
+app.get('/api/fb/list', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const target = req.query.path;
+  if (!target) {
+    return res.json({ path: null, parent: null, entries: listRootsEntries() });
+  }
+  if (!isPathAllowed(target)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(target);
+    if (!stat.isDirectory()) return res.status(400).json({ error: "Ce n'est pas un dossier" });
+    const isRoot = FB_ROOTS.includes(path.resolve(target));
+    res.json({
+      path: target,
+      parent: isRoot ? null : path.dirname(target),
+      entries: listDir(target),
+    });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
+
+app.post('/api/fb/launch', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath } = req.body || {};
+  if (!filePath) return res.status(400).json({ error: 'chemin requis' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) return res.status(400).json({ error: 'Impossible de lancer un dossier' });
+    launchFile(filePath);
+    log('Lancement :', filePath);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
+
+app.listen(STATUS_PORT, () => {
+  log(`Interface locale sur http://localhost:${STATUS_PORT}`);
+});
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\index.js ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\package-lock.json ---
+{
+  "name": "tunnel-manager",
+  "version": "1.1.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "tunnel-manager",
+      "version": "1.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "express": "^5.2.1",
+        "localtunnel": "^2.0.2"
+      }
+    },
+    "node_modules/accepts": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/accepts/-/accepts-2.0.0.tgz",
+      "integrity": "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-types": "^3.0.0",
+        "negotiator": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/ansi-regex": {
+      "version": "5.0.1",
+      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/ansi-styles": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",
+      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",
+      "license": "MIT",
+      "dependencies": {
+        "color-convert": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+      }
+    },
+    "node_modules/axios": {
+      "version": "0.21.4",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
+      "integrity": "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.14.0"
+      }
+    },
+    "node_modules/body-parser": {
+      "version": "2.3.0",
+      "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-2.3.0.tgz",
+      "integrity": "sha512-2cGmJupaNgg+QUwVLAucDuWuoMZ6EX9iHDRswZ5lsNYEmwPaRknMPCLZz07yTzVq/83p4o/wzbDZbBrTvGGTIw==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "^3.1.2",
+        "content-type": "^2.0.0",
+        "debug": "^4.4.3",
+        "http-errors": "^2.0.1",
+        "iconv-lite": "^0.7.2",
+        "on-finished": "^2.4.1",
+        "qs": "^6.15.2",
+        "raw-body": "^3.0.2",
+        "type-is": "^2.1.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/body-parser/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/bytes": {
+      "version": "3.1.2",
+      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz",
+      "integrity": "sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/call-bind-apply-helpers": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz",
+      "integrity": "sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/call-bound": {
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/cliui": {
+      "version": "7.0.4",
+      "resolved": "https://registry.npmjs.org/cliui/-/cliui-7.0.4.tgz",
+      "integrity": "sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==",
+      "license": "ISC",
+      "dependencies": {
+        "string-width": "^4.2.0",
+        "strip-ansi": "^6.0.0",
+        "wrap-ansi": "^7.0.0"
+      }
+    },
+    "node_modules/color-convert": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+      "license": "MIT",
+      "dependencies": {
+        "color-name": "~1.1.4"
+      },
+      "engines": {
+        "node": ">=7.0.0"
+      }
+    },
+    "node_modules/color-name": {
+      "version": "1.1.4",
+      "resolved": "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz",
+      "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==",
+      "license": "MIT"
+    },
+    "node_modules/content-disposition": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-1.1.0.tgz",
+      "integrity": "sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/content-type": {
+      "version": "1.0.5",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
+      "integrity": "sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie": {
+      "version": "0.7.2",
+      "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz",
+      "integrity": "sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie-signature": {
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.2.2.tgz",
+      "integrity": "sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.6.0"
+      }
+    },
+    "node_modules/debug": {
+      "version": "4.4.3",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+      "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "^2.1.3"
+      },
+      "engines": {
+        "node": ">=6.0"
+      },
+      "peerDependenciesMeta": {
+        "supports-color": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/depd": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz",
+      "integrity": "sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/dunder-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
+      "integrity": "sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "gopd": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/ee-first": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
+      "integrity": "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==",
+      "license": "MIT"
+    },
+    "node_modules/emoji-regex": {
+      "version": "8.0.0",
+      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",
+      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",
+      "license": "MIT"
+    },
+    "node_modules/encodeurl": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz",
+      "integrity": "sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/es-define-property": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz",
+      "integrity": "sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-errors": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz",
+      "integrity": "sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-object-atoms": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.2.tgz",
+      "integrity": "sha512-HWcBoN6NileqtSydK2FqHbS/LoDd2pqrnQHLyJzBj4kOp/ky2MWMN694xOfkK8/SnUsW2DH7EfyVlydKCsm1Zw==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/escalade": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/escalade/-/escalade-3.2.0.tgz",
+      "integrity": "sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6"
+      }
+    },
+    "node_modules/escape-html": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
+      "integrity": "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==",
+      "license": "MIT"
+    },
+    "node_modules/etag": {
+      "version": "1.8.1",
+      "resolved": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
+      "integrity": "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/express": {
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/express/-/express-5.2.1.tgz",
+      "integrity": "sha512-hIS4idWWai69NezIdRt2xFVofaF4j+6INOpJlVOLDO8zXGpUVEVzIYk12UUi2JzjEzWL3IOAxcTubgz9Po0yXw==",
+      "license": "MIT",
+      "dependencies": {
+        "accepts": "^2.0.0",
+        "body-parser": "^2.2.1",
+        "content-disposition": "^1.0.0",
+        "content-type": "^1.0.5",
+        "cookie": "^0.7.1",
+        "cookie-signature": "^1.2.1",
+        "debug": "^4.4.0",
+        "depd": "^2.0.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "finalhandler": "^2.1.0",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.0",
+        "merge-descriptors": "^2.0.0",
+        "mime-types": "^3.0.0",
+        "on-finished": "^2.4.1",
+        "once": "^1.4.0",
+        "parseurl": "^1.3.3",
+        "proxy-addr": "^2.0.7",
+        "qs": "^6.14.0",
+        "range-parser": "^1.2.1",
+        "router": "^2.2.0",
+        "send": "^1.1.0",
+        "serve-static": "^2.2.0",
+        "statuses": "^2.0.1",
+        "type-is": "^2.0.1",
+        "vary": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/finalhandler": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.1.tgz",
+      "integrity": "sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "on-finished": "^2.4.1",
+        "parseurl": "^1.3.3",
+        "statuses": "^2.0.1"
+      },
+      "engines": {
+        "node": ">= 18.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/follow-redirects": {
+      "version": "1.16.0",
+      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.0.tgz",
+      "integrity": "sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==",
+      "funding": [
+        {
+          "type": "individual",
+          "url": "https://github.com/sponsors/RubenVerborgh"
+        }
+      ],
+      "license": "MIT",
+      "engines": {
+        "node": ">=4.0"
+      },
+      "peerDependenciesMeta": {
+        "debug": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/forwarded": {
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",
+      "integrity": "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/fresh": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/fresh/-/fresh-2.0.0.tgz",
+      "integrity": "sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/function-bind": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz",
+      "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==",
+      "license": "MIT",
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/get-caller-file": {
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz",
+      "integrity": "sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==",
+      "license": "ISC",
+      "engines": {
+        "node": "6.* || 8.* || >= 10.*"
+      }
+    },
+    "node_modules/get-intrinsic": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "es-define-property": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "es-object-atoms": "^1.1.1",
+        "function-bind": "^1.1.2",
+        "get-proto": "^1.0.1",
+        "gopd": "^1.2.0",
+        "has-symbols": "^1.1.0",
+        "hasown": "^2.0.2",
+        "math-intrinsics": "^1.1.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/get-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz",
+      "integrity": "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==",
+      "license": "MIT",
+      "dependencies": {
+        "dunder-proto": "^1.0.1",
+        "es-object-atoms": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/gopd": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz",
+      "integrity": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/has-symbols": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz",
+      "integrity": "sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/hasown": {
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/hasown/-/hasown-2.0.4.tgz",
+      "integrity": "sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==",
+      "license": "MIT",
+      "dependencies": {
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/http-errors": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz",
+      "integrity": "sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==",
+      "license": "MIT",
+      "dependencies": {
+        "depd": "~2.0.0",
+        "inherits": "~2.0.4",
+        "setprototypeof": "~1.2.0",
+        "statuses": "~2.0.2",
+        "toidentifier": "~1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/iconv-lite": {
+      "version": "0.7.3",
+      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz",
+      "integrity": "sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==",
+      "license": "MIT",
+      "dependencies": {
+        "safer-buffer": ">= 2.1.2 < 3.0.0"
+      },
+      "engines": {
+        "node": ">=0.10.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/inherits": {
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
+      "integrity": "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==",
+      "license": "ISC"
+    },
+    "node_modules/ipaddr.js": {
+      "version": "1.9.1",
+      "resolved": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz",
+      "integrity": "sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/is-fullwidth-code-point": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",
+      "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/is-promise": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/is-promise/-/is-promise-4.0.0.tgz",
+      "integrity": "sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==",
+      "license": "MIT"
+    },
+    "node_modules/localtunnel": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/localtunnel/-/localtunnel-2.0.2.tgz",
+      "integrity": "sha512-n418Cn5ynvJd7m/N1d9WVJISLJF/ellZnfsLnx8WBWGzxv/ntNcFkJ1o6se5quUhCplfLGBNL5tYHiq5WF3Nug==",
+      "license": "MIT",
+      "dependencies": {
+        "axios": "0.21.4",
+        "debug": "4.3.2",
+        "openurl": "1.1.1",
+        "yargs": "17.1.1"
+      },
+      "bin": {
+        "lt": "bin/lt.js"
+      },
+      "engines": {
+        "node": ">=8.3.0"
+      }
+    },
+    "node_modules/localtunnel/node_modules/debug": {
+      "version": "4.3.2",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.3.2.tgz",
+      "integrity": "sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "2.1.2"
+      },
+      "engines": {
+        "node": ">=6.0"
+      },
+      "peerDependenciesMeta": {
+        "supports-color": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/localtunnel/node_modules/ms": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
+      "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
+      "license": "MIT"
+    },
+    "node_modules/math-intrinsics": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz",
+      "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/media-typer": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-1.1.1.tgz",
+      "integrity": "sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/merge-descriptors": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-2.0.0.tgz",
+      "integrity": "sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/mime-db": {
+      "version": "1.54.0",
+      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz",
+      "integrity": "sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/mime-types": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-3.0.2.tgz",
+      "integrity": "sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-db": "^1.54.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/ms": {
+      "version": "2.1.3",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
+      "license": "MIT"
+    },
+    "node_modules/negotiator": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-1.1.0.tgz",
+      "integrity": "sha512-NMPBRMJgiQHjbd8phG3Vebdx4kZ1H121rbl5IkMqeOsahptB9BKo/d7oJ3zTXqTgagn2bWlNSXkh0QUGM31RYg==",
+      "license": "MIT",
+      "dependencies": {
+        "content-type": "^2.1.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/negotiator/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/object-inspect": {
+      "version": "1.13.4",
+      "resolved": "https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz",
+      "integrity": "sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/on-finished": {
+      "version": "2.4.1",
+      "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz",
+      "integrity": "sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==",
+      "license": "MIT",
+      "dependencies": {
+        "ee-first": "1.1.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/once": {
+      "version": "1.4.0",
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+      "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
+      "license": "ISC",
+      "dependencies": {
+        "wrappy": "1"
+      }
+    },
+    "node_modules/openurl": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/openurl/-/openurl-1.1.1.tgz",
+      "integrity": "sha512-d/gTkTb1i1GKz5k3XE3XFV/PxQ1k45zDqGP2OA7YhgsaLoqm6qRvARAZOFer1fcXritWlGBRCu/UgeS4HAnXAA==",
+      "license": "MIT"
+    },
+    "node_modules/parseurl": {
+      "version": "1.3.3",
+      "resolved": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz",
+      "integrity": "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/path-to-regexp": {
+      "version": "8.4.2",
+      "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-8.4.2.tgz",
+      "integrity": "sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==",
+      "license": "MIT",
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/proxy-addr": {
+      "version": "2.0.8",
+      "resolved": "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.8.tgz",
+      "integrity": "sha512-5nnx0yGyVUcY6t9RnWcARWtwT9F1D8O9rt08htPvnd49W1IgZtmLkhu9WfMzQj1cFxjHIO6connUNVW5k7AVyQ==",
+      "license": "MIT",
+      "dependencies": {
+        "forwarded": "0.2.0",
+        "ipaddr.js": "1.9.1"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/qs": {
+      "version": "6.16.0",
+      "resolved": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+      "integrity": "sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==",
+      "license": "BSD-3-Clause",
+      "dependencies": {
+        "es-define-property": "^1.0.1",
+        "side-channel": "^1.1.1"
+      },
+      "engines": {
+        "node": ">=0.6"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/range-parser": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.3.0.tgz",
+      "integrity": "sha512-hek2mFQpPuI4E1BBKrSto+BU3e3x4xuarsbiwr3+lf7p44juvFMV0XFWQAP3xUyqXA4RrXLIoaSUGbSt056ZMw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/raw-body": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz",
+      "integrity": "sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "~3.1.2",
+        "http-errors": "~2.0.1",
+        "iconv-lite": "~0.7.0",
+        "unpipe": "~1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/require-directory": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz",
+      "integrity": "sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/router": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/router/-/router-2.2.0.tgz",
+      "integrity": "sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "depd": "^2.0.0",
+        "is-promise": "^4.0.0",
+        "parseurl": "^1.3.3",
+        "path-to-regexp": "^8.0.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      }
+    },
+    "node_modules/safer-buffer": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
+      "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==",
+      "license": "MIT"
+    },
+    "node_modules/send": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/send/-/send-1.2.1.tgz",
+      "integrity": "sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.3",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.1",
+        "mime-types": "^3.0.2",
+        "ms": "^2.1.3",
+        "on-finished": "^2.4.1",
+        "range-parser": "^1.2.1",
+        "statuses": "^2.0.2"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/serve-static": {
+      "version": "2.2.1",
+      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-2.2.1.tgz",
+      "integrity": "sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw==",
+      "license": "MIT",
+      "dependencies": {
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "parseurl": "^1.3.3",
+        "send": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/setprototypeof": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz",
+      "integrity": "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==",
+      "license": "ISC"
+    },
+    "node_modules/side-channel": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz",
+      "integrity": "sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.4",
+        "side-channel-list": "^1.0.1",
+        "side-channel-map": "^1.0.1",
+        "side-channel-weakmap": "^1.0.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-list": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz",
+      "integrity": "sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.4"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-map": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz",
+      "integrity": "sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-weakmap": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz",
+      "integrity": "sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3",
+        "side-channel-map": "^1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/statuses": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz",
+      "integrity": "sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/string-width": {
+      "version": "4.2.3",
+      "resolved": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",
+      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",
+      "license": "MIT",
+      "dependencies": {
+        "emoji-regex": "^8.0.0",
+        "is-fullwidth-code-point": "^3.0.0",
+        "strip-ansi": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/strip-ansi": {
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",
+      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-regex": "^5.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/toidentifier": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz",
+      "integrity": "sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.6"
+      }
+    },
+    "node_modules/type-is": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/type-is/-/type-is-2.1.0.tgz",
+      "integrity": "sha512-faYHw0anBbc/kWF3zFTEnxSFOAGUX9GFbOBthvDdLsIlEoWOFOtS0zgCiQYwIskL9iGXZL3kAXD8OoZ4GmMATA==",
+      "license": "MIT",
+      "dependencies": {
+        "content-type": "^2.0.0",
+        "media-typer": "^1.1.0",
+        "mime-types": "^3.0.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/type-is/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/unpipe": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz",
+      "integrity": "sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/vary": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+      "integrity": "sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/wrap-ansi": {
+      "version": "7.0.0",
+      "resolved": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz",
+      "integrity": "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^4.0.0",
+        "string-width": "^4.1.0",
+        "strip-ansi": "^6.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"
+      }
+    },
+    "node_modules/wrappy": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+      "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==",
+      "license": "ISC"
+    },
+    "node_modules/y18n": {
+      "version": "5.0.8",
+      "resolved": "https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz",
+      "integrity": "sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==",
+      "license": "ISC",
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/yargs": {
+      "version": "17.1.1",
+      "resolved": "https://registry.npmjs.org/yargs/-/yargs-17.1.1.tgz",
+      "integrity": "sha512-c2k48R0PwKIqKhPMWjeiF6y2xY/gPMUlro0sgxqXpbOIohWiLNXWslsootttv7E1e73QPAMQSg5FeySbVcpsPQ==",
+      "license": "MIT",
+      "dependencies": {
+        "cliui": "^7.0.2",
+        "escalade": "^3.1.1",
+        "get-caller-file": "^2.0.5",
+        "require-directory": "^2.1.1",
+        "string-width": "^4.2.0",
+        "y18n": "^5.0.5",
+        "yargs-parser": "^20.2.2"
+      },
+      "engines": {
+        "node": ">=12"
+      }
+    },
+    "node_modules/yargs-parser": {
+      "version": "20.2.9",
+      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz",
+      "integrity": "sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==",
+      "license": "ISC",
+      "engines": {
+        "node": ">=10"
+      }
+    }
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\package-lock.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\package.json ---
+{
+  "name": "tunnel-manager",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "localtunnel": "^2.0.2"
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\package.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\start.bat ---
+@echo off
+cd /d "%~dp0"
+title Tunnel Manager
+echo ============================================
+echo  Tunnel Manager
+echo ============================================
+echo.
+
+where node >nul 2>nul
+if errorlevel 1 (
+  echo [ERREUR] Node.js n'est pas installe.
+  echo Installe-le depuis https://nodejs.org puis relance ce fichier.
+  pause
+  exit /b 1
+)
+
+where ngrok >nul 2>nul
+if errorlevel 1 (
+  echo [ATTENTION] "ngrok" n'est pas trouve dans le PATH.
+  echo L'URL fixe ne pourra pas demarrer automatiquement.
+  echo.
+)
+
+if not exist "node_modules" (
+  echo Premiere fois : installation des dependances, patiente une minute...
+  call npm install
+  if errorlevel 1 (
+    echo [ERREUR] L'installation a echoue. Verifie ta connexion internet.
+    pause
+    exit /b 1
+  )
+  echo.
+)
+
+echo Demarrage...
+echo (laisse cette fenetre ouverte tant que tu veux garder tes tunnels actifs)
+echo.
+node index.js
+pause
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\start.bat ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\start.sh ---
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+echo "============================================"
+echo " Tunnel Manager"
+echo "============================================"
+echo
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "[ERREUR] Node.js n'est pas installé."
+  echo "Installe-le depuis https://nodejs.org puis relance ce script."
+  exit 1
+fi
+
+if ! command -v ngrok >/dev/null 2>&1; then
+  echo "[ATTENTION] 'ngrok' n'est pas trouvé dans le PATH."
+  echo "L'URL fixe ne pourra pas démarrer automatiquement."
+  echo
+fi
+
+if [ ! -d "node_modules" ]; then
+  echo "Première fois : installation des dépendances, patiente une minute..."
+  npm install
+  echo
+fi
+
+echo "Démarrage..."
+echo "(laisse ce terminal ouvert tant que tu veux garder tes tunnels actifs)"
+echo
+node index.js
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\start.sh ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\tunnels.config.json ---
+{
+  "statusServerPort": 4041,
+  "ngrok": {
+    "staticDomain": ""
+  },
+  "tunnels": [],
+  "fileBrowser": {
+    "enabled": true,
+    "roots": []
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_05\tunnels.config.json ---
+
