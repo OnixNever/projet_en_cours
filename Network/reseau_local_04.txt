@@ -10379,6 +10379,11 @@ cZiG7JfkmzaK/PBwEQKzDrJ+naRnIRH5cG+URnAA/Wdlugu7F1Z1
     "username": "test",
     "created_at": "2026-09-20T14:29:06.340396",
     "expires_at": "2026-10-20T14:29:06.340396"
+  },
+  "z-cltgFaMRJT9scw8LCFZ1dk9GY0u1NpHQjZjX7G-W4": {
+    "username": "a",
+    "created_at": "2026-09-20T21:12:46.216245",
+    "expires_at": "2026-10-20T21:12:46.216245"
   }
 }
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_04\data\sessions.json ---
@@ -10422,7 +10427,7 @@ cZiG7JfkmzaK/PBwEQKzDrJ+naRnIRH5cG+URnAA/Wdlugu7F1Z1
     "password": "a",
     "online": false,
     "created_at": "2026-01-25T17:38:53.542322",
-    "last_login": "2026-09-20T12:35:21.350362",
+    "last_login": "2026-09-20T21:12:46.215059",
     "role": "user",
     "color": "#902195",
     "last_logout": "2026-09-20T12:37:50.832128"

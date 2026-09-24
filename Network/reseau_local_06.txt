@@ -2,27 +2,28 @@
 STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
 =========================================
 
-[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06
   ├── gestion_serveur.html
   ├── serveur.py
   ├── start tout.bat
   ├── start.bat
   ├── utilisateur.html
+  ├── vocal.js
   ├── data\cert.pem
   ├── data\key.pem
   ├── data\messages.json
   ├── data\sessions.json
+  ├── data\sessions.json.bak
   ├── data\users.json
   ├── data\users.json.bak
-  ├── data\backups\users_20260920_211130.json
-  ├── data\backups\users_20260920_211305.json
+  ├── data\backups\users_20260923_185656.json
 
 
 =========================================
 CONTENU COMPLET DES FICHIERS
 =========================================
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\gestion_serveur.html ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\gestion_serveur.html ---
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -2525,9 +2526,9 @@ body {
 </body>
 </html>
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\gestion_serveur.html ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\gestion_serveur.html ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\serveur.py ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\serveur.py ---
 from fastapi import FastAPI, HTTPException, UploadFile, File, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -4177,9 +4178,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logger.info("Serveur arrêté")
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\serveur.py ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\serveur.py ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\start tout.bat ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\start tout.bat ---
 @echo off
 title Lancement du systeme - Serveur et interfaces
 color 0A
@@ -4254,9 +4255,9 @@ echo   fois, le navigateur affiche un avertissement de certificat : cliquez sur
 echo   "Avance" puis "Continuer vers le site").
 echo.
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\start tout.bat ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\start tout.bat ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\start.bat ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\start.bat ---
 @echo off
 title Lancement du systeme - Serveur et interfaces
 color 0A
@@ -4302,9 +4303,9 @@ REM ===============================
 echo [INFO] Lancement du serveur...
 start "Serveur Python" cmd /k python serveur.py
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\start.bat ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\start.bat ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\utilisateur.html ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\utilisateur.html ---
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9897,195 +9898,942 @@ start "Serveur Python" cmd /k python serveur.py
 </body>
 </html>
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\utilisateur.html ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\utilisateur.html ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\cert.pem ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\vocal.js ---
+/* ==========================================================================
+   vocal.js — Messages vocaux + appels vocaux (1 à 1 ou de groupe)
+   Se branche sur utilisateur.html sans toucher au reste de l'application.
+
+   - Messages vocaux : enregistrement (MediaRecorder) -> /upload_file -> /send_message
+   - Appels : WebRTC en maillage (chaque participant est relié à chacun des autres),
+     la signalisation passe par le WebSocket existant (messages "call_*").
+   ========================================================================== */
+(function () {
+    'use strict';
+    if (window.__vocalLoaded) return;
+    window.__vocalLoaded = true;
+
+    // ------------------------------------------------------------------ réglages
+    const VC = {
+        // Réseau local : aucun serveur STUN/TURN nécessaire.
+        // Pour appeler à travers Internet, ajoutez par exemple :
+        //   [{ urls: 'stun:stun.l.google.com:19302' }]
+        ICE_SERVERS: [],
+        MAX_RECORD_SECONDS: 600,
+        INCOMING_TIMEOUT_MS: 50000,
+        AUDIO: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+    };
+
+    // ------------------------------------------------------------------ utilitaires
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const toast = (msg, type = 'info') => {
+        try { showToast(msg, type); } catch (e) { console.log('[vocal]', msg); }
+    };
+    const wsSend = (obj) => {
+        const ws = STATE.websocket;
+        if (ws && ws.readyState === WebSocket.OPEN) { ws.send(JSON.stringify(obj)); return true; }
+        return false;
+    };
+    const colorOf = (u) => STATE.userColors.get(u) || '#6366f1';
+    const mmss = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+
+    async function getMic() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            throw new Error("Micro indisponible : ouvrez la page en HTTPS (ou sur localhost).");
+        }
+        try {
+            return await navigator.mediaDevices.getUserMedia({ audio: VC.AUDIO });
+        } catch (e) {
+            if (e.name === 'NotAllowedError' || e.name === 'SecurityError') {
+                throw new Error("Accès au micro refusé. Autorisez-le dans les réglages du navigateur.");
+            }
+            if (e.name === 'NotFoundError' || e.name === 'OverconstrainedError') {
+                throw new Error("Aucun micro détecté.");
+            }
+            throw new Error("Impossible d'utiliser le micro : " + e.message);
+        }
+    }
+
+    // Un seul AudioContext (sonnerie + indicateurs "en train de parler")
+    let actx = null;
+    function ctx() {
+        if (!actx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return null;
+            actx = new AC();
+        }
+        if (actx.state === 'suspended') actx.resume().catch(() => {});
+        return actx;
+    }
+
+    // ------------------------------------------------------------------ styles
+    const style = document.createElement('style');
+    style.textContent = `
+    .vc-recbar { display: none; flex: 1; align-items: center; gap: .75rem; padding: .6rem .9rem;
+        background: var(--bg-2); border: 1px solid var(--danger); border-radius: var(--radius); min-height: 48px; }
+    .vc-recording .message-input, .vc-recording .input-actions { display: none !important; }
+    .vc-recording .vc-recbar { display: flex; }
+    .vc-recdot { width: 10px; height: 10px; border-radius: 50%; background: var(--danger);
+        animation: vc-blink 1s infinite; }
+    @keyframes vc-blink { 50% { opacity: .25; } }
+    .vc-rectime { font-variant-numeric: tabular-nums; color: var(--text-0); font-weight: 600; }
+    .vc-rechint { color: var(--text-3); font-size: .85rem; flex: 1; }
+    .vc-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border);
+        background: var(--bg-2); color: var(--text-1); cursor: pointer; display: inline-flex;
+        align-items: center; justify-content: center; font-size: 1rem; transition: var(--transition);
+        flex-shrink: 0; }
+    .vc-btn:hover { background: var(--bg-3); }
+    .vc-btn.vc-ok { background: var(--secondary); border-color: var(--secondary); color: #fff; }
+    .vc-btn.vc-danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .vc-btn.vc-off { background: var(--text-0); color: var(--bg-0); }
+    .vc-user-call { margin-left: auto; width: 34px; height: 34px; font-size: .85rem; }
+
+    .vc-panel { position: fixed; right: 16px; bottom: 100px; width: min(340px, calc(100vw - 16px));
+        background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg, 14px);
+        box-shadow: var(--shadow-xl); z-index: 5000; display: none; flex-direction: column; overflow: hidden; }
+    .vc-panel.vc-show { display: flex; }
+    .vc-panel-head { display: flex; align-items: center; gap: .6rem; padding: .75rem 1rem;
+        border-bottom: 1px solid var(--border); color: var(--text-0); }
+    .vc-live { width: 9px; height: 9px; border-radius: 50%; background: var(--secondary); }
+    .vc-panel-head .vc-clock { margin-left: auto; font-variant-numeric: tabular-nums; color: var(--text-2); }
+    .vc-tiles { display: flex; flex-direction: column; gap: .25rem; padding: .5rem; max-height: 40vh; overflow-y: auto; }
+    .vc-tile { display: flex; align-items: center; gap: .75rem; padding: .5rem .6rem; border-radius: var(--radius); }
+    .vc-tile.vc-pending { opacity: .55; }
+    .vc-avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; color: #fff; font-weight: 700; flex-shrink: 0;
+        box-shadow: 0 0 0 0 transparent; transition: box-shadow .12s; }
+    .vc-tile.vc-speaking .vc-avatar { box-shadow: 0 0 0 3px var(--secondary); }
+    .vc-tname { color: var(--text-0); font-size: .95rem; }
+    .vc-tstat { color: var(--text-3); font-size: .78rem; }
+    .vc-controls { display: flex; justify-content: center; gap: 1rem; padding: .75rem;
+        border-top: 1px solid var(--border); }
+
+    .vc-incoming-host { position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+        display: flex; flex-direction: column; gap: .5rem; z-index: 6000; width: min(400px, calc(100vw - 16px)); }
+    .vc-incoming { display: flex; align-items: center; gap: .75rem; padding: .8rem 1rem;
+        background: var(--bg-1); border: 1px solid var(--primary); border-radius: var(--radius-lg, 14px);
+        box-shadow: var(--shadow-xl); color: var(--text-0); }
+    .vc-incoming .vc-in-text { flex: 1; min-width: 0; }
+    .vc-incoming small { display: block; color: var(--text-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .vc-modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 6500;
+        display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .vc-modal { background: var(--bg-1); border: 1px solid var(--border); border-radius: var(--radius-lg, 14px);
+        padding: 1.25rem; width: min(380px, 100%); color: var(--text-1); box-shadow: var(--shadow-xl); }
+    .vc-modal h3 { color: var(--text-0); margin-bottom: .75rem; font-size: 1.1rem; }
+    .vc-pick { display: flex; align-items: center; gap: .75rem; padding: .55rem .5rem; border-radius: var(--radius);
+        cursor: pointer; }
+    .vc-pick:hover { background: var(--bg-2); }
+    .vc-pick input { width: 18px; height: 18px; accent-color: var(--primary); }
+    .vc-modal-actions { display: flex; justify-content: flex-end; gap: .5rem; margin-top: 1rem; }
+    .vc-sink { position: absolute; width: 0; height: 0; overflow: hidden; }
+    @media (max-width: 640px) { .vc-panel { right: 8px; bottom: 90px; } }
+    @media (prefers-reduced-motion: reduce) { .vc-recdot { animation: none; } }
+    `;
+    document.head.appendChild(style);
+
+    // ------------------------------------------------------------------ éléments d'interface
+    const sink = document.createElement('div');
+    sink.className = 'vc-sink';
+    document.body.appendChild(sink);
+
+    const incomingHost = document.createElement('div');
+    incomingHost.className = 'vc-incoming-host';
+    document.body.appendChild(incomingHost);
+
+    const panel = document.createElement('div');
+    panel.className = 'vc-panel';
+    panel.innerHTML = `
+        <div class="vc-panel-head">
+            <span class="vc-live"></span><strong>Appel vocal</strong>
+            <span class="vc-clock" id="vcClock">00:00</span>
+        </div>
+        <div class="vc-tiles" id="vcTiles"></div>
+        <div class="vc-controls">
+            <button class="vc-btn" id="vcMute" title="Couper / activer le micro"><i class="fas fa-microphone"></i></button>
+            <button class="vc-btn" id="vcAdd" title="Inviter quelqu'un"><i class="fas fa-user-plus"></i></button>
+            <button class="vc-btn vc-danger" id="vcHang" title="Raccrocher"><i class="fas fa-phone-slash"></i></button>
+        </div>`;
+    document.body.appendChild(panel);
+
+    // Bouton micro (message vocal) + barre d'enregistrement
+    const attachBtn = $('#attachFileBtn');
+    const inputWrapper = $('.input-wrapper');
+    const micBtn = document.createElement('button');
+    micBtn.className = 'action-btn';
+    micBtn.id = 'vcMicBtn';
+    micBtn.title = 'Enregistrer un message vocal';
+    micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+    if (attachBtn) attachBtn.parentNode.insertBefore(micBtn, attachBtn);
+
+    const recBar = document.createElement('div');
+    recBar.className = 'vc-recbar';
+    recBar.innerHTML = `
+        <span class="vc-recdot"></span>
+        <span class="vc-rectime" id="vcRecTime">00:00</span>
+        <span class="vc-rechint">Enregistrement…</span>
+        <button class="vc-btn" id="vcRecCancel" title="Annuler"><i class="fas fa-trash"></i></button>
+        <button class="vc-btn vc-ok" id="vcRecSend" title="Envoyer"><i class="fas fa-paper-plane"></i></button>`;
+    if (inputWrapper) inputWrapper.appendChild(recBar);
+
+    // Bouton "Appeler" dans l'en-tête du chat
+    const onlineBtn = $('#onlineUsersBtn');
+    const callBtn = document.createElement('button');
+    callBtn.className = 'btn btn-secondary btn-sm';
+    callBtn.id = 'vcCallBtn';
+    callBtn.title = 'Démarrer un appel vocal';
+    callBtn.innerHTML = '<i class="fas fa-phone"></i> <span>Appeler</span>';
+    if (onlineBtn) onlineBtn.parentNode.insertBefore(callBtn, onlineBtn);
+
+    // ------------------------------------------------------------------ messages vocaux
+    const Rec = { mr: null, stream: null, chunks: [], t0: 0, tick: null, discard: false, mime: '' };
+
+    function pickMime() {
+        if (typeof MediaRecorder === 'undefined') return null;
+        const list = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'];
+        for (const m of list) {
+            if (MediaRecorder.isTypeSupported(m)) return m;
+        }
+        return '';
+    }
+    const extFromMime = (m) => /mp4/.test(m) ? 'm4a' : /ogg/.test(m) ? 'ogg' : 'webm';
+
+    function setRecUi(on) {
+        if (inputWrapper) inputWrapper.classList.toggle('vc-recording', on);
+        $('#vcRecTime').textContent = '00:00';
+    }
+
+    async function recStart() {
+        if (Rec.mr) return;
+        const mime = pickMime();
+        if (mime === null) { toast("Votre navigateur ne gère pas l'enregistrement audio.", 'error'); return; }
+        let stream;
+        try { stream = await getMic(); } catch (e) { toast(e.message, 'error'); return; }
+        let mr;
+        try {
+            mr = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+        } catch (e) {
+            stream.getTracks().forEach((t) => t.stop());
+            toast("Impossible de démarrer l'enregistrement.", 'error');
+            return;
+        }
+        Rec.stream = stream; Rec.mr = mr; Rec.chunks = []; Rec.discard = false;
+        Rec.mime = mr.mimeType || mime || 'audio/webm';
+        mr.ondataavailable = (e) => { if (e.data && e.data.size) Rec.chunks.push(e.data); };
+        mr.onstop = onRecStop;
+        mr.start(250);
+        Rec.t0 = Date.now();
+        setRecUi(true);
+        Rec.tick = setInterval(() => {
+            const s = Math.floor((Date.now() - Rec.t0) / 1000);
+            $('#vcRecTime').textContent = mmss(s);
+            if (s >= VC.MAX_RECORD_SECONDS) recStop(false);
+        }, 250);
+    }
+
+    function recStop(discard) {
+        if (!Rec.mr) return;
+        Rec.discard = !!discard;
+        clearInterval(Rec.tick);
+        try { Rec.mr.stop(); } catch (e) { /* déjà arrêté */ }
+    }
+
+    async function onRecStop() {
+        const { chunks, mime, discard } = Rec;
+        const duration = Date.now() - Rec.t0;
+        if (Rec.stream) Rec.stream.getTracks().forEach((t) => t.stop());
+        Rec.mr = null; Rec.stream = null; Rec.chunks = [];
+        setRecUi(false);
+        if (discard) return;
+        if (duration < 600 || !chunks.length) { toast('Message vocal trop court.', 'info'); return; }
+        await sendVoice(new Blob(chunks, { type: mime }), mime);
+    }
+
+    async function sendVoice(blob, mime) {
+        const name = `vocal_${Date.now()}.${extFromMime(mime)}`;
+        const fd = new FormData();
+        fd.append('file', blob, name);
+        micBtn.disabled = true;
+        micBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        try {
+            const up = await fetch(`${STATE.serverUrl}/upload_file`, { method: 'POST', body: fd });
+            if (!up.ok) throw new Error("envoi du fichier impossible");
+            const f = await up.json();
+            const res = await fetch(`${STATE.serverUrl}/send_message`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sender: STATE.currentUser, content: '',
+                    file_url: f.file_url, file_name: name, file_size: f.file_size
+                })
+            });
+            if (!res.ok) throw new Error("envoi du message impossible");
+        } catch (e) {
+            toast("Message vocal non envoyé : " + e.message, 'error');
+        } finally {
+            micBtn.disabled = false;
+            micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+        }
+    }
+
+    micBtn.addEventListener('click', recStart);
+    $('#vcRecCancel').addEventListener('click', () => recStop(true));
+    $('#vcRecSend').addEventListener('click', () => recStop(false));
+
+    // ------------------------------------------------------------------ appels : état
+    const Call = {
+        state: 'idle',            // idle | starting | joining | active
+        id: null, host: null,
+        participants: [],         // moi inclus
+        invited: new Set(),       // en train de sonner
+        peers: new Map(),         // username -> { pc, audio, cand[], remoteSet, status }
+        stream: null, muted: false,
+        t0: 0, clock: null, watch: null, pending: null,
+        incoming: new Map()       // call_id -> { el, timer }
+    };
+    const levels = new Map();     // clé -> { an, src, buf }
+
+    // ---- sonnerie (générée, aucun fichier audio nécessaire)
+    const Ring = {
+        timer: null,
+        // Volume max du bip : 0 (silence) à 1 (plein volume du système).
+        // Avant : 0.25 (assez bas). Augmentez encore si besoin.
+        VOLUME: 0.9,
+        beep() {
+            const c = ctx();
+            if (!c) return;
+            const t0 = c.currentTime;
+            // Un bip de plus (3 notes au lieu de 2) pour une sonnerie plus longue et plus présente
+            [[0, 440], [0.3, 554], [0.6, 659]].forEach(([off, freq]) => {
+                const o = c.createOscillator(), g = c.createGain();
+                o.type = 'sine'; o.frequency.value = freq;
+                g.gain.setValueAtTime(0.0001, t0 + off);
+                g.gain.exponentialRampToValueAtTime(this.VOLUME, t0 + off + 0.03);
+                g.gain.exponentialRampToValueAtTime(0.0001, t0 + off + 0.28);
+                o.connect(g); g.connect(c.destination);
+                o.start(t0 + off); o.stop(t0 + off + 0.32);
+            });
+            if (navigator.vibrate) navigator.vibrate([250, 120, 250]);
+        },
+        start() { if (this.timer) return; this.beep(); this.timer = setInterval(() => this.beep(), 2200); },
+        stop() { clearInterval(this.timer); this.timer = null; }
+    };
+
+    // ---- indicateur "en train de parler"
+    function watchLevel(key, stream) {
+        const c = ctx();
+        if (!c || !stream) return;
+        unwatchLevel(key);
+        try {
+            const src = c.createMediaStreamSource(stream);
+            const an = c.createAnalyser();
+            an.fftSize = 512;
+            src.connect(an);
+            levels.set(key, { an, src, buf: new Uint8Array(an.fftSize) });
+        } catch (e) { /* non bloquant */ }
+    }
+    function unwatchLevel(key) {
+        const l = levels.get(key);
+        if (l) { try { l.src.disconnect(); } catch (e) {} levels.delete(key); }
+    }
+    setInterval(() => {
+        if (Call.state !== 'active') return;
+        levels.forEach((l, key) => {
+            l.an.getByteTimeDomainData(l.buf);
+            let sum = 0;
+            for (let i = 0; i < l.buf.length; i++) { const x = (l.buf[i] - 128) / 128; sum += x * x; }
+            const speaking = Math.sqrt(sum / l.buf.length) > 0.04;
+            const tile = panel.querySelector(`.vc-tile[data-user="${CSS.escape(key)}"]`);
+            if (tile) tile.classList.toggle('vc-speaking', speaking);
+        });
+    }, 120);
+
+    // ---- affichage du panneau d'appel
+    function renderTiles() {
+        const box = $('#vcTiles');
+        if (!box) return;
+        const rows = [];
+        Call.participants.forEach((u) => {
+            const me = u === STATE.currentUser;
+            const peer = Call.peers.get(u);
+            const stat = me ? (Call.muted ? 'Vous · micro coupé' : 'Vous') : (peer ? peer.status : 'connexion…');
+            rows.push(tile(u, stat, false));
+        });
+        Call.invited.forEach((u) => rows.push(tile(u, 'sonne…', true)));
+        box.innerHTML = rows.join('');
+    }
+    function tile(u, stat, pending) {
+        return `<div class="vc-tile ${pending ? 'vc-pending' : ''}" data-user="${esc(u)}">
+            <div class="vc-avatar" style="background:${colorOf(u)}">${esc(u.charAt(0).toUpperCase())}</div>
+            <div><div class="vc-tname">${esc(u)}</div><div class="vc-tstat">${esc(stat)}</div></div></div>`;
+    }
+    function showPanel(on) { panel.classList.toggle('vc-show', on); }
+
+    // ------------------------------------------------------------------ appels : WebRTC
+    function signal(to, payload) {
+        wsSend({ type: 'call_signal', call_id: Call.id, to, payload });
+    }
+
+    function createPeer(user) {
+        if (Call.peers.has(user)) return Call.peers.get(user);
+        const pc = new RTCPeerConnection({ iceServers: VC.ICE_SERVERS });
+        const peer = { pc, audio: null, cand: [], remoteSet: false, status: 'connexion…' };
+        Call.peers.set(user, peer);
+        Call.stream.getTracks().forEach((t) => pc.addTrack(t, Call.stream));
+        pc.onicecandidate = (e) => { if (e.candidate) signal(user, { kind: 'ice', candidate: e.candidate }); };
+        pc.ontrack = (e) => attachRemote(user, e.streams[0] || new MediaStream([e.track]));
+        pc.onconnectionstatechange = () => {
+            const s = pc.connectionState;
+            peer.status = s === 'connected' ? 'connecté'
+                : s === 'failed' ? 'connexion échouée'
+                : s === 'disconnected' ? 'connexion instable'
+                : 'connexion…';
+            renderTiles();
+        };
+        renderTiles();
+        return peer;
+    }
+
+    function attachRemote(user, stream) {
+        const peer = Call.peers.get(user);
+        if (!peer) return;
+        if (!peer.audio) {
+            const a = document.createElement('audio');
+            a.autoplay = true;
+            a.playsInline = true;
+            sink.appendChild(a);
+            peer.audio = a;
+        }
+        peer.audio.srcObject = stream;
+        peer.audio.play().catch(() => {});
+        watchLevel(user, stream);
+    }
+
+    function closePeer(user) {
+        const peer = Call.peers.get(user);
+        if (!peer) return;
+        try { peer.pc.onicecandidate = null; peer.pc.ontrack = null; peer.pc.onconnectionstatechange = null; peer.pc.close(); } catch (e) {}
+        if (peer.audio) { peer.audio.srcObject = null; peer.audio.remove(); }
+        unwatchLevel(user);
+        Call.peers.delete(user);
+    }
+
+    async function flushCandidates(peer) {
+        const list = peer.cand.splice(0);
+        for (const c of list) { try { await peer.pc.addIceCandidate(c); } catch (e) {} }
+    }
+
+    // Le nouvel arrivant envoie une offre à chaque personne déjà présente
+    async function makeOffer(user) {
+        const peer = createPeer(user);
+        try {
+            const offer = await peer.pc.createOffer();
+            await peer.pc.setLocalDescription(offer);
+            signal(user, { kind: 'offer', sdp: peer.pc.localDescription });
+        } catch (e) { console.error('[vocal] offre impossible', e); peer.status = 'connexion échouée'; renderTiles(); }
+    }
+
+    async function onSignal(from, p) {
+        if (Call.state !== 'active' || !p || !Call.participants.includes(from)) return;
+        const peer = createPeer(from);
+        try {
+            if (p.kind === 'offer') {
+                await peer.pc.setRemoteDescription(p.sdp);
+                peer.remoteSet = true;
+                await flushCandidates(peer);
+                const answer = await peer.pc.createAnswer();
+                await peer.pc.setLocalDescription(answer);
+                signal(from, { kind: 'answer', sdp: peer.pc.localDescription });
+            } else if (p.kind === 'answer') {
+                await peer.pc.setRemoteDescription(p.sdp);
+                peer.remoteSet = true;
+                await flushCandidates(peer);
+            } else if (p.kind === 'ice' && p.candidate) {
+                if (peer.remoteSet) { try { await peer.pc.addIceCandidate(p.candidate); } catch (e) {} }
+                else peer.cand.push(p.candidate);
+            }
+        } catch (e) { console.error('[vocal] signal', p.kind, e); }
+    }
+
+    // ------------------------------------------------------------------ appels : cycle de vie
+    function releaseMic() {
+        if (Call.stream) Call.stream.getTracks().forEach((t) => t.stop());
+        Call.stream = null;
+    }
+
+    function endLocal(message) {
+        const was = Call.state !== 'idle';
+        Array.from(Call.peers.keys()).forEach(closePeer);
+        unwatchLevel(STATE.currentUser);
+        releaseMic();
+        clearInterval(Call.clock); clearInterval(Call.watch); clearTimeout(Call.pending);
+        Call.state = 'idle'; Call.id = null; Call.host = null;
+        Call.participants = []; Call.invited = new Set(); Call.muted = false;
+        const m = $('#vcMute');
+        m.classList.remove('vc-off');
+        m.innerHTML = '<i class="fas fa-microphone"></i>';
+        showPanel(false);
+        if (was && message) toast(message, 'info');
+    }
+
+    function armPending() {
+        clearTimeout(Call.pending);
+        Call.pending = setTimeout(() => {
+            if (Call.state === 'starting' || Call.state === 'joining') {
+                endLocal("Le serveur n'a pas répondu à l'appel.");
+            }
+        }, 8000);
+    }
+
+    async function startCall(invitees) {
+        if (Call.state !== 'idle') { toast('Vous êtes déjà dans un appel.', 'error'); return; }
+        if (!invitees.length) return;
+        let stream;
+        try { stream = await getMic(); } catch (e) { toast(e.message, 'error'); return; }
+        ctx(); // débloque le son pendant le clic de l'utilisateur
+        Call.stream = stream;
+        Call.state = 'starting';
+        if (!wsSend({ type: 'call_start', invitees })) {
+            endLocal('Connexion au serveur perdue.');
+            return;
+        }
+        armPending();
+    }
+
+    function enterCall(call, peers) {
+        clearTimeout(Call.pending);
+        Call.id = call.call_id;
+        Call.host = call.host;
+        Call.participants = call.participants.slice();
+        Call.invited = new Set(call.invited || []);
+        Call.state = 'active';
+        Call.t0 = Date.now();
+        Call.muted = false;
+        watchLevel(STATE.currentUser, Call.stream);
+        showPanel(true);
+        renderTiles();
+        clearInterval(Call.clock);
+        Call.clock = setInterval(() => { $('#vcClock').textContent = mmss(Math.floor((Date.now() - Call.t0) / 1000)); }, 500);
+        $('#vcClock').textContent = '00:00';
+        // Si la connexion au serveur tombe, on raccroche proprement
+        clearInterval(Call.watch);
+        Call.watch = setInterval(() => {
+            if (Call.state === 'active' && (!STATE.currentUser || !STATE.websocket || STATE.websocket.readyState !== WebSocket.OPEN)) {
+                endLocal('Connexion au serveur perdue : appel terminé.');
+            }
+        }, 2000);
+        peers.forEach((u) => makeOffer(u));
+    }
+
+    function hangup() {
+        if (Call.state === 'idle') return;
+        if (Call.id) wsSend({ type: 'call_leave', call_id: Call.id });
+        endLocal('Appel terminé.');
+    }
+
+    function toggleMute() {
+        if (!Call.stream) return;
+        Call.muted = !Call.muted;
+        Call.stream.getAudioTracks().forEach((t) => { t.enabled = !Call.muted; });
+        const m = $('#vcMute');
+        m.classList.toggle('vc-off', Call.muted);
+        m.innerHTML = Call.muted ? '<i class="fas fa-microphone-slash"></i>' : '<i class="fas fa-microphone"></i>';
+        renderTiles();
+    }
+
+    // ---- appel entrant
+    function showIncoming(data) {
+        const callId = data.call.call_id;
+        if (Call.state !== 'idle') { wsSend({ type: 'call_decline', call_id: callId, reason: 'busy' }); return; }
+        if (Call.incoming.has(callId)) return;
+        const others = data.call.participants.filter((u) => u !== data.from)
+            .concat(data.call.invited.filter((u) => u !== STATE.currentUser));
+        const el = document.createElement('div');
+        el.className = 'vc-incoming';
+        el.innerHTML = `
+            <div class="vc-avatar" style="background:${colorOf(data.from)}">${esc(data.from.charAt(0).toUpperCase())}</div>
+            <div class="vc-in-text"><strong>${esc(data.from)}</strong> vous appelle
+                ${others.length ? `<small>avec ${esc(others.join(', '))}</small>` : ''}</div>
+            <button class="vc-btn vc-danger" data-act="decline" title="Refuser"><i class="fas fa-phone-slash"></i></button>
+            <button class="vc-btn vc-ok" data-act="accept" title="Répondre"><i class="fas fa-phone"></i></button>`;
+        el.querySelector('[data-act="accept"]').addEventListener('click', () => acceptIncoming(callId));
+        el.querySelector('[data-act="decline"]').addEventListener('click', () => {
+            wsSend({ type: 'call_decline', call_id: callId });
+            dismissIncoming(callId);
+        });
+        incomingHost.appendChild(el);
+        const timer = setTimeout(() => dismissIncoming(callId), VC.INCOMING_TIMEOUT_MS);
+        Call.incoming.set(callId, { el, timer });
+        Ring.start();
+    }
+
+    function dismissIncoming(callId) {
+        const inc = Call.incoming.get(callId);
+        if (!inc) return;
+        clearTimeout(inc.timer);
+        inc.el.remove();
+        Call.incoming.delete(callId);
+        if (Call.incoming.size === 0) Ring.stop();
+    }
+
+    async function acceptIncoming(callId) {
+        dismissIncoming(callId);
+        if (Call.state !== 'idle') {
+            wsSend({ type: 'call_decline', call_id: callId, reason: 'busy' });
+            toast('Vous êtes déjà dans un appel.', 'error');
+            return;
+        }
+        let stream;
+        try { stream = await getMic(); } catch (e) {
+            toast(e.message, 'error');
+            wsSend({ type: 'call_decline', call_id: callId });
+            return;
+        }
+        ctx();
+        Call.stream = stream;
+        Call.state = 'joining';
+        if (!wsSend({ type: 'call_join', call_id: callId })) { endLocal('Connexion au serveur perdue.'); return; }
+        armPending();
+    }
+
+    // ---- messages du serveur
+    function onCallMessage(d) {
+        switch (d.type) {
+            case 'call_started':
+                if (Call.state === 'starting') enterCall(d.call, []);
+                else wsSend({ type: 'call_leave', call_id: d.call.call_id });
+                break;
+            case 'call_joined':
+                if (Call.state === 'joining') enterCall(d.call, d.peers || []);
+                else wsSend({ type: 'call_leave', call_id: d.call.call_id });
+                break;
+            case 'call_incoming':
+                showIncoming(d);
+                break;
+            case 'call_invited':
+                if (d.call_id === Call.id) { Call.invited = new Set(d.invited || []); renderTiles(); }
+                break;
+            case 'call_participant_joined':
+                if (d.call_id !== Call.id) break;
+                if (!Call.participants.includes(d.username)) Call.participants.push(d.username);
+                Call.invited = new Set((d.call && d.call.invited) || []);
+                toast(`${d.username} a rejoint l'appel`, 'info');
+                renderTiles();
+                break;
+            case 'call_participant_left':
+                if (d.call_id !== Call.id) break;
+                Call.participants = Call.participants.filter((u) => u !== d.username);
+                closePeer(d.username);
+                toast(`${d.username} a quitté l'appel`, 'info');
+                renderTiles();
+                break;
+            case 'call_declined':
+                if (d.call_id !== Call.id) break;
+                Call.invited.delete(d.username);
+                toast(d.reason === 'no_answer' ? `${d.username} n'a pas répondu`
+                    : d.reason === 'busy' ? `${d.username} est déjà en appel`
+                    : `${d.username} a refusé l'appel`, 'info');
+                renderTiles();
+                break;
+            case 'call_invite_cancelled':
+                dismissIncoming(d.call_id);
+                if (d.reason === 'missed') toast('Appel manqué', 'info');
+                break;
+            case 'call_signal':
+                if (d.call_id === Call.id) onSignal(d.from, d.payload);
+                break;
+            case 'call_ended':
+                if (d.call_id === Call.id) endLocal(d.reason || 'Appel terminé.');
+                else dismissIncoming(d.call_id);
+                break;
+            case 'call_notice':
+                toast(d.text, 'info');
+                break;
+            case 'call_error':
+                toast(d.text || "Erreur d'appel", 'error');
+                if (d.call_id) dismissIncoming(d.call_id);
+                if (Call.state === 'starting' || Call.state === 'joining') endLocal();
+                break;
+        }
+    }
+
+    // On s'intercale devant le gestionnaire WebSocket existant : les messages
+    // "call_*" sont traités ici, tout le reste passe comme avant.
+    const originalWsHandler = window.handleWebSocketMessage;
+    window.handleWebSocketMessage = function (data) {
+        if (data && typeof data.type === 'string' && data.type.indexOf('call_') === 0) {
+            try { onCallMessage(data); } catch (e) { console.error('[vocal]', e); }
+            return;
+        }
+        return originalWsHandler.apply(this, arguments);
+    };
+
+    // ------------------------------------------------------------------ sélection des personnes à appeler
+    function openPicker(preselect) {
+        const inCall = Call.state === 'active';
+        const list = Array.from(STATE.onlineUsers).filter((u) =>
+            u !== STATE.currentUser && !(inCall && (Call.participants.includes(u) || Call.invited.has(u))));
+        if (!list.length) { toast("Personne d'autre n'est en ligne.", 'info'); return; }
+        if (Call.state !== 'idle' && !inCall) { toast('Un appel est déjà en cours de connexion.', 'info'); return; }
+
+        const bg = document.createElement('div');
+        bg.className = 'vc-modal-bg';
+        bg.innerHTML = `
+            <div class="vc-modal">
+                <h3>${inCall ? "Inviter dans l'appel" : 'Démarrer un appel'}</h3>
+                <div>${list.map((u) => `
+                    <label class="vc-pick">
+                        <input type="checkbox" value="${esc(u)}" ${u === preselect ? 'checked' : ''}>
+                        <span class="vc-avatar" style="background:${colorOf(u)};width:30px;height:30px;font-size:.85rem">${esc(u.charAt(0).toUpperCase())}</span>
+                        <span>${esc(u)}</span>
+                    </label>`).join('')}</div>
+                <div class="vc-modal-actions">
+                    <button class="btn btn-secondary btn-sm" data-act="cancel">Annuler</button>
+                    <button class="btn btn-primary btn-sm" data-act="go"><i class="fas fa-phone"></i> ${inCall ? 'Inviter' : 'Appeler'}</button>
+                </div>
+            </div>`;
+        document.body.appendChild(bg);
+        const close = () => bg.remove();
+        bg.addEventListener('click', (e) => { if (e.target === bg) close(); });
+        bg.querySelector('[data-act="cancel"]').addEventListener('click', close);
+        bg.querySelector('[data-act="go"]').addEventListener('click', () => {
+            const chosen = Array.from(bg.querySelectorAll('input:checked')).map((i) => i.value);
+            if (!chosen.length) { toast('Choisissez au moins une personne.', 'info'); return; }
+            close();
+            if (inCall) wsSend({ type: 'call_invite', call_id: Call.id, invitees: chosen });
+            else startCall(chosen);
+        });
+    }
+
+    callBtn.addEventListener('click', () => openPicker());
+    $('#vcAdd').addEventListener('click', () => openPicker());
+    $('#vcHang').addEventListener('click', hangup);
+    $('#vcMute').addEventListener('click', toggleMute);
+
+    // Petit bouton "téléphone" à côté de chaque utilisateur en ligne (appel direct)
+    const originalUsersList = window.updateOnlineUsersList;
+    if (typeof originalUsersList === 'function') {
+        window.updateOnlineUsersList = function () {
+            const r = originalUsersList.apply(this, arguments);
+            document.querySelectorAll('#usersList .user-item').forEach((item) => {
+                if (item.querySelector('.vc-user-call')) return;
+                const nameEl = item.querySelector('.user-item-name');
+                if (!nameEl) return;
+                const name = nameEl.textContent.trim();
+                const b = document.createElement('button');
+                b.className = 'vc-btn vc-user-call';
+                b.title = `Appeler ${name}`;
+                b.innerHTML = '<i class="fas fa-phone"></i>';
+                b.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (Call.state === 'active') wsSend({ type: 'call_invite', call_id: Call.id, invitees: [name] });
+                    else startCall([name]);
+                });
+                item.appendChild(b);
+            });
+            return r;
+        };
+    }
+
+    window.addEventListener('beforeunload', () => {
+        if (Call.id) wsSend({ type: 'call_leave', call_id: Call.id });
+    });
+})();
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\vocal.js ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\cert.pem ---
 -----BEGIN CERTIFICATE-----
-MIIC9DCCAdygAwIBAgIUBLfeYxcb997Ur6oH6DoLZdJXekkwDQYJKoZIhvcNAQEL
-BQAwFzEVMBMGA1UEAwwMUmVzZWF1IExvY2FsMB4XDTI2MDkxOTE5MTEzMFoXDTI4
-MTIyMzE5MTEzMFowFzEVMBMGA1UEAwwMUmVzZWF1IExvY2FsMIIBIjANBgkqhkiG
-9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxL3ocOrpTxtDMPKcqVkPgi2acZ1V4deS5+oo
-/OMtX2Ut6W6ZCHqYEM6HAa7p1JaVD2vD9GPoJLOPc1hQGw4vJ32nVzoSoKmF/H08
-JYfcHnlX1ZmzM/LIf6Sjqxli4tCnNI5HmwsYTGUwaMTXq1UVNqoOaFRA7jOsbZbg
-Td87unbB79nb5LFpV51U8XeK74S/y7Pa9MXOSm6Ksq4uERrHsLl14kUINbkcjDPj
-Br1WvvJ1HQODFAMHEi7lLgHlUf1fi4P5hkLES2nZ74rPhW6wCH1xa/RecrepI/+w
-o8txHR9kYqITI5MoJoUOASbHU5b03bGQVh+mBbq8AHwn6B7xaQIDAQABozgwNjAm
-BgNVHREEHzAdgglsb2NhbGhvc3SCBG9uaXiHBH8AAAGHBMCogRIwDAYDVR0TAQH/
-BAIwADANBgkqhkiG9w0BAQsFAAOCAQEAK6jfrgGbnMSkZcfN+Cp5OFTrf0xUBB2H
-z5vE+jDPr176k/nAGm4sE0J3umWOsPdp4Q/9zaB7DfLY9i3ObbaqDYOVmOqXMl9e
-1trZmUfqENnmsIznxi6RnAOS5mApQDtGsG4sKzgfLsgDTZUiDNJbtNYnjz6RjgyL
-Tuj85j84ykaRjenm7xM/zNuc8zRdKdWCFqkfJxv660wns4CGPV2H72tWp/UPiY/b
-G+/PcynkTRJwl5qpUmNCL7QJKMVD02Afcecp5E80Xs4RfTI9QOT2bDZ6fPje4R5z
-bR15hIY9Cl3bxrGpqjLX6DvkVPscBC5PrLxfM2ETA8e4WPVo+yfzTg==
+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
 -----END CERTIFICATE-----
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\cert.pem ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\cert.pem ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\key.pem ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\key.pem ---
 -----BEGIN RSA PRIVATE KEY-----
-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
+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
 -----END RSA PRIVATE KEY-----
 
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\key.pem ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\key.pem ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\messages.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\messages.json ---
 {
   "messages": [],
   "last_id": 0
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\messages.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\messages.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\sessions.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\sessions.json ---
 {
-  "sz8ePGaYJ1x5kky3YQRWadqXJFFXOKbNZQDkO5jptTI": {
+  "7m0O_a9OCX4LzxPcWUe_wOVsSpeJdSmRmL5Fxp9BL7k": {
+    "username": "aaa",
+    "created_at": "2026-09-20T21:15:30.651456",
+    "expires_at": "2026-10-20T21:15:30.651456"
+  },
+  "AYbpFTmmcRhoyvIouFMPtNjI3fI7LRsBkDBUV54NRt4": {
     "username": "test",
-    "created_at": "2026-09-20T19:47:00.974833",
-    "expires_at": "2026-10-20T19:47:00.974833"
+    "created_at": "2026-09-23T18:57:16.983103",
+    "expires_at": "2026-10-23T18:57:16.983103"
+  },
+  "mYa2B_u6IFZwkp__Iqmf26B0lHxUllR-UKuWa5RA_dg": {
+    "username": "aaa",
+    "created_at": "2026-09-23T18:57:36.966924",
+    "expires_at": "2026-10-23T18:57:36.966924"
+  },
+  "W-0v6sHY8xcQvuARSVjvFI5-V-RuNj8d5E2AY6o6FgQ": {
+    "username": "aaa",
+    "created_at": "2026-09-23T18:59:29.310546",
+    "expires_at": "2026-10-23T18:59:29.310546"
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\sessions.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\sessions.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\users.json ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\sessions.json.bak ---
+{
+  "7m0O_a9OCX4LzxPcWUe_wOVsSpeJdSmRmL5Fxp9BL7k": {
+    "username": "aaa",
+    "created_at": "2026-09-20T21:15:30.651456",
+    "expires_at": "2026-10-20T21:15:30.651456"
+  },
+  "AYbpFTmmcRhoyvIouFMPtNjI3fI7LRsBkDBUV54NRt4": {
+    "username": "test",
+    "created_at": "2026-09-23T18:57:16.983103",
+    "expires_at": "2026-10-23T18:57:16.983103"
+  },
+  "mYa2B_u6IFZwkp__Iqmf26B0lHxUllR-UKuWa5RA_dg": {
+    "username": "aaa",
+    "created_at": "2026-09-23T18:57:36.966924",
+    "expires_at": "2026-10-23T18:57:36.966924"
+  }
+}
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\sessions.json.bak ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\users.json ---
 {
   "admin": {
     "password": "admin123",
     "online": false,
-    "created_at": "2026-09-20T19:45:42.753014",
+    "created_at": "2026-09-20T21:14:40.235441",
     "last_login": null,
     "role": "admin",
-    "color": "#2cfcc0"
+    "color": "#d8a5f9"
   },
   "test": {
     "password": "test",
     "online": true,
-    "created_at": "2026-09-20T19:46:10.275757",
-    "last_login": "2026-09-20T19:47:00.970817",
+    "created_at": "2026-09-20T21:15:02.251568",
+    "last_login": "2026-09-23T18:57:16.980781",
     "role": "user",
     "color": "#6366f1"
   },
   "aaa": {
     "password": "aaa",
-    "online": false,
-    "created_at": "2026-09-20T19:46:56.833942",
-    "last_login": "2026-09-20T19:48:30.199452",
+    "online": true,
+    "created_at": "2026-09-20T21:15:26.923664",
+    "last_login": "2026-09-23T18:59:29.302118",
     "role": "user",
-    "color": "#BFF90F",
-    "last_logout": "2026-09-20T19:50:11.456005"
+    "color": "#CB551F"
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\users.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\users.json ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\users.json.bak ---
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\users.json.bak ---
 {
   "admin": {
     "password": "admin123",
     "online": false,
-    "created_at": "2026-09-20T19:45:42.753014",
+    "created_at": "2026-09-20T21:14:40.235441",
     "last_login": null,
     "role": "admin",
-    "color": "#2cfcc0"
-  },
-  "test": {
-    "password": "test",
-    "online": false,
-    "created_at": "2026-09-20T19:46:10.275757",
-    "last_login": "2026-09-20T19:47:00.970817",
-    "role": "user",
-    "color": "#6366f1"
-  },
-  "aaa": {
-    "password": "aaa",
-    "online": false,
-    "created_at": "2026-09-20T19:46:56.833942",
-    "last_login": "2026-09-20T19:48:30.199452",
-    "role": "user",
-    "color": "#BFF90F",
-    "last_logout": "2026-09-20T19:50:11.456005"
-  }
-}
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\users.json.bak ---
-
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\backups\users_20260920_211130.json ---
-{
-  "admin": {
-    "password": "admin123",
-    "online": false,
-    "created_at": "2026-09-20T19:45:42.753014",
-    "last_login": null,
-    "role": "admin",
-    "color": "#2cfcc0"
-  },
-  "test": {
-    "password": "test",
-    "online": false,
-    "created_at": "2026-09-20T19:46:10.275757",
-    "last_login": "2026-09-20T19:47:00.970817",
-    "role": "user",
-    "color": "#6366f1"
-  },
-  "aaa": {
-    "password": "aaa",
-    "online": false,
-    "created_at": "2026-09-20T19:46:56.833942",
-    "last_login": "2026-09-20T19:48:30.199452",
-    "role": "user",
-    "color": "#BFF90F",
-    "last_logout": "2026-09-20T19:50:11.456005"
-  }
-}
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\backups\users_20260920_211130.json ---
-
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\backups\users_20260920_211305.json ---
-{
-  "admin": {
-    "password": "admin123",
-    "online": false,
-    "created_at": "2026-09-20T19:45:42.753014",
-    "last_login": null,
-    "role": "admin",
-    "color": "#2cfcc0"
+    "color": "#d8a5f9"
   },
   "test": {
     "password": "test",
     "online": true,
-    "created_at": "2026-09-20T19:46:10.275757",
-    "last_login": "2026-09-20T19:47:00.970817",
+    "created_at": "2026-09-20T21:15:02.251568",
+    "last_login": "2026-09-23T18:57:16.980781",
     "role": "user",
     "color": "#6366f1"
   },
   "aaa": {
     "password": "aaa",
     "online": false,
-    "created_at": "2026-09-20T19:46:56.833942",
-    "last_login": "2026-09-20T19:48:30.199452",
+    "created_at": "2026-09-20T21:15:26.923664",
+    "last_login": "2026-09-23T18:57:36.951343",
     "role": "user",
-    "color": "#BFF90F",
-    "last_logout": "2026-09-20T19:50:11.456005"
+    "color": "#CB551F"
   }
 }
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_05\data\backups\users_20260920_211305.json ---
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\users.json.bak ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\backups\users_20260923_185656.json ---
+{
+  "admin": {
+    "password": "admin123",
+    "online": false,
+    "created_at": "2026-09-20T21:14:40.235441",
+    "last_login": null,
+    "role": "admin",
+    "color": "#d8a5f9"
+  },
+  "test": {
+    "password": "test",
+    "online": false,
+    "created_at": "2026-09-20T21:15:02.251568",
+    "last_login": null,
+    "role": "user",
+    "color": "#6366f1"
+  },
+  "aaa": {
+    "password": "aaa",
+    "online": true,
+    "created_at": "2026-09-20T21:15:26.923664",
+    "last_login": "2026-09-20T21:15:30.646458",
+    "role": "user",
+    "color": "#CB551F"
+  }
+}
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_06\data\backups\users_20260923_185656.json ---
 
