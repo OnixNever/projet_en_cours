@@ -46,6 +46,8 @@ STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
   ├── context-sync-repo\Network\réseau_local_01.txt
   ├── context-sync-repo\compresseur\compresseur_2026-09-11_18-03-53.txt
   ├── context-sync-repo\decompresseur\decompresseur_2026-09-11_18-03-53.txt
+  ├── context-sync-repo\depot\oeil-du-monde-v3.html
+  ├── context-sync-repo\depot\oeil-du-monde-v4.html
   ├── context-sync-repo\entrainement_tactique\entrainement-tactique_01.txt
   ├── context-sync-repo\entrainement_tactique\entrainement-tactique_02.txt
   ├── context-sync-repo\entrainement_tactique\entrainement_tactique_2026-09-11_18-03-54.txt
@@ -950,6 +952,205 @@ from the remote, but no such ref was fetched.
 [2026-09-27 15:05:40] [compresseur] Aucun changement détecté.
 [2026-09-27 15:05:40] [decompresseur] Aucun changement détecté.
 [2026-09-27 15:05:40] [compresseur_auto] Changement détecté (67 fichier(s)), régénération du contexte...
+[2026-09-27 15:05:40] Ancienne version supprimée : compresseur_auto_2026-09-26_13-18-39.txt
+[2026-09-27 15:05:40] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-27_15-05-40.txt (11.1 Mo)
+[2026-09-27 15:05:40] [partage_QR] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_01] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_02] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_03] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_04] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_05] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_06] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_07] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_08] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_09] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_09_1] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_10] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_11] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_12] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_13] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_14] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_15] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_16] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_17] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_18] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_19] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_20] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_22] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_23] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_24] Aucun changement détecté.
+[2026-09-27 15:05:40] [%/%_25] Aucun changement détecté.
+[2026-09-27 15:05:40] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-09-27 15:05:40] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-09-27 15:05:40] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-09-27 15:05:40] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-09-27 15:05:40] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-09-27 15:05:40] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-09-27 15:05:40] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-09-27 15:05:40] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-09-27 15:05:40] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-27 15:05:40] [ChronoChess] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-09-27 15:05:40] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-09-27 15:05:41] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-09-27 15:05:41] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-09-27 15:05:41] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_02] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_03] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_04] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_05] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_06] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/reseau_local_07] Aucun changement détecté.
+[2026-09-27 15:05:41] [Network/réseau_local_01] Aucun changement détecté.
+[2026-09-27 15:05:46] Poussé sur Git.
+[2026-09-30 19:17:18] [recherche/recherche_01] Aucun changement détecté.
+[2026-09-30 19:17:18] [recherche/recherche_02] Aucun changement détecté.
+[2026-09-30 19:17:18] [recherche/recherche_03] Aucun changement détecté.
+[2026-09-30 19:17:18] [recherche/recherche_04] Aucun changement détecté.
+[2026-09-30 19:17:18] [recherche/recherche_05] Aucun changement détecté.
+[2026-09-30 19:17:18] [compresseur] Aucun changement détecté.
+[2026-09-30 19:17:18] [decompresseur] Aucun changement détecté.
+[2026-09-30 19:17:18] [compresseur_auto] Changement détecté (67 fichier(s)), régénération du contexte...
+[2026-09-30 19:17:18] Ancienne version supprimée : compresseur_auto_2026-09-27_06-58-26.txt
+[2026-09-30 19:17:18] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-30_19-17-18.txt (11.1 Mo)
+[2026-09-30 19:17:18] [partage_QR] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_01] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_02] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_03] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_04] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_05] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_06] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_07] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_08] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_09] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_09_1] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_10] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_11] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_12] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_13] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_14] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_15] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_16] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_17] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_18] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_19] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_20] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_22] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_23] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_24] Aucun changement détecté.
+[2026-09-30 19:17:18] [%/%_25] Aucun changement détecté.
+[2026-09-30 19:17:18] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-09-30 19:17:18] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-09-30 19:17:18] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-09-30 19:17:18] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-09-30 19:17:18] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-09-30 19:17:18] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-09-30 19:17:18] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-09-30 19:17:18] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-09-30 19:17:18] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-30 19:17:18] [ChronoChess] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-09-30 19:17:18] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-09-30 19:17:19] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-09-30 19:17:19] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-09-30 19:17:19] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_02] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_03] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_04] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_05] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_06] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/reseau_local_07] Aucun changement détecté.
+[2026-09-30 19:17:19] [Network/réseau_local_01] Aucun changement détecté.
+[2026-09-30 19:17:19] [depot] Ajouté : oeil-du-monde-v2.html
+[2026-09-30 19:17:19] [depot] Ajouté : oeil-du-monde-v3.html
+[2026-09-30 19:17:19] [depot] Ajouté : oeil-du-monde-v4.html
+[2026-09-30 19:17:25] Poussé sur Git.
+[2026-09-30 19:18:32] [recherche/recherche_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [recherche/recherche_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [recherche/recherche_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [recherche/recherche_04] Aucun changement détecté.
+[2026-09-30 19:18:32] [recherche/recherche_05] Aucun changement détecté.
+[2026-09-30 19:18:32] [compresseur] Aucun changement détecté.
+[2026-09-30 19:18:32] [decompresseur] Aucun changement détecté.
+[2026-09-30 19:18:32] [compresseur_auto] Changement détecté (70 fichier(s)), régénération du contexte...
+[2026-09-30 19:18:32] Ancienne version supprimée : compresseur_auto_2026-09-27_13-41-53.txt
+[2026-09-30 19:18:32] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-30_19-18-32.txt (11.2 Mo)
+[2026-09-30 19:18:32] [partage_QR] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_04] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_05] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_06] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_07] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_08] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_09] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_09_1] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_10] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_11] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_12] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_13] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_14] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_15] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_16] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_17] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_18] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_19] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_20] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_22] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_23] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_24] Aucun changement détecté.
+[2026-09-30 19:18:32] [%/%_25] Aucun changement détecté.
+[2026-09-30 19:18:32] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-09-30 19:18:32] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-09-30 19:18:32] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-09-30 19:18:32] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-30 19:18:32] [ChronoChess] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-09-30 19:18:32] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-09-30 19:18:32] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_02] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_03] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_04] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_05] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_06] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/reseau_local_07] Aucun changement détecté.
+[2026-09-30 19:18:32] [Network/réseau_local_01] Aucun changement détecté.
+[2026-09-30 19:18:32] [depot] Supprimé du dépôt : oeil-du-monde-v2.html
+[2026-09-30 19:18:42] Poussé sur Git.
+[2026-09-30 19:18:55] [recherche/recherche_01] Aucun changement détecté.
+[2026-09-30 19:18:55] [recherche/recherche_02] Aucun changement détecté.
+[2026-09-30 19:18:55] [recherche/recherche_03] Aucun changement détecté.
+[2026-09-30 19:18:55] [recherche/recherche_04] Aucun changement détecté.
+[2026-09-30 19:18:55] [recherche/recherche_05] Aucun changement détecté.
+[2026-09-30 19:18:55] [compresseur] Aucun changement détecté.
+[2026-09-30 19:18:55] [decompresseur] Aucun changement détecté.
+[2026-09-30 19:18:55] [compresseur_auto] Changement détecté (69 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\auto_context_sync.log ---
 
@@ -982,8 +1183,19 @@ Détection automatique des sous-versions :
     fichier horodaté est généré à chaque changement, et seules les 3
     dernières versions sont conservées.
 
-Ne pousse JAMAIS le code source lui-même : seuls les fichiers .txt générés
-sont envoyés sur Git.
+Modes (champ "mode" de chaque projet dans config.json) :
+    "classique" (défaut) : génère un bundle .txt du code (comportement d'origine).
+    "miroir" : dossier "boîte de dépôt" :
+    Si un projet du config.json porte l'option  "mode": "miroir",  son dossier
+    est synchronisé tel quel avec le dépôt Git (sous <repo>/<nom du projet>/) :
+      - fichier nouveau ou modifié  -> copié sur le dépôt (l'ancien est écrasé)
+      - fichier supprimé en local   -> supprimé du dépôt
+      - dossier vidé en local       -> dépôt vidé pour ce projet
+    Les fichiers sont copiés TELS QUELS (pas de bundle .txt). Sécurité : si le
+    dossier n'existe pas (disque absent, chemin erroné), rien n'est supprimé.
+
+Hors mode miroir, le script ne pousse JAMAIS le code source lui-même : seuls
+les fichiers .txt générés sont envoyés sur Git.
 
 Dépendances :
     - Python 3.9+
@@ -1306,6 +1518,73 @@ def write_subversion(repo_path: str, project_name: str, subversion_name: str, bu
 
 
 # ---------------------------------------------------------------------------
+# Mode miroir : le dossier du dépôt pour ce projet = copie exacte du dossier local
+# ---------------------------------------------------------------------------
+MIRROR_MAX_FILE_SIZE = 90 * 1024 * 1024  # GitHub refuse > 100 Mo
+
+
+def sync_mirror(repo_path: str, project_name: str, source_path: str) -> bool:
+    """Rend <repo>/<project_name>/ identique à source_path.
+    Retourne True si quelque chose a changé (ajout, mise à jour, suppression)."""
+    if project_name.strip() in ("", ".", "..", ".git"):
+        log(f"[{project_name}] Nom de projet invalide pour le mode miroir, ignoré.")
+        return False
+
+    dest_root = os.path.join(repo_path, project_name)
+    os.makedirs(dest_root, exist_ok=True)
+    changed = False
+
+    # 1) Inventaire du dossier local (chemin relatif -> chemin complet)
+    local_files = {}
+    for root, dirs, files in os.walk(source_path):
+        dirs[:] = sorted(d for d in dirs if d not in IGNORE_DIRS)
+        for f in sorted(files):
+            full = os.path.join(root, f)
+            try:
+                if os.path.getsize(full) > MIRROR_MAX_FILE_SIZE:
+                    log(f"[{project_name}] Fichier ignoré (> 90 Mo, trop gros pour GitHub) : {full}")
+                    continue
+            except OSError:
+                continue
+            rel = os.path.relpath(full, source_path)
+            local_files[rel] = full
+
+    # 2) Ajouts / mises à jour (écrasement si le contenu diffère)
+    for rel, full in local_files.items():
+        dest = os.path.join(dest_root, rel)
+        existed = os.path.isfile(dest)
+        if existed and hash_file(dest) == hash_file(full):
+            continue
+        os.makedirs(os.path.dirname(dest), exist_ok=True)
+        shutil.copy2(full, dest)
+        log(f"[{project_name}] {'Remplacé' if existed else 'Ajouté'} : {rel}")
+        changed = True
+
+    # 3) Suppressions : tout ce qui est dans le dépôt mais plus en local
+    for root, dirs, files in os.walk(dest_root, topdown=False):
+        for f in files:
+            dest = os.path.join(root, f)
+            rel = os.path.relpath(dest, dest_root)
+            if rel not in local_files:
+                try:
+                    os.remove(dest)
+                    log(f"[{project_name}] Supprimé du dépôt : {rel}")
+                    changed = True
+                except OSError as e:
+                    log(f"[{project_name}] Suppression impossible ({rel}) : {e}")
+        # dossiers devenus vides (sauf la racine du projet)
+        if root != dest_root:
+            try:
+                os.rmdir(root)
+            except OSError:
+                pass
+
+    if not changed:
+        log(f"[{project_name}] Miroir : aucun changement.")
+    return changed
+
+
+# ---------------------------------------------------------------------------
 # Boucle principale
 # ---------------------------------------------------------------------------
 def sync_once(config: dict):
@@ -1323,6 +1602,17 @@ def sync_once(config: dict):
 
         if not os.path.isdir(path):
             log(f"[{name}] Dossier introuvable, ignoré : {path}")
+            continue
+
+        mode = project.get("mode", "classique")
+        if mode not in ("classique", "miroir"):
+            log(f"[{name}] Mode inconnu '{mode}' (attendu : classique ou miroir), projet ignoré.")
+            continue
+
+        # ---- Mode miroir : copie exacte du dossier, sans bundle ni historique ----
+        if mode == "miroir":
+            if sync_mirror(repo_path, name, path):
+                any_change = True
             continue
 
         subversions = detect_subversions(path)
@@ -1456,63 +1746,81 @@ if __name__ == "__main__":
   "projects": [
     {
       "name": "recherche",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/recherche"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/recherche",
+      "mode": "classique"
     },
     {
       "name": "compresseur",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/compresseur"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/compresseur",
+      "mode": "classique"
     },
     {
       "name": "decompresseur",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/decompresseur"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/decompresseur",
+      "mode": "classique"
     },
     {
       "name": "compresseur_auto",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto",
+      "mode": "classique"
     },
     {
       "name": "partage_QR",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR",
+      "mode": "classique"
     },
     {
       "name": "%",
-      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/%"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/%",
+      "mode": "classique"
     },
     {
       "name": "entrainement_tactique",
-      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/entrainement-tactique",
+      "mode": "classique"
     },
     {
       "name": "pdf_to_audio",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/pdf2audio_project"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/pdf2audio_project",
+      "mode": "classique"
     },
     {
       "name": "py_to_starter",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter",
+      "mode": "classique"
     },
     {
       "name": "Dictée_vocale_intelligente",
-      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/Dictée_vocale_intelligente",
+      "mode": "classique"
     },
     {
       "name": "ChronoChess",
-      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/ChronoChess"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/ChronoChess",
+      "mode": "classique"
     },
     {
       "name": "tunnel_mobile",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile",
+      "mode": "classique"
     },
     {
       "name": "assistant_vocal_local",
-      "path": "C:/Users/Oniix/Desktop/mes prog/Python/assistant_vocal_local"
+      "path": "C:/Users/Oniix/Desktop/mes prog/Python/assistant_vocal_local",
+      "mode": "classique"
     },
     {
       "name": "Network",
-      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local"
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local",
+      "mode": "classique"
+    },
+    {
+      "name": "depot",
+      "path": "C:/Users/Oniix/Desktop/mes prog/depot",
+      "mode": "miroir"
     }
   ]
 }
-
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\config.json ---
 
 --- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\lancer_sync.bat ---
@@ -1578,11 +1886,11 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/decompresseur\\decompresseur_01\\decompresseur.py": "eeba5d5b33bcca45dd346514873197b7bd31781dc38da739d73dda44bea962a5"
   },
   "compresseur_auto": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "5e15bc57af494862a507976ac13efecba53d9ccc2a28109e53936bf27c45fa43",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.py": "a02dbd3c9f486fd7b10ffc6ec7a991000e40f2a988df656915b6a615a40b31e8",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "67194d71a53bcb9f1b31cdd9bb5781f31120e25b176902f3572928bd87d59137",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "90ebb6b85c527a204f679c588005aeeb9ead66b7c83c4e7cbdad259da3b83e9c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.py": "aa7ad4d4067ae0b8fd86908b094eef2187da9068840be8d510a3467542b86a73",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "3ab44de71312768f8a73c812b0c796649a4fd15c31f7b34a43f673b863e5e919",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "54aef5c034a77fb3baf8eb41d74b6e775b9439f31221d97eed46507a7a53df46",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "df645d8c0aaa5dc6499dd00957d4ddb76bd76eb9a627a54b38904a22531e39f1",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_01.txt": "e4ab75a69e366778fbca06fb9f5f54f108e3c241bef99c32492873f823352781",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_02.txt": "609819d210dbd7bd97d4987e12805fbae8463a10c99e68752dabd2362286849e",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_03.txt": "7371fab061151c9dab672ac2319cd769b8e881bb18b017d7ebfb979220528a99",
@@ -1621,11 +1929,15 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\Network\\réseau_local_01.txt": "8a346ce852eff954d3e381d081f3789e2c33b30d4f9f2d743890beed7fb533f1",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\compresseur\\compresseur_2026-09-11_18-03-53.txt": "a78af9d72df359705e0929282790368a9b3f5b6cd1a89fa87095a4500973e89d",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\decompresseur\\decompresseur_2026-09-11_18-03-53.txt": "7997869db705778b03c6da974cdbc7a1f1d3a48a3558656f8bd0c55de61658a6",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v2.html": "237471125ab4e76043550d9089cb65f03784953cc566b59596b3330859da0824",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v3.html": "9d7e2f4096399ce94fc282271debd9fb2cff5844776fe73aee1e94769922eb82",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v4.html": "bfd888d10ac83f396856ac033c18da9f7664dd8e627e82e7b0af87d4503fcf72",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement-tactique_01.txt": "e55439b920c73dae9cab19dfeac28bc3163bc44ef485b62e988dfdf1f64720b6",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement-tactique_02.txt": "ab931b8ec4149bd334d61ccfdaa875a422c3a840d5105d86fc6d010eab808356",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement_tactique_2026-09-11_18-03-54.txt": "201ed5ad398aa444f76b0bc13b8d7e28437521df95d83813c41495b2ba7b262a",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-09-11_18-03-53.txt": "da0b22a17797ac26dc01732c5e5be77549263de8ee15091804be920a29a8ede3",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-09-27_06-58-26.txt": "9968e19ed173d88cf5fb2d23d9800d7b7dde1685a364a0bf2d03ed958f9aa847",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-09-27_13-41-53.txt": "faadb5c400586c3866070d508fe233fe192842e349985959cb0407a572e6371b",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\pdf_to_audio\\pdf2audio_gpu_01.txt": "e67fe9dbd8e7012b12ee442fdd65df8af09cf7430cb616194b8e1ca1d8d6f8e8",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\pdf_to_audio\\pdf2audio_gpu_02.txt": "b6039bde3aedb471b54b23f5fccbe0b005e680d7fcef873d80ca8f63602dade4",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\pdf_to_audio\\pdf2audio_gpu_03.txt": "8a2303f4a78fc59c5217d511bc92ca5aff954406818f665e73c721ea9a0db566",
@@ -192038,6 +192350,637 @@ if __name__ == "__main__":
 
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\decompresseur\decompresseur_2026-09-11_18-03-53.txt ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v3.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.4;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, upscaler = null;
+
+/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Renforcement des contours (convolution) */
+function sharpen(ctx, w, h, a) {
+  const src = ctx.getImageData(0, 0, w, h), dst = ctx.createImageData(w, h);
+  const s = src.data, d = dst.data, c = 1 + 4 * a;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) {
+        d[i] = s[i]; d[i+1] = s[i+1]; d[i+2] = s[i+2]; d[i+3] = s[i+3]; continue;
+      }
+      const u = i - w * 4, b = i + w * 4;
+      for (let k = 0; k < 3; k++) {
+        const v = c * s[i+k] - a * (s[u+k] + s[b+k] + s[i-4+k] + s[i+4+k]);
+        d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v;
+      }
+      d[i+3] = s[i+3];
+    }
+  }
+  ctx.putImageData(dst, 0, 0);
+}
+
+/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
+let aiChain = Promise.resolve();
+function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadAI() {
+  if (upscaler) return;
+  await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/upscaler@latest/dist/browser/umd/upscaler.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@latest/dist/umd/2x.min.js');
+  upscaler = new Upscaler({ model: ESRGANSlim2x });
+}
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    let url = this.getTileUrl(coords);
+    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
+    img.src = url;
+    return canvas;
+  },
+  async _process(img, canvas, size) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && upscaler && !canvas._dead) {
+        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4 }));
+        if (out) {
+          const im = new Image(); im.src = out; await im.decode();
+          canvas.width = w = im.width; canvas.height = h = im.height;
+          ctx.drawImage(im, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  refresh() { this._bust = Date.now(); this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('l-ai').addEventListener('change', async e => {
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
+  try {
+    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
+    await loadAI();
+    aiOn = true;
+    say('ai', '<b>IA</b> : active, les tuiles s\'affinent une par une');
+    bases[current].refresh();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(refreshAll, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v3.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v4.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <select id="model" aria-label="Modèle IA" title="Rapide = léger ; Détaillé = plus fin mais beaucoup plus lent">
+      <option value="slim">IA rapide</option>
+      <option value="medium" selected>IA équilibrée</option>
+      <option value="thick">IA détaillée</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.4;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, upscaler = null;
+
+/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance uniquement (pas de franges colorées)
+   + un peu de contraste local (échelle large) pour faire ressortir toits, routes, haies.
+   Le seuil évite d'amplifier le bruit de compression JPEG. */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
+let aiChain = Promise.resolve();
+function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+const MODELS = {
+  slim:   { g:'ESRGANSlim2x',   u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@1.0.0/dist/umd/models/esrgan-slim/src/x2/index.min.js' },
+  medium: { g:'ESRGANMedium2x', u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-medium@1.0.0/dist/umd/models/esrgan-medium/src/x2/index.min.js' },
+  thick:  { g:'ESRGANThick2x',  u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-thick@1.0.0/dist/umd/models/esrgan-thick/src/x2/index.min.js' }
+};
+let loadedModel = null;
+async function loadAI(key) {
+  if (upscaler && loadedModel === key) return;
+  if (!window.tf) await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+  if (!window.Upscaler) await loadScript('https://cdn.jsdelivr.net/npm/upscaler@1.0.0/dist/browser/umd/upscaler.min.js');
+  const m = MODELS[key];
+  if (!window[m.g]) await loadScript(m.u);
+  await tf.ready();
+  upscaler = new Upscaler({ model: window[m.g] });
+  // préchauffage : évite les tuiles ratées pendant l'initialisation du GPU
+  try { await upscaler.warmup([{ patchSize:64, padding:4 }]); } catch (e) {}
+  loadedModel = key;
+}
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    let url = this.getTileUrl(coords);
+    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
+    img.src = url;
+    return canvas;
+  },
+  async _process(img, canvas, size) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && upscaler && !canvas._dead) {
+        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4, output:'base64' }));
+        if (out) {
+          const im = new Image(); im.src = out; await im.decode();
+          canvas.width = w = im.width; canvas.height = h = im.height;
+          ctx.drawImage(im, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  refresh() { this._bust = Date.now(); this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('l-ai').addEventListener('change', async e => {
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
+  try {
+    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
+    await loadAI($('model').value);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + $('model').selectedOptions[0].text + '), les tuiles s\'affinent une par une');
+    bases[current].refresh();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v4.html ---
 
 --- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\entrainement_tactique\entrainement-tactique_01.txt ---
 =========================================
