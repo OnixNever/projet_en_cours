@@ -46,11 +46,10 @@ STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
   ├── context-sync-repo\Network\réseau_local_01.txt
   ├── context-sync-repo\compresseur\compresseur_2026-09-11_18-03-53.txt
   ├── context-sync-repo\decompresseur\decompresseur_2026-09-11_18-03-53.txt
-  ├── context-sync-repo\depot\oeil-du-monde-v3.html
-  ├── context-sync-repo\depot\oeil-du-monde-v4.html
   ├── context-sync-repo\entrainement_tactique\entrainement-tactique_01.txt
   ├── context-sync-repo\entrainement_tactique\entrainement-tactique_02.txt
   ├── context-sync-repo\entrainement_tactique\entrainement_tactique_2026-09-11_18-03-54.txt
+  ├── context-sync-repo\oeil-du-monde\oeil-du-monde_2026-10-01_06-38-27.txt
   ├── context-sync-repo\partage_QR\partage_QR_2026-09-11_18-03-53.txt
   ├── context-sync-repo\partage_QR\partage_QR_2026-09-27_06-58-26.txt
   ├── context-sync-repo\partage_QR\partage_QR_2026-09-27_13-41-53.txt
@@ -1151,6 +1150,213 @@ from the remote, but no such ref was fetched.
 [2026-09-30 19:18:55] [compresseur] Aucun changement détecté.
 [2026-09-30 19:18:55] [decompresseur] Aucun changement détecté.
 [2026-09-30 19:18:55] [compresseur_auto] Changement détecté (69 fichier(s)), régénération du contexte...
+[2026-09-30 19:18:55] Ancienne version supprimée : compresseur_auto_2026-09-27_15-05-40.txt
+[2026-09-30 19:18:55] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-09-30_19-18-55.txt (11.2 Mo)
+[2026-09-30 19:18:55] [partage_QR] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_01] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_02] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_03] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_04] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_05] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_06] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_07] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_08] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_09] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_09_1] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_10] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_11] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_12] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_13] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_14] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_15] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_16] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_17] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_18] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_19] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_20] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_22] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_23] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_24] Aucun changement détecté.
+[2026-09-30 19:18:55] [%/%_25] Aucun changement détecté.
+[2026-09-30 19:18:55] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-09-30 19:18:55] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-09-30 19:18:55] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-09-30 19:18:55] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-09-30 19:18:55] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-09-30 19:18:55] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-09-30 19:18:56] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-09-30 19:18:56] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-09-30 19:18:56] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-09-30 19:18:56] [ChronoChess] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-09-30 19:18:56] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-09-30 19:18:56] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-09-30 19:18:56] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-09-30 19:18:56] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_02] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_03] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_04] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_05] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_06] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/reseau_local_07] Aucun changement détecté.
+[2026-09-30 19:18:56] [Network/réseau_local_01] Aucun changement détecté.
+[2026-09-30 19:18:56] [depot] Ajouté : oeil-du-monde-v2.html
+[2026-09-30 19:19:01] Poussé sur Git.
+[2026-10-01 06:34:16] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-01 06:34:16] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-01 06:34:16] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-01 06:34:16] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-01 06:34:16] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-01 06:34:16] [compresseur] Aucun changement détecté.
+[2026-10-01 06:34:16] [decompresseur] Aucun changement détecté.
+[2026-10-01 06:34:16] [compresseur_auto] Changement détecté (70 fichier(s)), régénération du contexte...
+[2026-10-01 06:34:16] Ancienne version supprimée : compresseur_auto_2026-09-30_19-17-18.txt
+[2026-10-01 06:34:16] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-10-01_06-34-16.txt (11.2 Mo)
+[2026-10-01 06:34:16] [partage_QR] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_01] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_02] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_03] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_04] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_05] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_06] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_07] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_08] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_09] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_09_1] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_10] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_11] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_12] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_13] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_14] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_15] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_16] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_17] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_18] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_19] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_20] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_22] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_23] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_24] Aucun changement détecté.
+[2026-10-01 06:34:16] [%/%_25] Aucun changement détecté.
+[2026-10-01 06:34:16] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-10-01 06:34:16] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-10-01 06:34:16] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-10-01 06:34:16] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-10-01 06:34:16] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-10-01 06:34:16] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-10-01 06:34:16] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-10-01 06:34:16] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-10-01 06:34:16] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-10-01 06:34:16] [ChronoChess] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-10-01 06:34:16] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-10-01 06:34:17] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-10-01 06:34:17] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-10-01 06:34:17] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_02] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_03] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_04] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_05] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_06] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/reseau_local_07] Aucun changement détecté.
+[2026-10-01 06:34:17] [Network/réseau_local_01] Aucun changement détecté.
+[2026-10-01 06:34:17] [depot] Ajouté : oeil-du-monde-v5.html
+[2026-10-01 06:34:17] [depot] Ajouté : oeil-du-monde-v6.html
+[2026-10-01 06:34:17] [depot] Ajouté : oeil-du-monde-v7.html
+[2026-10-01 06:34:22] Poussé sur Git.
+[2026-10-01 06:38:26] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-01 06:38:26] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-01 06:38:26] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-01 06:38:26] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-01 06:38:26] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-01 06:38:26] [compresseur] Aucun changement détecté.
+[2026-10-01 06:38:26] [decompresseur] Aucun changement détecté.
+[2026-10-01 06:38:26] [compresseur_auto] Changement détecté (73 fichier(s)), régénération du contexte...
+[2026-10-01 06:38:26] Ancienne version supprimée : compresseur_auto_2026-09-30_19-18-32.txt
+[2026-10-01 06:38:26] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-10-01_06-38-26.txt (11.3 Mo)
+[2026-10-01 06:38:26] [partage_QR] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_01] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_02] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_03] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_04] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_05] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_06] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_07] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_08] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_09] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_09_1] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_10] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_11] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_12] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_13] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_14] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_15] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_16] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_17] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_18] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_19] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_20] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_22] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_23] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_24] Aucun changement détecté.
+[2026-10-01 06:38:26] [%/%_25] Aucun changement détecté.
+[2026-10-01 06:38:26] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-10-01 06:38:26] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-10-01 06:38:26] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-10-01 06:38:26] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-10-01 06:38:26] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-10-01 06:38:26] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-10-01 06:38:26] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-10-01 06:38:26] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-10-01 06:38:26] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-10-01 06:38:26] [ChronoChess] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-10-01 06:38:26] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-10-01 06:38:27] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-10-01 06:38:27] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-10-01 06:38:27] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_02] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_03] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_04] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_05] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_06] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/reseau_local_07] Aucun changement détecté.
+[2026-10-01 06:38:27] [Network/réseau_local_01] Aucun changement détecté.
+[2026-10-01 06:38:27] [oeil-du-monde] Changement détecté (7 fichier(s)), régénération du contexte...
+[2026-10-01 06:38:27] [oeil-du-monde] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\oeil-du-monde\oeil-du-monde_2026-10-01_06-38-27.txt (118.5 Ko)
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v2.html
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v3.html
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v4.html
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v5.html
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v6.html
+[2026-10-01 06:38:27] [depot] Supprimé du dépôt : oeil-du-monde-v7.html
+[2026-10-01 06:38:31] Poussé sur Git.
+[2026-10-03 19:22:08] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-03 19:22:08] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-03 19:22:08] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-03 19:22:08] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-03 19:22:08] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-03 19:22:08] [compresseur] Aucun changement détecté.
+[2026-10-03 19:22:08] [decompresseur] Aucun changement détecté.
+[2026-10-03 19:22:09] [compresseur_auto] Changement détecté (68 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\auto_context_sync.log ---
 
@@ -1815,6 +2021,11 @@ if __name__ == "__main__":
       "mode": "classique"
     },
     {
+      "name": "oeil-du-monde",
+      "path": "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde",
+      "mode": "classique"
+    },
+    {
       "name": "depot",
       "path": "C:/Users/Oniix/Desktop/mes prog/depot",
       "mode": "miroir"
@@ -1886,11 +2097,11 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/decompresseur\\decompresseur_01\\decompresseur.py": "eeba5d5b33bcca45dd346514873197b7bd31781dc38da739d73dda44bea962a5"
   },
   "compresseur_auto": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "90ebb6b85c527a204f679c588005aeeb9ead66b7c83c4e7cbdad259da3b83e9c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "3da5a8906216fcc5d515790b1de3636662bff1a14a2fb7a168c1b5af2212c1ed",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.py": "aa7ad4d4067ae0b8fd86908b094eef2187da9068840be8d510a3467542b86a73",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "3ab44de71312768f8a73c812b0c796649a4fd15c31f7b34a43f673b863e5e919",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "424b3c23da2e40c79bffc0ae41f008f6d74df4b56b737342cf70a3a66d83568d",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "df645d8c0aaa5dc6499dd00957d4ddb76bd76eb9a627a54b38904a22531e39f1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "5586116009cb54364ccb2fef479a376d5a9356a49164f86e34453614e68c3a15",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_01.txt": "e4ab75a69e366778fbca06fb9f5f54f108e3c241bef99c32492873f823352781",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_02.txt": "609819d210dbd7bd97d4987e12805fbae8463a10c99e68752dabd2362286849e",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_03.txt": "7371fab061151c9dab672ac2319cd769b8e881bb18b017d7ebfb979220528a99",
@@ -1932,6 +2143,9 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v2.html": "237471125ab4e76043550d9089cb65f03784953cc566b59596b3330859da0824",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v3.html": "9d7e2f4096399ce94fc282271debd9fb2cff5844776fe73aee1e94769922eb82",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v4.html": "bfd888d10ac83f396856ac033c18da9f7664dd8e627e82e7b0af87d4503fcf72",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v5.html": "d1549557ac3b94a90ae444717def1736b57514aba58b9062dd5f9e08f59e5eb7",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v6.html": "7366f93de9a173f7ceeb63b2c037522e55c076dfc37f686d8a051272ef5d642e",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\depot\\oeil-du-monde-v7.html": "31dc7120ab8da31576893bcab9a080f8db4f9a9afda223bea5fff28d6aaab840",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement-tactique_01.txt": "e55439b920c73dae9cab19dfeac28bc3163bc44ef485b62e988dfdf1f64720b6",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement-tactique_02.txt": "ab931b8ec4149bd334d61ccfdaa875a422c3a840d5105d86fc6d010eab808356",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement_tactique_2026-09-11_18-03-54.txt": "201ed5ad398aa444f76b0bc13b8d7e28437521df95d83813c41495b2ba7b262a",
@@ -3926,6 +4140,15 @@ python auto_context_sync.py
       "C:/Users/Oniix/Desktop/mes prog/Python/assistant_vocal_local\\assistant_vocal_local_03\\piper\\voices\\fr_FR-siwis-medium.onnx.json": "39479916c2db192b5ac9764daddd0c744d83e023ad890c6976c0633ae4df8959",
       "C:/Users/Oniix/Desktop/mes prog/Python/assistant_vocal_local\\assistant_vocal_local_03\\static\\index.html": "5759177f8f1dd049a77de283b4e8ec687c7048e81d91bca9a5cabf75f4c51f13"
     }
+  },
+  "oeil-du-monde": {
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v2.html": "237471125ab4e76043550d9089cb65f03784953cc566b59596b3330859da0824",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v3.html": "9d7e2f4096399ce94fc282271debd9fb2cff5844776fe73aee1e94769922eb82",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v4.html": "bfd888d10ac83f396856ac033c18da9f7664dd8e627e82e7b0af87d4503fcf72",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v5.html": "d1549557ac3b94a90ae444717def1736b57514aba58b9062dd5f9e08f59e5eb7",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v6.html": "7366f93de9a173f7ceeb63b2c037522e55c076dfc37f686d8a051272ef5d642e",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde-v7.html": "31dc7120ab8da31576893bcab9a080f8db4f9a9afda223bea5fff28d6aaab840",
+    "C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\\oeil-du-monde.html": "31dc7120ab8da31576893bcab9a080f8db4f9a9afda223bea5fff28d6aaab840"
   }
 }
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\state.json ---
@@ -192351,637 +192574,6 @@ if __name__ == "__main__":
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\decompresseur\decompresseur_2026-09-11_18-03-53.txt ---
 
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v3.html ---
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Œil du monde</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<style>
-  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
-  * { box-sizing:border-box; }
-  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
-  #map { position:absolute; inset:0; background:#0b141b; }
-  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
-  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  form.box { gap:6px; }
-  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
-  input[type=text] { width:min(300px,55vw); }
-  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
-  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
-  label:has(input:checked) { color:var(--ink); }
-  input[type=range] { accent-color:var(--accent); width:100px; }
-  .val { min-width:3ch; color:var(--ink); text-align:right; }
-  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
-  #status b { color:var(--ink); font-weight:600; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-
-<div class="bar">
-  <form class="box" id="search">
-    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
-    <button>Aller</button>
-  </form>
-  <div class="box">
-    <select id="base" aria-label="Fond de carte">
-      <option value="esri">Satellite HD (Esri)</option>
-      <option value="eox">Satellite Sentinel-2</option>
-      <option value="nasa">Satellite NASA (hier)</option>
-      <option value="plan">Plan des rues</option>
-    </select>
-    <label><input type="checkbox" id="l-lab" checked>Noms</label>
-  </div>
-  <div class="box">
-    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
-    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
-    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
-  </div>
-  <div class="box">
-    <label for="every">Actualiser</label>
-    <select id="every" aria-label="Fréquence d'actualisation">
-      <option value="0">jamais</option>
-      <option value="60000">1 min</option>
-      <option value="300000" selected>5 min</option>
-      <option value="900000">15 min</option>
-    </select>
-    <button type="button" id="now">Maintenant</button>
-  </div>
-</div>
-<div id="status" class="box">Chargement…</div>
-
-<script>
-const $ = id => document.getElementById(id);
-const MAX_ZOOM = 22;
-
-const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
-  .setView([50.85, 4.35], 8);
-L.control.zoom({ position:'bottomright' }).addTo(map);
-
-const msgs = {};
-function say(k, v) {
-  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
-  $('status').innerHTML = Object.values(msgs).join('<br>');
-}
-
-/* =====================================================
-   Traitements d'image (tous calculés dans le navigateur)
-   ===================================================== */
-let sharpAmount = 0.4;   // 0 à 1
-let shadowAmount = 0.35; // 0 à 1
-let aiOn = false, upscaler = null;
-
-/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
-function liftShadows(ctx, w, h, a) {
-  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
-  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
-  const im = ctx.getImageData(0, 0, w, h), d = im.data;
-  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
-  ctx.putImageData(im, 0, 0);
-}
-
-/* Renforcement des contours (convolution) */
-function sharpen(ctx, w, h, a) {
-  const src = ctx.getImageData(0, 0, w, h), dst = ctx.createImageData(w, h);
-  const s = src.data, d = dst.data, c = 1 + 4 * a;
-  for (let y = 0; y < h; y++) {
-    for (let x = 0; x < w; x++) {
-      const i = (y * w + x) * 4;
-      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) {
-        d[i] = s[i]; d[i+1] = s[i+1]; d[i+2] = s[i+2]; d[i+3] = s[i+3]; continue;
-      }
-      const u = i - w * 4, b = i + w * 4;
-      for (let k = 0; k < 3; k++) {
-        const v = c * s[i+k] - a * (s[u+k] + s[b+k] + s[i-4+k] + s[i+4+k]);
-        d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v;
-      }
-      d[i+3] = s[i+3];
-    }
-  }
-  ctx.putImageData(dst, 0, 0);
-}
-
-/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
-let aiChain = Promise.resolve();
-function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
-
-function loadScript(src) {
-  return new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
-    document.head.appendChild(s);
-  });
-}
-async function loadAI() {
-  if (upscaler) return;
-  await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-  await loadScript('https://cdn.jsdelivr.net/npm/upscaler@latest/dist/browser/umd/upscaler.min.js');
-  await loadScript('https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@latest/dist/umd/2x.min.js');
-  upscaler = new Upscaler({ model: ESRGANSlim2x });
-}
-
-/* =====================================================
-   Couche de tuiles avec traitement
-   ===================================================== */
-const ProcTile = L.TileLayer.extend({
-  initialize(url, opt) {
-    L.TileLayer.prototype.initialize.call(this, url, opt);
-    this.on('tileunload', e => { e.tile._dead = true; });
-  },
-  createTile(coords, done) {
-    const size = this.getTileSize();
-    const canvas = document.createElement('canvas');
-    canvas.width = size.x; canvas.height = size.y;
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
-    img.onerror = e => done(e, canvas);
-    let url = this.getTileUrl(coords);
-    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
-    img.src = url;
-    return canvas;
-  },
-  async _process(img, canvas, size) {
-    const ctx = canvas.getContext('2d', { willReadFrequently:true });
-    ctx.drawImage(img, 0, 0, size.x, size.y);
-    if (!this.options.proc) return;
-    let w = size.x, h = size.y;
-    try {
-      if (aiOn && upscaler && !canvas._dead) {
-        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4 }));
-        if (out) {
-          const im = new Image(); im.src = out; await im.decode();
-          canvas.width = w = im.width; canvas.height = h = im.height;
-          ctx.drawImage(im, 0, 0);
-        }
-      }
-      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
-      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
-    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
-  },
-  refresh() { this._bust = Date.now(); this.redraw(); }
-});
-const tiles = (url, opt) => new ProcTile(url, opt);
-
-/* ---------- Fonds de carte ---------- */
-const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-
-const bases = {
-  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
-  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
-    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
-  nasa: null,
-  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
-};
-function makeNasa() {
-  const d = yesterday();
-  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
-    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
-}
-bases.nasa = makeNasa();
-
-const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
-
-/* ---------- Repli automatique si une source tombe ---------- */
-const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
-const errs = {};
-let current = 'esri';
-function watch(k) {
-  bases[k].on('tileerror', () => {
-    errs[k] = (errs[k] || 0) + 1;
-    if (errs[k] === 8 && current === k && fallback[k]) {
-      $('base').value = fallback[k]; setBase();
-      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
-    }
-  });
-  bases[k].on('load', () => { errs[k] = 0; });
-}
-Object.keys(bases).forEach(watch);
-
-function setBase() {
-  Object.values(bases).forEach(l => map.removeLayer(l));
-  map.removeLayer(labels);
-  current = $('base').value;
-  bases[current].addTo(map).bringToBack();
-  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
-  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
-}
-$('base').addEventListener('change', setBase);
-$('l-lab').addEventListener('change', setBase);
-
-/* ---------- Curseurs et option IA ---------- */
-function slider(id, apply, label) {
-  let t;
-  $(id).addEventListener('input', e => {
-    $(id + '-v').textContent = e.target.value;
-    apply(e.target.value / 100);
-    clearTimeout(t);
-    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
-  });
-}
-slider('sharp', v => { sharpAmount = v; }, 'Netteté');
-slider('shad', v => { shadowAmount = v; }, 'Ombres');
-
-$('l-ai').addEventListener('change', async e => {
-  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
-  try {
-    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
-    await loadAI();
-    aiOn = true;
-    say('ai', '<b>IA</b> : active, les tuiles s\'affinent une par une');
-    bases[current].refresh();
-  } catch (err) {
-    aiOn = false; e.target.checked = false;
-    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
-  }
-});
-
-/* ---------- Actualisation régulière ---------- */
-let timer = null;
-function refreshAll() {
-  if (current === 'nasa') {
-    map.removeLayer(bases.nasa);
-    bases.nasa = makeNasa(); watch('nasa');
-    bases.nasa.addTo(map).bringToBack();
-  } else {
-    bases[current].refresh();
-  }
-  if (map.hasLayer(labels)) labels.redraw();
-  say('ref', '<b>Actualisé</b>');
-}
-function schedule() {
-  clearInterval(timer);
-  const ms = +$('every').value;
-  if (ms) timer = setInterval(refreshAll, ms);
-  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
-}
-$('every').addEventListener('change', schedule);
-$('now').addEventListener('click', refreshAll);
-
-/* ---------- Recherche de lieu (Nominatim) ---------- */
-$('search').addEventListener('submit', async e => {
-  e.preventDefault();
-  const q = $('q').value.trim(); if (!q) return;
-  try {
-    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
-    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
-    const bb = r[0].boundingbox.map(Number);
-    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
-    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
-  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
-});
-
-/* ---------- Démarrage ---------- */
-setBase();
-schedule();
-</script>
-</body>
-</html>
-
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v3.html ---
-
---- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v4.html ---
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Œil du monde</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<style>
-  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
-  * { box-sizing:border-box; }
-  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
-  #map { position:absolute; inset:0; background:#0b141b; }
-  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
-  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  form.box { gap:6px; }
-  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
-  input[type=text] { width:min(300px,55vw); }
-  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
-  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
-  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
-  label:has(input:checked) { color:var(--ink); }
-  input[type=range] { accent-color:var(--accent); width:100px; }
-  .val { min-width:3ch; color:var(--ink); text-align:right; }
-  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
-  #status b { color:var(--ink); font-weight:600; }
-</style>
-</head>
-<body>
-<div id="map"></div>
-
-<div class="bar">
-  <form class="box" id="search">
-    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
-    <button>Aller</button>
-  </form>
-  <div class="box">
-    <select id="base" aria-label="Fond de carte">
-      <option value="esri">Satellite HD (Esri)</option>
-      <option value="eox">Satellite Sentinel-2</option>
-      <option value="nasa">Satellite NASA (hier)</option>
-      <option value="plan">Plan des rues</option>
-    </select>
-    <label><input type="checkbox" id="l-lab" checked>Noms</label>
-  </div>
-  <div class="box">
-    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
-    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
-    <select id="model" aria-label="Modèle IA" title="Rapide = léger ; Détaillé = plus fin mais beaucoup plus lent">
-      <option value="slim">IA rapide</option>
-      <option value="medium" selected>IA équilibrée</option>
-      <option value="thick">IA détaillée</option>
-    </select>
-    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
-  </div>
-  <div class="box">
-    <label for="every">Actualiser</label>
-    <select id="every" aria-label="Fréquence d'actualisation">
-      <option value="0">jamais</option>
-      <option value="60000">1 min</option>
-      <option value="300000" selected>5 min</option>
-      <option value="900000">15 min</option>
-    </select>
-    <button type="button" id="now">Maintenant</button>
-  </div>
-</div>
-<div id="status" class="box">Chargement…</div>
-
-<script>
-const $ = id => document.getElementById(id);
-const MAX_ZOOM = 22;
-
-const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
-  .setView([50.85, 4.35], 8);
-L.control.zoom({ position:'bottomright' }).addTo(map);
-
-const msgs = {};
-function say(k, v) {
-  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
-  $('status').innerHTML = Object.values(msgs).join('<br>');
-}
-
-/* =====================================================
-   Traitements d'image (tous calculés dans le navigateur)
-   ===================================================== */
-let sharpAmount = 0.4;   // 0 à 1
-let shadowAmount = 0.35; // 0 à 1
-let aiOn = false, upscaler = null;
-
-/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
-function liftShadows(ctx, w, h, a) {
-  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
-  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
-  const im = ctx.getImageData(0, 0, w, h), d = im.data;
-  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
-  ctx.putImageData(im, 0, 0);
-}
-
-/* Flou par boîte séparable sur un tableau de luminance */
-function boxBlur(src, w, h, r) {
-  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
-  for (let y = 0; y < h; y++) {
-    let acc = 0; const o = y * w;
-    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
-    for (let x = 0; x < w; x++) {
-      tmp[o + x] = acc / n;
-      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
-    }
-  }
-  for (let x = 0; x < w; x++) {
-    let acc = 0;
-    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
-    for (let y = 0; y < h; y++) {
-      out[y * w + x] = acc / n;
-      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
-    }
-  }
-  return out;
-}
-
-/* Détails : masque flou sur la luminance uniquement (pas de franges colorées)
-   + un peu de contraste local (échelle large) pour faire ressortir toits, routes, haies.
-   Le seuil évite d'amplifier le bruit de compression JPEG. */
-function sharpen(ctx, w, h, a) {
-  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
-  const L = new Float32Array(N);
-  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
-  const sc = Math.max(1, Math.round(w / 256));
-  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
-  const T = 1.5;
-  for (let i = 0, p = 0; p < N; i += 4, p++) {
-    let f = L[p] - fine[p];
-    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
-    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
-    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
-  }
-  ctx.putImageData(im, 0, 0);
-}
-
-/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
-let aiChain = Promise.resolve();
-function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
-
-function loadScript(src) {
-  return new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
-    document.head.appendChild(s);
-  });
-}
-const MODELS = {
-  slim:   { g:'ESRGANSlim2x',   u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@1.0.0/dist/umd/models/esrgan-slim/src/x2/index.min.js' },
-  medium: { g:'ESRGANMedium2x', u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-medium@1.0.0/dist/umd/models/esrgan-medium/src/x2/index.min.js' },
-  thick:  { g:'ESRGANThick2x',  u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-thick@1.0.0/dist/umd/models/esrgan-thick/src/x2/index.min.js' }
-};
-let loadedModel = null;
-async function loadAI(key) {
-  if (upscaler && loadedModel === key) return;
-  if (!window.tf) await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
-  if (!window.Upscaler) await loadScript('https://cdn.jsdelivr.net/npm/upscaler@1.0.0/dist/browser/umd/upscaler.min.js');
-  const m = MODELS[key];
-  if (!window[m.g]) await loadScript(m.u);
-  await tf.ready();
-  upscaler = new Upscaler({ model: window[m.g] });
-  // préchauffage : évite les tuiles ratées pendant l'initialisation du GPU
-  try { await upscaler.warmup([{ patchSize:64, padding:4 }]); } catch (e) {}
-  loadedModel = key;
-}
-
-/* =====================================================
-   Couche de tuiles avec traitement
-   ===================================================== */
-const ProcTile = L.TileLayer.extend({
-  initialize(url, opt) {
-    L.TileLayer.prototype.initialize.call(this, url, opt);
-    this.on('tileunload', e => { e.tile._dead = true; });
-  },
-  createTile(coords, done) {
-    const size = this.getTileSize();
-    const canvas = document.createElement('canvas');
-    canvas.width = size.x; canvas.height = size.y;
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
-    img.onerror = e => done(e, canvas);
-    let url = this.getTileUrl(coords);
-    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
-    img.src = url;
-    return canvas;
-  },
-  async _process(img, canvas, size) {
-    const ctx = canvas.getContext('2d', { willReadFrequently:true });
-    ctx.drawImage(img, 0, 0, size.x, size.y);
-    if (!this.options.proc) return;
-    let w = size.x, h = size.y;
-    try {
-      if (aiOn && upscaler && !canvas._dead) {
-        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4, output:'base64' }));
-        if (out) {
-          const im = new Image(); im.src = out; await im.decode();
-          canvas.width = w = im.width; canvas.height = h = im.height;
-          ctx.drawImage(im, 0, 0);
-        }
-      }
-      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
-      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
-    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
-  },
-  refresh() { this._bust = Date.now(); this.redraw(); }
-});
-const tiles = (url, opt) => new ProcTile(url, opt);
-
-/* ---------- Fonds de carte ---------- */
-const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
-
-const bases = {
-  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
-  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
-    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
-  nasa: null,
-  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
-};
-function makeNasa() {
-  const d = yesterday();
-  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
-    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
-}
-bases.nasa = makeNasa();
-
-const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
-  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
-
-/* ---------- Repli automatique si une source tombe ---------- */
-const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
-const errs = {};
-let current = 'esri';
-function watch(k) {
-  bases[k].on('tileerror', () => {
-    errs[k] = (errs[k] || 0) + 1;
-    if (errs[k] === 8 && current === k && fallback[k]) {
-      $('base').value = fallback[k]; setBase();
-      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
-    }
-  });
-  bases[k].on('load', () => { errs[k] = 0; });
-}
-Object.keys(bases).forEach(watch);
-
-function setBase() {
-  Object.values(bases).forEach(l => map.removeLayer(l));
-  map.removeLayer(labels);
-  current = $('base').value;
-  bases[current].addTo(map).bringToBack();
-  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
-  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
-}
-$('base').addEventListener('change', setBase);
-$('l-lab').addEventListener('change', setBase);
-
-/* ---------- Curseurs et option IA ---------- */
-function slider(id, apply, label) {
-  let t;
-  $(id).addEventListener('input', e => {
-    $(id + '-v').textContent = e.target.value;
-    apply(e.target.value / 100);
-    clearTimeout(t);
-    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
-  });
-}
-slider('sharp', v => { sharpAmount = v; }, 'Netteté');
-slider('shad', v => { shadowAmount = v; }, 'Ombres');
-
-$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
-$('l-ai').addEventListener('change', async e => {
-  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
-  try {
-    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
-    await loadAI($('model').value);
-    aiOn = true;
-    say('ai', '<b>IA</b> : active (' + $('model').selectedOptions[0].text + '), les tuiles s\'affinent une par une');
-    bases[current].refresh();
-  } catch (err) {
-    aiOn = false; e.target.checked = false;
-    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
-  }
-});
-
-/* ---------- Actualisation régulière ---------- */
-let timer = null;
-function refreshAll() {
-  if (current === 'nasa') {
-    map.removeLayer(bases.nasa);
-    bases.nasa = makeNasa(); watch('nasa');
-    bases.nasa.addTo(map).bringToBack();
-  } else {
-    bases[current].refresh();
-  }
-  if (map.hasLayer(labels)) labels.redraw();
-  say('ref', '<b>Actualisé</b>');
-}
-function schedule() {
-  clearInterval(timer);
-  const ms = +$('every').value;
-  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
-  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
-}
-$('every').addEventListener('change', schedule);
-$('now').addEventListener('click', refreshAll);
-
-/* ---------- Recherche de lieu (Nominatim) ---------- */
-$('search').addEventListener('submit', async e => {
-  e.preventDefault();
-  const q = $('q').value.trim(); if (!q) return;
-  try {
-    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
-    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
-    const bb = r[0].boundingbox.map(Number);
-    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
-    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
-  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
-});
-
-/* ---------- Démarrage ---------- */
-setBase();
-schedule();
-</script>
-</body>
-</html>
-
---- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\depot\oeil-du-monde-v4.html ---
-
 --- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\entrainement_tactique\entrainement-tactique_01.txt ---
 =========================================
 STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
@@ -197372,6 +196964,2600 @@ function quitSession(){
 
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\entrainement_tactique\entrainement_tactique_2026-09-11_18-03-54.txt ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\oeil-du-monde\oeil-du-monde_2026-10-01_06-38-27.txt ---
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde
+  ├── oeil-du-monde-v2.html
+  ├── oeil-du-monde-v3.html
+  ├── oeil-du-monde-v4.html
+  ├── oeil-du-monde-v5.html
+  ├── oeil-du-monde-v6.html
+  ├── oeil-du-monde-v7.html
+  ├── oeil-du-monde.html
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v2.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  input[type=range] { accent-color:var(--accent); width:110px; }
+  #sval { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(420px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+    <label for="sharp">Netteté</label>
+    <input type="range" id="sharp" min="0" max="100" value="40" aria-label="Netteté">
+    <span id="sval">40</span>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+/* ---------- Netteté (masque flou / convolution) ---------- */
+let sharpAmount = 0.4;
+
+function sharpen(ctx, w, h, a) {
+  const src = ctx.getImageData(0, 0, w, h);
+  const dst = ctx.createImageData(w, h);
+  const s = src.data, d = dst.data, c = 1 + 4 * a;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) {
+        d[i] = s[i]; d[i+1] = s[i+1]; d[i+2] = s[i+2]; d[i+3] = s[i+3]; continue;
+      }
+      const u = i - w * 4, b = i + w * 4;
+      for (let k = 0; k < 3; k++) {
+        const v = c * s[i+k] - a * (s[u+k] + s[b+k] + s[i-4+k] + s[i+4+k]);
+        d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v;
+      }
+      d[i+3] = s[i+3];
+    }
+  }
+  ctx.putImageData(dst, 0, 0);
+}
+
+/* Couche de tuiles avec netteté, repli automatique sur l'image brute si le serveur interdit le canvas */
+const SharpTile = L.TileLayer.extend({
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size.x, size.y);
+      if (this.options.sharp && sharpAmount > 0) {
+        try { sharpen(ctx, size.x, size.y, sharpAmount); } catch (e) { /* canvas protégé : on laisse l'image telle quelle */ }
+      }
+      done(null, canvas);
+    };
+    img.onerror = e => done(e, canvas);
+    img.src = this.getTileUrl(coords) + (this._bust ? (this.getTileUrl(coords).includes('?') ? '&' : '?') + '_=' + this._bust : '');
+    return canvas;
+  },
+  refresh() { this._bust = Date.now(); this.redraw(); }
+});
+const tiles = (url, opt) => new SharpTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+function yesterday() { return new Date(Date.now() - 864e5).toISOString().slice(0, 10); }
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { sharp:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { sharp:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null, // recréé à chaque actualisation pour suivre la date
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { sharp:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { sharp:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+Object.keys(bases).forEach(watch);
+
+/* ---------- Réglages ---------- */
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+let sharpTimer;
+$('sharp').addEventListener('input', e => {
+  $('sval').textContent = e.target.value;
+  sharpAmount = e.target.value / 100;
+  clearTimeout(sharpTimer);
+  sharpTimer = setTimeout(() => { bases[current].refresh(); say('sharp', '<b>Netteté</b> : ' + e.target.value + ' %'); }, 250);
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    const wasNasa = bases.nasa;
+    map.removeLayer(wasNasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(refreshAll, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v2.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v3.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.4;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, upscaler = null;
+
+/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Renforcement des contours (convolution) */
+function sharpen(ctx, w, h, a) {
+  const src = ctx.getImageData(0, 0, w, h), dst = ctx.createImageData(w, h);
+  const s = src.data, d = dst.data, c = 1 + 4 * a;
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const i = (y * w + x) * 4;
+      if (x === 0 || y === 0 || x === w - 1 || y === h - 1) {
+        d[i] = s[i]; d[i+1] = s[i+1]; d[i+2] = s[i+2]; d[i+3] = s[i+3]; continue;
+      }
+      const u = i - w * 4, b = i + w * 4;
+      for (let k = 0; k < 3; k++) {
+        const v = c * s[i+k] - a * (s[u+k] + s[b+k] + s[i-4+k] + s[i+4+k]);
+        d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v;
+      }
+      d[i+3] = s[i+3];
+    }
+  }
+  ctx.putImageData(dst, 0, 0);
+}
+
+/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
+let aiChain = Promise.resolve();
+function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadAI() {
+  if (upscaler) return;
+  await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/upscaler@latest/dist/browser/umd/upscaler.min.js');
+  await loadScript('https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@latest/dist/umd/2x.min.js');
+  upscaler = new Upscaler({ model: ESRGANSlim2x });
+}
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    let url = this.getTileUrl(coords);
+    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
+    img.src = url;
+    return canvas;
+  },
+  async _process(img, canvas, size) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && upscaler && !canvas._dead) {
+        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4 }));
+        if (out) {
+          const im = new Image(); im.src = out; await im.decode();
+          canvas.width = w = im.width; canvas.height = h = im.height;
+          ctx.drawImage(im, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  refresh() { this._bust = Date.now(); this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('l-ai').addEventListener('change', async e => {
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
+  try {
+    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
+    await loadAI();
+    aiOn = true;
+    say('ai', '<b>IA</b> : active, les tuiles s\'affinent une par une');
+    bases[current].refresh();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(refreshAll, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v3.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v4.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <select id="model" aria-label="Modèle IA" title="Rapide = léger ; Détaillé = plus fin mais beaucoup plus lent">
+      <option value="slim">IA rapide</option>
+      <option value="medium" selected>IA équilibrée</option>
+      <option value="thick">IA détaillée</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.4;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, upscaler = null;
+
+/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance uniquement (pas de franges colorées)
+   + un peu de contraste local (échelle large) pour faire ressortir toits, routes, haies.
+   Le seuil évite d'amplifier le bruit de compression JPEG. */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Super-résolution IA : une seule tuile à la fois pour ne pas saturer la carte graphique */
+let aiChain = Promise.resolve();
+function enqueue(fn) { const p = aiChain.then(fn); aiChain = p.catch(() => {}); return p; }
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+const MODELS = {
+  slim:   { g:'ESRGANSlim2x',   u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@1.0.0/dist/umd/models/esrgan-slim/src/x2/index.min.js' },
+  medium: { g:'ESRGANMedium2x', u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-medium@1.0.0/dist/umd/models/esrgan-medium/src/x2/index.min.js' },
+  thick:  { g:'ESRGANThick2x',  u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-thick@1.0.0/dist/umd/models/esrgan-thick/src/x2/index.min.js' }
+};
+let loadedModel = null;
+async function loadAI(key) {
+  if (upscaler && loadedModel === key) return;
+  if (!window.tf) await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+  if (!window.Upscaler) await loadScript('https://cdn.jsdelivr.net/npm/upscaler@1.0.0/dist/browser/umd/upscaler.min.js');
+  const m = MODELS[key];
+  if (!window[m.g]) await loadScript(m.u);
+  await tf.ready();
+  upscaler = new Upscaler({ model: window[m.g] });
+  // préchauffage : évite les tuiles ratées pendant l'initialisation du GPU
+  try { await upscaler.warmup([{ patchSize:64, padding:4 }]); } catch (e) {}
+  loadedModel = key;
+}
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    let url = this.getTileUrl(coords);
+    if (this._bust) url += (url.includes('?') ? '&' : '?') + '_=' + this._bust;
+    img.src = url;
+    return canvas;
+  },
+  async _process(img, canvas, size) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && upscaler && !canvas._dead) {
+        const out = await enqueue(() => canvas._dead ? null : upscaler.upscale(canvas, { patchSize:64, padding:4, output:'base64' }));
+        if (out) {
+          const im = new Image(); im.src = out; await im.decode();
+          canvas.width = w = im.width; canvas.height = h = im.height;
+          ctx.drawImage(im, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  refresh() { this._bust = Date.now(); this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].refresh(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('l-ai').addEventListener('change', async e => {
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].refresh(); return; }
+  try {
+    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
+    await loadAI($('model').value);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + $('model').selectedOptions[0].text + '), les tuiles s\'affinent une par une');
+    bases[current].refresh();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v4.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v5.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="40"><span class="val" id="sharp-v">40</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Afficher la carte sans aucun traitement pour comparer"><input type="checkbox" id="l-raw">Original</label>
+    <select id="model" aria-label="Modèle IA" title="Rapide = léger ; Détaillé = plus fin mais beaucoup plus lent">
+      <option value="slim">IA rapide</option>
+      <option value="medium" selected>IA équilibrée</option>
+      <option value="thick">IA détaillée</option>
+    </select>
+    <select id="cool" aria-label="Charge GPU" title="Pause entre deux tuiles : plus elle est longue, moins la carte graphique chauffe">
+      <option value="0">GPU à fond</option>
+      <option value="200" selected>GPU normal</option>
+      <option value="600">GPU doux</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones (ESRGAN), calculée dans le navigateur. Plus lent."><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.4;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, upscaler = null;
+
+/* Éclaircit les zones sombres (courbe gamma) : révèle ce qui est noyé dans l'ombre */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance uniquement (pas de franges colorées)
+   + un peu de contraste local (échelle large) pour faire ressortir toits, routes, haies.
+   Le seuil évite d'amplifier le bruit de compression JPEG. */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Super-résolution IA : une seule tuile à la fois, avec une pause entre deux tuiles
+   pour laisser refroidir la carte graphique. File « dernier arrivé, premier servi » :
+   quand on déplace la carte, les tuiles visibles passent avant celles déjà hors écran. */
+let coolMs = 200, rawView = false;
+const aiQueue = [];
+let aiBusy = false;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function enqueue(job) { return new Promise((res, rej) => { aiQueue.push({ job, res, rej }); pump(); }); }
+function clearQueue() { aiQueue.splice(0).forEach(t => t.res(null)); }
+async function pump() {
+  if (aiBusy) return;
+  aiBusy = true;
+  while (aiQueue.length) {
+    const t = aiQueue.pop();
+    try {
+      const out = await t.job();
+      t.res(out);
+      say('ai', '<b>IA</b> : ' + aiQueue.length + ' tuile(s) en attente');
+      if (out && coolMs) await sleep(coolMs);
+    } catch (e) { t.rej(e); }
+  }
+  aiBusy = false;
+  say('ai', '<b>IA</b> : terminé');
+}
+
+/* Cache des tuiles déjà passées à l'IA (le résultat brut, avant netteté/ombres).
+   Bouger un curseur ne relance donc plus le réseau de neurones : seul le traitement léger est refait. */
+const AI_CACHE_MAX = 120;
+const aiCache = new Map();
+function cacheGet(k) { const v = aiCache.get(k); if (v) { aiCache.delete(k); aiCache.set(k, v); } return v; }
+function cacheSet(k, v) { aiCache.set(k, v); if (aiCache.size > AI_CACHE_MAX) aiCache.delete(aiCache.keys().next().value); }
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+const MODELS = {
+  slim:   { g:'ESRGANSlim2x',   u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-slim@1.0.0/dist/umd/models/esrgan-slim/src/x2/index.min.js' },
+  medium: { g:'ESRGANMedium2x', u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-medium@1.0.0/dist/umd/models/esrgan-medium/src/x2/index.min.js' },
+  thick:  { g:'ESRGANThick2x',  u:'https://cdn.jsdelivr.net/npm/@upscalerjs/esrgan-thick@1.0.0/dist/umd/models/esrgan-thick/src/x2/index.min.js' }
+};
+let loadedModel = null;
+async function loadAI(key) {
+  if (upscaler && loadedModel === key) return;
+  if (!window.tf) await loadScript('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js');
+  if (!window.Upscaler) await loadScript('https://cdn.jsdelivr.net/npm/upscaler@1.0.0/dist/browser/umd/upscaler.min.js');
+  const m = MODELS[key];
+  if (!window[m.g]) await loadScript(m.u);
+  await tf.ready();
+  upscaler = new Upscaler({ model: window[m.g] });
+  // préchauffage : évite les tuiles ratées pendant l'initialisation du GPU
+  try { await upscaler.warmup([{ patchSize:64, padding:4 }]); } catch (e) {}
+  loadedModel = key;
+}
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const clean = this.getTileUrl(coords);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size, clean).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    img.src = this._bust ? clean + (clean.includes('?') ? '&' : '?') + '_=' + this._bust : clean;
+    return canvas;
+  },
+  async _process(img, canvas, size, key) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc || rawView) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && upscaler) {
+        const model = loadedModel, ck = model + '|' + key;
+        let big = cacheGet(ck);
+        if (!big && !canvas._dead) {
+          big = await enqueue(async () => {
+            if (canvas._dead) return null;
+            const out = await upscaler.upscale(canvas, { patchSize:64, padding:4, output:'base64' });
+            const im = new Image(); im.src = out; await im.decode();
+            const c = document.createElement('canvas'); c.width = im.width; c.height = im.height;
+            c.getContext('2d').drawImage(im, 0, 0);
+            cacheSet(ck, c);
+            return c;
+          });
+        }
+        if (big && !canvas._dead) {
+          canvas.width = w = big.width; canvas.height = h = big.height;
+          ctx.drawImage(big, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  /* Vrai rechargement (nouvelles images) : on vide le cache IA */
+  refresh() { this._bust = Date.now(); aiCache.clear(); this.redraw(); },
+  /* Simple ré-application des réglages : mêmes images, cache IA conservé */
+  restyle() { this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', setBase);
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].restyle(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('cool').addEventListener('change', e => { coolMs = +e.target.value; });
+$('l-raw').addEventListener('change', e => { rawView = e.target.checked; bases[current].restyle(); say('raw', rawView ? '<b>Affichage</b> : original, sans traitement' : '<b>Affichage</b> : traité'); });
+$('l-ai').addEventListener('change', async e => {
+  clearQueue();
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].restyle(); return; }
+  try {
+    say('ai', '<b>IA</b> : chargement du modèle (première fois : quelques secondes)…');
+    await loadAI($('model').value);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + $('model').selectedOptions[0].text + '), les tuiles s\'affinent une par une');
+    bases[current].restyle();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + err.message + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v5.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v6.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:12px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<div class="bar">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="30"><span class="val" id="sharp-v">30</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Afficher la carte sans aucun traitement pour comparer"><input type="checkbox" id="l-raw">Original</label>
+  </div>
+  <div class="box">
+    <select id="model" aria-label="Modèle IA" title="Real-ESRGAN est entraîné sur des images abîmées (flou, compression JPEG), contrairement au modèle précédent">
+      <option value="fast">IA Real-ESRGAN rapide (5 Mo)</option>
+      <option value="plus" selected>IA Real-ESRGAN détaillée (67 Mo)</option>
+    </select>
+    <select id="cool" aria-label="Charge GPU" title="Pause entre deux tuiles : plus elle est longue, moins la carte graphique chauffe">
+      <option value="0">GPU à fond</option>
+      <option value="100" selected>GPU normal</option>
+      <option value="500">GPU doux</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones, calculée dans votre navigateur"><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.3;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, session = null, loadedModel = null;
+let coolMs = 100, rawView = false;
+
+/* Éclaircit les zones sombres (courbe gamma) */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance + contraste local, avec seuil anti-bruit JPEG */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* =====================================================
+   Super-résolution IA : Real-ESRGAN via ONNX Runtime Web (WebGPU, repli WASM)
+   Real-ESRGAN est entraîné sur des images dégradées (flou + compression),
+   ce qui correspond bien aux tuiles satellite à fort zoom.
+   ===================================================== */
+const ORT = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+const HF = 'https://huggingface.co/jonathanst29/tinier-upscale-models/resolve/main/';
+const MODELS = {
+  fast: { url: HF + 'realesr-general-x4v3.onnx', label:'Real-ESRGAN rapide' },
+  plus: { url: HF + 'realesrgan-x4plus.onnx',    label:'Real-ESRGAN détaillée' }
+};
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadAI(key) {
+  if (session && loadedModel === key) return;
+  if (!window.ort) await loadScript(ORT + 'ort.webgpu.min.js');
+  ort.env.wasm.wasmPaths = ORT;
+  const r = await fetch(MODELS[key].url);
+  if (!r.ok) throw new Error('modèle introuvable (' + r.status + ')');
+  const buf = await r.arrayBuffer();
+  session = await ort.InferenceSession.create(buf, { executionProviders:['webgpu', 'wasm'] });
+  loadedModel = key;
+}
+
+/* Une tuile 256×256 → tuile 512×512. On ajoute 8 px de marge (bords répliqués) avant le réseau
+   puis on les retire, pour éviter les coutures visibles entre tuiles. */
+async function aiUpscale(src) {
+  const P = 8, w = src.width, h = src.height, W = w + 2 * P, H = h + 2 * P;
+  const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
+  const p = pc.getContext('2d', { willReadFrequently:true });
+  p.drawImage(src, P, P);
+  p.drawImage(src, 0, 0, w, 1, P, 0, w, P);
+  p.drawImage(src, 0, h - 1, w, 1, P, P + h, w, P);
+  p.drawImage(src, 0, 0, 1, h, 0, P, P, h);
+  p.drawImage(src, w - 1, 0, 1, h, P + w, P, P, h);
+  p.drawImage(src, 0, 0, 1, 1, 0, 0, P, P);
+  p.drawImage(src, w - 1, 0, 1, 1, P + w, 0, P, P);
+  p.drawImage(src, 0, h - 1, 1, 1, 0, P + h, P, P);
+  p.drawImage(src, w - 1, h - 1, 1, 1, P + w, P + h, P, P);
+
+  const px = p.getImageData(0, 0, W, H).data, n = W * H, f = new Float32Array(3 * n);
+  for (let i = 0; i < n; i++) { f[i] = px[4*i] / 255; f[n + i] = px[4*i+1] / 255; f[2*n + i] = px[4*i+2] / 255; }
+
+  const res = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', f, [1, 3, H, W]) });
+  const o = res[session.outputNames[0]], OH = o.dims[2], OW = o.dims[3], od = o.data, m = OW * OH;
+
+  const bc = document.createElement('canvas'); bc.width = OW; bc.height = OH;
+  const bx = bc.getContext('2d'), bi = bx.createImageData(OW, OH), b = bi.data;
+  for (let i = 0; i < m; i++) {
+    const r = od[i], g = od[m + i], bl = od[2*m + i];
+    b[4*i]   = r  < 0 ? 0 : r  > 1 ? 255 : r  * 255;
+    b[4*i+1] = g  < 0 ? 0 : g  > 1 ? 255 : g  * 255;
+    b[4*i+2] = bl < 0 ? 0 : bl > 1 ? 255 : bl * 255;
+    b[4*i+3] = 255;
+  }
+  bx.putImageData(bi, 0, 0);
+  if (o.dispose) o.dispose();
+
+  const k = OW / W;
+  const rc = document.createElement('canvas'); rc.width = 2 * w; rc.height = 2 * h;
+  const rx = rc.getContext('2d'); rx.imageSmoothingQuality = 'high';
+  rx.drawImage(bc, P * k, P * k, w * k, h * k, 0, 0, 2 * w, 2 * h);
+  return rc;
+}
+
+/* File d'attente : une tuile à la fois, pause entre deux tuiles pour ménager la carte graphique.
+   Dernier arrivé, premier servi : quand on déplace la carte, les tuiles visibles passent d'abord. */
+const aiQueue = [];
+let aiBusy = false;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function enqueue(job) { return new Promise((res, rej) => { aiQueue.push({ job, res, rej }); pump(); }); }
+function clearQueue() { aiQueue.splice(0).forEach(t => t.res(null)); }
+async function pump() {
+  if (aiBusy) return;
+  aiBusy = true;
+  while (aiQueue.length) {
+    const t = aiQueue.pop();
+    try {
+      const out = await t.job();
+      t.res(out);
+      say('ai', '<b>IA</b> : ' + aiQueue.length + ' tuile(s) en attente');
+      if (out && coolMs) await sleep(coolMs);
+    } catch (e) { t.rej(e); say('ai', '<b>IA</b> : erreur sur une tuile (' + (e.message || e) + ')'); }
+  }
+  aiBusy = false;
+  say('ai', '<b>IA</b> : terminé');
+}
+
+/* Cache : bouger un curseur ne relance pas le réseau de neurones, seul le traitement léger est refait */
+const AI_CACHE_MAX = 80;
+const aiCache = new Map();
+function cacheGet(k) { const v = aiCache.get(k); if (v) { aiCache.delete(k); aiCache.set(k, v); } return v; }
+function cacheSet(k, v) { aiCache.set(k, v); if (aiCache.size > AI_CACHE_MAX) aiCache.delete(aiCache.keys().next().value); }
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const clean = this.getTileUrl(coords);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size, clean).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    img.src = this._bust ? clean + (clean.includes('?') ? '&' : '?') + '_=' + this._bust : clean;
+    return canvas;
+  },
+  async _process(img, canvas, size, key) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc || rawView) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && session) {
+        const ck = loadedModel + '|' + key;
+        let big = cacheGet(ck);
+        if (!big && !canvas._dead) {
+          const snapshot = document.createElement('canvas');
+          snapshot.width = size.x; snapshot.height = size.y;
+          snapshot.getContext('2d').drawImage(canvas, 0, 0);
+          big = await enqueue(async () => {
+            if (canvas._dead) return null;
+            const c = await aiUpscale(snapshot);
+            cacheSet(ck, c);
+            return c;
+          });
+        }
+        if (big && !canvas._dead) {
+          canvas.width = w = big.width; canvas.height = h = big.height;
+          ctx.drawImage(big, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  /* Vrai rechargement (nouvelles images) : on vide le cache IA */
+  refresh() { this._bust = Date.now(); aiCache.clear(); this.redraw(); },
+  /* Simple ré-application des réglages : mêmes images, cache IA conservé */
+  restyle() { this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', () => { clearQueue(); setBase(); });
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs, vue originale et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].restyle(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('cool').addEventListener('change', e => { coolMs = +e.target.value; });
+$('l-raw').addEventListener('change', e => {
+  rawView = e.target.checked; clearQueue(); bases[current].restyle();
+  say('raw', rawView ? '<b>Affichage</b> : original, sans traitement' : '<b>Affichage</b> : traité');
+});
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('l-ai').addEventListener('change', async e => {
+  clearQueue();
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].restyle(); return; }
+  const key = $('model').value;
+  try {
+    aiOn = false;
+    say('ai', '<b>IA</b> : téléchargement du modèle ' + MODELS[key].label + ' (première fois seulement)…');
+    await loadAI(key);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + MODELS[key].label + '), les tuiles s\'affinent une par une');
+    bases[current].restyle();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + (err.message || err) + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' + (ms ? ' (suspendue pendant l\'IA)' : '') : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v6.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v7.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:56px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  #toggle { position:absolute; z-index:1001; top:12px; left:12px; display:inline-flex; align-items:center; gap:6px; background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-weight:600; box-shadow:0 1px 6px rgba(0,0,0,.4); }
+  #toggle:hover { border-color:var(--accent); }
+  body.ui-hidden .bar, body.ui-hidden #status { display:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<button type="button" id="toggle" aria-controls="ui" aria-expanded="true" title="Masquer ou afficher la barre d'outils et le panneau d'état (touche H)">▲ Masquer</button>
+
+<div class="bar" id="ui">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="30"><span class="val" id="sharp-v">30</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Afficher la carte sans aucun traitement pour comparer"><input type="checkbox" id="l-raw">Original</label>
+  </div>
+  <div class="box">
+    <select id="model" aria-label="Modèle IA" title="Real-ESRGAN est entraîné sur des images abîmées (flou, compression JPEG), contrairement au modèle précédent">
+      <option value="fast">IA Real-ESRGAN rapide (5 Mo)</option>
+      <option value="plus" selected>IA Real-ESRGAN détaillée (67 Mo)</option>
+    </select>
+    <select id="cool" aria-label="Charge GPU" title="Pause entre deux tuiles : plus elle est longue, moins la carte graphique chauffe">
+      <option value="0">GPU à fond</option>
+      <option value="100" selected>GPU normal</option>
+      <option value="500">GPU doux</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones, calculée dans votre navigateur"><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.3;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, session = null, loadedModel = null;
+let coolMs = 100, rawView = false;
+
+/* Éclaircit les zones sombres (courbe gamma) */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance + contraste local, avec seuil anti-bruit JPEG */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* =====================================================
+   Super-résolution IA : Real-ESRGAN via ONNX Runtime Web (WebGPU, repli WASM)
+   Real-ESRGAN est entraîné sur des images dégradées (flou + compression),
+   ce qui correspond bien aux tuiles satellite à fort zoom.
+   ===================================================== */
+const ORT = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+const HF = 'https://huggingface.co/jonathanst29/tinier-upscale-models/resolve/main/';
+const MODELS = {
+  fast: { url: HF + 'realesr-general-x4v3.onnx', label:'Real-ESRGAN rapide' },
+  plus: { url: HF + 'realesrgan-x4plus.onnx',    label:'Real-ESRGAN détaillée' }
+};
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadAI(key) {
+  if (session && loadedModel === key) return;
+  if (!window.ort) await loadScript(ORT + 'ort.webgpu.min.js');
+  ort.env.wasm.wasmPaths = ORT;
+  const r = await fetch(MODELS[key].url);
+  if (!r.ok) throw new Error('modèle introuvable (' + r.status + ')');
+  const buf = await r.arrayBuffer();
+  session = await ort.InferenceSession.create(buf, { executionProviders:['webgpu', 'wasm'] });
+  loadedModel = key;
+}
+
+/* Une tuile 256×256 → tuile 512×512. On ajoute 8 px de marge (bords répliqués) avant le réseau
+   puis on les retire, pour éviter les coutures visibles entre tuiles. */
+async function aiUpscale(src) {
+  const P = 8, w = src.width, h = src.height, W = w + 2 * P, H = h + 2 * P;
+  const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
+  const p = pc.getContext('2d', { willReadFrequently:true });
+  p.drawImage(src, P, P);
+  p.drawImage(src, 0, 0, w, 1, P, 0, w, P);
+  p.drawImage(src, 0, h - 1, w, 1, P, P + h, w, P);
+  p.drawImage(src, 0, 0, 1, h, 0, P, P, h);
+  p.drawImage(src, w - 1, 0, 1, h, P + w, P, P, h);
+  p.drawImage(src, 0, 0, 1, 1, 0, 0, P, P);
+  p.drawImage(src, w - 1, 0, 1, 1, P + w, 0, P, P);
+  p.drawImage(src, 0, h - 1, 1, 1, 0, P + h, P, P);
+  p.drawImage(src, w - 1, h - 1, 1, 1, P + w, P + h, P, P);
+
+  const px = p.getImageData(0, 0, W, H).data, n = W * H, f = new Float32Array(3 * n);
+  for (let i = 0; i < n; i++) { f[i] = px[4*i] / 255; f[n + i] = px[4*i+1] / 255; f[2*n + i] = px[4*i+2] / 255; }
+
+  const res = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', f, [1, 3, H, W]) });
+  const o = res[session.outputNames[0]], OH = o.dims[2], OW = o.dims[3], od = o.data, m = OW * OH;
+
+  const bc = document.createElement('canvas'); bc.width = OW; bc.height = OH;
+  const bx = bc.getContext('2d'), bi = bx.createImageData(OW, OH), b = bi.data;
+  for (let i = 0; i < m; i++) {
+    const r = od[i], g = od[m + i], bl = od[2*m + i];
+    b[4*i]   = r  < 0 ? 0 : r  > 1 ? 255 : r  * 255;
+    b[4*i+1] = g  < 0 ? 0 : g  > 1 ? 255 : g  * 255;
+    b[4*i+2] = bl < 0 ? 0 : bl > 1 ? 255 : bl * 255;
+    b[4*i+3] = 255;
+  }
+  bx.putImageData(bi, 0, 0);
+  if (o.dispose) o.dispose();
+
+  const k = OW / W;
+  const rc = document.createElement('canvas'); rc.width = 2 * w; rc.height = 2 * h;
+  const rx = rc.getContext('2d'); rx.imageSmoothingQuality = 'high';
+  rx.drawImage(bc, P * k, P * k, w * k, h * k, 0, 0, 2 * w, 2 * h);
+  return rc;
+}
+
+/* File d'attente : une tuile à la fois, pause entre deux tuiles pour ménager la carte graphique.
+   Dernier arrivé, premier servi : quand on déplace la carte, les tuiles visibles passent d'abord. */
+const aiQueue = [];
+let aiBusy = false;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function enqueue(job) { return new Promise((res, rej) => { aiQueue.push({ job, res, rej }); pump(); }); }
+function clearQueue() { aiQueue.splice(0).forEach(t => t.res(null)); }
+async function pump() {
+  if (aiBusy) return;
+  aiBusy = true;
+  while (aiQueue.length) {
+    const t = aiQueue.pop();
+    try {
+      const out = await t.job();
+      t.res(out);
+      say('ai', '<b>IA</b> : ' + aiQueue.length + ' tuile(s) en attente');
+      if (out && coolMs) await sleep(coolMs);
+    } catch (e) { t.rej(e); say('ai', '<b>IA</b> : erreur sur une tuile (' + (e.message || e) + ')'); }
+  }
+  aiBusy = false;
+  say('ai', '<b>IA</b> : terminé');
+}
+
+/* Cache : bouger un curseur ne relance pas le réseau de neurones, seul le traitement léger est refait */
+const AI_CACHE_MAX = 80;
+const aiCache = new Map();
+function cacheGet(k) { const v = aiCache.get(k); if (v) { aiCache.delete(k); aiCache.set(k, v); } return v; }
+function cacheSet(k, v) { aiCache.set(k, v); if (aiCache.size > AI_CACHE_MAX) aiCache.delete(aiCache.keys().next().value); }
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const clean = this.getTileUrl(coords);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size, clean).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    img.src = this._bust ? clean + (clean.includes('?') ? '&' : '?') + '_=' + this._bust : clean;
+    return canvas;
+  },
+  async _process(img, canvas, size, key) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc || rawView) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && session) {
+        const ck = loadedModel + '|' + key;
+        let big = cacheGet(ck);
+        if (!big && !canvas._dead) {
+          const snapshot = document.createElement('canvas');
+          snapshot.width = size.x; snapshot.height = size.y;
+          snapshot.getContext('2d').drawImage(canvas, 0, 0);
+          big = await enqueue(async () => {
+            if (canvas._dead) return null;
+            const c = await aiUpscale(snapshot);
+            cacheSet(ck, c);
+            return c;
+          });
+        }
+        if (big && !canvas._dead) {
+          canvas.width = w = big.width; canvas.height = h = big.height;
+          ctx.drawImage(big, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  /* Vrai rechargement (nouvelles images) : on vide le cache IA */
+  refresh() { this._bust = Date.now(); aiCache.clear(); this.redraw(); },
+  /* Simple ré-application des réglages : mêmes images, cache IA conservé */
+  restyle() { this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', () => { clearQueue(); setBase(); });
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs, vue originale et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].restyle(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('cool').addEventListener('change', e => { coolMs = +e.target.value; });
+$('l-raw').addEventListener('change', e => {
+  rawView = e.target.checked; clearQueue(); bases[current].restyle();
+  say('raw', rawView ? '<b>Affichage</b> : original, sans traitement' : '<b>Affichage</b> : traité');
+});
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('l-ai').addEventListener('change', async e => {
+  clearQueue();
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].restyle(); return; }
+  const key = $('model').value;
+  try {
+    aiOn = false;
+    say('ai', '<b>IA</b> : téléchargement du modèle ' + MODELS[key].label + ' (première fois seulement)…');
+    await loadAI(key);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + MODELS[key].label + '), les tuiles s\'affinent une par une');
+    bases[current].restyle();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + (err.message || err) + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' + (ms ? ' (suspendue pendant l\'IA)' : '') : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Replier / déplier l'interface (barre d'outils + panneau d'état) ---------- */
+function setUI(visible) {
+  document.body.classList.toggle('ui-hidden', !visible);
+  $('toggle').textContent = visible ? '▲ Masquer' : '▼ Afficher';
+  $('toggle').setAttribute('aria-expanded', visible);
+}
+$('toggle').addEventListener('click', () => setUI(document.body.classList.contains('ui-hidden')));
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() !== 'h' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target.tagName;
+  if (t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
+  setUI(document.body.classList.contains('ui-hidden'));
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde-v7.html ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde.html ---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Œil du monde</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+  :root { --bg:#0e1a24; --panel:#14232f; --line:#27404f; --ink:#e6eef2; --dim:#8fa5b2; --accent:#f2b134; }
+  * { box-sizing:border-box; }
+  html,body { height:100%; margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 "Segoe UI",system-ui,sans-serif; }
+  #map { position:absolute; inset:0; background:#0b141b; }
+  .bar { position:absolute; z-index:1000; top:56px; left:12px; right:12px; display:flex; gap:8px; flex-wrap:wrap; pointer-events:none; }
+  #toggle { position:absolute; z-index:1001; top:12px; left:12px; display:inline-flex; align-items:center; gap:6px; background:var(--panel); color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:6px 12px; font-weight:600; box-shadow:0 1px 6px rgba(0,0,0,.4); }
+  #toggle:hover { border-color:var(--accent); }
+  body.ui-hidden .bar, body.ui-hidden #status { display:none; }
+  .box { pointer-events:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  form.box { gap:6px; }
+  input[type=text], select { background:var(--bg); color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:6px 8px; font:inherit; }
+  input[type=text] { width:min(300px,55vw); }
+  button { background:var(--accent); color:#1a1305; border:0; border-radius:6px; padding:6px 12px; font:inherit; font-weight:600; cursor:pointer; }
+  button:focus-visible,input:focus-visible,select:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  label { display:inline-flex; align-items:center; gap:6px; color:var(--dim); cursor:pointer; }
+  label:has(input:checked) { color:var(--ink); }
+  input[type=range] { accent-color:var(--accent); width:100px; }
+  .val { min-width:3ch; color:var(--ink); text-align:right; }
+  #status { position:absolute; z-index:1000; left:12px; bottom:28px; max-width:min(440px,90vw); font-size:12px; color:var(--dim); display:block; }
+  #status b { color:var(--ink); font-weight:600; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+
+<button type="button" id="toggle" aria-controls="ui" aria-expanded="true" title="Masquer ou afficher la barre d'outils et le panneau d'état (touche H)">▲ Masquer</button>
+
+<div class="bar" id="ui">
+  <form class="box" id="search">
+    <input type="text" id="q" placeholder="Ville, adresse, monument…" aria-label="Rechercher un lieu">
+    <button>Aller</button>
+  </form>
+  <div class="box">
+    <select id="base" aria-label="Fond de carte">
+      <option value="esri">Satellite HD (Esri)</option>
+      <option value="eox">Satellite Sentinel-2</option>
+      <option value="nasa">Satellite NASA (hier)</option>
+      <option value="plan">Plan des rues</option>
+    </select>
+    <label><input type="checkbox" id="l-lab" checked>Noms</label>
+  </div>
+  <div class="box">
+    <label for="sharp">Netteté</label><input type="range" id="sharp" min="0" max="100" value="30"><span class="val" id="sharp-v">30</span>
+    <label for="shad">Ombres</label><input type="range" id="shad" min="0" max="100" value="35"><span class="val" id="shad-v">35</span>
+    <label title="Afficher la carte sans aucun traitement pour comparer"><input type="checkbox" id="l-raw">Original</label>
+  </div>
+  <div class="box">
+    <select id="model" aria-label="Modèle IA" title="Real-ESRGAN est entraîné sur des images abîmées (flou, compression JPEG), contrairement au modèle précédent">
+      <option value="fast">IA Real-ESRGAN rapide (5 Mo)</option>
+      <option value="plus" selected>IA Real-ESRGAN détaillée (67 Mo)</option>
+    </select>
+    <select id="cool" aria-label="Charge GPU" title="Pause entre deux tuiles : plus elle est longue, moins la carte graphique chauffe">
+      <option value="0">GPU à fond</option>
+      <option value="100" selected>GPU normal</option>
+      <option value="500">GPU doux</option>
+    </select>
+    <label title="Super-résolution par réseau de neurones, calculée dans votre navigateur"><input type="checkbox" id="l-ai">IA super-résolution</label>
+  </div>
+  <div class="box">
+    <label for="every">Actualiser</label>
+    <select id="every" aria-label="Fréquence d'actualisation">
+      <option value="0">jamais</option>
+      <option value="60000">1 min</option>
+      <option value="300000" selected>5 min</option>
+      <option value="900000">15 min</option>
+    </select>
+    <button type="button" id="now">Maintenant</button>
+  </div>
+</div>
+<div id="status" class="box">Chargement…</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAX_ZOOM = 22;
+
+const map = L.map('map', { worldCopyJump:true, zoomControl:false, maxZoom:MAX_ZOOM, zoomSnap:0.25, zoomDelta:0.5 })
+  .setView([50.85, 4.35], 8);
+L.control.zoom({ position:'bottomright' }).addTo(map);
+
+const msgs = {};
+function say(k, v) {
+  msgs[k] = v + ' <i>(' + new Date().toLocaleTimeString('fr-FR') + ')</i>';
+  $('status').innerHTML = Object.values(msgs).join('<br>');
+}
+
+/* =====================================================
+   Traitements d'image (tous calculés dans le navigateur)
+   ===================================================== */
+let sharpAmount = 0.3;   // 0 à 1
+let shadowAmount = 0.35; // 0 à 1
+let aiOn = false, session = null, loadedModel = null;
+let coolMs = 100, rawView = false;
+
+/* Éclaircit les zones sombres (courbe gamma) */
+function liftShadows(ctx, w, h, a) {
+  const g = 1 + a * 1.4, lut = new Uint8ClampedArray(256);
+  for (let i = 0; i < 256; i++) lut[i] = 255 * Math.pow(i / 255, 1 / g);
+  const im = ctx.getImageData(0, 0, w, h), d = im.data;
+  for (let i = 0; i < d.length; i += 4) { d[i] = lut[d[i]]; d[i+1] = lut[d[i+1]]; d[i+2] = lut[d[i+2]]; }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* Flou par boîte séparable sur un tableau de luminance */
+function boxBlur(src, w, h, r) {
+  const tmp = new Float32Array(w * h), out = new Float32Array(w * h), n = 2 * r + 1;
+  for (let y = 0; y < h; y++) {
+    let acc = 0; const o = y * w;
+    for (let k = -r; k <= r; k++) acc += src[o + Math.min(w - 1, Math.max(0, k))];
+    for (let x = 0; x < w; x++) {
+      tmp[o + x] = acc / n;
+      acc += src[o + Math.min(w - 1, x + r + 1)] - src[o + Math.max(0, x - r)];
+    }
+  }
+  for (let x = 0; x < w; x++) {
+    let acc = 0;
+    for (let k = -r; k <= r; k++) acc += tmp[Math.min(h - 1, Math.max(0, k)) * w + x];
+    for (let y = 0; y < h; y++) {
+      out[y * w + x] = acc / n;
+      acc += tmp[Math.min(h - 1, y + r + 1) * w + x] - tmp[Math.max(0, y - r) * w + x];
+    }
+  }
+  return out;
+}
+
+/* Détails : masque flou sur la luminance + contraste local, avec seuil anti-bruit JPEG */
+function sharpen(ctx, w, h, a) {
+  const im = ctx.getImageData(0, 0, w, h), d = im.data, N = w * h;
+  const L = new Float32Array(N);
+  for (let i = 0, p = 0; p < N; i += 4, p++) L[p] = 0.299 * d[i] + 0.587 * d[i+1] + 0.114 * d[i+2];
+  const sc = Math.max(1, Math.round(w / 256));
+  const fine = boxBlur(L, w, h, sc), wide = boxBlur(L, w, h, 4 * sc);
+  const T = 1.5;
+  for (let i = 0, p = 0; p < N; i += 4, p++) {
+    let f = L[p] - fine[p];
+    f = Math.abs(f) < T ? 0 : f - Math.sign(f) * T;
+    const add = a * (2.2 * f + 0.7 * (L[p] - wide[p]));
+    for (let k = 0; k < 3; k++) { const v = d[i+k] + add; d[i+k] = v < 0 ? 0 : v > 255 ? 255 : v; }
+  }
+  ctx.putImageData(im, 0, 0);
+}
+
+/* =====================================================
+   Super-résolution IA : Real-ESRGAN via ONNX Runtime Web (WebGPU, repli WASM)
+   Real-ESRGAN est entraîné sur des images dégradées (flou + compression),
+   ce qui correspond bien aux tuiles satellite à fort zoom.
+   ===================================================== */
+const ORT = 'https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+const HF = 'https://huggingface.co/jonathanst29/tinier-upscale-models/resolve/main/';
+const MODELS = {
+  fast: { url: HF + 'realesr-general-x4v3.onnx', label:'Real-ESRGAN rapide' },
+  plus: { url: HF + 'realesrgan-x4plus.onnx',    label:'Real-ESRGAN détaillée' }
+};
+
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = () => rej(new Error('Échec de chargement : ' + src));
+    document.head.appendChild(s);
+  });
+}
+async function loadAI(key) {
+  if (session && loadedModel === key) return;
+  if (!window.ort) await loadScript(ORT + 'ort.webgpu.min.js');
+  ort.env.wasm.wasmPaths = ORT;
+  const r = await fetch(MODELS[key].url);
+  if (!r.ok) throw new Error('modèle introuvable (' + r.status + ')');
+  const buf = await r.arrayBuffer();
+  session = await ort.InferenceSession.create(buf, { executionProviders:['webgpu', 'wasm'] });
+  loadedModel = key;
+}
+
+/* Une tuile 256×256 → tuile 512×512. On ajoute 8 px de marge (bords répliqués) avant le réseau
+   puis on les retire, pour éviter les coutures visibles entre tuiles. */
+async function aiUpscale(src) {
+  const P = 8, w = src.width, h = src.height, W = w + 2 * P, H = h + 2 * P;
+  const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
+  const p = pc.getContext('2d', { willReadFrequently:true });
+  p.drawImage(src, P, P);
+  p.drawImage(src, 0, 0, w, 1, P, 0, w, P);
+  p.drawImage(src, 0, h - 1, w, 1, P, P + h, w, P);
+  p.drawImage(src, 0, 0, 1, h, 0, P, P, h);
+  p.drawImage(src, w - 1, 0, 1, h, P + w, P, P, h);
+  p.drawImage(src, 0, 0, 1, 1, 0, 0, P, P);
+  p.drawImage(src, w - 1, 0, 1, 1, P + w, 0, P, P);
+  p.drawImage(src, 0, h - 1, 1, 1, 0, P + h, P, P);
+  p.drawImage(src, w - 1, h - 1, 1, 1, P + w, P + h, P, P);
+
+  const px = p.getImageData(0, 0, W, H).data, n = W * H, f = new Float32Array(3 * n);
+  for (let i = 0; i < n; i++) { f[i] = px[4*i] / 255; f[n + i] = px[4*i+1] / 255; f[2*n + i] = px[4*i+2] / 255; }
+
+  const res = await session.run({ [session.inputNames[0]]: new ort.Tensor('float32', f, [1, 3, H, W]) });
+  const o = res[session.outputNames[0]], OH = o.dims[2], OW = o.dims[3], od = o.data, m = OW * OH;
+
+  const bc = document.createElement('canvas'); bc.width = OW; bc.height = OH;
+  const bx = bc.getContext('2d'), bi = bx.createImageData(OW, OH), b = bi.data;
+  for (let i = 0; i < m; i++) {
+    const r = od[i], g = od[m + i], bl = od[2*m + i];
+    b[4*i]   = r  < 0 ? 0 : r  > 1 ? 255 : r  * 255;
+    b[4*i+1] = g  < 0 ? 0 : g  > 1 ? 255 : g  * 255;
+    b[4*i+2] = bl < 0 ? 0 : bl > 1 ? 255 : bl * 255;
+    b[4*i+3] = 255;
+  }
+  bx.putImageData(bi, 0, 0);
+  if (o.dispose) o.dispose();
+
+  const k = OW / W;
+  const rc = document.createElement('canvas'); rc.width = 2 * w; rc.height = 2 * h;
+  const rx = rc.getContext('2d'); rx.imageSmoothingQuality = 'high';
+  rx.drawImage(bc, P * k, P * k, w * k, h * k, 0, 0, 2 * w, 2 * h);
+  return rc;
+}
+
+/* File d'attente : une tuile à la fois, pause entre deux tuiles pour ménager la carte graphique.
+   Dernier arrivé, premier servi : quand on déplace la carte, les tuiles visibles passent d'abord. */
+const aiQueue = [];
+let aiBusy = false;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function enqueue(job) { return new Promise((res, rej) => { aiQueue.push({ job, res, rej }); pump(); }); }
+function clearQueue() { aiQueue.splice(0).forEach(t => t.res(null)); }
+async function pump() {
+  if (aiBusy) return;
+  aiBusy = true;
+  while (aiQueue.length) {
+    const t = aiQueue.pop();
+    try {
+      const out = await t.job();
+      t.res(out);
+      say('ai', '<b>IA</b> : ' + aiQueue.length + ' tuile(s) en attente');
+      if (out && coolMs) await sleep(coolMs);
+    } catch (e) { t.rej(e); say('ai', '<b>IA</b> : erreur sur une tuile (' + (e.message || e) + ')'); }
+  }
+  aiBusy = false;
+  say('ai', '<b>IA</b> : terminé');
+}
+
+/* Cache : bouger un curseur ne relance pas le réseau de neurones, seul le traitement léger est refait */
+const AI_CACHE_MAX = 80;
+const aiCache = new Map();
+function cacheGet(k) { const v = aiCache.get(k); if (v) { aiCache.delete(k); aiCache.set(k, v); } return v; }
+function cacheSet(k, v) { aiCache.set(k, v); if (aiCache.size > AI_CACHE_MAX) aiCache.delete(aiCache.keys().next().value); }
+
+/* =====================================================
+   Couche de tuiles avec traitement
+   ===================================================== */
+const ProcTile = L.TileLayer.extend({
+  initialize(url, opt) {
+    L.TileLayer.prototype.initialize.call(this, url, opt);
+    this.on('tileunload', e => { e.tile._dead = true; });
+  },
+  createTile(coords, done) {
+    const size = this.getTileSize();
+    const canvas = document.createElement('canvas');
+    canvas.width = size.x; canvas.height = size.y;
+    const clean = this.getTileUrl(coords);
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => this._process(img, canvas, size, clean).then(() => done(null, canvas), () => done(null, canvas));
+    img.onerror = e => done(e, canvas);
+    img.src = this._bust ? clean + (clean.includes('?') ? '&' : '?') + '_=' + this._bust : clean;
+    return canvas;
+  },
+  async _process(img, canvas, size, key) {
+    const ctx = canvas.getContext('2d', { willReadFrequently:true });
+    ctx.drawImage(img, 0, 0, size.x, size.y);
+    if (!this.options.proc || rawView) return;
+    let w = size.x, h = size.y;
+    try {
+      if (aiOn && session) {
+        const ck = loadedModel + '|' + key;
+        let big = cacheGet(ck);
+        if (!big && !canvas._dead) {
+          const snapshot = document.createElement('canvas');
+          snapshot.width = size.x; snapshot.height = size.y;
+          snapshot.getContext('2d').drawImage(canvas, 0, 0);
+          big = await enqueue(async () => {
+            if (canvas._dead) return null;
+            const c = await aiUpscale(snapshot);
+            cacheSet(ck, c);
+            return c;
+          });
+        }
+        if (big && !canvas._dead) {
+          canvas.width = w = big.width; canvas.height = h = big.height;
+          ctx.drawImage(big, 0, 0);
+        }
+      }
+      if (shadowAmount > 0) liftShadows(ctx, w, h, shadowAmount);
+      if (sharpAmount > 0) sharpen(ctx, w, h, sharpAmount);
+    } catch (e) { /* canvas protégé par le serveur ou IA indisponible : l'image reste telle quelle */ }
+  },
+  /* Vrai rechargement (nouvelles images) : on vide le cache IA */
+  refresh() { this._bust = Date.now(); aiCache.clear(); this.redraw(); },
+  /* Simple ré-application des réglages : mêmes images, cache IA conservé */
+  restyle() { this.redraw(); }
+});
+const tiles = (url, opt) => new ProcTile(url, opt);
+
+/* ---------- Fonds de carte ---------- */
+const yesterday = () => new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+
+const bases = {
+  esri: tiles('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { proc:true, maxNativeZoom:19, maxZoom:MAX_ZOOM, attribution:'Imagery © Esri, Maxar, Earthstar Geographics' }),
+  eox: tiles('https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless-2020_3857/default/g/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:13, maxZoom:MAX_ZOOM, attribution:'Sentinel-2 cloudless © EOX' }),
+  nasa: null,
+  plan: tiles('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    { proc:false, subdomains:'abcd', maxNativeZoom:20, maxZoom:MAX_ZOOM, attribution:'© OpenStreetMap contributors © CARTO' })
+};
+function makeNasa() {
+  const d = yesterday();
+  return tiles('https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/VIIRS_SNPP_CorrectedReflectance_TrueColor/default/' + d + '/GoogleMapsCompatible_Level9/{z}/{y}/{x}.jpg',
+    { proc:true, maxNativeZoom:9, maxZoom:MAX_ZOOM, attribution:'NASA GIBS, ' + d });
+}
+bases.nasa = makeNasa();
+
+const labels = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  { maxNativeZoom:19, maxZoom:MAX_ZOOM });
+
+/* ---------- Repli automatique si une source tombe ---------- */
+const fallback = { esri:'eox', eox:'nasa', nasa:'plan' };
+const errs = {};
+let current = 'esri';
+function watch(k) {
+  bases[k].on('tileerror', () => {
+    errs[k] = (errs[k] || 0) + 1;
+    if (errs[k] === 8 && current === k && fallback[k]) {
+      $('base').value = fallback[k]; setBase();
+      say('base', '<b>Fond</b> : source indisponible, bascule automatique');
+    }
+  });
+  bases[k].on('load', () => { errs[k] = 0; });
+}
+Object.keys(bases).forEach(watch);
+
+function setBase() {
+  Object.values(bases).forEach(l => map.removeLayer(l));
+  map.removeLayer(labels);
+  current = $('base').value;
+  bases[current].addTo(map).bringToBack();
+  if (current !== 'plan' && $('l-lab').checked) labels.addTo(map);
+  say('base', '<b>Fond</b> : ' + $('base').selectedOptions[0].text);
+}
+$('base').addEventListener('change', () => { clearQueue(); setBase(); });
+$('l-lab').addEventListener('change', setBase);
+
+/* ---------- Curseurs, vue originale et option IA ---------- */
+function slider(id, apply, label) {
+  let t;
+  $(id).addEventListener('input', e => {
+    $(id + '-v').textContent = e.target.value;
+    apply(e.target.value / 100);
+    clearTimeout(t);
+    t = setTimeout(() => { bases[current].restyle(); say(id, '<b>' + label + '</b> : ' + e.target.value + ' %'); }, 250);
+  });
+}
+slider('sharp', v => { sharpAmount = v; }, 'Netteté');
+slider('shad', v => { shadowAmount = v; }, 'Ombres');
+
+$('cool').addEventListener('change', e => { coolMs = +e.target.value; });
+$('l-raw').addEventListener('change', e => {
+  rawView = e.target.checked; clearQueue(); bases[current].restyle();
+  say('raw', rawView ? '<b>Affichage</b> : original, sans traitement' : '<b>Affichage</b> : traité');
+});
+$('model').addEventListener('change', () => { if ($('l-ai').checked) $('l-ai').dispatchEvent(new Event('change')); });
+$('l-ai').addEventListener('change', async e => {
+  clearQueue();
+  if (!e.target.checked) { aiOn = false; say('ai', '<b>IA</b> : désactivée'); bases[current].restyle(); return; }
+  const key = $('model').value;
+  try {
+    aiOn = false;
+    say('ai', '<b>IA</b> : téléchargement du modèle ' + MODELS[key].label + ' (première fois seulement)…');
+    await loadAI(key);
+    aiOn = true;
+    say('ai', '<b>IA</b> : active (' + MODELS[key].label + '), les tuiles s\'affinent une par une');
+    bases[current].restyle();
+  } catch (err) {
+    aiOn = false; e.target.checked = false;
+    say('ai', '<b>IA</b> : indisponible (' + (err.message || err) + ')');
+  }
+});
+
+/* ---------- Actualisation régulière ---------- */
+let timer = null;
+function refreshAll() {
+  if (current === 'nasa') {
+    map.removeLayer(bases.nasa);
+    bases.nasa = makeNasa(); watch('nasa');
+    bases.nasa.addTo(map).bringToBack();
+  } else {
+    bases[current].refresh();
+  }
+  if (map.hasLayer(labels)) labels.redraw();
+  say('ref', '<b>Actualisé</b>');
+}
+function schedule() {
+  clearInterval(timer);
+  const ms = +$('every').value;
+  if (ms) timer = setInterval(() => { if (!aiOn) refreshAll(); }, ms);
+  say('ref', ms ? '<b>Actualisation</b> : toutes les ' + ms / 60000 + ' min' + (ms ? ' (suspendue pendant l\'IA)' : '') : '<b>Actualisation</b> : désactivée');
+}
+$('every').addEventListener('change', schedule);
+$('now').addEventListener('click', refreshAll);
+
+/* ---------- Recherche de lieu (Nominatim) ---------- */
+$('search').addEventListener('submit', async e => {
+  e.preventDefault();
+  const q = $('q').value.trim(); if (!q) return;
+  try {
+    const r = await (await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=fr&q=' + encodeURIComponent(q))).json();
+    if (!r.length) { say('geo', '<b>Recherche</b> : lieu introuvable'); return; }
+    const bb = r[0].boundingbox.map(Number);
+    map.fitBounds([[bb[0], bb[2]], [bb[1], bb[3]]], { maxZoom:19 });
+    say('geo', '<b>Lieu</b> : ' + r[0].display_name.split(',').slice(0, 2).join(','));
+  } catch { say('geo', '<b>Recherche</b> : service indisponible'); }
+});
+
+/* ---------- Replier / déplier l'interface (barre d'outils + panneau d'état) ---------- */
+function setUI(visible) {
+  document.body.classList.toggle('ui-hidden', !visible);
+  $('toggle').textContent = visible ? '▲ Masquer' : '▼ Afficher';
+  $('toggle').setAttribute('aria-expanded', visible);
+}
+$('toggle').addEventListener('click', () => setUI(document.body.classList.contains('ui-hidden')));
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() !== 'h' || e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target.tagName;
+  if (t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
+  setUI(document.body.classList.contains('ui-hidden'));
+});
+
+/* ---------- Démarrage ---------- */
+setBase();
+schedule();
+</script>
+</body>
+</html>
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/oeil-du-monde\oeil-du-monde.html ---
+
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\oeil-du-monde\oeil-du-monde_2026-10-01_06-38-27.txt ---
 
 --- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\context-sync-repo\partage_QR\partage_QR_2026-09-11_18-03-53.txt ---
 =========================================
