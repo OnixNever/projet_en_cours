@@ -11139,8 +11139,12 @@ start "Serveur Python" cmd /k python serveur.py
    - Messages vocaux : enregistrement (MediaRecorder) -> /upload_file -> /send_message
    - Appels : WebRTC en maillage (chaque participant est relié à chacun des autres),
      la signalisation passe par le WebSocket existant (messages "call_*").
-   - Commandes vocales pendant un appel : « coupe le son », « reprends le son », « raccroche »
-     (reconnaissance vocale du navigateur, réglages dans VC.VOICE).
+   - Commandes vocales pendant un appel : « coupe le son », « reprends le son », « raccroche »,
+     « coupe le son de Paul », « mute tout le monde », « verrouille l'écran »…
+     Mêmes commandes et même bibliothèque de formulations en mode natif (navigateur) et en
+     mode sécurisé (Whisper local) ; réglages dans VC.VOICE.
+   - Couper le son d'un participant (ou de tous les autres) : bouton haut-parleur sur chaque
+     ligne de l'appel + bouton « tous les autres ». Ça ne coupe le son que pour VOUS.
    - Verrou tactile pendant un appel : un bouton verrouille l'écran tactile (seul le bouton
      de déverrouillage répond) ; l'écran reste allumé pendant tout l'appel (Wake Lock).
    ========================================================================== */
@@ -11188,29 +11192,135 @@ start "Serveur Python" cmd /k python serveur.py
             MAX_MS: 4000,
             // En dessous de cette durée (ms), on considère que c'est un bruit parasite et on ignore.
             MIN_MS: 300,
-            // La phrase ENTIÈRE doit correspondre (accents, majuscules, ponctuation et
-            // « euh… » ignorés). Ajoutez librement vos propres formulations.
+            // La phrase doit correspondre (accents, majuscules, ponctuation et « euh… »
+            // ignorés ; un mot mal reconnu est toléré). Ajoutez librement vos formulations :
+            // les listes ci-dessous sont lues telles quelles par les DEUX moteurs.
+            // Une commande ne dépasse pas ce nombre de mots (évite de réagir à une vraie conversation).
+            MAX_WORDS: 9,
+            // Moteur natif : on ignore un résultat arrivé moins de X ms après une voix distante.
+            NATIVE_REMOTE_GUARD_MS: 250,
+            // Moteur natif : après X erreurs réseau/micro d'affilée (réseau local sans Internet,
+            // par exemple), bascule tout seul en mode sécurisé (local) pour la suite de l'appel.
+            NATIVE_MAX_NETWORK_ERRORS: 3,
+            // Si un de ces mots est dit, la commande est ignorée (« ne coupe pas le micro »).
+            NEGATIONS: ['pas', 'jamais', 'surtout', 'interdit'],
+
+            // --- Mon micro ---------------------------------------------------------------
             MUTE: [
                 'coupe le son', 'couper le son', 'coupe mon son', 'coupe le micro', 'couper le micro',
-                'coupe mon micro', 'désactive le micro', 'désactiver le micro', 'mute', 'micro off'
+                'coupe mon micro', 'désactive le micro', 'désactiver le micro', 'mute', 'micro off',
+                'coupe moi le micro', 'coupe moi le son', 'coupe ma voix', 'coupe mon audio', "coupe l'audio",
+                'mute moi', 'mute mon micro', 'mute le micro', 'mets mon micro en sourdine',
+                'mets le micro en sourdine', 'mets moi en sourdine', 'mets moi en muet', 'micro en sourdine',
+                'passe en muet', 'passe en sourdine', 'mode muet', 'mets en muet', 'mets en sourdine',
+                'ferme mon micro', 'ferme le micro', 'éteins le micro', 'éteins mon micro',
+                'éteindre le micro', 'désactive mon micro', 'désactiver mon micro', 'je coupe mon micro',
+                'je me mute', 'je me mets en muet', 'micro coupé', 'micro désactivé', 'micro muet',
+                'on coupe le micro', 'micro mute'
             ],
             UNMUTE: [
                 'reprends le son', 'reprend le son', 'reprendre le son', 'remets le son', 'remet le son',
                 'remettre le son', 'active le micro', 'activer le micro', 'réactive le micro',
                 'réactiver le micro', 'remets le micro', 'remet le micro', 'rallume le micro',
-                'rallumer le micro', 'unmute', 'micro on'
+                'rallumer le micro', 'unmute', 'micro on',
+                'démute', 'démute moi', 'démute mon micro', 'démute le micro', 'active mon micro',
+                'activer mon micro', 'réactive mon micro', 'remets mon micro', 'remets moi le micro',
+                'remets moi le son', 'rallume mon micro', 'allume le micro', 'allume mon micro',
+                'ouvre le micro', 'ouvre mon micro', 'rouvre le micro', 'micro actif', 'micro activé',
+                'micro réactivé', 'sors de sourdine', 'sors de la sourdine', 'enlève la sourdine',
+                'retire la sourdine', 'enlève le mute', 'retire le mute', 'fin du mute', 'fin de la sourdine',
+                'sors du mode muet', 'retire le mode muet', 'reprends la parole', 'reprendre la parole',
+                'je reprends la parole', 'rends moi la parole', 'rends moi le son', 'rétablis le micro',
+                'rétablir le micro', 'rétablis mon micro', 'je veux parler'
             ],
+
+            // --- Raccrocher --------------------------------------------------------------
             HANGUP: [
                 'raccroche', 'raccroches', 'raccrocher', 'raccrochez', "arrête l'appel", "arrêter l'appel",
-                "termine l'appel", "terminer l'appel", "coupe l'appel", "couper l'appel", "fin de l'appel"
+                "termine l'appel", "terminer l'appel", "coupe l'appel", "couper l'appel", "fin de l'appel",
+                "raccroche l'appel", 'raccroche le téléphone', 'on raccroche', 'je raccroche',
+                "quitte l'appel", "quitter l'appel", 'quitte la conversation', 'quitter la conversation',
+                "sors de l'appel", "sortir de l'appel", 'termine la conversation', 'terminer la conversation',
+                "fin d'appel", "mets fin à l'appel", "mettre fin à l'appel", 'mets fin à la conversation',
+                "stop l'appel", "stoppe l'appel", "arrête la conversation", "arrêter la conversation",
+                "ferme l'appel", "fermer l'appel", 'déconnecte moi', 'je me déconnecte'
             ],
-            // Mots ignorés au début ou à la fin de la phrase
+
+            // --- Les AUTRES participants (coupe leur son chez VOUS uniquement) ------------
+            MUTE_OTHERS: [
+                'coupe le son des autres', 'coupe le son de tout le monde', 'coupe tout le monde',
+                'coupe les autres', 'coupe le micro des autres', 'coupe le micro de tout le monde',
+                'mute les autres', 'mute tout le monde', 'mute tous les participants', 'mute tous',
+                'mets les autres en sourdine', 'mets tout le monde en sourdine', 'mets tout le monde en muet',
+                'mets les autres en muet', 'mets en sourdine tout le monde', 'mets en sourdine les autres',
+                'silence pour tout le monde', 'silence tout le monde', 'fais taire tout le monde',
+                'fais taire les autres', 'faire taire tout le monde', 'faire taire les autres',
+                'éteins le son des autres', 'désactive le son des autres', 'désactive les autres',
+                'coupe le haut parleur', 'mute le haut parleur', 'coupe tout le son', 'coupe le volume',
+                'plus de son des autres', 'je ne veux plus entendre personne'
+            ],
+            UNMUTE_OTHERS: [
+                'remets le son des autres', 'remets le son de tout le monde', 'remets tout le monde',
+                'rétablis le son des autres', 'rétablis tout le monde', 'réactive le son des autres',
+                'réactive les autres', 'réactive tout le monde', 'active le son des autres',
+                'démute les autres', 'démute tout le monde', 'démute tous les participants',
+                'unmute tout le monde', 'unmute les autres', 'rends le son aux autres',
+                'rends la parole à tout le monde', 'rends la parole aux autres',
+                'sors tout le monde de sourdine', 'enlève la sourdine des autres',
+                'retire la sourdine à tout le monde', 'je veux entendre les autres',
+                'je veux entendre tout le monde', 'je veux les entendre', 'remets le haut parleur',
+                'réactive le haut parleur', 'rallume le son des autres', 'rallume tout le monde',
+                'reprends le son des autres', 'reprends tout le monde', 'remets le volume'
+            ],
+            // Un participant précis : « coupe le son de Paul », « mute Paul », « remets le son de Paul »…
+            // (le prénom doit être celui d'une personne présente dans l'appel ; construit avec les
+            // verbes ci-dessous, il n'y a donc pas de liste à tenir à jour).
+            // Verrouillage de l'écran tactile
+            LOCK: [
+                "verrouille l'écran", 'verrouille écran', 'verrouille le téléphone', 'verrouille',
+                "verrouiller l'écran", "bloque l'écran", "bloquer l'écran", 'active le verrou',
+                'activer le verrou', 'mets le verrou', "verrouille l'écran tactile", 'verrouille le tactile'
+            ],
+
+            // Mots-clés des commandes composées (mots isolés, n'importe où dans la phrase)
+            MUTE_VERBS: ['coupe', 'coupes', 'couper', 'coupez', 'coupons', 'mute', 'mutes', 'muter', 'muet',
+                'sourdine', 'taire', 'désactive', 'désactiver', 'éteins', 'éteindre', 'ferme', 'fermer',
+                'bloque', 'bloquer', 'silence'],
+            UNMUTE_VERBS: ['reprends', 'reprend', 'reprendre', 'remets', 'remet', 'remettre', 'remettez',
+                'réactive', 'réactiver', 'active', 'activer', 'démute', 'démuter', 'unmute', 'rallume',
+                'rallumer', 'allume', 'allumer', 'rétablis', 'rétablir', 'retire', 'retirer', 'enlève',
+                'enlever', 'sors', 'sortir', 'ouvre', 'ouvrir', 'rouvre', 'rouvrir', 'redonne', 'rends',
+                'rendre', 'libère', 'libérer', 'débloque', 'débloquer', 'restaure'],
+            SELF_OBJECTS: ['micro', 'microphone', 'son', 'voix', 'audio', 'moi', 'parole'],
+            OTHERS_WORDS: ['autre', 'autres', 'tous', 'tout le monde', 'participants', 'participant', 'eux',
+                'gens', 'haut parleur', 'casque'],
+
+            // Mots ignorés au début ou à la fin de la phrase (les expressions de plusieurs mots marchent aussi)
             FILLERS: ['euh', 'heu', 'hum', 'ben', 'bah', 'bon', 'alors', 'allez', 'ok', 'okay', 'claude',
-                'maintenant', 'merci', 'stp', 'svp', "s'il te plaît", "s'il vous plaît", 'please']
+                'maintenant', 'merci', 'stp', 'svp', "s'il te plaît", "s'il vous plaît", 'please',
+                'peux tu', 'tu peux', 'pourrais tu', 'pourriez vous', 'pouvez vous', 'tu veux bien',
+                'veux tu', 'vas y', 'allez y', 'du coup', 'donc', 'voilà', 'rapidement', 'tout de suite']
         }
     };
 
     // ------------------------------------------------------------------ utilitaires
+
+    // Icônes en SVG intégré : les boutons d'appel restent visibles même quand Font Awesome
+    // (chargé depuis Internet) n'est pas disponible, ce qui arrive sur un réseau local sans accès au net.
+    const svg = (inner) => '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" ' +
+        'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + inner + '</svg>';
+    const IC = {
+        mic: svg('<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/>'),
+        micOff: svg('<path d="M9 9v2a3 3 0 0 0 5.1 2.1M15 9.3V5a3 3 0 0 0-5.9-.8"/><path d="M5 11a7 7 0 0 0 11.5 5.3M19 11a7 7 0 0 1-.6 2.8M12 18v4"/><path d="M3 3l18 18"/>'),
+        speaker: svg('<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>'),
+        speakerOff: svg('<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M22 9l-6 6M16 9l6 6"/>'),
+        wave: svg('<path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4"/>'),
+        cloud: svg('<path d="M7 18a4 4 0 0 1-.5-7.97A6 6 0 0 1 18 9a4.5 4.5 0 0 1 0 9H7z"/>'),
+        shield: svg('<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/>'),
+        lock: svg('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
+        userPlus: svg('<circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 12 0v1M19 8v6M16 11h6"/>'),
+        phoneOff: svg('<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/><path d="M3 3l18 18"/>')
+    };
     const $ = (sel, root = document) => root.querySelector(sel);
     const esc = (s) => String(s).replace(/[&<>"']/g, (c) =>
         ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -11347,6 +11457,17 @@ start "Serveur Python" cmd /k python serveur.py
     .vc-unlock-label { position: relative; display: inline-flex; align-items: center; gap: .6rem; }
     @keyframes vc-fill { to { transform: scaleX(1); } }
     #vcVoiceSecure.vc-secure-on { color: var(--secondary, #22c55e); border-color: var(--secondary, #22c55e); }
+
+    /* --- boutons d'appel toujours visibles + mute des autres --- */
+    .vc-panel { max-height: calc(100vh - 120px); max-height: calc(100dvh - 120px); }
+    .vc-tiles { flex: 1 1 auto; min-height: 0; }
+    .vc-controls { flex-shrink: 0; }
+    .vc-btn { min-width: 44px; }
+    .vc-btn svg { width: 20px; height: 20px; display: block; pointer-events: none; }
+    #vcMute { width: 52px; height: 52px; min-width: 52px; }
+    .vc-tile-mute { margin-left: auto; width: 38px; height: 38px; min-width: 38px; }
+    .vc-tile.vc-peer-muted .vc-avatar { opacity: .5; }
+    .vc-tile.vc-peer-muted .vc-tname { text-decoration: line-through; opacity: .8; }
     `;
     document.head.appendChild(style);
 
@@ -11369,12 +11490,13 @@ start "Serveur Python" cmd /k python serveur.py
         <div class="vc-tiles" id="vcTiles"></div>
         <div class="vc-voicehint"><div id="vcVoiceState"></div><div id="vcVoiceDiag"></div><div id="vcVoiceHeard"></div></div>
         <div class="vc-controls">
-            <button class="vc-btn" id="vcMute" title="Couper / activer le micro"><i class="fas fa-microphone"></i></button>
-            <button class="vc-btn" id="vcVoice" title="Commandes vocales : « coupe le son », « reprends le son », « raccroche »"><i class="fas fa-ear-listen"></i></button>
-            <button class="vc-btn" id="vcVoiceSecure" title="Basculer entre reconnaissance vocale native (Internet) et mode sécurisé (100% local)"><i class="fas fa-cloud"></i></button>
-            <button class="vc-btn" id="vcLockBtn" title="Verrouiller l'écran tactile"><i class="fas fa-lock"></i></button>
-            <button class="vc-btn" id="vcAdd" title="Inviter quelqu'un"><i class="fas fa-user-plus"></i></button>
-            <button class="vc-btn vc-danger" id="vcHang" title="Raccrocher"><i class="fas fa-phone-slash"></i></button>
+            <button class="vc-btn" id="vcMute" title="Couper / activer mon micro" aria-label="Couper ou activer mon micro">${IC.mic}</button>
+            <button class="vc-btn" id="vcMuteAll" title="Couper le son de tous les autres (uniquement pour moi)" aria-label="Couper ou rétablir le son de tous les autres">${IC.speaker}</button>
+            <button class="vc-btn" id="vcVoice" title="Commandes vocales : « coupe le son », « reprends le son », « coupe le son de Paul », « raccroche »" aria-label="Commandes vocales">${IC.wave}</button>
+            <button class="vc-btn" id="vcVoiceSecure" title="Basculer entre reconnaissance vocale native (Internet) et mode sécurisé (100% local)" aria-label="Mode de reconnaissance vocale">${IC.cloud}</button>
+            <button class="vc-btn" id="vcLockBtn" title="Verrouiller l'écran tactile" aria-label="Verrouiller l'écran tactile">${IC.lock}</button>
+            <button class="vc-btn" id="vcAdd" title="Inviter quelqu'un" aria-label="Inviter quelqu'un">${IC.userPlus}</button>
+            <button class="vc-btn vc-danger" id="vcHang" title="Raccrocher" aria-label="Raccrocher">${IC.phoneOff}</button>
         </div>`;
     document.body.appendChild(panel);
 
@@ -11510,6 +11632,8 @@ start "Serveur Python" cmd /k python serveur.py
         invited: new Set(),       // en train de sonner
         peers: new Map(),         // username -> { pc, audio, cand[], remoteSet, status }
         stream: null, sendTrack: null, muted: false, locked: false,
+        mutedPeers: new Set(),    // participants dont VOUS avez coupé le son (local)
+        mutedAll: false,          // « tous les autres » coupés (y compris ceux qui arrivent après)
         t0: 0, clock: null, watch: null, pending: null,
         incoming: new Map()       // call_id -> { el, timer }
     };
@@ -11579,16 +11703,58 @@ start "Serveur Python" cmd /k python serveur.py
         Call.participants.forEach((u) => {
             const me = u === STATE.currentUser;
             const peer = Call.peers.get(u);
-            const stat = me ? (Call.muted ? 'Vous · micro coupé' : 'Vous') : (peer ? peer.status : 'connexion…');
-            rows.push(tile(u, stat, false));
+            const muted = !me && Call.mutedPeers.has(u);
+            let stat = me ? (Call.muted ? 'Vous · micro coupé' : 'Vous') : (peer ? peer.status : 'connexion…');
+            if (muted) stat += ' · son coupé pour vous';
+            rows.push(tile(u, stat, false, me, muted));
         });
-        Call.invited.forEach((u) => rows.push(tile(u, 'sonne…', true)));
+        Call.invited.forEach((u) => rows.push(tile(u, 'sonne…', true, false, false)));
         box.innerHTML = rows.join('');
+        updateMuteAllBtn();
     }
-    function tile(u, stat, pending) {
-        return `<div class="vc-tile ${pending ? 'vc-pending' : ''}" data-user="${esc(u)}">
+    function tile(u, stat, pending, me, muted) {
+        const btn = (pending || me) ? '' : `<button class="vc-btn vc-tile-mute ${muted ? 'vc-off' : ''}" data-mute-user="${esc(u)}"
+                title="${muted ? 'Rétablir le son de ' : 'Couper le son de '}${esc(u)} (uniquement pour vous)"
+                aria-label="${muted ? 'Rétablir le son de ' : 'Couper le son de '}${esc(u)}">${muted ? IC.speakerOff : IC.speaker}</button>`;
+        return `<div class="vc-tile ${pending ? 'vc-pending' : ''} ${muted ? 'vc-peer-muted' : ''}" data-user="${esc(u)}">
             <div class="vc-avatar" style="background:${colorOf(u)}">${esc(u.charAt(0).toUpperCase())}</div>
-            <div><div class="vc-tname">${esc(u)}</div><div class="vc-tstat">${esc(stat)}</div></div></div>`;
+            <div><div class="vc-tname">${esc(u)}</div><div class="vc-tstat">${esc(stat)}</div></div>${btn}</div>`;
+    }
+
+    // ---- couper le son des AUTRES (uniquement chez soi : l'élément <audio> de chacun est mis en sourdine)
+    function applyPeerMute(user) {
+        const peer = Call.peers.get(user);
+        if (!peer || !peer.audio) return;
+        const m = Call.mutedPeers.has(user);
+        peer.audio.muted = m;
+        peer.audio.volume = m ? 0 : 1;
+    }
+    function setPeerMuted(user, on, quiet) {
+        if (!user || user === STATE.currentUser) return;
+        if (on) Call.mutedPeers.add(user); else Call.mutedPeers.delete(user);
+        applyPeerMute(user);
+        renderTiles();
+        if (!quiet) toast(on ? `Le son de ${user} est coupé (uniquement pour vous).` : `Le son de ${user} est rétabli.`, 'info');
+    }
+    function othersInCall() { return Call.participants.filter((u) => u !== STATE.currentUser); }
+    function setAllOthersMuted(on, quiet) {
+        Call.mutedAll = !!on;
+        othersInCall().forEach((u) => {
+            if (on) Call.mutedPeers.add(u); else Call.mutedPeers.delete(u);
+            applyPeerMute(u);
+        });
+        if (!on) Call.mutedPeers.clear();
+        renderTiles();
+        if (!quiet) toast(on ? "Le son des autres est coupé (uniquement pour vous)." : 'Le son des autres est rétabli.', 'info');
+    }
+    function updateMuteAllBtn() {
+        const b = $('#vcMuteAll');
+        if (!b) return;
+        const others = othersInCall();
+        const all = others.length > 0 && others.every((u) => Call.mutedPeers.has(u));
+        b.classList.toggle('vc-off', all);
+        b.innerHTML = all ? IC.speakerOff : IC.speaker;
+        b.title = all ? 'Rétablir le son de tous les autres' : 'Couper le son de tous les autres (uniquement pour moi)';
     }
     function showPanel(on) { panel.classList.toggle('vc-show', on); }
 
@@ -11708,6 +11874,7 @@ start "Serveur Python" cmd /k python serveur.py
             peer.audio = a;
         }
         peer.audio.srcObject = stream;
+        applyPeerMute(user); // respecte un « mute » posé avant l'arrivée du flux
         peer.audio.play().catch(() => {});
         watchLevel(user, stream);
     }
@@ -11758,45 +11925,39 @@ start "Serveur Python" cmd /k python serveur.py
         } catch (e) { console.error('[vocal] signal', p.kind, e); }
     }
 
-    // ------------------------------------------------------------------ commandes vocales
-    // Reconnaissance 100% locale : dès que le micro capte de la voix, on enregistre un
-    // court extrait et on l'envoie à /transcribe sur CE serveur (Whisper via faster-whisper),
-    // qui tourne sur le PC — aucune requête vers Internet, ça marche même sans accès au net.
-    const Voice = {
-        active: false, wanted: VC.VOICE.DEFAULT_ON, lastRemoteVoice: 0, failCount: 0,
-        an: null, buf: null, mr: null, chunks: [], recording: false, sending: false,
-        loopTimer: null, watchTimer: null, recStart: 0, lastLoud: 0,
-        // Mode sécurisé (100% local) désactivé par défaut : reconnaissance native (Internet)
-        // utilisée en premier, plus précise. Se souvient du choix de l'utilisateur.
-        secureMode: (localStorage.getItem(VC.VOICE.SECURE_STORAGE_KEY) === '1'),
-        nativeRec: null, nativeShouldRestart: false,
-
-        diag(text) {
-            const el = $('#vcVoiceDiag');
-            const stamp = new Date().toLocaleTimeString('fr-FR', { hour12: false });
-            if (el) el.textContent = `[diag ${stamp}] ${text}`;
-            console.log('[vocal][diag]', text);
-        },
-
+    // ------------------------------------------------------------------ compréhension des commandes
+    // BEGIN NLU
+    // Partagé par les DEUX moteurs (natif et Whisper) : mêmes phrases reconnues, même logique.
+    const NLU = {
         normalize(t) {
-            return t.toLowerCase()
-                .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // enlève les accents
-                .replace(/[.,!?;:]/g, '')
-                .trim();
+            return String(t || '').toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')   // enlève les accents
+                .replace(/[’'`´]/g, ' ')                            // l'appel -> l appel
+                .replace(/[^a-z0-9\s]/g, ' ')                       // ponctuation, tirets…
+                .replace(/\s+/g, ' ').trim();
         },
+        // Retire les « euh », « s'il te plaît », « tu peux »… au début et à la fin
         stripFillers(words) {
-            let a = 0, b = words.length;
-            const isFiller = (w) => VC.VOICE.FILLERS.some((f) => Voice.normalize(f) === w);
-            while (a < b && isFiller(words[a])) a++;
-            while (b > a && isFiller(words[b - 1])) b--;
-            return words.slice(a, b);
+            let text = words.join(' ');
+            const fillers = VC.VOICE.FILLERS.map((f) => NLU.normalize(f)).filter(Boolean)
+                .sort((a, b) => b.length - a.length);
+            let changed = true;
+            while (changed && text) {
+                changed = false;
+                for (const f of fillers) {
+                    if (text === f) { text = ''; changed = true; break; }
+                    if (text.startsWith(f + ' ')) { text = text.slice(f.length + 1); changed = true; break; }
+                    if (text.endsWith(' ' + f)) { text = text.slice(0, -(f.length + 1)); changed = true; break; }
+                }
+            }
+            return text ? text.split(' ') : [];
         },
-        // Distance d'édition (Levenshtein) entre deux mots : sert à tolérer les petites
-        // erreurs de transcription (ex: "coupe" reconnu "coup" ou "coup'").
+        // Distance d'édition (Levenshtein) : tolère les petites erreurs de transcription
         wordDist(a, b) {
             if (a === b) return 0;
             const m = a.length, n = b.length;
-            if (!m) return n; if (!n) return m;
+            if (!m) return n;
+            if (!n) return m;
             const d = Array.from({ length: m + 1 }, (_, i) => [i, ...Array(n).fill(0)]);
             for (let j = 0; j <= n; j++) d[0][j] = j;
             for (let i = 1; i <= m; i++) {
@@ -11815,9 +11976,7 @@ start "Serveur Python" cmd /k python serveur.py
             const allowed = maxLen <= 6 ? 1 : 2;
             return this.wordDist(a, b) <= allowed;
         },
-        // Score de correspondance entre ce qui a été dit et une phrase attendue :
-        // proportion des mots-clés de la phrase retrouvés (identiques ou proches) dans
-        // ce qui a été dit, peu importe l'ordre ou les mots en trop autour.
+        // Proportion des mots de la phrase attendue retrouvés (identiques ou proches), ordre libre
         matchScore(saidWords, phraseWords) {
             if (!phraseWords.length) return 0;
             let hit = 0;
@@ -11828,26 +11987,156 @@ start "Serveur Python" cmd /k python serveur.py
             }
             return hit / phraseWords.length;
         },
-        // Renvoie true si "said" correspond à une des phrases de la liste, avec tolérance
-        // aux petites erreurs de reconnaissance (mot mal capté, ordre légèrement différent).
         matches(said, list) {
-            const words = this.stripFillers(this.normalize(said).split(/\s+/).filter(Boolean));
+            const words = Array.isArray(said) ? said
+                : this.stripFillers(this.normalize(said).split(' ').filter(Boolean));
             if (!words.length) return false;
             return list.some((phrase) => {
-                const phraseWords = this.normalize(phrase).split(/\s+/).filter(Boolean);
+                const phraseWords = this.normalize(phrase).split(' ').filter(Boolean);
                 return this.matchScore(words, phraseWords) >= 0.8;
             });
         },
-        handle(said) {
-            const heardEl = Call.locked ? $('#vcLockVoice') : $('#vcVoiceHeard');
-            this.setHeard(heardEl, `« ${said} »`);
+        // Cherche un participant (autre que moi) nommé dans la phrase : prénom complet,
+        // un morceau du pseudo, ou une transcription proche (« Onix » pour « Oniix »).
+        findParticipant(words, ctx) {
+            const others = (ctx.participants || []).filter((u) => u !== ctx.me);
+            const hits = [];
+            for (const u of others) {
+                const toks = this.normalize(u).split(' ').filter((t) => t.length >= 2);
+                if (!toks.length) continue;
+                const full = toks.join('');
+                const ok = words.some((w) => w === full || toks.some((t) =>
+                    w === t
+                    || (t.length >= 4 && this.wordsClose(w, t))
+                    || (w.length >= 4 && (t.startsWith(w) || w.startsWith(t)) && t.length >= 4)));
+                if (ok) hits.push(u);
+            }
+            if (hits.length === 1) return { name: hits[0] };
+            if (hits.length > 1) return { ambiguous: hits };
+            return null;
+        },
+        // Transforme une phrase en commande : { action, name? } ou null.
+        // actions : hangup, lock, mute, unmute, muteOthers, unmuteOthers, muteUser, unmuteUser,
+        //           ambiguous, unknownUser
+        parse(said, ctx) {
+            const V = VC.VOICE;
+            ctx = ctx || { participants: [], me: null };
+            const words = this.stripFillers(this.normalize(said).split(' ').filter(Boolean));
+            if (!words.length || words.length > V.MAX_WORDS) return null;
+            if (words.some((w) => V.NEGATIONS.some((n) => this.normalize(n) === w))) return null;
+            const text = words.join(' ');
+            const N = (arr) => arr.map((x) => this.normalize(x));
+            // Mots-clés : correspondance exacte, ou à 1 lettre près pour les mots de 7 lettres et plus
+            // (assez strict pour ne pas confondre « désactive » et « réactive », « entendre » et « éteindre »)
+            const has = (list) => { const L = N(list); return words.some((w) =>
+                L.some((x) => w === x || (x.length >= 7 && w.length >= 7 && this.wordDist(w, x) <= 1))); };
+            const hasPhrase = (list) => { const L = N(list); return L.some((x) => (' ' + text + ' ').includes(' ' + x + ' ')); };
+
+            if (this.matches(words, V.HANGUP)) return { action: 'hangup' };
+            if (this.matches(words, V.LOCK)) return { action: 'lock' };
+
+            // Un mot « qui défait » (démute, retire la sourdine…) l'emporte sur les mots de sourdine
+            const unmuteVerb = has(V.UNMUTE_VERBS);
+            const muteVerb = !unmuteVerb && has(V.MUTE_VERBS);
+            const wantsUnmute = unmuteVerb;
+
+            // 1. Tous les autres
+            const othersWord = hasPhrase(V.OTHERS_WORDS);
+            if (unmuteVerb || !muteVerb) { if (this.matches(words, V.UNMUTE_OTHERS)) return { action: 'unmuteOthers' }; }
+            if (muteVerb || !unmuteVerb) { if (this.matches(words, V.MUTE_OTHERS)) return { action: 'muteOthers' }; }
+            if (othersWord && (muteVerb || unmuteVerb)) return { action: wantsUnmute ? 'unmuteOthers' : 'muteOthers' };
+
+            if (!muteVerb && !unmuteVerb && !this.matches(words, V.MUTE) && !this.matches(words, V.UNMUTE)) return null;
+
+            // 2. Une personne précise
+            const who = this.findParticipant(words, ctx);
+            if (who && who.ambiguous) return { action: 'ambiguous', names: who.ambiguous };
+            if (who && who.name) return { action: wantsUnmute ? 'unmuteUser' : 'muteUser', name: who.name };
+            // « le son de <quelqu'un> » non reconnu parmi les participants : on n'agit pas sur MON micro
+            if (/\b(son|micro|voix|audio|parole)\s+(de|du|d)\s+(?!moi\b|mon\b|ma\b|mes\b|me\b)\w+/.test(text)) {
+                return { action: 'unknownUser' };
+            }
+
+            // 3. Mon propre micro
+            const selfObj = has(V.SELF_OBJECTS);
+            const phraseMute = this.matches(words, V.MUTE), phraseUnmute = this.matches(words, V.UNMUTE);
+            if (wantsUnmute) return (phraseUnmute || selfObj) ? { action: 'unmute' } : null;
+            if (muteVerb) return (phraseMute || selfObj) ? { action: 'mute' } : null;
+            if (phraseUnmute) return { action: 'unmute' };
+            if (phraseMute) return { action: 'mute' };
+            return null;
+        }
+    };
+    // END NLU
+
+    // ------------------------------------------------------------------ commandes vocales
+    // Reconnaissance 100% locale : dès que le micro capte de la voix, on enregistre un
+    // court extrait et on l'envoie à /transcribe sur CE serveur (Whisper via faster-whisper),
+    // qui tourne sur le PC — aucune requête vers Internet, ça marche même sans accès au net.
+    const Voice = {
+        active: false, wanted: VC.VOICE.DEFAULT_ON, lastRemoteVoice: 0, failCount: 0,
+        an: null, buf: null, mr: null, chunks: [], recording: false, sending: false,
+        loopTimer: null, watchTimer: null, recStart: 0, lastLoud: 0,
+        // Mode sécurisé (100% local) désactivé par défaut : reconnaissance native (Internet)
+        // utilisée en premier, plus précise. Se souvient du choix de l'utilisateur.
+        secureMode: (localStorage.getItem(VC.VOICE.SECURE_STORAGE_KEY) === '1'),
+        nativeRec: null, nativeShouldRestart: false, nativeNetErrors: 0, _lastKey: '', _lastAt: 0,
+
+        diag(text) {
+            const el = $('#vcVoiceDiag');
+            const stamp = new Date().toLocaleTimeString('fr-FR', { hour12: false });
+            if (el) el.textContent = `[diag ${stamp}] ${text}`;
+            console.log('[vocal][diag]', text);
+        },
+
+        normalize(t) { return NLU.normalize(t); },
+        stripFillers(words) { return NLU.stripFillers(words); },
+        wordDist(a, b) { return NLU.wordDist(a, b); },
+        wordsClose(a, b) { return NLU.wordsClose(a, b); },
+        matchScore(saidWords, phraseWords) { return NLU.matchScore(saidWords, phraseWords); },
+        matches(said, list) { return NLU.matches(said, list); },
+        heardEl() { return Call.locked ? $('#vcLockVoice') : $('#vcVoiceHeard'); },
+        context() { return { participants: Call.participants.slice(), me: STATE.currentUser }; },
+
+        // « said » : une phrase, ou la liste des hypothèses du moteur natif (la meilleure d'abord)
+        handle(input) {
+            const alts = (Array.isArray(input) ? input : [input]).filter(Boolean);
+            if (!alts.length) return;
+            const heardEl = this.heardEl();
+            this.setHeard(heardEl, `« ${alts[0]} »`);
             clearTimeout(this._clearHeard);
             this._clearHeard = setTimeout(() => this.setHeard(heardEl, ''), 4000);
 
-            if (VC.VOICE.IGNORE_WHILE_REMOTE_SPEAKS && Date.now() - this.lastRemoteVoice < 500) return;
-            if (this.matches(said, VC.VOICE.HANGUP)) { hangup(); return; }
-            if (this.matches(said, VC.VOICE.MUTE)) { if (!Call.muted) toggleMute(); return; }
-            if (this.matches(said, VC.VOICE.UNMUTE)) { if (Call.muted) toggleMute(); return; }
+            const guard = this.secureMode ? 500 : VC.VOICE.NATIVE_REMOTE_GUARD_MS;
+            if (VC.VOICE.IGNORE_WHILE_REMOTE_SPEAKS && Date.now() - this.lastRemoteVoice < guard) return;
+
+            // Même phrase reçue deux fois de suite (redémarrage du moteur) : une seule exécution
+            const key = NLU.normalize(alts[0]);
+            if (key && key === this._lastKey && Date.now() - this._lastAt < 1500) return;
+
+            for (const alt of alts) {
+                const cmd = NLU.parse(alt, this.context());
+                if (cmd) {
+                    this._lastKey = key; this._lastAt = Date.now();
+                    this.execute(cmd, alt);
+                    return;
+                }
+            }
+        },
+        execute(cmd, said) {
+            this.diag(`commande : ${cmd.action}${cmd.name ? ' → ' + cmd.name : ''} (« ${said} »)`);
+            switch (cmd.action) {
+                case 'hangup': hangup(); break;
+                case 'mute': if (!Call.muted) toggleMute(); break;
+                case 'unmute': if (Call.muted) toggleMute(); break;
+                case 'muteOthers': setAllOthersMuted(true); break;
+                case 'unmuteOthers': setAllOthersMuted(false); break;
+                case 'muteUser': setPeerMuted(cmd.name, true); break;
+                case 'unmuteUser': setPeerMuted(cmd.name, false); break;
+                case 'lock': lockTouch(); break;
+                case 'ambiguous': toast(`Plusieurs personnes possibles : ${cmd.names.join(', ')}. Précisez le nom.`, 'info'); break;
+                case 'unknownUser': toast("Je n'ai pas reconnu de qui il s'agit dans l'appel.", 'info'); break;
+            }
         },
         setHeard(el, text) { if (el) el.textContent = text || ''; },
 
@@ -11883,14 +12172,24 @@ start "Serveur Python" cmd /k python serveur.py
             try { rec = new SR(); } catch (e) { this.diag('reconnaissance native impossible : ' + e.message); return; }
             rec.lang = 'fr-FR';
             rec.continuous = true;
-            rec.interimResults = false;
-            rec.maxAlternatives = 1;
+            rec.interimResults = true;   // texte provisoire affiché ; seules les phrases finales déclenchent
+            rec.maxAlternatives = 5;     // on essaie toutes les hypothèses du moteur contre la bibliothèque
+            this.nativeNetErrors = 0;
             rec.onresult = (event) => {
-                const res = event.results[event.results.length - 1];
-                if (!res || !res.isFinal) return;
-                const said = ((res[0] && res[0].transcript) || '').trim();
-                this.failCount = 0;
-                if (said) { this.diag(`texte reconnu (natif) : « ${said} »`); this.handle(said); }
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const res = event.results[i];
+                    const alts = [];
+                    for (let k = 0; k < res.length; k++) {
+                        const t = ((res[k] && res[k].transcript) || '').trim();
+                        if (t) alts.push(t);
+                    }
+                    if (!alts.length) continue;
+                    if (!res.isFinal) { this.setHeard(this.heardEl(), `… ${alts[0]}`); continue; }
+                    this.failCount = 0;
+                    this.nativeNetErrors = 0;
+                    this.diag(`texte reconnu (natif) : « ${alts[0]} »`);
+                    this.handle(alts);
+                }
             };
             rec.onerror = (event) => {
                 this.diag('erreur reconnaissance native : ' + event.error);
@@ -11900,11 +12199,23 @@ start "Serveur Python" cmd /k python serveur.py
                     this.stop();
                     return;
                 }
-                // 'no-speech', 'network', 'aborted'... : onend va relancer automatiquement.
+                // Pas d'Internet / micro indisponible pour le moteur : après quelques échecs d'affilée,
+                // on bascule seul sur Whisper (local) pour que les commandes continuent de marcher.
+                if (event.error === 'network' || event.error === 'audio-capture' || event.error === 'language-not-supported') {
+                    this.nativeNetErrors++;
+                    if (this.nativeNetErrors >= VC.VOICE.NATIVE_MAX_NETWORK_ERRORS) this.fallbackToLocal(event.error);
+                }
+                // 'no-speech', 'aborted'... : onend va relancer automatiquement.
             };
             rec.onend = () => {
-                if (this.active && this.wanted && !this.secureMode && this.nativeShouldRestart && Call.state === 'active') {
-                    try { rec.start(); } catch (e) { /* déjà démarrée, on ignore */ }
+                if (this.nativeRec === rec && this.active && this.wanted && !this.secureMode
+                    && this.nativeShouldRestart && Call.state === 'active') {
+                    const delay = Math.min(2000, 150 + this.nativeNetErrors * 500);
+                    setTimeout(() => {
+                        if (this.nativeRec === rec && this.active && this.nativeShouldRestart && Call.state === 'active') {
+                            try { rec.start(); } catch (e) { /* déjà démarrée, on ignore */ }
+                        }
+                    }, delay);
                 }
             };
             try { rec.start(); } catch (e) { this.diag('démarrage reconnaissance native impossible : ' + e.message); return; }
@@ -11914,6 +12225,18 @@ start "Serveur Python" cmd /k python serveur.py
             this.failCount = 0;
             this.diag('écoute native démarrée (Internet requis), en attente de voix…');
             updateVoiceBtn();
+        },
+
+        // Le moteur natif ne répond pas (souvent : pas d'Internet) : on passe en local pour cet appel,
+        // sans écraser le choix mémorisé de l'utilisateur.
+        fallbackToLocal(reason) {
+            if (this.secureMode) return;
+            this.diag(`moteur natif inutilisable (${reason}) : bascule en mode sécurisé local`);
+            toast('Reconnaissance native indisponible (pas d\'Internet ?) : bascule en mode local (Whisper).', 'info');
+            this.stop();
+            this.secureMode = true;
+            updateSecureBtn();
+            this.start();
         },
 
         // ---- Mode sécurisé : 100% local, MediaRecorder -> /transcribe -> Whisper ----
@@ -12009,7 +12332,9 @@ start "Serveur Python" cmd /k python serveur.py
                 fd.append('file', blob, 'commande.' + (mime.includes('ogg') ? 'ogg' : 'webm'));
                 // On indique à Whisper les formulations attendues : sur un vocabulaire de
                 // commandes fermé comme ici, ça améliore nettement la reconnaissance.
-                const hints = [...VC.VOICE.MUTE, ...VC.VOICE.UNMUTE, ...VC.VOICE.HANGUP].join(', ');
+                const names = Call.participants.filter((u) => u !== STATE.currentUser);
+                const hints = [...VC.VOICE.MUTE, ...VC.VOICE.UNMUTE, ...VC.VOICE.HANGUP,
+                    ...VC.VOICE.MUTE_OTHERS, ...VC.VOICE.UNMUTE_OTHERS, ...VC.VOICE.LOCK, ...names].join(', ');
                 fd.append('hints', hints);
                 const res = await fetch(`${STATE.serverUrl}/transcribe`, { method: 'POST', body: fd });
                 if (!res.ok) {
@@ -12067,7 +12392,7 @@ start "Serveur Python" cmd /k python serveur.py
         b.classList.toggle('vc-off', !(Voice.active || Voice.wanted));
         const state = $('#vcVoiceState');
         if (state) state.textContent = (Voice.active || Voice.wanted)
-            ? `Commandes vocales actives (${Voice.secureMode ? '100% local' : 'natif, Internet'}) : « coupe le son » · « reprends le son » · « raccroche »`
+            ? `Commandes vocales actives (${Voice.secureMode ? '100% local' : 'natif, Internet'}) : « coupe le son » · « reprends le son » · « coupe le son de [prénom] » · « mute tout le monde » · « raccroche »`
             : 'Commandes vocales désactivées';
         updateSecureBtn();
     }
@@ -12079,8 +12404,7 @@ start "Serveur Python" cmd /k python serveur.py
         s.title = Voice.secureMode
             ? 'Mode sécurisé (100% local) actif — cliquer pour repasser en reconnaissance native (Internet)'
             : 'Reconnaissance native active (Internet) — cliquer pour passer en mode sécurisé (100% local)';
-        const icon = s.querySelector('i');
-        if (icon) icon.className = Voice.secureMode ? 'fas fa-shield-halved' : 'fas fa-cloud';
+        s.innerHTML = Voice.secureMode ? IC.shield : IC.cloud;
     }
 
     $('#vcVoice').addEventListener('click', () => { Voice.active || Voice.wanted ? Voice.stop() : Voice.start(); });
@@ -12119,9 +12443,11 @@ start "Serveur Python" cmd /k python serveur.py
         clearInterval(Call.clock); clearInterval(Call.watch); clearTimeout(Call.pending);
         Call.state = 'idle'; Call.id = null; Call.host = null;
         Call.participants = []; Call.invited = new Set(); Call.muted = false; Call.locked = false;
+        Call.mutedPeers = new Set(); Call.mutedAll = false;
         const m = $('#vcMute');
         m.classList.remove('vc-off');
-        m.innerHTML = '<i class="fas fa-microphone"></i>';
+        m.innerHTML = IC.mic;
+        updateMuteAllBtn();
         showPanel(false);
         lockScreen.classList.remove('vc-show');
         Voice.stop();
@@ -12199,7 +12525,8 @@ start "Serveur Python" cmd /k python serveur.py
         if (Call.sendTrack) Call.sendTrack.enabled = !Call.muted;
         const m = $('#vcMute');
         m.classList.toggle('vc-off', Call.muted);
-        m.innerHTML = Call.muted ? '<i class="fas fa-microphone-slash"></i>' : '<i class="fas fa-microphone"></i>';
+        m.innerHTML = Call.muted ? IC.micOff : IC.mic;
+        m.title = Call.muted ? 'Réactiver mon micro' : 'Couper mon micro';
         renderTiles();
     }
 
@@ -12278,6 +12605,7 @@ start "Serveur Python" cmd /k python serveur.py
             case 'call_participant_joined':
                 if (d.call_id !== Call.id) break;
                 if (!Call.participants.includes(d.username)) Call.participants.push(d.username);
+                if (Call.mutedAll) Call.mutedPeers.add(d.username); // « tous les autres » reste coupé pour les nouveaux
                 Call.invited = new Set((d.call && d.call.invited) || []);
                 toast(`${d.username} a rejoint l'appel`, 'info');
                 renderTiles();
@@ -12371,6 +12699,19 @@ start "Serveur Python" cmd /k python serveur.py
     $('#vcAdd').addEventListener('click', () => openPicker());
     $('#vcHang').addEventListener('click', hangup);
     $('#vcMute').addEventListener('click', toggleMute);
+    $('#vcMuteAll').addEventListener('click', () => {
+        const others = othersInCall();
+        const all = others.length > 0 && others.every((u) => Call.mutedPeers.has(u));
+        if (!others.length) { toast("Personne d'autre dans l'appel.", 'info'); return; }
+        setAllOthersMuted(!all);
+    });
+    // Un bouton haut-parleur par participant (délégation : survit aux réaffichages de la liste)
+    $('#vcTiles').addEventListener('click', (e) => {
+        const b = e.target.closest('[data-mute-user]');
+        if (!b) return;
+        const u = b.getAttribute('data-mute-user');
+        setPeerMuted(u, !Call.mutedPeers.has(u));
+    });
 
     // Petit bouton "téléphone" à côté de chaque utilisateur en ligne (appel direct)
     const originalUsersList = window.updateOnlineUsersList;
@@ -12401,6 +12742,7 @@ start "Serveur Python" cmd /k python serveur.py
         if (Call.id) wsSend({ type: 'call_leave', call_id: Call.id });
     });
 })();
+
 
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/html_et_css/réseau_local\reseau_local_08\vocal.js ---
