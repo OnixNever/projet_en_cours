@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Tactique – Plan v3</title>
+<style>
+html,body{margin:0;height:100%;background:#0b0f14;color:#cfe3f5;font-family:system-ui,sans-serif;overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none}
+.bar{position:fixed;top:8px;left:8px;display:flex;gap:6px;align-items:center}
+.bar button{background:#1b2735;color:#cfe3f5;border:1px solid #34475c;border-radius:6px;padding:8px 12px;font-size:14px}
+.bar button:disabled{opacity:.35}
+#lvl{min-width:72px;text-align:center;font-size:14px;background:#0b0f14cc;padding:8px 6px;border-radius:6px;border:1px solid #34475c}
+#info{position:fixed;bottom:8px;left:8px;right:8px;font-size:13px;opacity:.8;background:#0b0f14aa;padding:4px 8px;border-radius:6px}
+</style></head><body>
+<canvas id="c"></canvas>
+<div class="bar">
+  <button id="bGen">Nouvelle map</button>
+  <button id="bDn" title="Étage inférieur">▼</button>
+  <span id="lvl">RDC</span>
+  <button id="bUp" title="Étage supérieur">▲</button>
+</div>
+<div id="info">Molette / pincement = zoom · glisser = déplacer · clic = placer l'opérateur · clic sur un escalier ▲▼ = changer d'étage · ▲▼ en haut = afficher un autre étage · la souris oriente son regard</div>
+<script>
+/* Tuiles
+ 0 sol (biome ; vide aux étages)   1 mur        2 sol intérieur   3 porte      4 fenêtre
+ 6 eau   7 escalier montant   8 escalier descendant   9 chemin / dalles   10 roche
+ 11 caisse   12 pelouse   13 haie   14 route   15 trottoir   16 parking / béton
+ 17 route axe horizontal   18 route axe vertical   19 place de parking   20 porte de garage   21 pilier
+ Les arbres sont une couche séparée (tr). */
+const W=200,H=130,cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const GROUND=['#58994a','#3f7a3c','#cdb06a','#e6eef5','#d6c384','#1d4e7a','#6e6e72'];
+const TREEC=['#2f7a31','#1f5a2a','#6b8a3a','#2d6a50','#6b8a3a','#2e6b2b','#2e6b2b'];
+const INT='#a9a193',WALLC='#1f2429';
+const SW=new Set([1,3,4,20]);
+const WK=new Set([2,3,7,8,9,12,14,15,16,17,18,19,20]);
+let LV,tr,bio,occ,stairs,spawn,cityR,cam={x:0,y:0,z:8},op={x:0,y:0,a:0,l:0,set:false},vl=0;
+const FOV=110;
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function hash(i,j,s){let h=(Math.imul(i,374761393)+Math.imul(j,668265263)+Math.imul(s,1442695041))|0;h=Math.imul(h^(h>>>13),1274126177);return((h^(h>>>16))>>>0)/4294967295}
+function vn(x,y,s){const i=Math.floor(x),j=Math.floor(y),fx=x-i,fy=y-j,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
+  const a=hash(i,j,s),b=hash(i+1,j,s),c=hash(i,j+1,s),d=hash(i+1,j+1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
+const fbm=(x,y,s)=>(vn(x/20,y/20,s)+.5*vn(x/10,y/10,s+7)+.25*vn(x/5,y/5,s+13))/1.75;
+
+/* ---------- utilitaires de construction ---------- */
+const lv=l=>{while(LV.length<=l)LV.push(new Uint8Array(W*H));return LV[l]};
+const put=(G,x,y,t)=>{if(x>=0&&y>=0&&x<W&&y<H)G[y*W+x]=t};
+const fillR=(G,x,y,w,h,t)=>{for(let j=y;j<y+h;j++)for(let i=x;i<x+w;i++)put(G,i,j,t)};
+function pathTo(G,x,y0,y1,t=9){const s=Math.sign(y1-y0)||1;for(let y=y0;y!==y1+s;y+=s)put(G,x,y,t)}
+function shell(G,x,y,w,h){for(let j=y;j<y+h;j++)for(let i=x;i<x+w;i++)G[j*W+i]=(i===x||j===y||i===x+w-1||j===y+h-1)?1:2}
+function bsp(G,x,y,w,h,minR,pStop,segs){
+  const cV=w>=2*minR+1,cH=h>=2*minR+1;
+  if(!cV&&!cH)return;
+  if(Math.random()<pStop&&w*h<70)return;
+  if(cV&&(!cH||Math.random()<w/(w+h))){const s=rnd(minR,w-minR-1),wx=x+s;
+    for(let j=y;j<y+h;j++)G[j*W+wx]=1;segs.push({v:1,p:wx,a:y,l:h});
+    bsp(G,x,y,s,h,minR,pStop,segs);bsp(G,wx+1,y,w-s-1,h,minR,pStop,segs)}
+  else{const s=rnd(minR,h-minR-1),wy=y+s;
+    for(let i=x;i<x+w;i++)G[wy*W+i]=1;segs.push({v:0,p:wy,a:x,l:w});
+    bsp(G,x,y,w,s,minR,pStop,segs);bsp(G,x,wy+1,w,h-s-1,minR,pStop,segs)}
+}
+function doors(G,segs){
+  for(const s of segs){const c=[];
+    for(let k=1;k<s.l-1;k++){const x=s.v?s.p:s.a+k,y=s.v?s.a+k:s.p;
+      const A=s.v?G[y*W+x-1]:G[(y-1)*W+x],B=s.v?G[y*W+x+1]:G[(y+1)*W+x];
+      if(A===2&&B===2)c.push(y*W+x)}
+    if(c.length)G[c[rnd(0,c.length-1)]]=3}
+}
+function windows(G,x,y,w,h,mod){
+  for(let i=1;i<w-1;i++){if(i%mod!==1)continue;
+    if(G[y*W+x+i]===1&&G[(y+1)*W+x+i]===2)G[y*W+x+i]=4;
+    const by=y+h-1;if(G[by*W+x+i]===1&&G[(by-1)*W+x+i]===2)G[by*W+x+i]=4}
+  for(let j=1;j<h-1;j++){if(j%mod!==1)continue;
+    if(G[(y+j)*W+x]===1&&G[(y+j)*W+x+1]===2)G[(y+j)*W+x]=4;
+    const bx=x+w-1;if(G[(y+j)*W+bx]===1&&G[(y+j)*W+bx-1]===2)G[(y+j)*W+bx]=4}
+}
+function splitRun(a,b,mn,mx,avoid){const out=[];let cur=a;
+  for(;;){const rem=b-cur+1;if(rem<=mx)break;let w=rnd(mn,mx);if(rem-w-1<mn)w=rem-mn-1;if(w<mn)break;out.push(cur+w);cur=cur+w+1}
+  return avoid==null?out:out.map(p=>p===avoid?p+1:p)}
+
+/* ---------- types de bâtiments ---------- */
+// Maison : pièces par partition, porte d'entrée côté rue (f = -1 nord, +1 sud), porte de jardin éventuelle
+function house(x,y,w,h,f){
+  const G=LV[0];shell(G,x,y,w,h);
+  const segs=[];bsp(G,x+1,y+1,w-2,h-2,3,.08,segs);doors(G,segs);
+  const cand=(iy,from,to)=>{const c=[];for(let xx=from;xx<to;xx++)if(G[iy*W+xx]===2)c.push(xx);return c.length?c[rnd(0,c.length-1)]:-1};
+  const fy=f<0?y:y+h-1,iy=f<0?y+1:y+h-2;
+  let dx=cand(iy,x+2,x+w-2);if(dx<0)dx=cand(iy,x+1,x+w-1);
+  if(dx<0){dx=x+(w>>1);G[iy*W+dx]=2}
+  G[fy*W+dx]=3;
+  if(Math.random()<.6){const by=f<0?y+h-1:y,bi=f<0?y+h-2:y+1,bx=cand(bi,x+2,x+w-2);
+    if(bx>=0){G[by*W+bx]=3;put(G,bx,by-f,9)}}
+  windows(G,x,y,w,h,3);
+  return [dx,fy];
+}
+// Grand bâtiment (bureaux / commerce) : couloir central, rangées de pièces, hall d'entrée à double porte
+function office(x,y,w,h,f){
+  const G=LV[0];shell(G,x,y,w,h);
+  const c0=y+((h-3)>>1),rT=c0-1,rB=c0+3,fyy=f<0?y:y+h-1;
+  for(let i=x+1;i<x+w-1;i++){G[rT*W+i]=1;G[rB*W+i]=1}
+  const strips=[{y0:y+1,y1:rT-1,wr:rT,front:f<0},{y0:rB+1,y1:y+h-2,wr:rB,front:f>0}];
+  let entrance=[x+(w>>1),fyy];
+  for(const s of strips){
+    const walls=splitRun(x+1,x+w-2,5,8),b=[x,...walls,x+w-1];
+    for(const p of walls)for(let j=s.y0;j<=s.y1;j++)G[j*W+p]=1;
+    let lob=-1;
+    if(s.front){let bd=1e9;for(let k=0;k<b.length-1;k++){const d=Math.abs((b[k]+b[k+1])/2-(x+w/2));if(d<bd){bd=d;lob=k}}}
+    for(let k=0;k<b.length-1;k++){
+      const a=b[k]+1,e=b[k+1]-1;if(e<a)continue;
+      if(k===lob){
+        for(let i=a;i<=e;i++)G[s.wr*W+i]=2;
+        const mid=(a+e)>>1;G[fyy*W+mid]=3;if(mid+1<=e)G[fyy*W+mid+1]=3;
+        entrance=[mid,fyy];
+        if(e-a>=6){G[s.wr*W+a+1]=21;G[s.wr*W+e-1]=21}
+      }else G[s.wr*W+rnd(a,e)]=3;
+    }
+  }
+  const cm=c0+1;G[cm*W+x]=3;G[cm*W+x+w-1]=3;
+  windows(G,x,y,w,h,3);
+  return entrance;
+}
+// Tour : 3 à 5 étages, noyau central avec escalier, couloir en anneau, bureaux en façade
+function tower(tx,ty,f){
+  const nl=rnd(3,5),T=21,mid=10;
+  for(let l=0;l<nl;l++){
+    const G=lv(l),P=(i,j,t)=>{G[(ty+j)*W+tx+i]=t};
+    shell(G,tx,ty,T,T);
+    for(let i=1;i<=19;i++){P(i,5,1);P(i,15,1)}
+    for(let j=6;j<=14;j++){P(5,j,1);P(15,j,1)}
+    for(let i=8;i<=12;i++){P(i,8,1);P(i,12,1)}
+    for(let j=8;j<=12;j++){P(8,j,1);P(12,j,1)}
+    for(const [r0,r1,wr,ext] of [[1,4,5,0],[16,19,15,20]]){
+      const walls=splitRun(1,19,5,8,mid),b=[0,...walls,20];
+      for(const p of walls){for(let j=r0;j<=r1;j++)P(p,j,1);P(p,rnd(r0,r1),3)}
+      for(let k=0;k<b.length-1;k++){const a=b[k]+1,e=b[k+1]-1,lo=Math.max(a,6),hi=Math.min(e,14);
+        if(lo<=hi)P((a<=mid&&mid<=e)?mid:rnd(lo,hi),wr,3)}
+      if(l===0&&((f>0&&ext===20)||(f<0&&ext===0)))P(mid,ext,3);
+    }
+    for(const [c0,c1,wc] of [[1,4,5],[16,19,15]]){
+      const walls=splitRun(6,14,4,5),b=[5,...walls,15];
+      for(const q of walls)for(let i=c0;i<=c1;i++)P(i,q,1);
+      for(let k=0;k<b.length-1;k++){const a=b[k]+1,e=b[k+1]-1;if(e>=a)P(wc,rnd(a,e),3)}
+    }
+    P(mid,8,3);P(mid,12,3);
+    if(l<nl-1){P(9,10,7);stairs.set(`${l}:${tx+9}:${ty+10}`,[l+1,tx+11,ty+10])}
+    if(l>0){P(11,10,8);stairs.set(`${l}:${tx+11}:${ty+10}`,[l-1,tx+9,ty+10])}
+    windows(G,tx,ty,T,T,2);
+  }
+  return [tx+mid,f>0?ty+20:ty];
+}
+// Entrepôt : grande halle, bureau au fond, caisses, portes de garage
+function ware(x,y,w,h,f){
+  const G=LV[0];shell(G,x,y,w,h);
+  const cx=x+(w>>1),fy=f<0?y:y+h-1;
+  const oy=f<0?y+h-6:y+1,wr=f<0?oy-1:oy+5,lo=Math.min(oy,wr),hi=Math.max(oy+4,wr);
+  for(let i=x+1;i<=x+7;i++)G[wr*W+i]=1;
+  for(let j=lo;j<=hi;j++)G[j*W+x+7]=1;
+  G[wr*W+x+3]=3;
+  for(let xx=x+2;xx<x+w-4;xx+=5)for(let yy=y+2;yy<y+h-4;yy+=5){
+    if(Math.abs(xx+1-cx)<4)continue;
+    if(xx<x+9&&yy+1>=lo&&yy<=hi)continue;
+    if(Math.random()<.15)continue;
+    for(let a=0;a<2;a++)for(let b=0;b<2;b++)if(G[(yy+b)*W+xx+a]===2)G[(yy+b)*W+xx+a]=11}
+  for(let i=cx-2;i<=cx+2;i++)G[fy*W+i]=20;
+  const px=x+w-4,pi=f<0?y+1:y+h-2;if(G[pi*W+px]===2)G[fy*W+px]=3;
+  windows(G,x,y,w,h,3);
+  return [cx,fy];
+}
+
+/* ---------- îlots urbains ---------- */
+function lot(x0,y0,x1,y1,f){
+  const G=LV[0];
+  for(let i=x0;i<=x1;i++){G[y0*W+i]=13;G[y1*W+i]=13}
+  for(let j=y0;j<=y1;j++){G[j*W+x0]=13;G[j*W+x1]=13}
+  const iw=x1-x0-1,id=y1-y0-1,fyr=f<0?y0:y1;
+  const hw=Math.min(rnd(7,11),iw-2),hd=Math.min(rnd(7,9),id-3);
+  if(hw>=6&&hd>=6&&Math.random()>.1){
+    const hx=x0+1+rnd(1,iw-hw-1),fy=Math.max(1,Math.min(rnd(3,4),id-hd-1)),hy=f<0?y0+1+fy:y1-fy-hd;
+    const d=house(hx,hy,hw,hd,f);
+    pathTo(G,d[0],d[1]+f,fyr);
+    if(!spawn)spawn={x:d[0]+.5,y:d[1]-f+.5,a:f>0?Math.PI/2:-Math.PI/2};
+  }else G[fyr*W+rnd(x0+2,x1-2)]=12;
+  for(let j=y0+1;j<y1;j++)for(let i=x0+1;i<x1;i++)if(G[j*W+i]===12&&Math.random()<.05)tr[j*W+i]=1;
+}
+function blockRes(bx,by,bw,bh){
+  const G=LV[0];fillR(G,bx,by,bw,bh,12);
+  const mid=by+(bh>>1);
+  for(const r of [{y0:by,y1:mid,f:-1},{y0:mid,y1:by+bh-1,f:1}]){
+    const k=Math.max(2,Math.round(bw/rnd(12,14))),p=[];
+    for(let i=0;i<=k;i++)p.push(bx+Math.round(i*(bw-1)/k));
+    for(let i=0;i<k;i++)lot(p[i],r.y0,p[i+1],r.y1,r.f);
+  }
+}
+function blockBig(bx,by,bw,bh){
+  const G=LV[0];fillR(G,bx,by,bw,bh,12);
+  const f=Math.random()<.5?1:-1,w=rnd(22,bw-5),h=rnd(13,16),x=bx+((bw-w)>>1),y=f>0?by+2:by+bh-2-h;
+  const py0=f>0?y+h+1:by+1,py1=f>0?by+bh-2:y-2;
+  for(let j=py0;j<=py1;j++){const r=(j-py0)%5;for(let i=bx+1;i<bx+bw-1;i++)G[j*W+i]=r<2?19:16}
+  const e=office(x,y,w,h,f),edge=f>0?by+bh-1:by;
+  for(let i=x;i<x+w;i++)put(G,i,e[1]+f,15);
+  pathTo(G,e[0],e[1]+f,edge);pathTo(G,e[0]+1,e[1]+f,edge);
+  for(let j=by;j<by+bh;j++)for(let i=bx;i<bx+bw;i++)if(G[j*W+i]===12&&Math.random()<.07)tr[j*W+i]=1;
+}
+function blockTower(bx,by,bw,bh){
+  const G=LV[0];fillR(G,bx,by,bw,bh,12);
+  const T=21,tx=bx+((bw-T)>>1),ty=by+((bh-T)>>1),f=Math.random()<.5?1:-1;
+  fillR(G,tx-2,ty-2,T+4,T+4,9);
+  const e=tower(tx,ty,f);
+  pathTo(G,e[0],e[1]+f,f>0?by+bh-1:by);
+  for(let j=by;j<by+bh;j++)for(let i=bx;i<bx+bw;i++)if(G[j*W+i]===12&&Math.random()<.08)tr[j*W+i]=1;
+}
+function blockWare(bx,by,bw,bh){
+  const G=LV[0];fillR(G,bx,by,bw,bh,16);
+  const f=Math.random()<.5?1:-1,w=rnd(22,bw-4),h=rnd(14,17),x=bx+((bw-w)>>1),y=f>0?by+2:by+bh-2-h;
+  for(let i=bx;i<bx+bw;i++){put(G,i,by,12);put(G,i,by+bh-1,12)}
+  for(let j=by;j<by+bh;j++){put(G,bx,j,12);put(G,bx+bw-1,j,12)}
+  const e=ware(x,y,w,h,f),edge=f>0?by+bh-1:by;
+  for(let k=-2;k<=2;k++)pathTo(G,e[0]+k,e[1]+f,edge,16);
+  for(let j=by;j<by+bh;j++)for(let i=bx;i<bx+bw;i++)if(G[j*W+i]===12&&Math.random()<.25)tr[j*W+i]=1;
+}
+function blockPark(bx,by,bw,bh){
+  const G=LV[0];fillR(G,bx,by,bw,bh,12);
+  const my=by+(bh>>1),mx=bx+(bw>>1);
+  for(let i=bx;i<bx+bw;i++){put(G,i,my,9);put(G,i,my+1,9)}
+  for(let j=by;j<by+bh;j++){put(G,mx,j,9);put(G,mx+1,j,9)}
+  const pcx=Math.random()<.5?bx+(bw>>2):bx+((3*bw)>>2),pcy=Math.random()<.5?by+(bh>>2):by+((3*bh)>>2);
+  for(let j=by;j<by+bh;j++)for(let i=bx;i<bx+bw;i++){
+    if(G[j*W+i]!==12)continue;
+    if(Math.hypot(i-pcx,j-pcy)<=4)G[j*W+i]=6;else if(Math.random()<.12)tr[j*W+i]=1}
+}
+
+/* ---------- campagne ---------- */
+function free(x,y,w,h){
+  if(x<cityR.x+cityR.w+6&&x+w>cityR.x-6&&y<cityR.y+cityR.h+6&&y+h>cityR.y-6)return false;
+  if(x<2||y<2||x+w>=W-2||y+h>=H-2)return false;
+  for(let j=y;j<y+h;j++)for(let i=x;i<x+w;i++){const k=j*W+i;if(occ[k]||bio[k]>=4)return false}
+  return true;
+}
+function rural(kind){
+  const G=LV[0];
+  for(let t=0;t<300;t++){
+    const big=kind==='ware',w=big?rnd(22,26):rnd(8,12),h=big?rnd(14,16):rnd(7,9),f=Math.random()<.5?1:-1;
+    const x=rnd(8,W-w-9),y=rnd(8,H-h-9),gx=x-3,gy=y-3,gw=w+6,gh=h+6;
+    if(!free(gx-1,gy-1,gw+2,gh+2))continue;
+    for(let j=gy-1;j<gy+gh+1;j++)for(let i=gx-1;i<gx+gw+1;i++)occ[j*W+i]=1;
+    for(let j=gy;j<gy+gh;j++)for(let i=gx;i<gx+gw;i++){G[j*W+i]=big?16:12;tr[j*W+i]=0}
+    const d=big?ware(x,y,w,h,f):house(x,y,w,h,f),edge=f>0?gy+gh-1:gy;
+    if(big){for(let k=-2;k<=2;k++)pathTo(G,d[0]+k,d[1]+f,edge,16)}
+    else{
+      if(Math.random()<.6){
+        for(let i=gx;i<gx+gw;i++){G[gy*W+i]=13;G[(gy+gh-1)*W+i]=13}
+        for(let j=gy;j<gy+gh;j++){G[j*W+gx]=13;G[j*W+gx+gw-1]=13}
+      }
+      pathTo(G,d[0],d[1]+f,edge);
+      for(let j=gy;j<gy+gh;j++)for(let i=gx;i<gx+gw;i++)if(G[j*W+i]===12&&Math.random()<.06)tr[j*W+i]=1;
+    }
+    return;
+  }
+}
+
+/* ---------- génération ---------- */
+function gen(){
+  const S=[rnd(1,9999),rnd(1,9999),rnd(1,9999)];
+  const g0=new Uint8Array(W*H);
+  LV=[g0];tr=new Uint8Array(W*H);bio=new Uint8Array(W*H);occ=new Uint8Array(W*H);stairs=new Map();spawn=null;vl=0;
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    const e=fbm(x,y,S[0]),m=fbm(x,y,S[1]),t=fbm(x,y,S[2])*.6+(y/H)*.4,i=y*W+x;
+    let b=0;
+    if(e<.3)b=5;else if(e>.74)b=6;else if(t<.3)b=3;else if(e<.34)b=4;
+    else if(t>.62&&m<.48)b=2;else if(m>.55)b=1;
+    bio[i]=b;
+    if(b===5)g0[i]=6;else if(b===6)g0[i]=10;
+    else{const r=Math.random();
+      if((b===1&&r<.3)||(b===0&&r<.025)||(b===3&&r<.06)||(b===2&&r<.01))tr[i]=1}
+  }
+  // emplacement de la zone urbaine : le moins d'eau / montagne possible
+  const cols=3,rows=2,bwL=[],bhL=[];
+  for(let i=0;i<cols;i++)bwL.push(rnd(28,34));
+  for(let j=0;j<rows;j++)bhL.push(rnd(27,32));
+  const CWd=7*(cols+1)+bwL.reduce((a,b)=>a+b,0),CHt=7*(rows+1)+bhL.reduce((a,b)=>a+b,0);
+  let best=[6,6],bs=1e9;
+  for(let t=0;t<80;t++){const cx=rnd(6,W-CWd-6),cy=rnd(6,H-CHt-6);let s=0;
+    for(let y=cy;y<cy+CHt;y+=3)for(let x=cx;x<cx+CWd;x+=3)if(bio[y*W+x]>=4)s++;
+    if(s<bs){bs=s;best=[cx,cy]}}
+  const cx=best[0],cy=best[1];cityR={x:cx,y:cy,w:CWd,h:CHt};
+  for(let y=cy-3;y<cy+CHt+3;y++)for(let x=cx-3;x<cx+CWd+3;x++){const i=y*W+x;g0[i]=0;tr[i]=0;bio[i]=0}
+  // rues : 7 de large = trottoir + 5 de chaussée + trottoir
+  const vx=[],hy=[];
+  let a=cx;for(let i=0;i<=cols;i++){vx.push(a);a+=7+(i<cols?bwL[i]:0)}
+  a=cy;for(let j=0;j<=rows;j++){hy.push(a);a+=7+(j<rows?bhL[j]:0)}
+  for(const y0 of hy)for(let x=cx;x<cx+CWd;x++)for(let k=0;k<7;k+=6)g0[(y0+k)*W+x]=15;
+  for(const x0 of vx)for(let y=cy;y<cy+CHt;y++)for(let k=0;k<7;k+=6)g0[y*W+x0+k]=15;
+  for(const y0 of hy)for(let x=cx;x<cx+CWd;x++)for(let k=1;k<=5;k++)g0[(y0+k)*W+x]=14;
+  for(const x0 of vx)for(let y=cy;y<cy+CHt;y++)for(let k=1;k<=5;k++)g0[y*W+x0+k]=14;
+  for(const y0 of hy)for(let x=cx;x<cx+CWd;x++)if(!vx.some(v=>x>=v&&x<=v+6))g0[(y0+3)*W+x]=17;
+  for(const x0 of vx)for(let y=cy;y<cy+CHt;y++)if(!hy.some(v=>y>=v&&y<=v+6))g0[y*W+x0+3]=18;
+  // îlots : au moins une tour et un grand bâtiment, le reste surtout résidentiel
+  const kinds=shuffle(['tower','big','res','res','res',pick(['ware','park','res'])]);
+  let n=0;
+  for(let i=0;i<cols;i++)for(let j=0;j<rows;j++){
+    const bx=vx[i]+7,by=hy[j]+7,bw=bwL[i],bh=bhL[j],k=kinds[n++];
+    ({tower:blockTower,big:blockBig,res:blockRes,ware:blockWare,park:blockPark})[k](bx,by,bw,bh);
+  }
+  for(let k=rnd(3,5);k>0;k--)rural('house');
+  rural('ware');
+  if(!spawn){let f=null;for(let y=0;y<H&&!f;y++)for(let x=0;x<W;x++)if(g0[y*W+x]===2){f={x:x+.5,y:y+.5,a:0};break}
+    spawn=f||{x:W/2,y:H/2,a:0}}
+  op={x:spawn.x,y:spawn.y,a:spawn.a,l:0,set:true};
+  const r=devicePixelRatio||1;
+  cam.z=15*r;cam.x=op.x-cv.width/2/cam.z;cam.y=op.y-cv.height/2/cam.z;
+  updLv();draw();
+}
+
+/* ---------- accès aux tuiles / collisions / vision ---------- */
+const gt=(l,x,y)=>(x<0||y<0||x>=W||y>=H)?-1:LV[l][y*W+x];
+const st=(l,x,y)=>SW.has(gt(l,x,y));
+const isH=(l,x,y)=>gt(l,x,y)===13;
+function walk(l,x,y){
+  if(x<0||y<0||x>=W||y>=H)return false;
+  const i=(y|0)*W+(x|0),t=LV[l][i];
+  if(t===0)return l===0&&!tr[i];
+  if(l===0&&tr[i])return false;
+  return WK.has(t);
+}
+// les murs et les haies sont minces : on teste la position exacte dans la tuile
+function thin(l,xi,yi,fx,fy,th,isT){
+  const h=th/2,dx=Math.abs(fx-.5),dy=Math.abs(fy-.5);
+  if(dx<h&&dy<h)return true;
+  if(dy<h&&(fx<.5?isT(l,xi-1,yi):isT(l,xi+1,yi)))return true;
+  if(dx<h&&(fy<.5?isT(l,xi,yi-1):isT(l,xi,yi+1)))return true;
+  return false;
+}
+function blocksAt(l,x,y){
+  if(x<0||y<0||x>=W||y>=H)return true;
+  const xi=x|0,yi=y|0,i=yi*W+xi,t=LV[l][i],fx=x-xi,fy=y-yi;
+  if(l===0&&tr[i]){const a=fx-.5,b=fy-.5;if(a*a+b*b<.2)return true}
+  switch(t){
+    case 1:return thin(l,xi,yi,fx,fy,.34,st);
+    case 13:return thin(l,xi,yi,fx,fy,.6,isH);
+    case 10:case 11:return true;
+    case 21:{const a=fx-.5,b=fy-.5;return a*a+b*b<.17}
+  }
+  return false;
+}
+function visPoly(){
+  const pts=[],n=240,a0=op.a-FOV*Math.PI/360,span=FOV*Math.PI/180;
+  for(let i=0;i<=n;i++){const a=a0+span*i/n,dx=Math.cos(a),dy=Math.sin(a);let d=0;
+    while(d<60&&!blocksAt(op.l,op.x+dx*d,op.y+dy*d))d+=.05;
+    pts.push([op.x+dx*d,op.y+dy*d])}
+  return pts;
+}
+
+/* ---------- rendu ---------- */
+const sx=x=>(x-cam.x)*cam.z,sy=y=>(y-cam.y)*cam.z;
+function baseCol(l,x,y,t){
+  const i=y*W+x;
+  switch(t){
+    case 0:return l?null:GROUND[bio[i]];
+    case 2:case 7:case 8:case 11:case 21:return INT;
+    case 6:return '#1d4e7a';
+    case 9:return '#b4a07a';
+    case 10:return '#6e6e72';
+    case 12:case 13:return '#5aa043';
+    case 14:case 17:case 18:return '#3a3f46';
+    case 15:return '#9a9da3';
+    case 16:case 19:return '#4b5058';
+  }
+  return '#f0f';
+}
+const nbCol=(l,x,y)=>{const t=gt(l,x,y);return(t<0||SW.has(t))?null:baseCol(l,x,y,t)};
+// fond d'un mur / porte / fenêtre : moitié intérieur, moitié extérieur
+function baseStruct(l,x,y,px,py,z){
+  const hs=st(l,x-1,y)||st(l,x+1,y),vs=st(l,x,y-1)||st(l,x,y+1),e=z+.5,hz=z/2+.5;
+  const f=(c,a,b,w,h)=>{if(c){ctx.fillStyle=c;ctx.fillRect(a,b,w,h)}};
+  if(hs&&!vs){f(nbCol(l,x,y-1),px,py,e,hz);f(nbCol(l,x,y+1),px,py+z/2,e,hz)}
+  else if(vs&&!hs){f(nbCol(l,x-1,y),px,py,hz,e);f(nbCol(l,x+1,y),px+z/2,py,hz,e)}
+  else{let c=null;
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const k=nbCol(l,x+dx,y+dy);if(k){if(k===INT){c=k;break}if(!c)c=k}}
+    f(c,px,py,e,e)}
+}
+function drawWall(l,x,y,px,py,z,t){
+  const k=z*.34,cx=px+z/2,cy=py+z/2,e=.5;
+  ctx.fillStyle=WALLC;
+  ctx.fillRect(cx-k/2,cy-k/2,k,k);
+  if(st(l,x-1,y))ctx.fillRect(px-e,cy-k/2,z/2+e,k);
+  if(st(l,x+1,y))ctx.fillRect(cx,cy-k/2,z/2+e,k);
+  if(st(l,x,y-1))ctx.fillRect(cx-k/2,py-e,k,z/2+e);
+  if(st(l,x,y+1))ctx.fillRect(cx-k/2,cy,k,z/2+e);
+  if(t===4){
+    ctx.strokeStyle='#9fd8ff';ctx.lineWidth=Math.max(1,k*.45);ctx.beginPath();
+    if(st(l,x-1,y)||st(l,x+1,y)){ctx.moveTo(px,cy);ctx.lineTo(px+z,cy)}else{ctx.moveTo(cx,py);ctx.lineTo(cx,py+z)}
+    ctx.stroke();
+  }
+}
+// porte façon plan d'architecte : vantail ouvert + arc de débattement
+function drawDoor(l,x,y,px,py,z){
+  const hs=st(l,x-1,y)||st(l,x+1,y);
+  const L=gt(l,x-1,y)===3,R=gt(l,x+1,y)===3,U=gt(l,x,y-1)===3,D=gt(l,x,y+1)===3;
+  let hx,hy,ex,ey,a0,a1,ccw;
+  if(hs){
+    const hl=R?true:L?false:hash(x,y,5)>.5,sd=hash(L?x-1:x,y,6)>.5?1:-1;
+    hx=hl?px:px+z;hy=py+z/2;ex=hx;ey=hy+sd*z*.96;
+    if(hl){a0=0;a1=sd>0?Math.PI/2:-Math.PI/2;ccw=sd<0}else{a0=Math.PI;a1=sd>0?Math.PI/2:Math.PI*1.5;ccw=sd>0}
+  }else{
+    const ht=D?true:U?false:hash(x,y,5)>.5,sd=hash(x,U?y-1:y,6)>.5?1:-1;
+    hx=px+z/2;hy=ht?py:py+z;ex=hx+sd*z*.96;ey=hy;
+    if(ht){a0=Math.PI/2;a1=sd>0?0:Math.PI;ccw=sd>0}else{a0=-Math.PI/2;a1=sd>0?0:-Math.PI;ccw=sd<0}
+  }
+  ctx.strokeStyle='rgba(255,255,255,.4)';ctx.lineWidth=Math.max(1,z*.035);
+  ctx.beginPath();ctx.arc(hx,hy,z*.96,a0,a1,ccw);ctx.stroke();
+  ctx.strokeStyle='#7a4f27';ctx.lineWidth=Math.max(1.5,z*.1);ctx.lineCap='round';
+  ctx.beginPath();ctx.moveTo(hx,hy);ctx.lineTo(ex,ey);ctx.stroke();ctx.lineCap='butt';
+}
+function drawGarage(l,x,y,px,py,z){
+  ctx.strokeStyle='#cfd3d8';ctx.lineWidth=Math.max(1.5,z*.16);ctx.setLineDash([z*.22,z*.12]);ctx.beginPath();
+  if(st(l,x-1,y)||st(l,x+1,y)){ctx.moveTo(px,py+z/2);ctx.lineTo(px+z,py+z/2)}else{ctx.moveTo(px+z/2,py);ctx.lineTo(px+z/2,py+z)}
+  ctx.stroke();ctx.setLineDash([]);
+}
+function drawHedge(l,x,y,px,py,z){
+  const cx=px+z/2,cy=py+z/2,nb=[[1,0],[-1,0],[0,1],[0,-1]].filter(([a,b])=>gt(l,x+a,y+b)===13);
+  ctx.lineCap='round';
+  for(const [col,wd] of [['#2b6c31',.64],['#3d8a43',.4]]){
+    ctx.strokeStyle=col;ctx.lineWidth=z*wd;ctx.beginPath();
+    ctx.moveTo(cx,cy);ctx.lineTo(cx+.01,cy);
+    for(const [a,b] of nb){ctx.moveTo(cx,cy);ctx.lineTo(cx+a*z/2,cy+b*z/2)}
+    ctx.stroke();
+  }
+  ctx.lineCap='butt';
+}
+function drawStairs(px,py,z,up){
+  const cx=px+z/2,cy=py+z/2;
+  ctx.fillStyle=up?'rgba(45,106,79,.28)':'rgba(138,59,46,.28)';ctx.fillRect(px,py,z+.5,z+.5);
+  ctx.strokeStyle='#756c5e';ctx.lineWidth=Math.max(1,z*.05);ctx.beginPath();
+  for(let k=1;k<5;k++){ctx.moveTo(px+z*.08,py+z*k/5);ctx.lineTo(px+z*.92,py+z*k/5)}
+  ctx.stroke();
+  ctx.fillStyle=up?'#1f6b4a':'#9a3524';ctx.beginPath();
+  if(up){ctx.moveTo(cx,cy-z*.22);ctx.lineTo(cx+z*.2,cy+z*.16);ctx.lineTo(cx-z*.2,cy+z*.16)}
+  else{ctx.moveTo(cx,cy+z*.22);ctx.lineTo(cx+z*.2,cy-z*.16);ctx.lineTo(cx-z*.2,cy-z*.16)}
+  ctx.closePath();ctx.fill();
+}
+function drawLevel(l){
+  const G=LV[l],z=cam.z,x0=Math.max(0,Math.floor(cam.x)),y0=Math.max(0,Math.floor(cam.y)),
+    x1=Math.min(W,Math.ceil(cam.x+cv.width/z)),y1=Math.min(H,Math.ceil(cam.y+cv.height/z));
+  // 1) fonds
+  for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
+    const t=G[y*W+x],px=sx(x),py=sy(y);
+    if(SW.has(t)){baseStruct(l,x,y,px,py,z);continue}
+    const c=baseCol(l,x,y,t);if(!c)continue;
+    ctx.fillStyle=c;ctx.fillRect(px,py,z+.5,z+.5);
+    if(t===0||t===12||t===13||t===2||t===9||t===15||t===10){
+      const v=hash(x,y,3);
+      ctx.fillStyle=v>.5?'rgba(255,255,255,'+((v-.5)*.09)+')':'rgba(0,0,0,'+((.5-v)*.12)+')';
+      ctx.fillRect(px,py,z+.5,z+.5)}
+  }
+  // 2) détails
+  for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
+    const t=G[y*W+x];if(!t)continue;
+    const px=sx(x),py=sy(y);
+    switch(t){
+      case 1:case 4:drawWall(l,x,y,px,py,z,t);break;
+      case 3:drawDoor(l,x,y,px,py,z);break;
+      case 20:drawGarage(l,x,y,px,py,z);break;
+      case 13:drawHedge(l,x,y,px,py,z);break;
+      case 7:drawStairs(px,py,z,true);break;
+      case 8:drawStairs(px,py,z,false);break;
+      case 11:
+        ctx.fillStyle='#8c6b3f';ctx.fillRect(px+z*.07,py+z*.07,z*.86,z*.86);
+        ctx.strokeStyle='#5a4326';ctx.lineWidth=Math.max(1,z*.06);ctx.strokeRect(px+z*.07,py+z*.07,z*.86,z*.86);
+        ctx.beginPath();ctx.moveTo(px+z*.07,py+z*.07);ctx.lineTo(px+z*.93,py+z*.93);ctx.moveTo(px+z*.93,py+z*.07);ctx.lineTo(px+z*.07,py+z*.93);ctx.stroke();break;
+      case 21:
+        ctx.fillStyle='#6f757c';ctx.beginPath();ctx.arc(px+z/2,py+z/2,z*.4,0,7);ctx.fill();
+        ctx.strokeStyle='#3d4247';ctx.lineWidth=Math.max(1,z*.05);ctx.stroke();break;
+      case 17:if(x%2===0){ctx.strokeStyle='#e0c35a';ctx.lineWidth=Math.max(1,z*.08);ctx.beginPath();ctx.moveTo(px+z*.15,py+z/2);ctx.lineTo(px+z*.85,py+z/2);ctx.stroke()}break;
+      case 18:if(y%2===0){ctx.strokeStyle='#e0c35a';ctx.lineWidth=Math.max(1,z*.08);ctx.beginPath();ctx.moveTo(px+z/2,py+z*.15);ctx.lineTo(px+z/2,py+z*.85);ctx.stroke()}break;
+      case 19:if(x%2===0){ctx.strokeStyle='rgba(255,255,255,.45)';ctx.lineWidth=Math.max(1,z*.06);ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px,py+z);ctx.stroke()}break;
+      case 9:case 15:
+        if(z>=9){ctx.strokeStyle='rgba(0,0,0,.12)';ctx.lineWidth=1;ctx.strokeRect(px+.5,py+.5,z-1,z-1)}break;
+      case 12:{
+        const v=hash(x,y,9);
+        if(z>=6&&v>.9){ctx.fillStyle=v>.96?'#ffd0e8':'#fff2a8';
+          for(let k=0;k<3;k++){ctx.fillRect(px+z*(.2+.25*k),py+z*(.25+.2*((k*2)%3)),z*.1,z*.1)}}
+        break}
+    }
+  }
+  // 3) arbres (rez-de-chaussée)
+  if(l===0)for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){
+    if(!tr[y*W+x])continue;
+    const cx=sx(x)+z/2,cy=sy(y)+z/2,r=z*(.55+.3*hash(x,y,11));
+    ctx.fillStyle='rgba(0,0,0,.25)';ctx.beginPath();ctx.arc(cx+z*.12,cy+z*.14,r,0,7);ctx.fill();
+    ctx.fillStyle=TREEC[bio[y*W+x]];ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.12)';ctx.beginPath();ctx.arc(cx-r*.25,cy-r*.25,r*.55,0,7);ctx.fill();
+  }
+}
+function draw(){
+  ctx.fillStyle='#0b0f14';ctx.fillRect(0,0,cv.width,cv.height);
+  drawLevel(0);
+  if(vl>0){ctx.fillStyle='rgba(8,12,18,.62)';ctx.fillRect(0,0,cv.width,cv.height);drawLevel(vl)}
+  if(!op.set)return;
+  const z=cam.z;
+  if(op.l===vl){
+    const p=visPoly();ctx.beginPath();ctx.moveTo(sx(op.x),sy(op.y));
+    p.forEach(q=>ctx.lineTo(sx(q[0]),sy(q[1])));ctx.closePath();
+    ctx.fillStyle='rgba(255,240,120,.22)';ctx.fill();
+    ctx.strokeStyle='rgba(255,240,120,.7)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle='#ff5a3c';ctx.beginPath();ctx.arc(sx(op.x),sy(op.y),Math.max(4,z*.35),0,7);ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(sx(op.x),sy(op.y));
+    ctx.lineTo(sx(op.x+Math.cos(op.a)*1.3),sy(op.y+Math.sin(op.a)*1.3));ctx.stroke();
+  }else{
+    ctx.globalAlpha=.35;ctx.fillStyle='#ff5a3c';ctx.beginPath();ctx.arc(sx(op.x),sy(op.y),Math.max(4,z*.35),0,7);ctx.fill();ctx.globalAlpha=1;
+  }
+}
+
+/* ---------- interface ---------- */
+const bUp=document.getElementById('bUp'),bDn=document.getElementById('bDn'),lvlEl=document.getElementById('lvl'),bGen=document.getElementById('bGen');
+function updLv(){lvlEl.textContent=vl?('Étage '+vl):'RDC';bUp.disabled=vl>=LV.length-1;bDn.disabled=vl<=0}
+bUp.onclick=()=>{if(vl<LV.length-1){vl++;updLv();draw()}};
+bDn.onclick=()=>{if(vl>0){vl--;updLv();draw()}};
+function resize(){const r=devicePixelRatio||1;cv.width=innerWidth*r;cv.height=innerHeight*r;if(LV)draw()}
+addEventListener('resize',resize);
+const toWorld=(px,py)=>[px/cam.z+cam.x,py/cam.z+cam.y];
+function zoomAt(px,py,f){const r=devicePixelRatio||1,[wx,wy]=toWorld(px,py);cam.z=Math.min(120*r,Math.max(1.5*r,cam.z*f));cam.x=wx-px/cam.z;cam.y=wy-py/cam.z}
+function place(px,py){
+  const [wx,wy]=toWorld(px,py);
+  if(!walk(vl,wx,wy))return;
+  const s=stairs.get(vl+':'+(wx|0)+':'+(wy|0));
+  if(s){op={x:s[1]+.5,y:s[2]+.5,a:op.a,l:s[0],set:true};vl=s[0];updLv();draw();return}
+  if(op.set&&op.l===vl){const d=Math.hypot(wx-op.x,wy-op.y);if(d>.5)op.a=Math.atan2(wy-op.y,wx-op.x)}
+  op.x=wx;op.y=wy;op.l=vl;op.set=true;draw();
+}
+const ptrs=new Map();let moved=0,pinch=0;
+const pos=e=>{const r=devicePixelRatio||1;return[e.clientX*r,e.clientY*r]};
+cv.addEventListener('pointerdown',e=>{cv.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,pos(e));moved=0;pinch=0});
+cv.addEventListener('pointermove',e=>{
+  const [px,py]=pos(e);
+  if(!ptrs.has(e.pointerId)){if(e.pointerType==='mouse'&&op.set&&op.l===vl){const [wx,wy]=toWorld(px,py);op.a=Math.atan2(wy-op.y,wx-op.x);draw()}return}
+  const prev=ptrs.get(e.pointerId);ptrs.set(e.pointerId,[px,py]);
+  if(ptrs.size===1){moved+=Math.abs(px-prev[0])+Math.abs(py-prev[1]);cam.x-=(px-prev[0])/cam.z;cam.y-=(py-prev[1])/cam.z}
+  else if(ptrs.size===2){const [a,b]=[...ptrs.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);moved+=99;
+    if(pinch)zoomAt((a[0]+b[0])/2,(a[1]+b[1])/2,d/pinch);pinch=d}
+  draw();
+});
+cv.addEventListener('pointerup',e=>{const [px,py]=pos(e);
+  if(ptrs.size===1&&moved<12*(devicePixelRatio||1))place(px,py);ptrs.delete(e.pointerId);pinch=0});
+cv.addEventListener('pointercancel',e=>ptrs.delete(e.pointerId));
+cv.addEventListener('wheel',e=>{e.preventDefault();const [px,py]=pos(e);zoomAt(px,py,e.deltaY<0?1.12:1/1.12);draw()},{passive:false});
+bGen.onclick=gen;
+resize();gen();
+</script></body></html>
