@@ -1,0 +1,4595 @@
+=========================================
+STRUCTURE DES ÉLÉMENTS SÉLECTIONNÉS
+=========================================
+
+[DOSSIER] C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11
+  ├── V\README.md
+  ├── V\access.key
+  ├── V\index.js
+  ├── V\package-lock.json
+  ├── V\package.json
+  ├── V\screen-client.js
+  ├── V\screen-helper.ps1
+  ├── V\screen-usage.json
+  ├── V\start.bat
+  ├── V\start.sh
+  ├── V\tunnel-url.txt
+  ├── V\tunnels.config.json
+
+
+=========================================
+CONTENU COMPLET DES FICHIERS
+=========================================
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\README.md ---
+# Tunnel Manager
+
+Un seul fichier à lancer, une seule URL à ouvrir sur ton téléphone. Pas de terminal à toucher côté mobile.
+
+## Mise en route (une seule fois)
+
+1. Dézippe le dossier où tu veux sur ton PC.
+2. Installe `cloudflared` (le programme de tunnel de Cloudflare) et vérifie que la commande `cloudflared --version` fonctionne dans un terminal. Aucun compte, aucun domaine ni aucune configuration Cloudflare n'est nécessaire : le programme utilise un « tunnel rapide » gratuit.
+
+**Important :** l'adresse publique (du type `https://xxxx-xxxx.trycloudflare.com`) est **différente à chaque démarrage**. Elle s'affiche dans le terminal du PC et s'écrit dans le fichier `tunnel-url.txt`.
+
+Pour la recevoir sur ton téléphone sans retourner devant le PC, tu peux activer une notification (optionnel) dans `tunnels.config.json` :
+
+```json
+"notify": { "ntfyTopic": "un-nom-long-et-impossible-a-deviner-123" }
+```
+
+Installe l'app gratuite **ntfy** sur ton téléphone et abonne-toi à ce même nom de topic : à chaque démarrage, tu reçois l'URL en notification et un toucher l'ouvre. Laisse vide pour désactiver. Choisis un nom long et secret : quiconque le connaît peut lire tes notifications (il lui faudrait quand même la clé d'accès pour entrer).
+
+## Démarrer
+
+**Windows :** double-clique sur `start.bat`
+**Linux/Mac :** `./start.sh`
+
+Ce fichier fait tout, à chaque fois : il installe automatiquement ce qui manque la première fois, lance Cloudflare, et démarre l'interface. Laisse la fenêtre ouverte tant que tu veux garder tes tunnels actifs.
+
+## Clé d'accès (important, à lire)
+
+Toute l'interface — gestion des tunnels **et** explorateur de fichiers — est maintenant protégée par une clé.
+
+- Au tout premier lancement, le programme génère une clé aléatoire et l'affiche dans le terminal, en plus de l'écrire dans un fichier `access.key` créé à côté d'`index.js`.
+- La première fois que tu ouvres l'URL sur ton téléphone, un écran de verrouillage te la demande. Une fois entrée, elle reste enregistrée sur ce téléphone (dans le navigateur) — tu n'as plus à la retaper.
+- **Ne partage jamais** le lien du tunnel et la clé dans le même message ou au même endroit : si les deux fuitent ensemble, n'importe qui peut accéder à ton PC.
+- Ne commite jamais `access.key` sur un dépôt public, et ne l'envoie à personne.
+- Si tu veux forcer une nouvelle clé (par exemple si tu penses qu'elle a fuité), supprime le fichier `access.key` et relance le programme : une nouvelle sera générée. Il faudra alors la ressaisir sur tous tes appareils.
+
+## Depuis ton téléphone
+
+Ouvre l'adresse `trycloudflare.com` affichée au démarrage (ou reçue en notification) dans un navigateur et entre la clé. Comme l'adresse change à chaque démarrage du programme, le navigateur la considère comme un nouveau site : tu devras donc **ressaisir la clé à chaque nouvelle adresse**.
+
+### Onglet Tunnels
+
+- **+ Nouveau port** : donne un nom et le port local de ton programme, le tunnel démarre immédiatement
+  - Coche **"Mon programme tourne en HTTPS en local"** si ton programme répond en `https://` sur ton PC (et pas en `http://`). Sans ça, le tunnel essaiera de lui parler en http et ça échouera.
+- Le lien généré pour chaque tunnel, avec un bouton **Copier**
+- Un badge **HTTPS** sur les tunnels concernés, pour t'y retrouver
+- Un bouton **Retirer** pour fermer un tunnel
+
+### Onglet Fichiers
+
+Explorateur de fichiers limité aux dossiers que tu autorises explicitement (voir ci-dessous). Tu peux naviguer dedans et appuyer sur **Lancer** pour ouvrir un fichier sur le PC, comme si tu avais double-cliqué dessus.
+
+**Configurer les dossiers accessibles** — édite `fileBrowser.roots` dans `tunnels.config.json` :
+
+```json
+"fileBrowser": {
+  "enabled": true,
+  "roots": [
+    "C:/Users/Oniix/Desktop",
+    "C:/Users/Oniix/Documents/MesProgrammes"
+  ]
+}
+```
+
+- Si `roots` est vide, ton dossier utilisateur complet est utilisé par défaut.
+- **Recommandation :** limite `roots` aux dossiers dont tu as vraiment besoin (ex. juste le dossier contenant les programmes que tu veux lancer à distance), plutôt que tout `C:/`. Impossible de sortir de ces dossiers depuis l'interface, donc plus la liste est restreinte, plus la surface exposée est petite.
+- Mets `"enabled": false` pour désactiver complètement l'explorateur si tu ne l'utilises pas.
+
+Tout se fait depuis cette page, sans jamais retoucher au PC ni à un terminal.
+
+### Onglet Écran (nouveau)
+
+Voir et piloter l'écran du PC depuis le téléphone : clics, défilement, clavier, raccourcis. Utile quand une conversation s'arrête et qu'il faut la relancer dans le navigateur du PC, quelle que soit son adresse.
+
+- **Windows uniquement.** Le programme lance `screen-helper.ps1` (PowerShell) pour capturer l'écran et envoyer souris/clavier. Ne sépare pas ce fichier de `index.js`.
+- **Le PC doit rester allumé et déverrouillé.** Quand Windows est verrouillé (Win+L) ou qu'une fenêtre d'administrateur (UAC) est affichée, la capture est impossible.
+- **Gestes** : toucher = clic gauche, appui long = clic droit. Trois modes en bas :
+  - **Vue** : pince avec deux doigts pour zoomer / dézoomer (le zoom suit tes doigts, de la vue d'ensemble jusqu'à ×5), glisse à un doigt pour déplacer la vue (avec un petit élan au lâcher). Les boutons − / + restent disponibles. Un simple toucher clique toujours.
+  - **Défiler** : glisser = molette de la souris
+  - **Glisser** : glisser = cliquer-déplacer (sélectionner du texte, déplacer une fenêtre)
+- **⌨ Clavier** : touche le champ et écris, le texte part directement vers le PC (accents compris). **Touches** ouvre un petit panneau qui flotte par-dessus l'écran (il ne le rétrécit pas), avec 5 onglets : Flèches (croix + Début/Fin/Pg ↑/Pg ↓), Vidéo (F plein écran, M muet, Espace/K pause, J/L ±10 s), Web (F11, F5, Ctrl+L/F/T/W, retour/avant), Édition (Échap, Tab, copier/coller…) et Fenêtres (⊞ Windows, Alt+Tab, Win+Tab, Bureau). Le bouton **⊞ Windows** envoie la touche Windows une seule fois (le **Win** du haut, lui, est la version collante pour les raccourcis). **Ctrl, Win, Alt, Maj** (premiers boutons de la liste) : touches « collantes » pour les raccourcis. 1 appui = la prochaine touche part avec le modificateur (ex. **Win** puis → pour envoyer la fenêtre à droite, **Ctrl** puis → pour réorganiser), 2 appuis = il reste maintenu pour enchaîner (affiché « Win ∞ »), 3 appuis = relâché. On peut en combiner plusieurs (ex. Ctrl + Maj + →). Marche aussi avec une lettre tapée dans le champ clavier. Le bouton **Démarrer** envoie la touche Win seule. Attention : Ctrl+V colle le presse-papiers **du PC**, pas celui du téléphone. Pour envoyer du texte copié sur le téléphone, colle-le dans le champ clavier.
+- **Paysage / plein écran** : à zoom 1 l'écran du PC prend toute la largeur du téléphone (on défile en hauteur, et en zoomant on se déplace dans tous les sens). Pince vers l'intérieur pour la vue d'ensemble. Le bouton **⛶** masque les barres et passe en plein écran : le téléphone devient l'écran ; le petit bouton rond ⛶ en haut à droite les réaffiche.
+- **Plusieurs écrans** : un menu apparaît en haut (ta tablette en écran secondaire compte comme un écran).
+- **🔒** : passe en lecture seule (plus aucun clic ni frappe envoyé) pour déplacer la vue sans risque.
+
+**Attention à la data.** Cloudflare n'impose pas le plafond de 1 Go par mois de l'ancien plan Ngrok, mais un flux d'écran constant reste lourd et un tunnel rapide est prévu pour des usages légers. Bonnes pratiques :
+
+- Une image identique à la précédente n'est jamais renvoyée : un écran immobile ne consomme presque rien.
+- Le menu de qualité propose **Éco** (le plus léger), **Normal** et **Net**. Reste en Éco quand tu n'as pas besoin de netteté.
+- Le programme compte les données envoyées par l'écran dans `screen-usage.json`. Par défaut la limite est désactivée (`monthlyBudgetMB: 0`) ; mets par exemple `3000` si tu veux un garde-fou mensuel.
+
+Réglages dans `tunnels.config.json` :
+
+```json
+"screen": { "enabled": true, "viewOnly": false, "monthlyBudgetMB": 0 }
+```
+
+- `enabled: false` désactive complètement la fonction.
+- `viewOnly: true` interdit tout contrôle côté serveur : tu vois l'écran, c'est tout.
+- `monthlyBudgetMB: 0` supprime la limite.
+
+**Sécurité.** Avec cet onglet, quiconque a l'URL **et** la clé contrôle ton PC. Ne partage jamais les deux. Si tu penses que la clé a fuité, supprime `access.key` et relance.
+
+## Si "Cannot find module" apparaît
+
+Ça veut dire que les dépendances n'ont pas été installées dans ce dossier. `start.bat`/`start.sh` s'en occupe automatiquement à chaque lancement s'il détecte qu'elles manquent — donc si ça arrive quand même, vérifie que tu lances bien le `.bat`/`.sh` qui se trouve **dans le même dossier** que `index.js`, `package.json` et `tunnels.config.json` (ne les déplace pas séparément).
+
+## Si ton programme local est en HTTPS
+
+Si tu ouvres normalement ton programme dans le navigateur avec une adresse en `https://localhost:PORT`, alors coche la case HTTPS quand tu crées le tunnel. Sinon laisse-la décochée. Un certificat auto-signé (le genre qui affiche "connexion non sécurisée" en local) est géré automatiquement, pas besoin de rien configurer de plus.
+
+## Page de confirmation Local Tunnel
+
+La première fois que tu ouvres un lien `.loca.lt` depuis un nouvel appareil, Local Tunnel demande de confirmer l'IP publique du PC (mesure anti-abus, pas un bug). Récupère-la sur ton PC avec :
+
+```
+curl ipv4.icanhazip.com
+```
+
+
+## Nouveautés 1.6.0
+
+- **Menu plein écran (onglet Écran)** : en plein écran (⛶), le bouton ☰ en haut à droite ouvre un petit menu déroulant avec le choix de l'écran du PC (si plusieurs écrans), la qualité (Éco / Normal / Net), Rafraîchir et Quitter le plein écran.
+- **Alimentation** : le bouton ⏻ en haut à droite du menu général ouvre un menu à deux colonnes. À gauche **Redémarrer** (le tunnel = relance le programme, l'adresse publique change ; le PC), à droite **Éteindre** (le tunnel = ferme le programme ; le PC). Pour le PC : confirmation demandée, délai de 10 s avec bouton Annuler sous Windows. Désactivable avec `"power": { "enabled": false }` dans `tunnels.config.json`.
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\README.md ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\access.key ---
+beb78fcb8fbfcb329263bfffe876ecef047266ef0f7911c9
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\access.key ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\index.js ---
+/**
+ * Tunnel Manager — une seule commande à lancer sur le PC (start.bat / start.sh).
+ * Ouvre ensuite l'URL Cloudflare (affichée dans le terminal) depuis le téléphone : tout se pilote depuis là.
+ */
+
+const localtunnel = require('localtunnel');
+const express = require('express');
+const multer = require('multer');
+const { spawn, exec } = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const os = require('os');
+const { WebSocketServer } = require('ws');
+const { URL } = require('url');
+
+const CONFIG_PATH = path.join(__dirname, 'tunnels.config.json');
+const config = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
+const STATUS_PORT = config.statusServerPort || 4041; // port interne du Tunnel Manager
+
+let tunnels = {};      // { id: { id, name, port, url, error, handle } }
+let ngrokPublicUrl = null;
+let ngrokError = null;
+let runningFiles = {}; // { [filePath]: { pid, startedAt } } — fichiers lancés depuis l'explorateur, encore ouverts
+
+function log(...args) {
+  console.log(new Date().toLocaleTimeString(), '-', ...args);
+}
+
+// ---------- Clé d'accès ----------
+// Générée une seule fois au premier lancement, stockée dans access.key.
+// Le téléphone doit la fournir (header x-access-key) pour toute requête /api/*.
+
+const KEY_PATH = path.join(__dirname, 'access.key');
+
+function loadOrCreateAccessKey() {
+  if (fs.existsSync(KEY_PATH)) return fs.readFileSync(KEY_PATH, 'utf8').trim();
+  const key = crypto.randomBytes(24).toString('hex');
+  fs.writeFileSync(KEY_PATH, key, 'utf8');
+  return key;
+}
+
+const ACCESS_KEY = loadOrCreateAccessKey();
+
+log('========================================================');
+log(" Cle d'acces (a entrer UNE SEULE FOIS sur ton telephone) :");
+log(' ' + ACCESS_KEY);
+log(' (egalement dans le fichier access.key, a ne jamais partager)');
+log('========================================================');
+
+function checkKey(req, res, next) {
+  const provided = String(req.headers['x-access-key'] || '');
+  const a = Buffer.from(provided);
+  const b = Buffer.from(ACCESS_KEY);
+  const valid = a.length === b.length && crypto.timingSafeEqual(a, b);
+  if (!valid) return res.status(401).json({ error: 'cle invalide' });
+  next();
+}
+
+// Même vérification, mais lue dans l'URL plutôt que dans un header.
+// Nécessaire pour les cas où le navigateur ne peut pas ajouter de header
+// personnalisé : un lien de téléchargement direct, et la connexion WebSocket
+// du terminal (l'API WebSocket du navigateur ne permet pas de header non plus).
+function isValidKey(provided) {
+  const a = Buffer.from(String(provided || ''));
+  const b = Buffer.from(ACCESS_KEY);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+function checkKeyQuery(req, res, next) {
+  if (!isValidKey(req.query.key)) return res.status(401).send('Clé invalide');
+  next();
+}
+
+// ---------- Cloudflare (tunnel rapide, gratuit, sans compte ni domaine) ----------
+// NB : les variables ngrokPublicUrl / ngrokError gardent leur ancien nom pour ne rien
+// changer côté interface ; elles contiennent maintenant l'URL trycloudflare.com.
+
+const URL_FILE = path.join(__dirname, 'tunnel-url.txt');
+let cfProcess = null;
+let cfStopping = false;
+
+function announceUrl(url) {
+  log('==================================================');
+  log(' URL PUBLIQUE : ' + url);
+  log('==================================================');
+  try { fs.writeFileSync(URL_FILE, url + '\n'); } catch (e) {}
+
+  // Optionnel : notification sur le téléphone via ntfy.sh (config.notify.ntfyTopic).
+  // Désactivé par défaut. Choisis un nom de topic long et impossible à deviner.
+  const topic = config.notify && config.notify.ntfyTopic;
+  if (topic) {
+    fetch('https://ntfy.sh/' + encodeURIComponent(topic), {
+      method: 'POST',
+      body: url,
+      headers: { Title: 'Tunnel Manager - nouvelle URL', Click: url },
+    }).catch((err) => log('Notification ntfy impossible :', err.message));
+  }
+}
+
+function startCloudflare() {
+  cfStopping = false;
+  log('Lancement de Cloudflare...');
+  cfProcess = spawn(
+    'cloudflared',
+    ['tunnel', '--no-autoupdate', '--url', `http://127.0.0.1:${STATUS_PORT}`],
+    { shell: process.platform === 'win32' }
+  );
+
+  // cloudflared écrit l'URL publique dans ses logs (sur stderr).
+  const onData = (d) => {
+    const text = String(d);
+    // Plusieurs lignes peuvent arriver d'un coup : on les parcourt toutes et on ignore
+    // "api.trycloudflare.com" (adresse interne de Cloudflare, pas notre tunnel).
+    for (const m of text.matchAll(/https:\/\/([a-z0-9-]+)\.trycloudflare\.com/g)) {
+      if (m[1] === 'api') continue;
+      if (m[0] !== ngrokPublicUrl) {
+        ngrokPublicUrl = m[0];
+        ngrokError = null;
+        announceUrl(ngrokPublicUrl);
+      }
+      break;
+    }
+    if (/ERR|error/i.test(text)) process.stderr.write(`[cloudflared] ${text}`);
+  };
+  cfProcess.stdout.on('data', onData);
+  cfProcess.stderr.on('data', onData);
+
+  cfProcess.on('error', (err) => {
+    ngrokError = `cloudflared introuvable (${err.message}). Vérifie qu'il est installé : tape "cloudflared --version" dans un terminal.`;
+    log('ERREUR:', ngrokError);
+  });
+
+  cfProcess.on('exit', (code) => {
+    if (cfStopping) return;
+    log(`Cloudflare s'est arrêté (code ${code}), relance dans 5s... (l'URL va changer)`);
+    ngrokPublicUrl = null;
+    setTimeout(startCloudflare, 5000);
+  });
+}
+
+function stopCloudflare() {
+  cfStopping = true;
+  if (!cfProcess || !cfProcess.pid) return;
+  try {
+    if (process.platform === 'win32') {
+      require('child_process').execSync(`taskkill /pid ${cfProcess.pid} /T /F`, { stdio: 'ignore' });
+    } else {
+      cfProcess.kill();
+    }
+  } catch (e) {}
+}
+process.on('exit', stopCloudflare);
+process.on('SIGINT', () => process.exit(0));
+process.on('SIGTERM', () => process.exit(0));
+
+// ---------- Local Tunnel ----------
+
+function nextId() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+async function startTunnel({ id, name, port, https }) {
+  tunnels[id] = { id, name, port, https: !!https, url: null, error: null, handle: null };
+
+  try {
+    const options = { port };
+    if (https) {
+      options.local_https = true;
+      options.allow_invalid_cert = true; // accepte les certificats auto-signés (courant en local)
+    }
+    const handle = await localtunnel(options);
+    if (!tunnels[id]) { handle.close(); return; } // retiré entre-temps
+    tunnels[id].handle = handle;
+    tunnels[id].url = handle.url;
+    tunnels[id].error = null;
+    log(`[${name}] actif :`, handle.url);
+
+    handle.on('close', () => {
+      if (!tunnels[id]) return;
+      log(`[${name}] fermé, relance dans 5s...`);
+      tunnels[id].url = null;
+      tunnels[id].error = 'reconnexion...';
+      setTimeout(() => { if (tunnels[id]) startTunnel(tunnels[id]); }, 5000);
+    });
+    handle.on('error', (err) => { if (tunnels[id]) tunnels[id].error = err.message; });
+  } catch (err) {
+    if (!tunnels[id]) return;
+    tunnels[id].error = err.message;
+    log(`[${name}] échec :`, err.message, '- nouvelle tentative dans 10s');
+    setTimeout(() => { if (tunnels[id]) startTunnel(tunnels[id]); }, 10000);
+  }
+}
+
+function stopTunnel(id) {
+  const t = tunnels[id];
+  if (!t) return;
+  if (t.handle) { try { t.handle.close(); } catch (e) {} }
+  delete tunnels[id];
+}
+
+// ---------- Explorateur de fichiers ----------
+// Limité aux dossiers listés dans tunnels.config.json -> fileBrowser.roots
+// (par défaut : ton dossier utilisateur). Impossible de sortir de ces dossiers.
+
+const fbConfig = config.fileBrowser || {};
+const FB_ENABLED = fbConfig.enabled !== false;
+const FB_ALL_DRIVES = !!(fbConfig.roots && fbConfig.roots.includes('*'));
+
+// Détecte les lettres de lecteur actives sur Windows (C:, D:, clé USB E:, etc.).
+// Rejoué à chaque requête (pas mis en cache) pour qu'une clé USB branchée après
+// le lancement du programme apparaisse sans avoir à relancer.
+function detectWindowsDrives() {
+  const drives = [];
+  for (let i = 65; i <= 90; i++) {
+    const drivePath = `${String.fromCharCode(i)}:\\`;
+    try { if (fs.existsSync(drivePath)) drives.push(drivePath); } catch (e) {}
+  }
+  return drives;
+}
+
+// Calcule la liste des racines autorisées. Si tunnels.config.json contient
+// "*" dans fileBrowser.roots, on est en mode "tout l'ordinateur" : tous les
+// disques (dont les périphériques amovibles) sur Windows, ou "/" ailleurs.
+// Sinon, comportement inchangé : les dossiers listés, ou le dossier utilisateur par défaut.
+function getRoots() {
+  if (FB_ALL_DRIVES) {
+    if (process.platform === 'win32') return detectWindowsDrives().map((p) => path.resolve(p));
+    return ['/'];
+  }
+  return (fbConfig.roots && fbConfig.roots.length ? fbConfig.roots : [os.homedir()])
+    .map((p) => path.resolve(p))
+    .filter((p) => {
+      try { return fs.statSync(p).isDirectory(); } catch (e) { log('ATTENTION dossier racine introuvable ignoré :', p); return false; }
+    });
+}
+
+function isPathAllowed(target) {
+  const resolved = path.resolve(target);
+  return getRoots().some((root) => {
+    // Une racine "disque" comme "C:\" se termine déjà par un séparateur ;
+    // on la normalise pour ne pas doubler le séparateur dans la comparaison.
+    const normRoot = root.endsWith(path.sep) ? root.slice(0, -1) : root;
+    return resolved === root || resolved === normRoot || resolved.startsWith(normRoot + path.sep);
+  });
+}
+
+// ---------- Import depuis le téléphone ----------
+// Un fichier envoyé seul n'a qu'un nom ("photo.jpg"). Un import de dossier
+// entier envoie chaque fichier avec un chemin relatif dans son "originalname"
+// ("mon-dossier/sous-dossier/fichier.txt"), reconstitué ici pour recréer la
+// même arborescence côté PC.
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      try {
+        const targetDir = req.body && req.body.targetDir;
+        if (!targetDir || !isPathAllowed(targetDir)) return cb(new Error('Dossier cible non autorisé'));
+        const relParts = file.originalname.split(/[\\/]/).filter((p) => p && p !== '.' && p !== '..');
+        const destDir = relParts.length > 1 ? path.join(targetDir, ...relParts.slice(0, -1)) : targetDir;
+        if (!isPathAllowed(destDir)) return cb(new Error('Chemin non autorisé'));
+        fs.mkdirSync(destDir, { recursive: true });
+        cb(null, destDir);
+      } catch (err) { cb(err); }
+    },
+    filename: (req, file, cb) => {
+      const relParts = file.originalname.split(/[\\/]/).filter((p) => p && p !== '.' && p !== '..');
+      cb(null, relParts.length ? relParts[relParts.length - 1] : file.originalname);
+    },
+  }),
+  limits: { fileSize: 2 * 1024 * 1024 * 1024 }, // 2 Go par fichier, ajustable si besoin
+});
+
+function listRootsEntries() {
+  return getRoots().map((root) => ({ name: root, path: root, type: 'dir', size: 0, mtime: 0 }));
+}
+
+function listDir(dirPath) {
+  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
+  const result = [];
+  for (const entry of entries) {
+    if (entry.name.startsWith('.')) continue; // fichiers/dossiers cachés ignorés
+    const full = path.join(dirPath, entry.name);
+    let stat;
+    try { stat = fs.statSync(full); } catch (e) { continue; } // lien cassé, permission refusée...
+    result.push({
+      name: entry.name,
+      path: full,
+      type: entry.isDirectory() ? 'dir' : 'file',
+      size: stat.size,
+      mtime: stat.mtimeMs,
+      running: !entry.isDirectory() && !!runningFiles[full],
+    });
+  }
+  result.sort((a, b) => (a.type === b.type ? a.name.localeCompare(b.name) : a.type === 'dir' ? -1 : 1));
+  return result;
+}
+
+// Taille max d'un fichier qu'on accepte de charger dans l'éditeur mobile.
+// Au-delà, on refuse : éditer un gros fichier texte depuis un téléphone n'a pas de sens.
+const MAX_EDIT_SIZE = 2 * 1024 * 1024; // 2 Mo
+
+// Lance le fichier avec son programme associé et, quand c'est possible, retient
+// le PID du programme lancé pour pouvoir savoir plus tard s'il tourne encore
+// et le fermer à la demande. Retourne une Promise<boolean> : true si le
+// témoin "fichier ouvert" pourra être suivi, false si on ne peut pas le suivre
+// (le fichier est quand même bien lancé dans ce cas).
+function launchFile(filePath) {
+  return new Promise((resolve) => {
+    if (process.platform === 'win32') {
+      // Start-Process -PassThru (contrairement à "start") renvoie le PID du
+      // programme réellement ouvert, pas celui de cmd.exe qui se termine aussitôt.
+      const escaped = filePath.replace(/'/g, "''");
+      const ps = spawn('powershell.exe', [
+        '-NoProfile', '-NonInteractive', '-Command',
+        `$p = Start-Process -FilePath '${escaped}' -PassThru; Write-Output $p.Id`
+      ], { windowsHide: true });
+      let out = '';
+      ps.stdout.on('data', (d) => { out += d.toString(); });
+      ps.on('close', () => {
+        const pid = parseInt(out.trim(), 10);
+        if (Number.isFinite(pid)) runningFiles[filePath] = { pid, startedAt: Date.now() };
+        resolve(Number.isFinite(pid));
+      });
+      ps.on('error', () => resolve(false));
+    } else {
+      const opener = process.platform === 'darwin' ? 'open' : 'xdg-open';
+      const child = spawn(opener, [filePath], { detached: true, stdio: 'ignore' });
+      child.unref();
+      // Sur Mac/Linux, ce PID est celui de l'ouvreur, pas toujours celui de
+      // l'application elle-même : le témoin peut donc s'éteindre un peu avant
+      // ou après la fermeture réelle selon le programme. Limite du système,
+      // pas du programme.
+      if (child.pid) runningFiles[filePath] = { pid: child.pid, startedAt: Date.now() };
+      resolve(!!child.pid);
+    }
+  });
+}
+
+function isPidAlive(pid, cb) {
+  if (process.platform === 'win32') {
+    exec(`tasklist /FI "PID eq ${pid}" /FO CSV /NH`, { windowsHide: true }, (err, stdout) => {
+      cb(!err && !!stdout && stdout.toLowerCase().includes(String(pid)));
+    });
+  } else {
+    let alive = true;
+    try { process.kill(pid, 0); } catch (e) { alive = false; }
+    cb(alive);
+  }
+}
+
+// Ferme le programme associé à un fichier lancé depuis l'explorateur.
+// Retourne true si un processus suivi a bien été trouvé (et une tentative de
+// fermeture envoyée), false si ce fichier n'était pas suivi comme ouvert.
+function stopRunningFile(filePath) {
+  const entry = runningFiles[filePath];
+  if (!entry) return false;
+  if (process.platform === 'win32') {
+    exec(`taskkill /PID ${entry.pid} /T /F`, { windowsHide: true }, () => {});
+  } else {
+    try { process.kill(entry.pid, 'SIGTERM'); } catch (e) {}
+  }
+  delete runningFiles[filePath];
+  return true;
+}
+
+// Vérifie périodiquement quels fichiers lancés sont encore ouverts, pour
+// éteindre automatiquement le témoin dès que le programme se ferme tout seul.
+setInterval(() => {
+  for (const filePath of Object.keys(runningFiles)) {
+    const pid = runningFiles[filePath].pid;
+    isPidAlive(pid, (alive) => { if (!alive) delete runningFiles[filePath]; });
+  }
+}, 2000);
+
+// ---------- Terminal distant ----------
+// Ouvre un vrai shell (cmd.exe sous Windows, bash/sh ailleurs) dans un dossier
+// autorisé de l'explorateur, et le pilote via WebSocket depuis le téléphone.
+// Ce n'est pas un vrai pseudo-terminal (pas de rendu ANSI avancé), mais
+// largement suffisant pour lancer des commandes et lire leur sortie.
+
+function spawnShell(cwd) {
+  if (process.platform === 'win32') {
+    return spawn('cmd.exe', ['/Q'], { cwd, windowsHide: true });
+  }
+  const shell = process.env.SHELL || 'bash';
+  return spawn(shell, ['-i'], { cwd, env: process.env });
+}
+
+function attachTerminal(ws, cwd) {
+  let proc;
+  try {
+    proc = spawnShell(cwd);
+  } catch (err) {
+    ws.send(`[erreur au démarrage du terminal] ${err.message}\r\n`);
+    ws.close();
+    return;
+  }
+
+  const onData = (d) => { if (ws.readyState === ws.OPEN) ws.send(d.toString('utf8')); };
+  proc.stdout.on('data', onData);
+  proc.stderr.on('data', onData);
+  proc.on('error', (err) => onData(Buffer.from(`[erreur] ${err.message}\r\n`)));
+  proc.on('exit', (code) => {
+    if (ws.readyState === ws.OPEN) { ws.send(`\r\n[session terminée, code ${code}]\r\n`); ws.close(); }
+  });
+
+  ws.on('message', (msg) => {
+    try { proc.stdin.write(msg.toString()); } catch (e) {}
+  });
+  ws.on('close', () => { try { proc.kill(); } catch (e) {} });
+}
+
+// ---------- Écran distant ----------
+// Un petit programme PowerShell (screen-helper.ps1) capture l'écran du PC et
+// injecte souris/clavier. Ici on le pilote et on relaie les images au téléphone
+// par WebSocket (/ws/screen). Windows uniquement.
+//
+// ATTENTION data : l'ancien plan Ngrok gratuit plafonnait à 1 Go/mois. On n'envoie
+// donc JAMAIS deux fois la même image, et on compte la consommation (screen-usage.json)
+// avec un budget mensuel de sécurité (screen.monthlyBudgetMB, 0 = désactivé).
+
+const screenCfg = config.screen || {};
+const SCREEN_HELPER = path.join(__dirname, 'screen-helper.ps1');
+const SCREEN_USAGE_PATH = path.join(__dirname, 'screen-usage.json');
+const SCREEN_VIEW_ONLY = !!screenCfg.viewOnly;
+const SCREEN_BUDGET_BYTES = (screenCfg.monthlyBudgetMB === undefined ? 800 : Number(screenCfg.monthlyBudgetMB)) * 1024 * 1024;
+
+function screenUnavailableReason() {
+  if (screenCfg.enabled === false) return 'Désactivé dans tunnels.config.json (screen.enabled)';
+  if (process.platform !== 'win32') return 'Disponible uniquement quand le programme tourne sous Windows';
+  if (!fs.existsSync(SCREEN_HELPER)) return 'Fichier screen-helper.ps1 introuvable à côté de index.js';
+  return null;
+}
+
+const monthKey = () => new Date().toISOString().slice(0, 7);
+let screenUsage = { month: monthKey(), bytes: 0 };
+try {
+  const saved = JSON.parse(fs.readFileSync(SCREEN_USAGE_PATH, 'utf8'));
+  if (saved && saved.month === monthKey()) screenUsage = saved;
+} catch (e) { /* premier lancement */ }
+
+function addScreenUsage(n) {
+  if (screenUsage.month !== monthKey()) screenUsage = { month: monthKey(), bytes: 0 };
+  screenUsage.bytes += n;
+}
+function budgetExceeded() {
+  return SCREEN_BUDGET_BYTES > 0 && screenUsage.bytes >= SCREEN_BUDGET_BYTES;
+}
+setInterval(() => { try { fs.writeFileSync(SCREEN_USAGE_PATH, JSON.stringify(screenUsage)); } catch (e) {} }, 30000);
+process.on('exit', () => { try { fs.writeFileSync(SCREEN_USAGE_PATH, JSON.stringify(screenUsage)); } catch (e) {} });
+
+// Les commandes passent en JSON, une par ligne, sur l'entrée standard de PowerShell.
+// On échappe tout caractère non-ASCII (\uXXXX) : la console Windows n'est pas en UTF-8
+// par défaut et les accents seraient sinon abîmés.
+function asciiJson(obj) {
+  return JSON.stringify(obj).replace(/[\u007f-\uffff]/g, (c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'));
+}
+
+const KEY_NAMES = new Set(['ctrl', 'control', 'shift', 'alt', 'win', 'enter', 'esc', 'escape', 'tab', 'backspace',
+  'delete', 'del', 'insert', 'home', 'end', 'pageup', 'pagedown', 'left', 'up', 'right', 'down', 'space',
+  'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12']);
+function isValidKeyCombo(k) {
+  if (typeof k !== 'string' || k.length > 40) return false;
+  return k.toLowerCase().split('+').every((part) => KEY_NAMES.has(part) || /^[a-z0-9]$/.test(part));
+}
+
+const clampNum = (v, min, max, fallback) => {
+  const n = Number(v);
+  return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : fallback;
+};
+const BUTTONS = ['left', 'right', 'middle'];
+
+let activeScreenSession = null; // une seule session à la fois (la nouvelle remplace l'ancienne)
+
+function spawnScreenHelper() {
+  return spawn('powershell.exe', [
+    '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', SCREEN_HELPER,
+  ], { windowsHide: true });
+}
+
+function attachScreen(ws) {
+  if (activeScreenSession) activeScreenSession.close('Remplacée par une autre connexion');
+
+  const helper = spawnScreenHelper();        // capture d'écran uniquement
+  let inputHelper = spawnScreenHelper();     // souris / clavier uniquement : ne reste jamais bloqué derrière une capture
+  const settings = { w: 1280, q: 50, fps: 5 };
+  let closed = false;
+  let pending = false;
+  let shotStartedAt = 0;
+  let lastFrame = '';
+  let timer = null;
+  let pingTimer = null;
+  let missedPongs = 0;
+  ws.on('pong', () => { missedPongs = 0; });
+
+  const sendJson = (obj) => { if (ws.readyState === ws.OPEN) ws.send(JSON.stringify(obj)); };
+  const cmd = (obj) => { if (!closed) { try { helper.stdin.write(asciiJson(obj) + '\n'); } catch (e) {} } };
+  const cmdIn = (obj) => { if (!closed) { try { inputHelper.stdin.write(asciiJson(obj) + '\n'); } catch (e) {} } };
+  // Après une action (touche, clic…) on accélère un instant les captures pour voir le résultat tout de suite
+  let boostUntil = 0;
+  const boosting = () => Date.now() < boostUntil;
+  function boost() {
+    boostUntil = Date.now() + 1500;
+    if (!pending && !closed) { clearTimeout(timer); timer = setTimeout(requestShot, 60); }
+  }
+
+  function close(reason) {
+    if (closed) return;
+    closed = true;
+    clearTimeout(timer);
+    clearInterval(pingTimer);
+    try { helper.kill(); } catch (e) {}
+    try { inputHelper.kill(); } catch (e) {}
+    if (reason) sendJson({ t: 'error', message: reason });
+    try { ws.close(); } catch (e) {}
+    if (activeScreenSession && activeScreenSession.helper === helper) activeScreenSession = null;
+  }
+  activeScreenSession = { helper, close };
+
+  function requestShot() {
+    if (closed || pending) return;
+    if (budgetExceeded()) {
+      close('Budget data du mois atteint (' + (screenUsage.bytes / 1048576).toFixed(1) + ' Mo). Augmente screen.monthlyBudgetMB (ou mets 0 pour désactiver la limite) dans tunnels.config.json si tu le souhaites.');
+      return;
+    }
+    if (ws.bufferedAmount > 1.5 * 1024 * 1024) { timer = setTimeout(requestShot, 200); return; } // réseau lent : on attend
+    pending = true;
+    shotStartedAt = Date.now();
+    cmd({ c: 'shot', w: settings.w, q: settings.q });
+  }
+  function scheduleNext(extraMs) {
+    const interval = boosting() ? Math.min(1000 / settings.fps, 90) : 1000 / settings.fps;
+    const wait = Math.max(0, interval - (Date.now() - shotStartedAt)) + (extraMs || 0);
+    clearTimeout(timer);
+    timer = setTimeout(requestShot, wait);
+  }
+
+  let buf = '';
+  helper.stdout.setEncoding('utf8');
+  helper.stdout.on('data', (chunk) => {
+    buf += chunk;
+    let nl;
+    while ((nl = buf.indexOf('\n')) >= 0) {
+      const line = buf.slice(0, nl).replace(/\r$/, '');
+      buf = buf.slice(nl + 1);
+      handleHelperLine(line);
+    }
+  });
+
+  function handleHelperLine(line) {
+    if (line.startsWith('R|')) {
+      sendJson({ t: 'ready', viewOnly: SCREEN_VIEW_ONLY });
+      requestShot();
+    } else if (line.startsWith('S|')) {
+      try {
+        let list = JSON.parse(line.slice(2));
+        if (!Array.isArray(list)) list = [list];
+        sendJson({ t: 'screens', list });
+      } catch (e) {}
+    } else if (line.startsWith('F|')) {
+      pending = false;
+      const frame = line.slice(2);
+      if (frame === lastFrame) { scheduleNext(boosting() ? 30 : 250); return; } // écran inchangé : rien à envoyer
+      lastFrame = frame;
+      const jpeg = Buffer.from(frame, 'base64');
+      addScreenUsage(jpeg.length);
+      if (ws.readyState === ws.OPEN) ws.send(jpeg);
+      scheduleNext(0);
+    } else if (line.startsWith('E|')) {
+      const [, which, ...rest] = line.split('|');
+      const message = rest.join('|');
+      log('[écran] erreur', which + ':', message);
+      if (which === 'shot') {
+        pending = false;
+        sendJson({ t: 'error', message: "Capture impossible (écran verrouillé ou fenêtre d'administrateur au premier plan ?) : " + message, soft: true });
+        scheduleNext(1500);
+      } else {
+        sendJson({ t: 'error', message, soft: true });
+      }
+    }
+  }
+
+  helper.stderr.on('data', (d) => log('[écran/ps]', String(d).trim()));
+  inputHelper.stdout.setEncoding('utf8');
+  inputHelper.stdout.on('data', (chunk) => {
+    chunk.split('\n').forEach((l) => {
+      l = l.replace(/\r$/, '');
+      if (l.startsWith('E|')) { const [, which, ...rest] = l.split('|'); log('[écran/saisie] erreur', which + ':', rest.join('|')); sendJson({ t: 'error', message: rest.join('|'), soft: true }); }
+    });
+  });
+  inputHelper.stderr.on('data', (d) => log('[écran/ps saisie]', String(d).trim()));
+  inputHelper.on('error', () => { inputHelper = helper; });
+  inputHelper.on('exit', () => { if (!closed) inputHelper = helper; });
+  helper.on('error', (err) => close('Impossible de lancer PowerShell : ' + err.message));
+  helper.on('exit', (code) => { if (!closed) close('Le programme de capture s\'est arrêté (code ' + code + ')'); });
+
+  ws.on('message', (raw) => {
+    let m;
+    try { m = JSON.parse(raw.toString()); } catch (e) { return; }
+    if (!m || typeof m.t !== 'string') return;
+
+    switch (m.t) {
+      case 'cfg':
+        settings.w = Math.round(clampNum(m.w, 480, 2560, settings.w));
+        settings.q = Math.round(clampNum(m.q, 20, 90, settings.q));
+        settings.fps = clampNum(m.fps, 0.5, 10, settings.fps);
+        lastFrame = '';
+        break;
+      case 'screen':
+        cmd({ c: 'screen', i: Math.round(clampNum(m.i, 0, 15, 0)) });
+        if (inputHelper !== helper) cmdIn({ c: 'screen', i: Math.round(clampNum(m.i, 0, 15, 0)) });
+        lastFrame = '';
+        break;
+      case 'refresh':
+        lastFrame = '';
+        break;
+    }
+    if (SCREEN_VIEW_ONLY) return; // mode lecture seule : on ignore tout ce qui touche au PC
+
+    const x = clampNum(m.x, 0, 1, 0), y = clampNum(m.y, 0, 1, 0);
+    const b = BUTTONS.includes(m.b) ? m.b : 'left';
+    switch (m.t) {
+      case 'move': cmdIn({ c: 'move', x, y }); break;
+      case 'down': cmdIn({ c: 'down', x, y, b }); break;
+      case 'up': cmdIn({ c: 'up', x, y, b }); boost(); break;
+      case 'click': cmdIn({ c: 'click', x, y, b }); boost(); break;
+      case 'wheel': cmdIn({ c: 'wheel', d: Math.round(clampNum(m.d, -20, 20, 0)) }); boost(); break;
+      case 'text':
+        if (typeof m.s === 'string' && m.s.length > 0 && m.s.length <= 500) { cmdIn({ c: 'text', s: m.s }); boost(); }
+        break;
+      case 'key':
+        if (isValidKeyCombo(m.k)) { cmdIn({ c: 'key', k: m.k }); boost(); }
+        break;
+    }
+  });
+  ws.on('close', () => close());
+  ws.on('error', () => close());
+  // Toutes les 10 s : ping WebSocket (garde la connexion ouverte quand l'écran ne bouge pas), signal « hb » vers le
+  // téléphone (lui permet de détecter une connexion morte), relance d'une capture bloquée et nettoyage d'un client disparu.
+  pingTimer = setInterval(() => {
+    if (closed) return;
+    if (missedPongs >= 4) { try { ws.terminate(); } catch (e) {} return; } // plus de réponse depuis ~40 s : on libère PowerShell
+    missedPongs++;
+    try { ws.ping(); } catch (e) {}
+    sendJson({ t: 'hb' });
+    if (pending && Date.now() - shotStartedAt > 10000) { // capture sans réponse : on repart au lieu de rester bloqué
+      pending = false;
+      requestShot();
+    }
+  }, 10000);
+}
+
+// ---------- Démarrage ----------
+
+startCloudflare();
+(config.tunnels || []).forEach((t) => startTunnel({ id: nextId(), ...t }));
+
+// ---------- Interface mobile ----------
+
+const app = express();
+app.use(express.json());
+app.use('/api', checkKey); // toutes les routes /api/* exigent la clé d'accès
+
+app.get('/screen-client.js', (req, res) => {
+  res.type('application/javascript').sendFile(path.join(__dirname, 'screen-client.js'));
+});
+
+app.get('/', (req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Mes Tunnels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root {
+    --bg: #0b0d12; --card: #161a22; --border: #262b36; --text: #f1f3f6;
+    --muted: #8b93a3; --accent: #4f8cff; --green: #35c46b; --red: #ff5c5c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: env(safe-area-inset-top,0) 1rem env(safe-area-inset-bottom,0);
+    max-width: 480px; margin-inline: auto;
+  }
+  header { padding: 1.5rem 0 1rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  .status-line { color: var(--muted); font-size: .85rem; display: flex; align-items: center; gap: .4rem; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .dot.off { background: var(--red); }
+  .dot.wait { background: #e0b93e; }
+
+  .tabs { display: flex; gap: .5rem; margin-bottom: 1rem; }
+  .tab-btn {
+    flex: 1; padding: .7rem; border-radius: 10px; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted); font-weight: 600; font-size: .9rem; cursor: pointer;
+  }
+  .tab-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  header { position: relative; }
+  .pwr-btn { position: absolute; top: 1.4rem; right: 0; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--card); color: var(--muted); cursor: pointer; padding: 0;
+    display: flex; align-items: center; justify-content: center; transition: color .15s, border-color .15s, background .15s; }
+  .pwr-btn svg { width: 1.2rem; height: 1.2rem; }
+  .pwr-btn.open, .pwr-btn:active { color: var(--text); border-color: var(--accent); background: #1c2230; }
+  .pwr-menu { display: none; position: absolute; top: 4.3rem; right: 0; z-index: 15; width: 21rem; max-width: 100%;
+    grid-template-columns: 1fr 1fr; gap: .3rem .35rem; padding: .5rem; border-radius: 16px; border: 1px solid var(--border);
+    background: rgba(22,26,34,.97); box-shadow: 0 14px 34px rgba(0,0,0,.55); animation: pwrIn .14s ease-out; }
+  .pwr-menu.open { display: grid; }
+  .pwr-col { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+  .pwr-head { font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: .2rem .35rem .1rem; }
+  .pwr-wide { grid-column: 1 / -1; }
+  @keyframes pwrIn { from { opacity: 0; transform: translateY(-6px) scale(.98); } to { opacity: 1; transform: none; } }
+  .pwr-item { display: flex; flex-direction: column; align-items: flex-start; gap: .5rem; width: 100%; text-align: left; border: 1px solid var(--border);
+    background: #1a1f2b; color: var(--text); border-radius: 12px; padding: .65rem; cursor: pointer; font-family: inherit; }
+  .pwr-item.row { flex-direction: row; align-items: center; gap: .65rem; }
+  .pwr-item:active { background: #232838; }
+  .pwr-ico { flex: none; width: 2.2rem; height: 2.2rem; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .pwr-ico svg { width: 1.15rem; height: 1.15rem; }
+  .pwr-ico.blue { background: rgba(79,140,255,.16); color: #7aa8ff; }
+  .pwr-ico.rose { background: rgba(255,120,140,.14); color: #ff9aa8; }
+  .pwr-ico.grey { background: #232838; color: var(--muted); }
+  .pwr-txt { display: flex; flex-direction: column; min-width: 0; }
+  .pwr-txt b { font-size: .88rem; font-weight: 600; }
+  .pwr-txt small { color: var(--muted); font-size: .72rem; margin-top: .1rem; line-height: 1.25; }
+  .pwr-msg { font-size: .78rem; color: var(--muted); line-height: 1.4; padding: 0 .35rem .2rem; grid-column: 1 / -1; }
+  .pwr-msg:empty { display: none; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 1rem; margin-bottom: .75rem;
+  }
+  .card .top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+  .card .name { font-weight: 600; font-size: 1.05rem; }
+  .card .port { color: var(--muted); font-size: .8rem; }
+  .card .url {
+    margin-top: .6rem; display: block; word-break: break-all;
+    color: var(--accent); font-size: .95rem; text-decoration: none;
+  }
+  .card .err { margin-top: .6rem; color: var(--red); font-size: .85rem; }
+  .card .actions { margin-top: .75rem; display: flex; gap: .5rem; }
+  .btn {
+    border: none; border-radius: 10px; padding: .6rem .9rem; font-size: .85rem;
+    font-weight: 600; cursor: pointer;
+  }
+  .btn-copy { background: #232838; color: var(--text); flex: 1; }
+  .btn-remove { background: #2a1a1a; color: var(--red); }
+
+  .empty { text-align: center; color: var(--muted); padding: 2rem 0; }
+
+  .fab {
+    position: fixed; bottom: calc(1.5rem + env(safe-area-inset-bottom,0));
+    left: 50%; transform: translateX(-50%); width: min(440px, calc(100% - 2rem));
+    background: var(--accent); color: white; border: none; border-radius: 16px;
+    padding: 1rem; font-size: 1rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(79,140,255,.4);
+  }
+
+  .sheet-backdrop {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 10;
+  }
+  .sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; background: var(--card);
+    border-radius: 18px 18px 0 0; padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom,0));
+    z-index: 11; max-width: 480px; margin-inline: auto;
+  }
+  .sheet h2 { margin: 0 0 1rem; font-size: 1.15rem; }
+  .sheet label { display: block; font-size: .8rem; color: var(--muted); margin-bottom: .3rem; }
+  .sheet input {
+    width: 100%; padding: .8rem; border-radius: 10px; border: 1px solid var(--border);
+    background: #10141c; color: var(--text); font-size: 1rem; margin-bottom: 1rem;
+  }
+  .switch-label {
+    display: flex; align-items: center; gap: .6rem; margin-bottom: 1.1rem;
+    font-size: .9rem; color: var(--text); cursor: pointer;
+  }
+  .switch-input { width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0; }
+  .badge-https {
+    display: inline-block; margin-left: .4rem; font-size: .68rem; font-weight: 700;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 6px;
+    padding: .1rem .35rem; vertical-align: middle;
+  }
+  .sheet .row { display: flex; gap: .75rem; }
+  .sheet .row .btn { flex: 1; padding: .9rem; }
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-cancel { background: #232838; color: var(--text); }
+
+  .breadcrumb { color: var(--muted); font-size: .8rem; margin-bottom: .75rem; word-break: break-all; }
+  .file-row {
+    display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: .8rem .9rem; margin-bottom: .5rem;
+  }
+  .file-row .left { display: flex; align-items: center; gap: .7rem; min-width: 0; flex: 1; }
+  .file-row .icon { font-size: 1.3rem; flex-shrink: 0; }
+  .file-row .name { font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-row.dir { cursor: pointer; }
+  .btn-launch { background: var(--green); color: #06210f; flex-shrink: 0; padding: .5rem .8rem; font-size: .8rem; }
+  .proc-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: #3a4050; flex-shrink: 0;
+    transition: background .2s, box-shadow .2s;
+  }
+  .proc-dot.on { background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .btn-back { background: #232838; color: var(--text); margin-bottom: .75rem; padding: .6rem 1rem; }
+  .file-row .right { display: flex; gap: .4rem; flex-shrink: 0; }
+  .btn-sm { padding: .5rem .7rem; font-size: .78rem; }
+  .btn-term { background: #232838; color: var(--accent); }
+  .btn-dl { background: #232838; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; }
+  .btn-edit { background: #232838; color: var(--text); }
+  .btn-menu { background: #232838; color: var(--text); font-size: 1.05rem; line-height: 1; padding: .5rem .8rem; }
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none; position: absolute; right: 0; top: calc(100% + .3rem);
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    min-width: 150px; z-index: 20; overflow: hidden; box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  }
+  .dropdown-menu.active { display: block; }
+  .dropdown-item {
+    display: block; width: 100%; text-align: left; padding: .75rem 1rem; font-size: .85rem;
+    background: none; border: none; color: var(--text); cursor: pointer; text-decoration: none;
+  }
+  .dropdown-item:not(:last-child) { border-bottom: 1px solid var(--border); }
+  .dropdown-item.danger { color: var(--red); }
+
+  .overlay {
+    display: none; position: fixed; inset: 0; background: var(--bg); z-index: 30;
+    flex-direction: column; padding: env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);
+  }
+  .overlay.active { display: flex; }
+  .overlay-header {
+    display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+    padding: 1rem 1rem .75rem; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .overlay-header .title { font-weight: 600; font-size: .95rem; word-break: break-all; }
+  .overlay-close { background: #232838; color: var(--text); border: none; border-radius: 10px; padding: .5rem .8rem; font-size: .85rem; cursor: pointer; flex-shrink: 0; }
+
+  #termOutput {
+    flex: 1; overflow-y: auto; padding: 1rem; margin: 0; white-space: pre-wrap; word-break: break-all;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .82rem; color: #c9e6ff;
+  }
+  #termInputRow { display: flex; gap: .5rem; padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom,0)); border-top: 1px solid var(--border); flex-shrink: 0; }
+  #termInput {
+    flex: 1; padding: .8rem; border-radius: 10px; border: 1px solid var(--border);
+    background: #10141c; color: var(--text); font-family: ui-monospace, monospace; font-size: .9rem;
+  }
+
+  #editorTextarea {
+    flex: 1; width: 100%; padding: 1rem; border: none; resize: none;
+    background: #10141c; color: var(--text); font-family: ui-monospace, monospace; font-size: .85rem;
+    line-height: 1.4;
+  }
+  #editorFooter { display: flex; gap: .75rem; padding: .75rem 1rem calc(.75rem + env(safe-area-inset-bottom,0)); border-top: 1px solid var(--border); flex-shrink: 0; }
+  #editorFooter .btn { flex: 1; padding: .9rem; }
+
+  .lock-screen {
+    position: fixed; inset: 0; background: var(--bg); z-index: 50;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 1.5rem;
+  }
+  .lock-screen h2 { margin-bottom: .3rem; }
+  .lock-screen p { color: var(--muted); font-size: .85rem; text-align: center; margin-bottom: 1.5rem; max-width: 320px; }
+  .lock-screen input {
+    width: 100%; max-width: 320px; padding: .9rem; border-radius: 10px; border: 1px solid var(--border);
+    background: #10141c; color: var(--text); font-size: 1rem; margin-bottom: .8rem; text-align: center;
+  }
+  .lock-screen .btn-primary { width: 100%; max-width: 320px; padding: .9rem; }
+  .lock-error { color: var(--red); font-size: .82rem; margin-bottom: .8rem; min-height: 1.1em; }
+
+  #bottomSpace { height: 6rem; }
+  #bottomSpace2 { height: 6rem; }
+</style>
+</head>
+<body>
+
+<div class="lock-screen" id="lockScreen">
+  <h2>🔒 Accès verrouillé</h2>
+  <p>Entre la clé affichée dans le terminal sur ton PC (ou dans le fichier access.key) pour déverrouiller cette interface.</p>
+  <input id="keyInput" placeholder="Clé d'accès" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <div class="lock-error" id="lockError"></div>
+  <button class="btn btn-primary" onclick="tryUnlock()">Déverrouiller</button>
+</div>
+
+<div id="app" style="display:none">
+<header>
+  <button class="pwr-btn" id="pwrBtn" title="Éteindre" onclick="togglePower()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v8"/><path d="M6.6 6.8a8 8 0 1 0 10.8 0"/></svg>
+  </button>
+  <div class="pwr-menu" id="pwrMenu">
+    <div class="pwr-col">
+      <div class="pwr-head">Redémarrer</div>
+      <button class="pwr-item" onclick="powerAction('restart-app')">
+        <span class="pwr-ico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></span>
+        <span class="pwr-txt"><b>Le tunnel</b><small>Relance le programme</small></span>
+      </button>
+      <button class="pwr-item" onclick="powerAction('restart')">
+        <span class="pwr-ico rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <span class="pwr-txt"><b>Le PC</b><small>Dans 10 s, annulable</small></span>
+      </button>
+    </div>
+    <div class="pwr-col">
+      <div class="pwr-head">Éteindre</div>
+      <button class="pwr-item" onclick="powerAction('app')">
+        <span class="pwr-ico blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg></span>
+        <span class="pwr-txt"><b>Le tunnel</b><small>Ferme le programme</small></span>
+      </button>
+      <button class="pwr-item" onclick="powerAction('shutdown')">
+        <span class="pwr-ico rose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+        <span class="pwr-txt"><b>Le PC</b><small>Dans 10 s, annulable</small></span>
+      </button>
+    </div>
+    <button class="pwr-item row pwr-wide" id="pwrCancel" style="display:none" onclick="powerCancel()">
+      <span class="pwr-ico grey"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>
+      <span class="pwr-txt"><b>Annuler l’opération</b></span>
+    </button>
+    <div class="pwr-msg" id="pwrMsg"></div>
+  </div>
+  <h1>Tunnel Manager</h1>
+  <div class="status-line" id="ngrokStatus">
+    <span class="dot wait"></span> Connexion en cours...
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" id="tabTunnelsBtn" onclick="showTab('tunnels')">Tunnels</button>
+  <button class="tab-btn" id="tabFilesBtn" onclick="showTab('files')">Fichiers</button>
+  <button class="tab-btn" id="tabScreenBtn" onclick="showTab('screen')">Écran</button>
+</div>
+
+<div class="view active" id="tunnelsView">
+  <div id="list"><div class="empty">Chargement...</div></div>
+  <div id="bottomSpace"></div>
+  <button class="fab" onclick="openSheet()">+ Nouveau port</button>
+</div>
+
+<div class="view" id="screenView">
+  <div class="card">
+    <div class="top"><div class="name">🖥️ Écran du PC</div></div>
+    <div class="port" id="screenInfo" style="margin-top:.4rem">Chargement...</div>
+    <div class="actions"><button class="btn btn-primary" id="screenOpenBtn" style="flex:1;padding:.9rem" onclick="TMScreen.open()">Ouvrir l'écran du PC</button></div>
+  </div>
+  <div class="card">
+    <div class="port" style="line-height:1.55">
+      <b style="color:var(--text)">Gestes</b><br>
+      Toucher = clic gauche · Appui long = clic droit<br>
+      Mode <b>Vue</b> : pincer pour zoomer / dézoomer, glisser pour déplacer la vue<br>
+      Mode <b>Défiler</b> : glisser = molette de la souris<br>
+      Mode <b>Glisser</b> : glisser = cliquer-déplacer<br>
+      <b style="color:var(--text)">⌨ Clavier</b> pour écrire, <b style="color:var(--text)">Touches</b> pour Ctrl+C, Alt+Tab, flèches... (<b style="color:var(--text)">Ctrl, Win, Alt, Maj</b> : 1 appui = pour la prochaine touche, 2 appuis = maintenu) · <b style="color:var(--text)">⛶</b> = plein écran
+    </div>
+  </div>
+</div>
+
+<div class="view" id="filesView">
+  <div id="fbBack"></div>
+  <div class="breadcrumb" id="fbPath">Dossiers autorisés</div>
+  <div id="fbList"><div class="empty">Chargement...</div></div>
+  <div id="bottomSpace2"></div>
+  <button class="fab" id="importFab" onclick="openImportSheet()">⬆ Importer ici</button>
+</div>
+</div>
+
+<input type="file" id="uploadFilesInput" multiple style="display:none" onchange="handleUploadInputChange(event)">
+<input type="file" id="uploadFolderInput" webkitdirectory directory multiple style="display:none" onchange="handleUploadInputChange(event)">
+
+<div class="sheet-backdrop" id="importBackdrop" onclick="closeImportSheet()"></div>
+<div class="sheet" id="importSheet" style="display:none">
+  <h2>Importer vers ce dossier</h2>
+  <div class="breadcrumb" id="importTargetLabel" style="margin-bottom:1rem"></div>
+  <div class="row">
+    <button class="btn btn-cancel" onclick="closeImportSheet();document.getElementById('uploadFilesInput').click()">Fichier(s)</button>
+    <button class="btn btn-primary" onclick="closeImportSheet();document.getElementById('uploadFolderInput').click()">Dossier</button>
+  </div>
+</div>
+
+<div class="sheet-backdrop" id="backdrop" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet" style="display:none">
+  <h2>Exposer un nouveau port</h2>
+  <label>Nom (pour t'y retrouver)</label>
+  <input id="inputName" placeholder="Ex : Mon serveur web" autocomplete="off">
+  <label>Port local</label>
+  <input id="inputPort" type="number" inputmode="numeric" placeholder="Ex : 8000">
+  <label class="switch-label">
+    <input id="inputHttps" type="checkbox" class="switch-input">
+    <span>Mon programme tourne en HTTPS en local</span>
+  </label>
+  <div class="row">
+    <button class="btn btn-cancel" onclick="closeSheet()">Annuler</button>
+    <button class="btn btn-primary" onclick="addTunnel()">Créer</button>
+  </div>
+</div>
+
+<div class="overlay" id="termOverlay">
+  <div class="overlay-header">
+    <div class="title" id="termTitle">Terminal</div>
+    <button class="overlay-close" onclick="closeTerminal()">Fermer</button>
+  </div>
+  <pre id="termOutput"></pre>
+  <div id="termInputRow">
+    <input id="termInput" placeholder="Tape une commande..." autocomplete="off" autocapitalize="off" spellcheck="false">
+    <button class="btn btn-primary btn-sm" onclick="sendTermCommand()">Envoyer</button>
+  </div>
+</div>
+
+<div class="overlay" id="editorOverlay">
+  <div class="overlay-header">
+    <div class="title" id="editorTitle">Édition</div>
+    <button class="overlay-close" onclick="closeEditor()">Fermer</button>
+  </div>
+  <textarea id="editorTextarea" autocapitalize="off" autocorrect="off" spellcheck="false"></textarea>
+  <div id="editorFooter">
+    <button class="btn btn-cancel" onclick="closeEditor()">Annuler</button>
+    <button class="btn btn-primary" onclick="saveEditor()">Enregistrer</button>
+  </div>
+</div>
+
+<script src="/screen-client.js"></script>
+<script>
+let currentFbPath = null; // null = racine (liste des dossiers autorisés)
+
+// ---------- Clé / déverrouillage ----------
+
+function getKey() { return localStorage.getItem('tm_key') || ''; }
+
+function authHeaders() {
+  return { 'x-access-key': getKey(), 'Content-Type': 'application/json' };
+}
+
+async function tryUnlock() {
+  const key = document.getElementById('keyInput').value.trim();
+  if (!key) return;
+  localStorage.setItem('tm_key', key);
+  const ok = await checkAuth();
+  if (ok) {
+    document.getElementById('lockScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    refresh();
+  } else {
+    document.getElementById('lockError').textContent = 'Clé incorrecte.';
+    localStorage.removeItem('tm_key');
+  }
+}
+
+async function checkAuth() {
+  try {
+    const res = await fetch('/api/status', { headers: authHeaders() });
+    return res.status === 200;
+  } catch (e) { return false; }
+}
+
+async function boot() {
+  if (getKey()) {
+    const ok = await checkAuth();
+    if (ok) {
+      document.getElementById('lockScreen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      refresh();
+      return;
+    }
+  }
+  document.getElementById('lockScreen').style.display = 'flex';
+}
+
+// ---------- Alimentation du PC ----------
+
+function togglePower() {
+  var open = document.getElementById('pwrMenu').classList.toggle('open');
+  document.getElementById('pwrBtn').classList.toggle('open', open);
+}
+
+async function powerAction(action) {
+  var texts = {
+    'app': 'Éteindre le Tunnel Manager ? Les tunnels seront coupés et tu ne pourras plus y accéder tant que le programme n’est pas relancé sur le PC.',
+    'restart-app': 'Redémarrer le Tunnel Manager ? Les tunnels seront coupés quelques secondes et l’adresse publique va changer.',
+    'shutdown': 'Vraiment ÉTEINDRE le PC ?',
+    'restart': 'Vraiment REDÉMARRER le PC ? Windows risque de demander ton mot de passe au démarrage : tu ne pourras pas le saisir à distance.'
+  };
+  if (!confirm(texts[action] || 'Confirmer ?')) return;
+  var msg = document.getElementById('pwrMsg');
+  var cancel = document.getElementById('pwrCancel');
+  msg.textContent = 'Envoi de la commande...';
+  try {
+    var r = await fetch('/api/power', { method: 'POST', headers: authHeaders(), body: JSON.stringify({ action: action }) });
+    var d = await r.json().catch(function () { return {}; });
+    if (!r.ok) { msg.textContent = 'Erreur : ' + (d.error || ('HTTP ' + r.status)); return; }
+    if (d.cancellable) {
+      msg.textContent = (action === 'restart' ? 'Redémarrage' : 'Extinction') + ' du PC dans ' + d.delay + ' s. Tu peux encore annuler.';
+      cancel.style.display = '';
+      setTimeout(function () { cancel.style.display = 'none'; msg.textContent = 'Commande exécutée : la connexion va se couper.'; }, d.delay * 1000);
+    } else if (action === 'restart-app') {
+      msg.textContent = 'Redémarrage en cours : recharge la page dans quelques secondes (la nouvelle adresse est dans tunnel-url.txt ou la notification).';
+    } else {
+      msg.textContent = action === 'app' ? 'Tunnel Manager arrêté.' : 'Commande envoyée : la connexion va se couper.';
+    }
+  } catch (e) { msg.textContent = 'Erreur : ' + e.message; }
+}
+
+async function powerCancel() {
+  var msg = document.getElementById('pwrMsg');
+  try {
+    var r = await fetch('/api/power/cancel', { method: 'POST', headers: authHeaders() });
+    var d = await r.json().catch(function () { return {}; });
+    msg.textContent = r.ok ? 'Annulé.' : ('Erreur : ' + (d.error || ('HTTP ' + r.status)));
+    if (r.ok) document.getElementById('pwrCancel').style.display = 'none';
+  } catch (e) { msg.textContent = 'Erreur : ' + e.message; }
+}
+
+// ---------- Onglets ----------
+
+function showTab(tab) {
+  document.getElementById('tabTunnelsBtn').classList.toggle('active', tab === 'tunnels');
+  document.getElementById('tabFilesBtn').classList.toggle('active', tab === 'files');
+  document.getElementById('tabScreenBtn').classList.toggle('active', tab === 'screen');
+  document.getElementById('tunnelsView').classList.toggle('active', tab === 'tunnels');
+  document.getElementById('filesView').classList.toggle('active', tab === 'files');
+  document.getElementById('screenView').classList.toggle('active', tab === 'screen');
+  if (tab === 'files') loadFiles(currentFbPath);
+  if (tab === 'screen' && window.TMScreen) TMScreen.refreshInfo();
+}
+
+// ---------- Tunnels ----------
+
+function openSheet() {
+  document.getElementById('sheet').style.display = 'block';
+  document.getElementById('backdrop').style.display = 'block';
+  document.getElementById('inputName').value = '';
+  document.getElementById('inputPort').value = '';
+  document.getElementById('inputHttps').checked = false;
+}
+function closeSheet() {
+  document.getElementById('sheet').style.display = 'none';
+  document.getElementById('backdrop').style.display = 'none';
+}
+
+async function addTunnel() {
+  const name = document.getElementById('inputName').value.trim() || 'Sans nom';
+  const port = parseInt(document.getElementById('inputPort').value, 10);
+  const https = document.getElementById('inputHttps').checked;
+  if (!port || port < 1 || port > 65535) { alert('Entre un port valide (ex : 8000)'); return; }
+  await fetch('/api/tunnels', {
+    method: 'POST', headers: authHeaders(),
+    body: JSON.stringify({ name, port, https })
+  });
+  closeSheet();
+  refresh();
+}
+
+async function removeTunnel(id) {
+  await fetch('/api/tunnels/' + id, { method: 'DELETE', headers: authHeaders() });
+  refresh();
+}
+
+function copyUrl(url, btn) {
+  navigator.clipboard.writeText(url).then(() => {
+    const old = btn.textContent;
+    btn.textContent = 'Copié !';
+    setTimeout(() => btn.textContent = old, 1200);
+  });
+}
+
+async function refresh() {
+  try {
+    const res = await fetch('/api/status', { headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+
+    const s = document.getElementById('ngrokStatus');
+    if (data.ngrok.url) {
+      s.innerHTML = '<span class="dot"></span> Connecté';
+    } else if (data.ngrok.error) {
+      s.innerHTML = '<span class="dot off"></span> ' + data.ngrok.error;
+    } else {
+      s.innerHTML = '<span class="dot wait"></span> Connexion en cours...';
+    }
+
+    const list = document.getElementById('list');
+    if (data.tunnels.length === 0) {
+      list.innerHTML = '<div class="empty">Aucun tunnel actif.<br>Appuie sur "+ Nouveau port" pour en créer un.</div>';
+      return;
+    }
+    list.innerHTML = data.tunnels.map(t => \`
+      <div class="card">
+        <div class="top">
+          <div>
+            <div class="name">\${t.name}\${t.https ? '<span class="badge-https">HTTPS</span>' : ''}</div>
+            <div class="port">Port local \${t.port}</div>
+          </div>
+        </div>
+        \${t.url
+          ? \`<a class="url" href="\${t.url}" target="_blank">\${t.url}</a>\`
+          : \`<div class="err">\${t.error || 'Démarrage en cours...'}</div>\`
+        }
+        <div class="actions">
+          \${t.url ? \`<button class="btn btn-copy" onclick="copyUrl('\${t.url}', this)">Copier le lien</button>\` : ''}
+          <button class="btn btn-remove" onclick="removeTunnel('\${t.id}')">Retirer</button>
+        </div>
+      </div>
+    \`).join('');
+  } catch (e) { /* silencieux, on réessaiera */ }
+}
+
+// ---------- Fichiers ----------
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+// ---------- Import depuis le téléphone ----------
+
+function openImportSheet() {
+  if (!currentFbPath) { alert("Ouvre d'abord un dossier avant d'importer."); return; }
+  document.getElementById('importTargetLabel').textContent = 'Dans : ' + currentFbPath;
+  document.getElementById('importSheet').style.display = 'block';
+  document.getElementById('importBackdrop').style.display = 'block';
+}
+function closeImportSheet() {
+  document.getElementById('importSheet').style.display = 'none';
+  document.getElementById('importBackdrop').style.display = 'none';
+}
+
+function handleUploadInputChange(event) {
+  const files = event.target.files;
+  event.target.value = ''; // permet de re-sélectionner les mêmes fichiers plus tard
+  if (files && files.length) uploadFiles(files);
+}
+
+function uploadFiles(fileList) {
+  if (!currentFbPath) { alert("Ouvre d'abord un dossier avant d'importer."); return; }
+  const formData = new FormData();
+  formData.append('targetDir', currentFbPath);
+  for (const file of fileList) {
+    // webkitRelativePath est rempli par le navigateur pour un import de dossier
+    // (ex. "mon-dossier/photo.jpg"), vide pour un simple import de fichiers.
+    const relPath = file.webkitRelativePath || file.name;
+    formData.append('files', file, relPath);
+  }
+
+  const fab = document.getElementById('importFab');
+  const originalLabel = fab.textContent;
+  fab.disabled = true;
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/fb/upload');
+  xhr.setRequestHeader('x-access-key', getKey());
+  xhr.upload.onprogress = (ev) => {
+    if (ev.lengthComputable) fab.textContent = 'Import... ' + Math.round((ev.loaded / ev.total) * 100) + '%';
+  };
+  xhr.onload = () => {
+    fab.disabled = false;
+    fab.textContent = originalLabel;
+    if (xhr.status === 401) { logout(); return; }
+    let data = {};
+    try { data = JSON.parse(xhr.responseText); } catch (e) {}
+    if (xhr.status >= 400) { alert('Erreur : ' + (data.error || xhr.status)); return; }
+    loadFiles(currentFbPath);
+  };
+  xhr.onerror = () => {
+    fab.disabled = false;
+    fab.textContent = originalLabel;
+    alert("Erreur de connexion pendant l'import.");
+  };
+  xhr.send(formData);
+}
+
+async function loadFiles(dirPath) {
+  const fbList = document.getElementById('fbList');
+  const fbPathEl = document.getElementById('fbPath');
+  const fbBack = document.getElementById('fbBack');
+  fbList.innerHTML = '<div class="empty">Chargement...</div>';
+
+  const url = dirPath ? '/api/fb/list?path=' + encodeURIComponent(dirPath) : '/api/fb/list';
+  try {
+    const res = await fetch(url, { headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { fbList.innerHTML = '<div class="empty">' + escapeHtml(data.error) + '</div>'; return; }
+
+    currentFbPath = data.path;
+    fbPathEl.textContent = data.path || 'Dossiers autorisés';
+    fbBack.innerHTML = data.parent !== undefined && data.parent !== null
+      ? '<button class="btn btn-back" data-path="' + encodeURIComponent(data.parent) + '" onclick="loadFiles(decodeURIComponent(this.dataset.path))">← Retour</button>'
+      : (data.path ? '<button class="btn btn-back" onclick="loadFiles(null)">← Retour</button>' : '');
+
+    if (data.entries.length === 0) {
+      fbList.innerHTML = '<div class="empty">Dossier vide.</div>';
+      return;
+    }
+
+    fbList.innerHTML = data.entries.map(e => {
+      const encPath = encodeURIComponent(e.path);
+      if (e.type === 'dir') {
+        return '<div class="file-row dir">' +
+          '<div class="left" data-path="' + encPath + '" onclick="loadFiles(decodeURIComponent(this.dataset.path))"><span class="icon">📁</span><span class="name">' + escapeHtml(e.name) + '</span></div>' +
+          '<div class="right"><button class="btn btn-sm btn-term" data-path="' + encPath + '" onclick="event.stopPropagation();openTerminal(decodeURIComponent(this.dataset.path))">Terminal</button></div>' +
+        '</div>';
+      }
+      return '<div class="file-row">' +
+        '<div class="left"><span class="icon">📄</span><span class="name">' + escapeHtml(e.name) + '</span></div>' +
+        '<div class="right">' +
+          '<span class="proc-dot' + (e.running ? ' on' : '') + '" data-path="' + encPath + '" ' +
+            'title="' + (e.running ? 'Fichier ouvert' : 'Fichier fermé') + '"></span>' +
+          '<div class="dropdown">' +
+            '<button class="btn btn-sm btn-menu" onclick="event.stopPropagation();toggleMenu(event.currentTarget)">⋮</button>' +
+            '<div class="dropdown-menu">' +
+              '<button class="dropdown-item" data-path="' + encPath + '" onclick="closeAllMenus();openEditor(decodeURIComponent(this.dataset.path))">Modifier</button>' +
+              '<a class="dropdown-item" href="/download?path=' + encPath + '&key=' + encodeURIComponent(getKey()) + '" onclick="closeAllMenus()">Télécharger</a>' +
+              '<button class="dropdown-item launch-toggle" data-path="' + encPath + '" onclick="closeAllMenus();handleLaunchToggle(decodeURIComponent(this.dataset.path), this)">' + (e.running ? 'Fermer' : 'Lancer') + '</button>' +
+              '<button class="dropdown-item" data-path="' + encPath + '" onclick="closeAllMenus();renameFile(decodeURIComponent(this.dataset.path))">Renommer</button>' +
+              '<button class="dropdown-item danger" data-path="' + encPath + '" onclick="closeAllMenus();deleteFile(decodeURIComponent(this.dataset.path))">Supprimer</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  } catch (e) {
+    fbList.innerHTML = '<div class="empty">Erreur de chargement.</div>';
+  }
+}
+
+// Le bouton du menu ⋮ fait office d'interrupteur : "Lancer" si le fichier est
+// fermé, "Fermer" s'il est ouvert. L'état réel est lu sur le témoin (la
+// loupiote), qui lui n'est que visuel et jamais cliquable.
+function handleLaunchToggle(filePath, btn) {
+  const dot = document.querySelector('.proc-dot[data-path="' + encodeURIComponent(filePath) + '"]');
+  const isRunning = !!(dot && dot.classList.contains('on'));
+  if (isRunning) stopFile(filePath, dot, btn);
+  else launchFile(filePath, dot, btn);
+}
+
+async function launchFile(filePath, dot, btn) {
+  if (!confirm('Lancer ce fichier sur ton PC ?\\n' + filePath)) return;
+  try {
+    const res = await fetch('/api/fb/launch', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: filePath })
+    });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { alert('Erreur : ' + data.error); return; }
+    setProcState(filePath, true);
+  } catch (e) { alert('Erreur de connexion.'); }
+}
+
+async function stopFile(filePath, dot, btn) {
+  if (!confirm('Fermer ce fichier sur ton PC ?\\n' + filePath)) return;
+  try {
+    const res = await fetch('/api/fb/stop', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: filePath })
+    });
+    if (res.status === 401) { logout(); return; }
+    setProcState(filePath, false);
+  } catch (e) { alert('Erreur de connexion.'); }
+}
+
+// Met à jour à la fois la loupiote et le texte du bouton ⋮ > Lancer/Fermer
+// pour un chemin donné, sans recharger toute la liste.
+function setProcState(filePath, running) {
+  const enc = encodeURIComponent(filePath);
+  const dot = document.querySelector('.proc-dot[data-path="' + enc + '"]');
+  if (dot) {
+    dot.classList.toggle('on', running);
+    dot.title = running ? 'Fichier ouvert' : 'Fichier fermé';
+  }
+  document.querySelectorAll('.launch-toggle[data-path="' + enc + '"]').forEach((b) => {
+    b.textContent = running ? 'Fermer' : 'Lancer';
+  });
+}
+
+// Sonde périodiquement quels fichiers sont encore ouverts, pour que la
+// loupiote et le bouton ⋮ restent à jour même si le programme se ferme tout
+// seul (sans recharger toute la liste, ce qui fermerait les menus ouverts).
+async function refreshProcLights() {
+  if (!document.getElementById('filesView').classList.contains('active')) return;
+  try {
+    const res = await fetch('/api/fb/running', { headers: authHeaders() });
+    if (res.status !== 200) return;
+    const data = await res.json();
+    const runningSet = new Set(data.running || []);
+    document.querySelectorAll('.proc-dot').forEach((dot) => {
+      const p = decodeURIComponent(dot.dataset.path);
+      setProcState(p, runningSet.has(p));
+    });
+  } catch (e) { /* silencieux, on réessaiera */ }
+}
+
+// ---------- Menu déroulant par fichier ----------
+
+function toggleMenu(btn) {
+  const menu = btn.nextElementSibling;
+  const wasActive = menu.classList.contains('active');
+  closeAllMenus();
+  if (!wasActive) menu.classList.add('active');
+}
+
+function closeAllMenus() {
+  document.querySelectorAll('.dropdown-menu.active').forEach((m) => m.classList.remove('active'));
+}
+
+document.addEventListener('click', closeAllMenus);
+
+async function renameFile(filePath) {
+  const currentName = filePath.split(/[\\\\/]/).pop();
+  const newName = prompt('Nouveau nom :', currentName);
+  if (!newName || newName === currentName) return;
+  try {
+    const res = await fetch('/api/fb/rename', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: filePath, newName })
+    });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { alert('Erreur : ' + data.error); return; }
+    loadFiles(currentFbPath);
+  } catch (e) { alert('Erreur de connexion.'); }
+}
+
+async function deleteFile(filePath) {
+  if (!confirm('Supprimer définitivement ce fichier ?\\n' + filePath)) return;
+  try {
+    const res = await fetch('/api/fb/delete', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: filePath })
+    });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { alert('Erreur : ' + data.error); return; }
+    loadFiles(currentFbPath);
+  } catch (e) { alert('Erreur de connexion.'); }
+}
+
+// ---------- Terminal ----------
+
+let termSocket = null;
+
+function openTerminal(dirPath) {
+  document.getElementById('termTitle').textContent = 'Terminal — ' + dirPath;
+  document.getElementById('termOutput').textContent = '';
+  document.getElementById('termOverlay').classList.add('active');
+  document.getElementById('termInput').value = '';
+
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const url = proto + '//' + location.host + '/ws/terminal?key=' + encodeURIComponent(getKey()) + '&cwd=' + encodeURIComponent(dirPath);
+  termSocket = new WebSocket(url);
+
+  termAppend('[connexion au terminal...]\\r\\n');
+  termSocket.onopen = () => termAppend('[connecté]\\r\\n');
+  termSocket.onmessage = (ev) => termAppend(ev.data);
+  termSocket.onclose = () => termAppend('\\r\\n[connexion fermée]\\r\\n');
+  termSocket.onerror = () => termAppend('\\r\\n[erreur de connexion]\\r\\n');
+
+  document.getElementById('termInput').focus();
+}
+
+function termAppend(text) {
+  const out = document.getElementById('termOutput');
+  out.textContent += text;
+  out.scrollTop = out.scrollHeight;
+}
+
+function sendTermCommand() {
+  const input = document.getElementById('termInput');
+  const cmd = input.value;
+  if (termSocket && termSocket.readyState === WebSocket.OPEN) {
+    termSocket.send(cmd + '\\n');
+  }
+  input.value = '';
+}
+
+document.getElementById('termInput').addEventListener('keydown', (e) => { if (e.key === 'Enter') sendTermCommand(); });
+
+function closeTerminal() {
+  document.getElementById('termOverlay').classList.remove('active');
+  if (termSocket) { try { termSocket.close(); } catch (e) {} termSocket = null; }
+}
+
+// ---------- Éditeur de fichier ----------
+
+let editorPath = null;
+
+async function openEditor(filePath) {
+  document.getElementById('editorTitle').textContent = filePath;
+  document.getElementById('editorTextarea').value = 'Chargement...';
+  document.getElementById('editorOverlay').classList.add('active');
+  try {
+    const res = await fetch('/api/fb/read?path=' + encodeURIComponent(filePath), { headers: authHeaders() });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { alert('Erreur : ' + data.error); closeEditor(); return; }
+    editorPath = data.path;
+    document.getElementById('editorTextarea').value = data.content;
+  } catch (e) {
+    alert('Erreur de chargement du fichier.');
+    closeEditor();
+  }
+}
+
+async function saveEditor() {
+  if (!editorPath) return;
+  const content = document.getElementById('editorTextarea').value;
+  try {
+    const res = await fetch('/api/fb/write', {
+      method: 'POST', headers: authHeaders(),
+      body: JSON.stringify({ path: editorPath, content })
+    });
+    if (res.status === 401) { logout(); return; }
+    const data = await res.json();
+    if (data.error) { alert('Erreur : ' + data.error); return; }
+    closeEditor();
+  } catch (e) {
+    alert('Erreur de connexion.');
+  }
+}
+
+function closeEditor() {
+  document.getElementById('editorOverlay').classList.remove('active');
+  editorPath = null;
+}
+
+function logout() {
+  localStorage.removeItem('tm_key');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('lockScreen').style.display = 'flex';
+  document.getElementById('lockError').textContent = 'Session expirée, ressaisis la clé.';
+}
+
+boot();
+setInterval(() => {
+  if (document.getElementById('app').style.display !== 'none') {
+    refresh();
+    refreshProcLights();
+  }
+}, 3000);
+</script>
+</body>
+</html>`);
+});
+
+// ---------- Alimentation du PC (redémarrer / éteindre) ----------
+// Éteindre / redémarrer le PC (Windows : « shutdown » avec un délai de 10 s pour pouvoir annuler),
+// ou arrêter / relancer seulement le Tunnel Manager.
+// Désactivable : "power": { "enabled": false }.
+const POWER_ENABLED = (config.power || {}).enabled !== false;
+const POWER_DELAY_S = 10;
+let powerPending = null; // { action, at }
+
+app.post('/api/power', (req, res) => {
+  if (!POWER_ENABLED) return res.status(403).json({ error: 'Alimentation désactivée dans tunnels.config.json' });
+  const action = String((req.body || {}).action || '');
+  if (['app', 'restart-app', 'shutdown', 'restart'].indexOf(action) < 0) return res.status(400).json({ error: 'action invalide' });
+  if (action === 'app' || action === 'restart-app') {
+    // Arrête (ou relance) uniquement Tunnel Manager : tunnels, cloudflared et écran sont coupés ; le PC reste allumé.
+    const relaunch = action === 'restart-app';
+    log(relaunch ? 'Redemarrage du Tunnel Manager demande depuis le telephone' : 'Arret du Tunnel Manager demande depuis le telephone');
+    res.json({ ok: true, delay: 0, cancellable: false, relaunch });
+    setTimeout(() => {
+      if (relaunch) {
+        try {
+          // Petit processus détaché : attend 2,5 s que l'ancien libère le port, puis relance index.js en arrière-plan.
+          const code = "setTimeout(function(){require('child_process').spawn(process.argv[1],[process.argv[2]],{cwd:process.argv[3],detached:true,stdio:'ignore',windowsHide:true}).unref();},2500);";
+          spawn(process.execPath, ['-e', code, process.execPath, __filename, __dirname], { detached: true, stdio: 'ignore', windowsHide: true }).unref();
+        } catch (e) { log('Relance impossible : ' + e.message); }
+      }
+      process.exit(0);
+    }, 400);
+    return;
+  }
+  let cmd;
+  if (process.platform === 'win32') {
+    cmd = `shutdown ${action === 'restart' ? '/r' : '/s'} /t ${POWER_DELAY_S} /c "Tunnel Manager : ${action === 'restart' ? 'redemarrage' : 'arret'} demande depuis le telephone"`;
+  } else if (process.platform === 'darwin') {
+    cmd = `osascript -e 'tell app "System Events" to ${action === 'restart' ? 'restart' : 'shut down'}'`;
+  } else {
+    cmd = action === 'restart' ? 'systemctl reboot' : 'systemctl poweroff';
+  }
+  log(`Alimentation : ${action === 'restart' ? 'redemarrage' : 'arret'} du PC demande depuis le telephone`);
+  exec(cmd, { windowsHide: true }, (err, stdout, stderr) => {
+    if (err) {
+      powerPending = null;
+      return res.status(500).json({ error: String(stderr || err.message).trim() || 'commande refusée' });
+    }
+    powerPending = { action, at: Date.now() };
+    res.json({ ok: true, delay: process.platform === 'win32' ? POWER_DELAY_S : 0, cancellable: process.platform === 'win32' });
+  });
+});
+
+app.post('/api/power/cancel', (req, res) => {
+  if (!POWER_ENABLED) return res.status(403).json({ error: 'Alimentation désactivée' });
+  if (process.platform !== 'win32') return res.status(400).json({ error: 'Annulation non disponible sur ce système' });
+  exec('shutdown /a', { windowsHide: true }, (err, stdout, stderr) => {
+    if (err) return res.status(500).json({ error: 'Rien à annuler (ou trop tard)' });
+    powerPending = null;
+    log('Alimentation : operation annulee');
+    res.json({ ok: true });
+  });
+});
+
+app.get('/api/screen/info', (req, res) => {
+  const reason = screenUnavailableReason();
+  res.json({
+    enabled: !reason,
+    reason,
+    viewOnly: SCREEN_VIEW_ONLY,
+    usedMB: Math.round(screenUsage.bytes / 1048576),
+    budgetMB: SCREEN_BUDGET_BYTES > 0 ? Math.round(SCREEN_BUDGET_BYTES / 1048576) : 0,
+  });
+});
+
+app.get('/api/status', (req, res) => {
+  res.json({
+    ngrok: { url: ngrokPublicUrl, error: ngrokError },
+    tunnels: Object.values(tunnels).map(({ handle, ...t }) => t),
+  });
+});
+
+app.post('/api/tunnels', (req, res) => {
+  const { name, port, https } = req.body || {};
+  if (!port) return res.status(400).json({ error: 'port requis' });
+  startTunnel({ id: nextId(), name: name || `Port ${port}`, port: parseInt(port, 10), https: !!https });
+  res.json({ ok: true });
+});
+
+app.delete('/api/tunnels/:id', (req, res) => {
+  stopTunnel(req.params.id);
+  res.json({ ok: true });
+});
+
+app.get('/api/fb/list', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const target = req.query.path;
+  if (!target) {
+    return res.json({ path: null, parent: null, entries: listRootsEntries() });
+  }
+  if (!isPathAllowed(target)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(target);
+    if (!stat.isDirectory()) return res.status(400).json({ error: "Ce n'est pas un dossier" });
+    const isRoot = getRoots().includes(path.resolve(target));
+    res.json({
+      path: target,
+      parent: isRoot ? null : path.dirname(target),
+      entries: listDir(target),
+    });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
+
+// Import depuis le téléphone : un ou plusieurs fichiers, ou un dossier entier
+// (le navigateur envoie alors chaque fichier avec son chemin relatif).
+app.post('/api/fb/upload', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  upload.array('files')(req, res, (err) => {
+    if (err) return res.status(400).json({ error: err.message });
+    const count = req.files ? req.files.length : 0;
+    log(`Import : ${count} fichier(s) reçu(s) dans`, req.body.targetDir);
+    res.json({ ok: true, count });
+  });
+});
+
+app.post('/api/fb/launch', async (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath } = req.body || {};
+  if (!filePath) return res.status(400).json({ error: 'chemin requis' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) return res.status(400).json({ error: 'Impossible de lancer un dossier' });
+    const tracked = await launchFile(filePath);
+    log('Lancement :', filePath, tracked ? '(témoin suivi)' : '(témoin indisponible)');
+    res.json({ ok: true, tracked });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
+
+app.post('/api/fb/stop', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath } = req.body || {};
+  if (!filePath) return res.status(400).json({ error: 'chemin requis' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  const stopped = stopRunningFile(filePath);
+  log(stopped ? 'Fermeture :' : 'Rien à fermer (déjà fermé) :', filePath);
+  res.json({ ok: true, stopped });
+});
+
+app.get('/api/fb/running', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  res.json({ running: Object.keys(runningFiles) });
+});
+
+app.get('/api/fb/read', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const target = req.query.path;
+  if (!target) return res.status(400).json({ error: 'chemin requis' });
+  if (!isPathAllowed(target)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(target);
+    if (stat.isDirectory()) return res.status(400).json({ error: 'Impossible de lire un dossier' });
+    if (stat.size > MAX_EDIT_SIZE) return res.status(413).json({ error: 'Fichier trop volumineux pour être édité (max 2 Mo)' });
+    const content = fs.readFileSync(target, 'utf8');
+    res.json({ path: target, content });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+});
+
+app.post('/api/fb/write', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath, content } = req.body || {};
+  if (!filePath) return res.status(400).json({ error: 'chemin requis' });
+  if (content === undefined) return res.status(400).json({ error: 'contenu requis' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory()) {
+      return res.status(400).json({ error: "Impossible d'écrire dans un dossier" });
+    }
+    fs.writeFileSync(filePath, content, 'utf8');
+    log('Fichier modifié :', filePath);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/fb/rename', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath, newName } = req.body || {};
+  if (!filePath || !newName) return res.status(400).json({ error: 'chemin et nouveau nom requis' });
+  if (newName.includes('/') || newName.includes('\\')) return res.status(400).json({ error: 'Nom invalide' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const dest = path.join(path.dirname(filePath), newName);
+    if (!isPathAllowed(dest)) return res.status(403).json({ error: 'Destination non autorisée' });
+    if (fs.existsSync(dest)) return res.status(409).json({ error: 'Un élément porte déjà ce nom' });
+    fs.renameSync(filePath, dest);
+    log('Fichier renommé :', filePath, '->', dest);
+    res.json({ ok: true, path: dest });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/fb/delete', (req, res) => {
+  if (!FB_ENABLED) return res.status(403).json({ error: 'Explorateur désactivé' });
+  const { path: filePath } = req.body || {};
+  if (!filePath) return res.status(400).json({ error: 'chemin requis' });
+  if (!isPathAllowed(filePath)) return res.status(403).json({ error: 'Chemin non autorisé' });
+  try {
+    const stat = fs.statSync(filePath);
+    if (stat.isDirectory()) return res.status(400).json({ error: 'Suppression de dossier non prise en charge ici (utilise le terminal)' });
+    fs.unlinkSync(filePath);
+    log('Fichier supprimé :', filePath);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Route de téléchargement, HORS /api : un lien <a href> ou window.open ne peut
+// pas ajouter le header x-access-key, donc la clé passe ici en paramètre d'URL
+// (voir checkKeyQuery). Le lien n'est donc à partager avec personne, comme le
+// reste de l'interface.
+app.get('/download', checkKeyQuery, (req, res) => {
+  if (!FB_ENABLED) return res.status(403).send('Explorateur désactivé');
+  const target = req.query.path;
+  if (!target) return res.status(400).send('chemin requis');
+  if (!isPathAllowed(target)) return res.status(403).send('Chemin non autorisé');
+  try {
+    const stat = fs.statSync(target);
+    if (stat.isDirectory()) return res.status(400).send('Impossible de télécharger un dossier');
+    res.download(target);
+  } catch (err) {
+    res.status(404).send(err.message);
+  }
+});
+
+const server = app.listen(STATUS_PORT, () => {
+  log(`Interface locale sur http://localhost:${STATUS_PORT}`);
+});
+
+// ---------- WebSocket du terminal ----------
+// Branché manuellement sur l'event "upgrade" du serveur HTTP (pas via
+// express) car la clé d'accès doit être vérifiée avant d'accepter la
+// connexion WebSocket elle-même.
+
+const wss = new WebSocketServer({ noServer: true });
+const wssScreen = new WebSocketServer({ noServer: true });
+
+server.on('upgrade', (req, socket, head) => {
+  let parsed;
+  try { parsed = new URL(req.url, `http://localhost:${STATUS_PORT}`); } catch (e) { socket.destroy(); return; }
+
+  const key = parsed.searchParams.get('key');
+  if (!isValidKey(key)) { socket.destroy(); return; }
+
+  if (parsed.pathname === '/ws/terminal') {
+    const cwd = parsed.searchParams.get('cwd');
+    if (!cwd || !isPathAllowed(cwd)) { socket.destroy(); return; }
+    wss.handleUpgrade(req, socket, head, (ws) => { attachTerminal(ws, cwd); });
+    return;
+  }
+
+  if (parsed.pathname === '/ws/screen') {
+    if (screenUnavailableReason()) { socket.destroy(); return; }
+    wssScreen.handleUpgrade(req, socket, head, (ws) => { attachScreen(ws); });
+    return;
+  }
+
+  socket.destroy();
+});
+
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\index.js ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\package-lock.json ---
+{
+  "name": "tunnel-manager",
+  "version": "1.5.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "tunnel-manager",
+      "version": "1.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "express": "^5.2.1",
+        "localtunnel": "^2.0.2",
+        "multer": "^1.4.5-lts.1",
+        "ws": "^8.18.0"
+      }
+    },
+    "node_modules/accepts": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/accepts/-/accepts-2.0.0.tgz",
+      "integrity": "sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-types": "^3.0.0",
+        "negotiator": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/ansi-regex": {
+      "version": "5.0.1",
+      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz",
+      "integrity": "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/ansi-styles": {
+      "version": "4.3.0",
+      "resolved": "https://registry.npmjs.org/ansi-styles/-/ansi-styles-4.3.0.tgz",
+      "integrity": "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==",
+      "license": "MIT",
+      "dependencies": {
+        "color-convert": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+      }
+    },
+    "node_modules/append-field": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/append-field/-/append-field-1.0.0.tgz",
+      "integrity": "sha512-klpgFSWLW1ZEs8svjfb7g4qWY0YS5imI82dTg+QahUvJ8YqAY0P10Uk8tTyh9ZGuYEZEMaeJYCF5BFuX552hsw==",
+      "license": "MIT"
+    },
+    "node_modules/axios": {
+      "version": "0.21.4",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
+      "integrity": "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.14.0"
+      }
+    },
+    "node_modules/body-parser": {
+      "version": "2.3.0",
+      "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-2.3.0.tgz",
+      "integrity": "sha512-2cGmJupaNgg+QUwVLAucDuWuoMZ6EX9iHDRswZ5lsNYEmwPaRknMPCLZz07yTzVq/83p4o/wzbDZbBrTvGGTIw==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "^3.1.2",
+        "content-type": "^2.0.0",
+        "debug": "^4.4.3",
+        "http-errors": "^2.0.1",
+        "iconv-lite": "^0.7.2",
+        "on-finished": "^2.4.1",
+        "qs": "^6.15.2",
+        "raw-body": "^3.0.2",
+        "type-is": "^2.1.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/body-parser/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/buffer-from": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz",
+      "integrity": "sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==",
+      "license": "MIT"
+    },
+    "node_modules/busboy": {
+      "version": "1.6.0",
+      "resolved": "https://registry.npmjs.org/busboy/-/busboy-1.6.0.tgz",
+      "integrity": "sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==",
+      "dependencies": {
+        "streamsearch": "^1.1.0"
+      },
+      "engines": {
+        "node": ">=10.16.0"
+      }
+    },
+    "node_modules/bytes": {
+      "version": "3.1.2",
+      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.1.2.tgz",
+      "integrity": "sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/call-bind-apply-helpers": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz",
+      "integrity": "sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/call-bound": {
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/cliui": {
+      "version": "7.0.4",
+      "resolved": "https://registry.npmjs.org/cliui/-/cliui-7.0.4.tgz",
+      "integrity": "sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==",
+      "license": "ISC",
+      "dependencies": {
+        "string-width": "^4.2.0",
+        "strip-ansi": "^6.0.0",
+        "wrap-ansi": "^7.0.0"
+      }
+    },
+    "node_modules/color-convert": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+      "integrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+      "license": "MIT",
+      "dependencies": {
+        "color-name": "~1.1.4"
+      },
+      "engines": {
+        "node": ">=7.0.0"
+      }
+    },
+    "node_modules/color-name": {
+      "version": "1.1.4",
+      "resolved": "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz",
+      "integrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==",
+      "license": "MIT"
+    },
+    "node_modules/concat-stream": {
+      "version": "1.6.2",
+      "resolved": "https://registry.npmjs.org/concat-stream/-/concat-stream-1.6.2.tgz",
+      "integrity": "sha512-27HBghJxjiZtIk3Ycvn/4kbJk/1uZuJFfuPEns6LaEvpvG1f0hTea8lilrouyo9mVc2GWdcEZ8OLoGmSADlrCw==",
+      "engines": [
+        "node >= 0.8"
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "buffer-from": "^1.0.0",
+        "inherits": "^2.0.3",
+        "readable-stream": "^2.2.2",
+        "typedarray": "^0.0.6"
+      }
+    },
+    "node_modules/content-disposition": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/content-disposition/-/content-disposition-1.1.0.tgz",
+      "integrity": "sha512-5jRCH9Z/+DRP7rkvY83B+yGIGX96OYdJmzngqnw2SBSxqCFPd0w2km3s5iawpGX8krnwSGmF0FW5Nhr0Hfai3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/content-type": {
+      "version": "1.0.5",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-1.0.5.tgz",
+      "integrity": "sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie": {
+      "version": "0.7.2",
+      "resolved": "https://registry.npmjs.org/cookie/-/cookie-0.7.2.tgz",
+      "integrity": "sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/cookie-signature": {
+      "version": "1.2.2",
+      "resolved": "https://registry.npmjs.org/cookie-signature/-/cookie-signature-1.2.2.tgz",
+      "integrity": "sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6.6.0"
+      }
+    },
+    "node_modules/core-util-is": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz",
+      "integrity": "sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==",
+      "license": "MIT"
+    },
+    "node_modules/debug": {
+      "version": "4.4.3",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.4.3.tgz",
+      "integrity": "sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "^2.1.3"
+      },
+      "engines": {
+        "node": ">=6.0"
+      },
+      "peerDependenciesMeta": {
+        "supports-color": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/depd": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/depd/-/depd-2.0.0.tgz",
+      "integrity": "sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/dunder-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/dunder-proto/-/dunder-proto-1.0.1.tgz",
+      "integrity": "sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "gopd": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/ee-first": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
+      "integrity": "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==",
+      "license": "MIT"
+    },
+    "node_modules/emoji-regex": {
+      "version": "8.0.0",
+      "resolved": "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz",
+      "integrity": "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==",
+      "license": "MIT"
+    },
+    "node_modules/encodeurl": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/encodeurl/-/encodeurl-2.0.0.tgz",
+      "integrity": "sha512-Q0n9HRi4m6JuGIV1eFlmvJB7ZEVxu93IrMyiMsGC0lrMJMWzRgx6WGquyfQgZVb31vhGgXnfmPNNXmxnOkRBrg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/es-define-property": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/es-define-property/-/es-define-property-1.0.1.tgz",
+      "integrity": "sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-errors": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/es-errors/-/es-errors-1.3.0.tgz",
+      "integrity": "sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/es-object-atoms": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/es-object-atoms/-/es-object-atoms-1.1.2.tgz",
+      "integrity": "sha512-HWcBoN6NileqtSydK2FqHbS/LoDd2pqrnQHLyJzBj4kOp/ky2MWMN694xOfkK8/SnUsW2DH7EfyVlydKCsm1Zw==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/escalade": {
+      "version": "3.2.0",
+      "resolved": "https://registry.npmjs.org/escalade/-/escalade-3.2.0.tgz",
+      "integrity": "sha512-WUj2qlxaQtO4g6Pq5c29GTcWGDyd8itL8zTlipgECz3JesAiiOKotd8JU6otB3PACgG6xkJUyVhboMS+bje/jA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6"
+      }
+    },
+    "node_modules/escape-html": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/escape-html/-/escape-html-1.0.3.tgz",
+      "integrity": "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==",
+      "license": "MIT"
+    },
+    "node_modules/etag": {
+      "version": "1.8.1",
+      "resolved": "https://registry.npmjs.org/etag/-/etag-1.8.1.tgz",
+      "integrity": "sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/express": {
+      "version": "5.2.1",
+      "resolved": "https://registry.npmjs.org/express/-/express-5.2.1.tgz",
+      "integrity": "sha512-hIS4idWWai69NezIdRt2xFVofaF4j+6INOpJlVOLDO8zXGpUVEVzIYk12UUi2JzjEzWL3IOAxcTubgz9Po0yXw==",
+      "license": "MIT",
+      "dependencies": {
+        "accepts": "^2.0.0",
+        "body-parser": "^2.2.1",
+        "content-disposition": "^1.0.0",
+        "content-type": "^1.0.5",
+        "cookie": "^0.7.1",
+        "cookie-signature": "^1.2.1",
+        "debug": "^4.4.0",
+        "depd": "^2.0.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "finalhandler": "^2.1.0",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.0",
+        "merge-descriptors": "^2.0.0",
+        "mime-types": "^3.0.0",
+        "on-finished": "^2.4.1",
+        "once": "^1.4.0",
+        "parseurl": "^1.3.3",
+        "proxy-addr": "^2.0.7",
+        "qs": "^6.14.0",
+        "range-parser": "^1.2.1",
+        "router": "^2.2.0",
+        "send": "^1.1.0",
+        "serve-static": "^2.2.0",
+        "statuses": "^2.0.1",
+        "type-is": "^2.0.1",
+        "vary": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/finalhandler": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/finalhandler/-/finalhandler-2.1.1.tgz",
+      "integrity": "sha512-S8KoZgRZN+a5rNwqTxlZZePjT/4cnm0ROV70LedRHZ0p8u9fRID0hJUZQpkKLzro8LfmC8sx23bY6tVNxv8pQA==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "on-finished": "^2.4.1",
+        "parseurl": "^1.3.3",
+        "statuses": "^2.0.1"
+      },
+      "engines": {
+        "node": ">= 18.0.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/follow-redirects": {
+      "version": "1.16.0",
+      "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.0.tgz",
+      "integrity": "sha512-y5rN/uOsadFT/JfYwhxRS5R7Qce+g3zG97+JrtFZlC9klX/W5hD7iiLzScI4nZqUS7DNUdhPgw4xI8W2LuXlUw==",
+      "funding": [
+        {
+          "type": "individual",
+          "url": "https://github.com/sponsors/RubenVerborgh"
+        }
+      ],
+      "license": "MIT",
+      "engines": {
+        "node": ">=4.0"
+      },
+      "peerDependenciesMeta": {
+        "debug": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/forwarded": {
+      "version": "0.2.0",
+      "resolved": "https://registry.npmjs.org/forwarded/-/forwarded-0.2.0.tgz",
+      "integrity": "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/fresh": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/fresh/-/fresh-2.0.0.tgz",
+      "integrity": "sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/function-bind": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz",
+      "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==",
+      "license": "MIT",
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/get-caller-file": {
+      "version": "2.0.5",
+      "resolved": "https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz",
+      "integrity": "sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==",
+      "license": "ISC",
+      "engines": {
+        "node": "6.* || 8.* || >= 10.*"
+      }
+    },
+    "node_modules/get-intrinsic": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bind-apply-helpers": "^1.0.2",
+        "es-define-property": "^1.0.1",
+        "es-errors": "^1.3.0",
+        "es-object-atoms": "^1.1.1",
+        "function-bind": "^1.1.2",
+        "get-proto": "^1.0.1",
+        "gopd": "^1.2.0",
+        "has-symbols": "^1.1.0",
+        "hasown": "^2.0.2",
+        "math-intrinsics": "^1.1.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/get-proto": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/get-proto/-/get-proto-1.0.1.tgz",
+      "integrity": "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==",
+      "license": "MIT",
+      "dependencies": {
+        "dunder-proto": "^1.0.1",
+        "es-object-atoms": "^1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/gopd": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz",
+      "integrity": "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/has-symbols": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/has-symbols/-/has-symbols-1.1.0.tgz",
+      "integrity": "sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/hasown": {
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/hasown/-/hasown-2.0.4.tgz",
+      "integrity": "sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==",
+      "license": "MIT",
+      "dependencies": {
+        "function-bind": "^1.1.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/http-errors": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz",
+      "integrity": "sha512-4FbRdAX+bSdmo4AUFuS0WNiPz8NgFt+r8ThgNWmlrjQjt1Q7ZR9+zTlce2859x4KSXrwIsaeTqDoKQmtP8pLmQ==",
+      "license": "MIT",
+      "dependencies": {
+        "depd": "~2.0.0",
+        "inherits": "~2.0.4",
+        "setprototypeof": "~1.2.0",
+        "statuses": "~2.0.2",
+        "toidentifier": "~1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/iconv-lite": {
+      "version": "0.7.3",
+      "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz",
+      "integrity": "sha512-IKXpvIzjnC9XTAUbVBcMfGS0EPaIXtW6v+zr+RRp+hqULEpo0owZax6wyRwPOJbWbzjYspQwusTsfVr0ifh4uQ==",
+      "license": "MIT",
+      "dependencies": {
+        "safer-buffer": ">= 2.1.2 < 3.0.0"
+      },
+      "engines": {
+        "node": ">=0.10.0"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/inherits": {
+      "version": "2.0.4",
+      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz",
+      "integrity": "sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==",
+      "license": "ISC"
+    },
+    "node_modules/ipaddr.js": {
+      "version": "1.9.1",
+      "resolved": "https://registry.npmjs.org/ipaddr.js/-/ipaddr.js-1.9.1.tgz",
+      "integrity": "sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/is-fullwidth-code-point": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz",
+      "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/is-promise": {
+      "version": "4.0.0",
+      "resolved": "https://registry.npmjs.org/is-promise/-/is-promise-4.0.0.tgz",
+      "integrity": "sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==",
+      "license": "MIT"
+    },
+    "node_modules/isarray": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz",
+      "integrity": "sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ==",
+      "license": "MIT"
+    },
+    "node_modules/localtunnel": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/localtunnel/-/localtunnel-2.0.2.tgz",
+      "integrity": "sha512-n418Cn5ynvJd7m/N1d9WVJISLJF/ellZnfsLnx8WBWGzxv/ntNcFkJ1o6se5quUhCplfLGBNL5tYHiq5WF3Nug==",
+      "license": "MIT",
+      "dependencies": {
+        "axios": "0.21.4",
+        "debug": "4.3.2",
+        "openurl": "1.1.1",
+        "yargs": "17.1.1"
+      },
+      "bin": {
+        "lt": "bin/lt.js"
+      },
+      "engines": {
+        "node": ">=8.3.0"
+      }
+    },
+    "node_modules/localtunnel/node_modules/debug": {
+      "version": "4.3.2",
+      "resolved": "https://registry.npmjs.org/debug/-/debug-4.3.2.tgz",
+      "integrity": "sha512-mOp8wKcvj7XxC78zLgw/ZA+6TSgkoE2C/ienthhRD298T7UNwAg9diBpLRxC0mOezLl4B0xV7M0cCO6P/O0Xhw==",
+      "license": "MIT",
+      "dependencies": {
+        "ms": "2.1.2"
+      },
+      "engines": {
+        "node": ">=6.0"
+      },
+      "peerDependenciesMeta": {
+        "supports-color": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/localtunnel/node_modules/ms": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
+      "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
+      "license": "MIT"
+    },
+    "node_modules/math-intrinsics": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz",
+      "integrity": "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      }
+    },
+    "node_modules/media-typer": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-1.1.1.tgz",
+      "integrity": "sha512-yz3xRaG20c6/BOzvYoDaGtPmGscs7YivItZEEqe6GbwNfHuxu9YNmvnEkMzKldAGY4/80pRcQRZSEnhquk9XuQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/merge-descriptors": {
+      "version": "2.0.0",
+      "resolved": "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-2.0.0.tgz",
+      "integrity": "sha512-Snk314V5ayFLhp3fkUREub6WtjBfPdCPY1Ln8/8munuLuiYhsABgBVWsozAG+MWMbVEvcdcpbi9R7ww22l9Q3g==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/mime-db": {
+      "version": "1.54.0",
+      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz",
+      "integrity": "sha512-aU5EJuIN2WDemCcAp2vFBfp/m4EAhWJnUNSSw0ixs7/kXbd6Pg64EmwJkNdFhB8aWt1sH2CTXrLxo/iAGV3oPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/mime-types": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-3.0.2.tgz",
+      "integrity": "sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-db": "^1.54.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/minimist": {
+      "version": "1.2.8",
+      "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz",
+      "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==",
+      "license": "MIT",
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/mkdirp": {
+      "version": "0.5.6",
+      "resolved": "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.6.tgz",
+      "integrity": "sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==",
+      "license": "MIT",
+      "dependencies": {
+        "minimist": "^1.2.6"
+      },
+      "bin": {
+        "mkdirp": "bin/cmd.js"
+      }
+    },
+    "node_modules/ms": {
+      "version": "2.1.3",
+      "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz",
+      "integrity": "sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==",
+      "license": "MIT"
+    },
+    "node_modules/multer": {
+      "version": "1.4.5-lts.2",
+      "resolved": "https://registry.npmjs.org/multer/-/multer-1.4.5-lts.2.tgz",
+      "integrity": "sha512-VzGiVigcG9zUAoCNU+xShztrlr1auZOlurXynNvO9GiWD1/mTBbUljOKY+qMeazBqXgRnjzeEgJI/wyjJUHg9A==",
+      "deprecated": "Multer 1.x is impacted by a number of vulnerabilities, which have been patched in 2.x. You should upgrade to the latest 2.x version.",
+      "license": "MIT",
+      "dependencies": {
+        "append-field": "^1.0.0",
+        "busboy": "^1.0.0",
+        "concat-stream": "^1.5.2",
+        "mkdirp": "^0.5.4",
+        "object-assign": "^4.1.1",
+        "type-is": "^1.6.4",
+        "xtend": "^4.0.0"
+      },
+      "engines": {
+        "node": ">= 6.0.0"
+      }
+    },
+    "node_modules/multer/node_modules/media-typer": {
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz",
+      "integrity": "sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/multer/node_modules/mime-db": {
+      "version": "1.52.0",
+      "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz",
+      "integrity": "sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/multer/node_modules/mime-types": {
+      "version": "2.1.35",
+      "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz",
+      "integrity": "sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==",
+      "license": "MIT",
+      "dependencies": {
+        "mime-db": "1.52.0"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/multer/node_modules/type-is": {
+      "version": "1.6.18",
+      "resolved": "https://registry.npmjs.org/type-is/-/type-is-1.6.18.tgz",
+      "integrity": "sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==",
+      "license": "MIT",
+      "dependencies": {
+        "media-typer": "0.3.0",
+        "mime-types": "~2.1.24"
+      },
+      "engines": {
+        "node": ">= 0.6"
+      }
+    },
+    "node_modules/negotiator": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/negotiator/-/negotiator-1.1.0.tgz",
+      "integrity": "sha512-NMPBRMJgiQHjbd8phG3Vebdx4kZ1H121rbl5IkMqeOsahptB9BKo/d7oJ3zTXqTgagn2bWlNSXkh0QUGM31RYg==",
+      "license": "MIT",
+      "dependencies": {
+        "content-type": "^2.1.0"
+      },
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/negotiator/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/object-assign": {
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",
+      "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/object-inspect": {
+      "version": "1.13.4",
+      "resolved": "https://registry.npmjs.org/object-inspect/-/object-inspect-1.13.4.tgz",
+      "integrity": "sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/on-finished": {
+      "version": "2.4.1",
+      "resolved": "https://registry.npmjs.org/on-finished/-/on-finished-2.4.1.tgz",
+      "integrity": "sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==",
+      "license": "MIT",
+      "dependencies": {
+        "ee-first": "1.1.1"
+      },
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/once": {
+      "version": "1.4.0",
+      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
+      "integrity": "sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==",
+      "license": "ISC",
+      "dependencies": {
+        "wrappy": "1"
+      }
+    },
+    "node_modules/openurl": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/openurl/-/openurl-1.1.1.tgz",
+      "integrity": "sha512-d/gTkTb1i1GKz5k3XE3XFV/PxQ1k45zDqGP2OA7YhgsaLoqm6qRvARAZOFer1fcXritWlGBRCu/UgeS4HAnXAA==",
+      "license": "MIT"
+    },
+    "node_modules/parseurl": {
+      "version": "1.3.3",
+      "resolved": "https://registry.npmjs.org/parseurl/-/parseurl-1.3.3.tgz",
+      "integrity": "sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/path-to-regexp": {
+      "version": "8.4.2",
+      "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-8.4.2.tgz",
+      "integrity": "sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==",
+      "license": "MIT",
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/process-nextick-args": {
+      "version": "2.0.1",
+      "resolved": "https://registry.npmjs.org/process-nextick-args/-/process-nextick-args-2.0.1.tgz",
+      "integrity": "sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==",
+      "license": "MIT"
+    },
+    "node_modules/proxy-addr": {
+      "version": "2.0.8",
+      "resolved": "https://registry.npmjs.org/proxy-addr/-/proxy-addr-2.0.8.tgz",
+      "integrity": "sha512-5nnx0yGyVUcY6t9RnWcARWtwT9F1D8O9rt08htPvnd49W1IgZtmLkhu9WfMzQj1cFxjHIO6connUNVW5k7AVyQ==",
+      "license": "MIT",
+      "dependencies": {
+        "forwarded": "0.2.0",
+        "ipaddr.js": "1.9.1"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/qs": {
+      "version": "6.16.0",
+      "resolved": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+      "integrity": "sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==",
+      "license": "BSD-3-Clause",
+      "dependencies": {
+        "es-define-property": "^1.0.1",
+        "side-channel": "^1.1.1"
+      },
+      "engines": {
+        "node": ">=0.6"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/range-parser": {
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.3.0.tgz",
+      "integrity": "sha512-hek2mFQpPuI4E1BBKrSto+BU3e3x4xuarsbiwr3+lf7p44juvFMV0XFWQAP3xUyqXA4RrXLIoaSUGbSt056ZMw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.6"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/raw-body": {
+      "version": "3.0.2",
+      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-3.0.2.tgz",
+      "integrity": "sha512-K5zQjDllxWkf7Z5xJdV0/B0WTNqx6vxG70zJE4N0kBs4LovmEYWJzQGxC9bS9RAKu3bgM40lrd5zoLJ12MQ5BA==",
+      "license": "MIT",
+      "dependencies": {
+        "bytes": "~3.1.2",
+        "http-errors": "~2.0.1",
+        "iconv-lite": "~0.7.0",
+        "unpipe": "~1.0.0"
+      },
+      "engines": {
+        "node": ">= 0.10"
+      }
+    },
+    "node_modules/readable-stream": {
+      "version": "2.3.8",
+      "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.8.tgz",
+      "integrity": "sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==",
+      "license": "MIT",
+      "dependencies": {
+        "core-util-is": "~1.0.0",
+        "inherits": "~2.0.3",
+        "isarray": "~1.0.0",
+        "process-nextick-args": "~2.0.0",
+        "safe-buffer": "~5.1.1",
+        "string_decoder": "~1.1.1",
+        "util-deprecate": "~1.0.1"
+      }
+    },
+    "node_modules/require-directory": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz",
+      "integrity": "sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.10.0"
+      }
+    },
+    "node_modules/router": {
+      "version": "2.2.0",
+      "resolved": "https://registry.npmjs.org/router/-/router-2.2.0.tgz",
+      "integrity": "sha512-nLTrUKm2UyiL7rlhapu/Zl45FwNgkZGaCpZbIHajDYgwlJCOzLSk+cIPAnsEqV955GjILJnKbdQC1nVPz+gAYQ==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.0",
+        "depd": "^2.0.0",
+        "is-promise": "^4.0.0",
+        "parseurl": "^1.3.3",
+        "path-to-regexp": "^8.0.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      }
+    },
+    "node_modules/safe-buffer": {
+      "version": "5.1.2",
+      "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.2.tgz",
+      "integrity": "sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==",
+      "license": "MIT"
+    },
+    "node_modules/safer-buffer": {
+      "version": "2.1.2",
+      "resolved": "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz",
+      "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==",
+      "license": "MIT"
+    },
+    "node_modules/send": {
+      "version": "1.2.1",
+      "resolved": "https://registry.npmjs.org/send/-/send-1.2.1.tgz",
+      "integrity": "sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==",
+      "license": "MIT",
+      "dependencies": {
+        "debug": "^4.4.3",
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "etag": "^1.8.1",
+        "fresh": "^2.0.0",
+        "http-errors": "^2.0.1",
+        "mime-types": "^3.0.2",
+        "ms": "^2.1.3",
+        "on-finished": "^2.4.1",
+        "range-parser": "^1.2.1",
+        "statuses": "^2.0.2"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/serve-static": {
+      "version": "2.2.1",
+      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-2.2.1.tgz",
+      "integrity": "sha512-xRXBn0pPqQTVQiC8wyQrKs2MOlX24zQ0POGaj0kultvoOCstBQM5yvOhAVSUwOMjQtTvsPWoNCHfPGwaaQJhTw==",
+      "license": "MIT",
+      "dependencies": {
+        "encodeurl": "^2.0.0",
+        "escape-html": "^1.0.3",
+        "parseurl": "^1.3.3",
+        "send": "^1.2.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/setprototypeof": {
+      "version": "1.2.0",
+      "resolved": "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.2.0.tgz",
+      "integrity": "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==",
+      "license": "ISC"
+    },
+    "node_modules/side-channel": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.1.tgz",
+      "integrity": "sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.4",
+        "side-channel-list": "^1.0.1",
+        "side-channel-map": "^1.0.1",
+        "side-channel-weakmap": "^1.0.2"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-list": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/side-channel-list/-/side-channel-list-1.0.1.tgz",
+      "integrity": "sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==",
+      "license": "MIT",
+      "dependencies": {
+        "es-errors": "^1.3.0",
+        "object-inspect": "^1.13.4"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-map": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/side-channel-map/-/side-channel-map-1.0.1.tgz",
+      "integrity": "sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/side-channel-weakmap": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/side-channel-weakmap/-/side-channel-weakmap-1.0.2.tgz",
+      "integrity": "sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==",
+      "license": "MIT",
+      "dependencies": {
+        "call-bound": "^1.0.2",
+        "es-errors": "^1.3.0",
+        "get-intrinsic": "^1.2.5",
+        "object-inspect": "^1.13.3",
+        "side-channel-map": "^1.0.1"
+      },
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/statuses": {
+      "version": "2.0.2",
+      "resolved": "https://registry.npmjs.org/statuses/-/statuses-2.0.2.tgz",
+      "integrity": "sha512-DvEy55V3DB7uknRo+4iOGT5fP1slR8wQohVdknigZPMpMstaKJQWhwiYBACJE3Ul2pTnATihhBYnRhZQHGBiRw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/streamsearch": {
+      "version": "1.1.0",
+      "resolved": "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz",
+      "integrity": "sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==",
+      "engines": {
+        "node": ">=10.0.0"
+      }
+    },
+    "node_modules/string_decoder": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/string_decoder/-/string_decoder-1.1.1.tgz",
+      "integrity": "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg==",
+      "license": "MIT",
+      "dependencies": {
+        "safe-buffer": "~5.1.0"
+      }
+    },
+    "node_modules/string-width": {
+      "version": "4.2.3",
+      "resolved": "https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz",
+      "integrity": "sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==",
+      "license": "MIT",
+      "dependencies": {
+        "emoji-regex": "^8.0.0",
+        "is-fullwidth-code-point": "^3.0.0",
+        "strip-ansi": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/strip-ansi": {
+      "version": "6.0.1",
+      "resolved": "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz",
+      "integrity": "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-regex": "^5.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/toidentifier": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz",
+      "integrity": "sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.6"
+      }
+    },
+    "node_modules/type-is": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/type-is/-/type-is-2.1.0.tgz",
+      "integrity": "sha512-faYHw0anBbc/kWF3zFTEnxSFOAGUX9GFbOBthvDdLsIlEoWOFOtS0zgCiQYwIskL9iGXZL3kAXD8OoZ4GmMATA==",
+      "license": "MIT",
+      "dependencies": {
+        "content-type": "^2.0.0",
+        "media-typer": "^1.1.0",
+        "mime-types": "^3.0.0"
+      },
+      "engines": {
+        "node": ">= 18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/type-is/node_modules/content-type": {
+      "version": "2.1.0",
+      "resolved": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
+      "integrity": "sha512-mj7UPXE0jaqaOsukNZRUEfEi2AcL7C/vwmwcHV0O97eO1E1pxBZuyjlZrx5seTaNBg1U6+o35wpa35Qfcc+7ag==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "funding": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/express"
+      }
+    },
+    "node_modules/typedarray": {
+      "version": "0.0.6",
+      "resolved": "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz",
+      "integrity": "sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==",
+      "license": "MIT"
+    },
+    "node_modules/unpipe": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/unpipe/-/unpipe-1.0.0.tgz",
+      "integrity": "sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/util-deprecate": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz",
+      "integrity": "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==",
+      "license": "MIT"
+    },
+    "node_modules/vary": {
+      "version": "1.1.2",
+      "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+      "integrity": "sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8"
+      }
+    },
+    "node_modules/wrap-ansi": {
+      "version": "7.0.0",
+      "resolved": "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz",
+      "integrity": "sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^4.0.0",
+        "string-width": "^4.1.0",
+        "strip-ansi": "^6.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"
+      }
+    },
+    "node_modules/wrappy": {
+      "version": "1.0.2",
+      "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+      "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==",
+      "license": "ISC"
+    },
+    "node_modules/ws": {
+      "version": "8.21.3",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.21.3.tgz",
+      "integrity": "sha512-201TZ/kPWxoPr/OKWjquZR1SWKXcvxdH+e1xrx89b3YbmzLMFCLfnaG1HFIgWzJOEWZ7MvpK++odZufgYR50Rw==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "peerDependencies": {
+        "bufferutil": "^4.0.1",
+        "utf-8-validate": ">=5.0.2"
+      },
+      "peerDependenciesMeta": {
+        "bufferutil": {
+          "optional": true
+        },
+        "utf-8-validate": {
+          "optional": true
+        }
+      }
+    },
+    "node_modules/xtend": {
+      "version": "4.0.2",
+      "resolved": "https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz",
+      "integrity": "sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.4"
+      }
+    },
+    "node_modules/y18n": {
+      "version": "5.0.8",
+      "resolved": "https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz",
+      "integrity": "sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==",
+      "license": "ISC",
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/yargs": {
+      "version": "17.1.1",
+      "resolved": "https://registry.npmjs.org/yargs/-/yargs-17.1.1.tgz",
+      "integrity": "sha512-c2k48R0PwKIqKhPMWjeiF6y2xY/gPMUlro0sgxqXpbOIohWiLNXWslsootttv7E1e73QPAMQSg5FeySbVcpsPQ==",
+      "license": "MIT",
+      "dependencies": {
+        "cliui": "^7.0.2",
+        "escalade": "^3.1.1",
+        "get-caller-file": "^2.0.5",
+        "require-directory": "^2.1.1",
+        "string-width": "^4.2.0",
+        "y18n": "^5.0.5",
+        "yargs-parser": "^20.2.2"
+      },
+      "engines": {
+        "node": ">=12"
+      }
+    },
+    "node_modules/yargs-parser": {
+      "version": "20.2.9",
+      "resolved": "https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz",
+      "integrity": "sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==",
+      "license": "ISC",
+      "engines": {
+        "node": ">=10"
+      }
+    }
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\package-lock.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\package.json ---
+{
+  "name": "tunnel-manager",
+  "version": "1.6.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup": "npm install",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "localtunnel": "^2.0.2",
+    "multer": "^1.4.5-lts.1",
+    "ws": "^8.18.0"
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\package.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-client.js ---
+/**
+ * screen-client.js — visionneuse + télécommande de l'écran du PC (côté téléphone).
+ * Servi par index.js sur /screen-client.js, chargé par la page principale.
+ * Expose window.TMScreen = { open, close, refreshInfo }.
+ *
+ * Volontairement dans un fichier séparé : la page principale est une template string
+ * dans index.js, où chaque antislash/backtick serait un piège.
+ */
+(function () {
+  'use strict';
+
+  // ---------- Réglages ----------
+  var PRESETS = {
+    eco:    { label: 'Éco (≈ peu de data)', w: 800,  q: 35, fps: 3 },
+    normal: { label: 'Normal',              w: 1280, q: 50, fps: 5 },
+    net:    { label: 'Net',                 w: 1920, q: 70, fps: 5 },
+  };
+  var MIN_SCALE = 0.3, MAX_SCALE = 5; // zoom continu au pincement (1 = largeur du téléphone, < 1 = vue d'ensemble)
+  var SCROLL_PX = 36;        // pixels de glissement = un cran de molette
+  var MOVE_THROTTLE_MS = 40;
+  var SENT = '\u200b';       // caractère invisible dans le champ clavier (voir plus bas)
+  // Touches par onglet (libellé, touche envoyée). 'pad' = flèches en croix + déplacement.
+  var KEY_TABS = [
+    { id: 'arrows', label: '⬍ Flèches', pad: true },
+    { id: 'video', label: '▶ Vidéo', keys: [
+      ['⛶ Plein écran', 'f'], ['🔇 Muet', 'm'], ['⏯ Pause', 'space'], ['⏯ K', 'k'],
+      ['⏪ J −10 s', 'j'], ['L +10 s ⏩', 'l'], ['◀ 5 s', 'left'], ['5 s ▶', 'right'],
+    ] },
+    { id: 'web', label: '🌐 Web', keys: [
+      ['F11', 'f11'], ['F5', 'f5'], ['Adresse', 'ctrl+l'], ['Chercher', 'ctrl+f'],
+      ['Onglet +', 'ctrl+t'], ['Onglet ✕', 'ctrl+w'], ['Onglet →', 'ctrl+tab'],
+      ['← Retour', 'alt+left'], ['Avant →', 'alt+right'],
+    ] },
+    { id: 'edit', label: '✎ Édition', keys: [
+      ['Échap', 'esc'], ['Tab', 'tab'], ['Entrée', 'enter'], ['⌫', 'backspace'], ['Suppr', 'delete'],
+      ['Ctrl+A', 'ctrl+a'], ['Ctrl+C', 'ctrl+c'], ['Ctrl+V', 'ctrl+v'], ['Ctrl+X', 'ctrl+x'], ['Ctrl+Z', 'ctrl+z'],
+    ] },
+    { id: 'win', label: '⊞ Fenêtres', keys: [
+      ['⊞ Windows', 'win'], ['Alt+Tab', 'alt+tab'], ['Win+Tab', 'win+tab'], ['Bureau', 'win+d'],
+    ] },
+  ];
+  var PAD_KEYS = [   // grille 3 colonnes : null = case vide
+    [null, ['↑', 'up'], null],
+    [['←', 'left'], ['↓', 'down'], ['→', 'right']],
+  ];
+  var PAGE_KEYS = [['Début', 'home'], ['Fin', 'end'], ['Pg ↑', 'pageup'], ['Pg ↓', 'pagedown']];
+
+  // ---------- État ----------
+  var ws = null, wantOpen = false, reconnectTimer = null, failCount = 0, gotReady = false;
+  var retry = 0, lastMsgAt = 0;   // retry : nombre de reconnexions d'affilée (délai croissant) ; lastMsgAt : dernier message reçu
+  var mode = 'view', scale = 1, locked = false, serverViewOnly = false;
+  var mods = { ctrl: 0, alt: 0, shift: 0, win: 0 };   // 0 = relâché, 1 = pour la prochaine touche, 2 = maintenu
+  var preset = localStorage.getItem('tm_scr_preset');
+  if (!PRESETS[preset]) preset = 'normal';
+  var curUrl = null, sessionBytes = 0;
+  var built = false;
+  var el = {};
+  var tp = null;             // doigt actif
+  var lastMoveAt = 0;
+  var kbdPrev = SENT;
+
+  function getKey() { return localStorage.getItem('tm_key') || ''; }
+  function r4(v) { return Math.round(v * 10000) / 10000; }
+
+  // ---------- Construction de l'interface ----------
+  function css() {
+    var s = document.createElement('style');
+    s.textContent = [
+      '#scrOverlay{display:none;position:fixed;inset:0;background:#000;z-index:40;flex-direction:column;',
+      '  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);}',
+      '#scrOverlay.active{display:flex;}',
+      '.scr-bar,.scr-bottom{background:var(--bg,#0b0d12);color:var(--text,#f1f3f6);flex-shrink:0;touch-action:manipulation;}',
+      '.scr-bar{display:flex;align-items:center;gap:.4rem;padding:.5rem .6rem;border-bottom:1px solid var(--border,#262b36);font-size:.78rem;}',
+      '.scr-bar .grow{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}',
+      '.scr-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.35rem;background:#e0b93e;}',
+      '.scr-dot.on{background:#35c46b;}.scr-dot.off{background:#ff5c5c;}',
+      '.scr-bar select,.scr-bar button,.scr-bottom button,.scr-bottom input{',
+      '  background:#232838;color:var(--text,#f1f3f6);border:1px solid var(--border,#262b36);border-radius:9px;',
+      '  padding:.45rem .6rem;font-size:.8rem;}',
+      '.scr-bar select{max-width:7.5rem;}',
+      '#scrView{flex:1;min-height:0;display:flex;overflow:auto;position:relative;background:#000;-webkit-user-select:none;user-select:none;',
+      '  -webkit-touch-callout:none;overscroll-behavior:contain;touch-action:none;}',
+      '#scrImg{display:none;flex:none;margin:auto;width:100%;max-width:none;height:auto;-webkit-user-drag:none;pointer-events:auto;}',
+      '#scrEmpty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8b93a3;',
+      '  padding:1rem;text-align:center;font-size:.9rem;pointer-events:none;}',
+      '.scr-bottom{border-top:1px solid var(--border,#262b36);padding:.45rem .5rem .5rem;}',
+      '.scr-row{display:flex;gap:.35rem;margin-bottom:.35rem;align-items:center;}',
+      '.scr-row:last-child{margin-bottom:0;}',
+      '.scr-row button{flex:1;}',
+      '.scr-bottom button.on{background:var(--accent,#4f8cff);border-color:var(--accent,#4f8cff);color:#fff;}',
+      '#scrKbd{flex:3;min-width:0;font-size:16px;}', /* 16px : évite le zoom automatique d'iOS */
+      '.scr-bottom{position:relative;}',
+      /* Panneau des touches : flotte AU-DESSUS de l'écran (ne le rétrécit pas), compact et translucide */
+      '#scrKeys{display:none;position:absolute;left:0;right:0;bottom:100%;z-index:45;flex-direction:column;gap:.3rem;',
+      '  padding:.35rem .45rem;background:rgba(11,13,18,.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);',
+      '  border-top:1px solid var(--border,#262b36);max-height:42vh;overflow:auto;}',
+      '#scrKeys.open{display:flex;}',
+      '.scr-krow{display:flex;flex-wrap:wrap;gap:.25rem;}',
+      '#scrKeys button{flex:0 0 auto;min-width:2.6rem;padding:.38rem .5rem;font-size:.76rem;transition:background .08s;}',
+      '#scrKeys button.hit{background:#4f8cff;border-color:#4f8cff;color:#fff;}',
+      '#scrKeys .scr-tabs button{flex:1 1 0;min-width:0;padding:.38rem .2rem;font-size:.7rem;background:transparent;}',
+      '#scrKeys .scr-tabs button.on{background:var(--accent,#4f8cff);color:#fff;}',
+      '.scr-pad{display:flex;flex-wrap:wrap;align-items:flex-start;gap:.7rem;}',
+      '.scr-dpad{display:grid;grid-template-columns:repeat(3,2.9rem);gap:.25rem;}',
+      '.scr-dpad button,.scr-page button{min-width:0 !important;padding-left:0 !important;padding-right:0 !important;}',
+      '.scr-dpad .sp{visibility:hidden;}',
+      '.scr-page{display:grid;grid-template-columns:repeat(2,3.4rem);gap:.25rem;}',
+      '@media (orientation:landscape) and (max-height:520px){',
+      '  .scr-bar{padding:.25rem .5rem;}',
+      '  .scr-bottom{padding:.25rem .4rem;}',
+      '  .scr-row{margin-bottom:.25rem;}',
+      '  .scr-bar select,.scr-bar button,.scr-bottom button,.scr-bottom input{padding:.3rem .5rem;font-size:.74rem;}',
+      '  #scrKeys{max-height:60vh;}',
+      '}',
+      '#scrOverlay.min .scr-bar,#scrOverlay.min .scr-bottom{display:none;}',
+      '#scrFab{display:none;position:absolute;top:calc(env(safe-area-inset-top,0px) + 6px);right:calc(env(safe-area-inset-right,0px) + 6px);',
+      '  z-index:50;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid #262b36;background:rgba(20,24,34,.55);',
+      '  color:#fff;font-size:1.1rem;opacity:.55;padding:0;}',
+      '#scrOverlay.min #scrFab{display:block;}',
+      /* Petit menu déroulant du mode plein écran (écran du PC, qualité, quitter) */
+      '#scrFsMenu{display:none;position:absolute;z-index:55;top:calc(env(safe-area-inset-top,0px) + 6px + 2.9rem);',
+      '  right:calc(env(safe-area-inset-right,0px) + 6px);min-width:12rem;max-width:calc(100vw - 16px);flex-direction:column;gap:.45rem;',
+      '  padding:.6rem;border-radius:12px;border:1px solid #262b36;background:rgba(11,13,18,.94);color:#f1f3f6;',
+      '  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:.8rem;}',
+      '#scrOverlay.min #scrFsMenu.open{display:flex;}',
+      '#scrFsMenu label{display:flex;flex-direction:column;gap:.2rem;color:#8b93a3;font-size:.7rem;}',
+      '#scrFsMenu select,#scrFsMenu button{background:#232838;color:#f1f3f6;border:1px solid #262b36;border-radius:9px;padding:.5rem .6rem;font-size:.85rem;}',
+      '#scrFsMenu .row2{display:flex;gap:.4rem;}#scrFsMenu .row2 button{flex:1;}',
+      '.scr-ripple{position:fixed;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;',
+      '  border:2px solid #4f8cff;background:rgba(79,140,255,.25);pointer-events:none;z-index:60;',
+      '  animation:scrRipple .35s ease-out forwards;}',
+      '@keyframes scrRipple{from{transform:scale(.4);opacity:1}to{transform:scale(1.5);opacity:0}}',
+    ].join('\n');
+    document.head.appendChild(s);
+  }
+
+  function build() {
+    if (built) return;
+    built = true;
+    css();
+
+    var o = document.createElement('div');
+    o.id = 'scrOverlay';
+    o.innerHTML =
+      '<div class="scr-bar">' +
+      '  <span class="grow"><span class="scr-dot" id="scrDot"></span><span id="scrStatus">Connexion…</span> <span id="scrMb" style="color:#8b93a3"></span></span>' +
+      '  <select id="scrMon" style="display:none"></select>' +
+      '  <select id="scrQ"></select>' +
+      '  <button id="scrReload" title="Rafraîchir / reconnecter">↻</button>' +
+      '  <button id="scrFull" title="Plein écran (masquer les barres)">⛶</button>' +
+      '  <button id="scrClose">Fermer</button>' +
+      '</div>' +
+      '<div id="scrView"><img id="scrImg" alt="" draggable="false"><div id="scrEmpty">Connexion à l\'écran du PC…</div></div>' +
+      '<div class="scr-bottom">' +
+      '  <div class="scr-row">' +
+      '    <button data-mode="view" class="on">👁 Vue</button>' +
+      '    <button data-mode="scroll">↕ Défiler</button>' +
+      '    <button data-mode="drag">✋ Glisser</button>' +
+      '    <button id="scrZoomOut" style="flex:0 0 2.6rem">−</button>' +
+      '    <button id="scrZoomIn" style="flex:0 0 2.6rem">+</button>' +
+      '  </div>' +
+      '  <div class="scr-row">' +
+      '    <input id="scrKbd" placeholder="⌨ Toucher ici pour écrire" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="enter">' +
+      '    <button id="scrKeysBtn" style="flex:1">Touches</button>' +
+      '    <button id="scrLock" style="flex:0 0 2.6rem" title="Verrouiller (lecture seule)">🔓</button>' +
+      '  </div>' +
+      '  <div id="scrKeys"></div>' +
+      '</div>';
+    var fab = document.createElement('button');
+    fab.id = 'scrFab';
+    fab.title = 'Menu plein écran (écran du PC, qualité, quitter)';
+    fab.textContent = '☰';
+    o.appendChild(fab);
+    el.scrFab = fab;
+    var fs = document.createElement('div');
+    fs.id = 'scrFsMenu';
+    fs.innerHTML =
+      '<label id=\"scrMonFsWrap\" style=\"display:none\">Écran du PC<select id=\"scrMonFs\"></select></label>' +
+      '<label>Qualité<select id=\"scrQFs\"></select></label>' +
+      '<div class=\"row2\"><button id=\"scrReloadFs\">↻ Rafraîchir</button><button id=\"scrExitFs\">⤡ Quitter le plein écran</button></div>';
+    o.appendChild(fs);
+    document.body.appendChild(o);
+
+    ['scrOverlay', 'scrDot', 'scrStatus', 'scrMb', 'scrMon', 'scrQ', 'scrReload', 'scrClose', 'scrView', 'scrImg',
+      'scrEmpty', 'scrKbd', 'scrKeysBtn', 'scrLock', 'scrKeys', 'scrZoomIn', 'scrZoomOut', 'scrFull',
+      'scrFsMenu', 'scrMonFsWrap', 'scrMonFs', 'scrQFs', 'scrReloadFs', 'scrExitFs'].forEach(function (id) {
+      el[id] = document.getElementById(id);
+    });
+
+    // Qualité
+    [el.scrQ, el.scrQFs].forEach(function (sel) {
+      Object.keys(PRESETS).forEach(function (k) {
+        var opt = document.createElement('option');
+        opt.value = k; opt.textContent = PRESETS[k].label;
+        sel.appendChild(opt);
+      });
+      sel.value = preset;
+      sel.onchange = function () {
+        preset = sel.value;
+        el.scrQ.value = preset; el.scrQFs.value = preset;
+        try { localStorage.setItem('tm_scr_preset', preset); } catch (e) {}
+        sendCfg();
+      };
+    });
+
+    // Écrans multiples (barre normale + menu plein écran, toujours synchronisés)
+    [el.scrMon, el.scrMonFs].forEach(function (sel) {
+      sel.onchange = function () {
+        el.scrMon.value = sel.value; el.scrMonFs.value = sel.value;
+        sendRaw({ t: 'screen', i: parseInt(sel.value, 10) || 0 });
+        setFsMenu(false);
+      };
+    });
+
+    // Boutons
+    el.scrClose.onclick = close;
+    el.scrFull.onclick = function () { setMin(true); };
+    el.scrFab.onclick = function () { setFsMenu(!el.scrFsMenu.classList.contains('open')); };
+    el.scrExitFs.onclick = function () { setMin(false); };
+    el.scrReloadFs.onclick = function () { el.scrReload.onclick(); setFsMenu(false); };
+    el.scrReload.onclick = function () {
+      if (ws && ws.readyState === 1) sendRaw({ t: 'refresh' });
+      else { failCount = 0; wantOpen = true; connect(); }
+    };
+
+    // Modes
+    Array.prototype.forEach.call(o.querySelectorAll('[data-mode]'), function (b) {
+      b.onclick = function () {
+        mode = b.getAttribute('data-mode');
+        Array.prototype.forEach.call(o.querySelectorAll('[data-mode]'), function (x) { x.classList.toggle('on', x === b); });
+        applyTouchAction();
+      };
+    });
+
+    // Zoom
+    el.scrZoomIn.onclick = function () { setScale(scale * 1.5); };
+    el.scrZoomOut.onclick = function () { setScale(scale / 1.5); };
+    // L'image s'adapte à la taille de la zone (portrait / paysage / clavier ouvert)
+    el.scrImg.onload = layoutImg;
+    window.addEventListener('resize', layoutImg);
+    if (window.ResizeObserver) new ResizeObserver(layoutImg).observe(el.scrView);
+    window.addEventListener('orientationchange', function () { setTimeout(layoutImg, 250); });
+
+    // Verrouillage
+    el.scrLock.onclick = function () {
+      if (serverViewOnly) return;
+      locked = !locked;
+      updateLockUi();
+    };
+
+    // Touches spéciales
+    // Modificateurs « collants » : 1 appui = la prochaine touche part avec (ex. Win puis →),
+    // 2 appuis = reste maintenu pour enchaîner (affiché « Win ∞ »), 3 appuis = relâché.
+    function flash(b) {
+      b.classList.add('hit');
+      setTimeout(function () { b.classList.remove('hit'); }, 130);
+      try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+    }
+    function keyBtn(k) {
+      var b = document.createElement('button');
+      b.textContent = k[0];
+      b.onclick = function () { flash(b); send({ t: 'key', k: withMods(k[1]) }); };
+      return b;
+    }
+    // Ligne 1 : modificateurs collants (1 appui = pour la prochaine touche, 2 = maintenu, 3 = relâché)
+    el.modBtns = {};
+    var modRow = document.createElement('div');
+    modRow.className = 'scr-krow';
+    ['ctrl', 'win', 'alt', 'shift'].forEach(function (n) {
+      var mb = document.createElement('button');
+      mb.textContent = MOD_LABELS[n];
+      mb.style.borderColor = '#4f8cff';
+      mb.style.flex = '1 1 0';
+      mb.onclick = function () { setMod(n, (mods[n] + 1) % 3); };
+      el.modBtns[n] = mb;
+      modRow.appendChild(mb);
+    });
+    el.scrKeys.appendChild(modRow);
+    // Ligne 2 : onglets
+    var tabRow = document.createElement('div');
+    tabRow.className = 'scr-krow scr-tabs';
+    var body = document.createElement('div');
+    body.className = 'scr-kbody';
+    var curTab = localStorage.getItem('tm_scr_tab') || 'arrows';
+    if (!KEY_TABS.some(function (t) { return t.id === curTab; })) curTab = 'arrows';
+    function fillBody(tab) {
+      body.innerHTML = '';
+      if (tab.pad) {
+        var wrap = document.createElement('div');
+        wrap.className = 'scr-pad';
+        var dpad = document.createElement('div');
+        dpad.className = 'scr-dpad';
+        PAD_KEYS.forEach(function (row) {
+          row.forEach(function (k) {
+            if (!k) { var sp = document.createElement('button'); sp.className = 'sp'; sp.tabIndex = -1; sp.textContent = '·'; dpad.appendChild(sp); }
+            else dpad.appendChild(keyBtn(k));
+          });
+        });
+        var page = document.createElement('div');
+        page.className = 'scr-page';
+        PAGE_KEYS.forEach(function (k) { page.appendChild(keyBtn(k)); });
+        wrap.appendChild(dpad); wrap.appendChild(page);
+        body.appendChild(wrap);
+      } else {
+        var row = document.createElement('div');
+        row.className = 'scr-krow';
+        tab.keys.forEach(function (k) { row.appendChild(keyBtn(k)); });
+        body.appendChild(row);
+      }
+    }
+    var tabBtns = {};
+    KEY_TABS.forEach(function (tab) {
+      var tb = document.createElement('button');
+      tb.textContent = tab.label;
+      tb.onclick = function () {
+        curTab = tab.id;
+        try { localStorage.setItem('tm_scr_tab', curTab); } catch (e) {}
+        Object.keys(tabBtns).forEach(function (id) { tabBtns[id].classList.toggle('on', id === curTab); });
+        fillBody(tab);
+      };
+      tabBtns[tab.id] = tb;
+      tabRow.appendChild(tb);
+    });
+    el.scrKeys.appendChild(tabRow);
+    el.scrKeys.appendChild(body);
+    KEY_TABS.forEach(function (t) { if (t.id === curTab) { tabBtns[t.id].classList.add('on'); fillBody(t); } });
+    el.scrKeysBtn.onclick = function () { el.scrKeysBtn.classList.toggle('on', el.scrKeys.classList.toggle('open')); };
+
+    setupKeyboard();
+    setupPointer();
+    applyTouchAction();
+
+    document.addEventListener('visibilitychange', function () {
+      if (!wantOpen) return;
+      if (document.hidden) { if (ws) { try { ws.close(); } catch (e) {} } } // économise la data en arrière-plan
+      else if (!ws || ws.readyState > 1) { failCount = 0; retry = 0; connect(); }
+      else if (Date.now() - lastMsgAt > 15000) { failCount = 0; retry = 0; connect(); } // socket « ouverte » mais morte
+    });
+    // Retour du réseau (wifi <-> 4G, sortie de tunnel…) : on reconnecte tout de suite au lieu d'attendre
+    window.addEventListener('online', function () {
+      if (!wantOpen || document.hidden) return;
+      if (!ws || ws.readyState > 1 || Date.now() - lastMsgAt > 8000) { failCount = 0; retry = 0; connect(); }
+    });
+    // Chien de garde : le serveur envoie un signal toutes les 10 s même si l'écran ne bouge pas.
+    // Plus rien depuis 25 s = connexion morte sans que le navigateur s'en soit aperçu -> on relance.
+    setInterval(function () {
+      if (!wantOpen || document.hidden || !ws || ws.readyState !== 1) return;
+      if (Date.now() - lastMsgAt > 25000) {
+        setStatus('off', 'Connexion perdue, reconnexion…');
+        failCount = 0; retry = 0; connect();
+      }
+    }, 5000);
+  }
+
+  // ---------- Utilitaires UI ----------
+  function setStatus(kind, text) {
+    el.scrDot.className = 'scr-dot' + (kind === 'on' ? ' on' : kind === 'off' ? ' off' : '');
+    el.scrStatus.textContent = text;
+  }
+  function updateMb() {
+    el.scrMb.textContent = '· ' + (sessionBytes / 1048576).toFixed(1).replace('.', ',') + ' Mo';
+  }
+  function updateLockUi() {
+    el.scrLock.textContent = (locked || serverViewOnly) ? '🔒' : '🔓';
+    el.scrLock.classList.toggle('on', locked || serverViewOnly);
+    applyTouchAction();
+  }
+  function applyTouchAction() {
+    // Dans tous les modes, les gestes sont gérés ici (pincement, déplacement, molette, clic).
+    el.scrView.style.touchAction = 'none';
+  }
+  function setFsMenu(on) {
+    if (!el.scrFsMenu) return;
+    el.scrFsMenu.classList.toggle('open', !!on);
+    el.scrFab.style.opacity = on ? '1' : '';
+    el.scrFab.style.background = on ? 'rgba(79,140,255,.9)' : '';
+  }
+  function setMin(on) {
+    setFsMenu(false);
+    el.scrOverlay.classList.toggle('min', on);
+    try {
+      var pr = null;
+      if (on && el.scrOverlay.requestFullscreen) pr = el.scrOverlay.requestFullscreen();
+      else if (!on && document.fullscreenElement && document.exitFullscreen) pr = document.exitFullscreen();
+      if (pr && pr.catch) pr.catch(function () {});
+    } catch (e) {}
+    layoutImg();
+    setTimeout(layoutImg, 150);
+  }
+  function isViewLike() { return mode === 'view' || locked || serverViewOnly; }
+
+  // Largeur de base = toute la largeur du téléphone (le PC remplit l'écran, on défile en hauteur) ;
+  // le zoom multiplie ça, et en pinçant vers l'intérieur on retrouve la vue d'ensemble.
+  function baseWidth() {
+    return Math.max(1, el.scrView.clientWidth);
+  }
+  function layoutImg() {
+    if (!built) return;
+    var w = Math.max(1, Math.round(baseWidth() * scale)) + 'px';
+    if (el.scrImg.style.width !== w) el.scrImg.style.width = w;
+  }
+  // Change le zoom en gardant fixe le point de l'image situé sous (mx, my) (coordonnées écran).
+  function setScale(ns, mx, my) {
+    ns = Math.max(MIN_SCALE, Math.min(MAX_SCALE, ns));
+    var v = el.scrView, im = el.scrImg;
+    var r = im.getBoundingClientRect();
+    if (mx == null) {
+      var vr = v.getBoundingClientRect();
+      mx = vr.left + vr.width / 2; my = vr.top + vr.height / 2;
+    }
+    var fx = r.width ? Math.min(1, Math.max(0, (mx - r.left) / r.width)) : 0.5;
+    var fy = r.height ? Math.min(1, Math.max(0, (my - r.top) / r.height)) : 0.5;
+    scale = ns;
+    layoutImg();
+    var r2 = im.getBoundingClientRect();
+    v.scrollLeft += (r2.left + fx * r2.width) - mx;
+    v.scrollTop += (r2.top + fy * r2.height) - my;
+  }
+
+  var MOD_LABELS = { ctrl: 'Ctrl', win: 'Win', alt: 'Alt', shift: 'Maj' };
+  function setMod(name, st) {
+    mods[name] = st;
+    var b = el.modBtns && el.modBtns[name];
+    if (b) { b.classList.toggle('on', st > 0); b.textContent = MOD_LABELS[name] + (st === 2 ? ' ∞' : ''); }
+  }
+  function anyMod() { return !!(mods.ctrl || mods.alt || mods.shift || mods.win); }
+  function releaseOneShot() {
+    Object.keys(mods).forEach(function (n) { if (mods[n] === 1) setMod(n, 0); });
+  }
+  // Ajoute les modificateurs armés devant une touche simple (ex. win + droite -> « win+right »).
+  function withMods(k) {
+    if (!anyMod() || k.indexOf('+') >= 0) return k;
+    var pre = ['ctrl', 'alt', 'shift', 'win'].filter(function (n) { return mods[n] && n !== k; });
+    releaseOneShot();
+    return pre.length ? pre.join('+') + '+' + k : k;
+  }
+  function ripple(x, y) {
+    var d = document.createElement('div');
+    d.className = 'scr-ripple';
+    d.style.left = x + 'px'; d.style.top = y + 'px';
+    document.body.appendChild(d);
+    setTimeout(function () { if (d.parentNode) d.parentNode.removeChild(d); }, 400);
+  }
+
+  // ---------- Connexion ----------
+  function sendRaw(obj) {
+    if (ws && ws.readyState === 1) ws.send(JSON.stringify(obj));
+  }
+  function send(obj) {
+    if (locked || serverViewOnly) return;
+    sendRaw(obj);
+  }
+  function sendCfg() {
+    var p = PRESETS[preset];
+    sendRaw({ t: 'cfg', w: p.w, q: p.q, fps: p.fps });
+  }
+
+  function connect() {
+    clearTimeout(reconnectTimer);
+    if (ws) { try { ws.onclose = null; ws.onmessage = null; ws.close(); } catch (e) {} }
+    gotReady = false;
+    setStatus('wait', 'Connexion…');
+    var proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var sock = new WebSocket(proto + '//' + location.host + '/ws/screen?key=' + encodeURIComponent(getKey()));
+    ws = sock;
+    sock.binaryType = 'blob';
+    sock.onopen = function () { lastMsgAt = Date.now(); sendCfg(); };
+    sock.onmessage = onMessage;
+    sock.onerror = function () {};
+    sock.onclose = function () {
+      if (ws !== sock || !wantOpen) return;
+      if (document.hidden) { setStatus('off', 'En pause'); return; }
+      if (!gotReady) failCount++;
+      if (failCount >= 8) {
+        wantOpen = false;
+        setStatus('off', 'Connexion impossible (clé invalide, écran désactivé ou PC éteint ?)');
+        return;
+      }
+      // Délai croissant : 1 s, 2 s, 4 s… plafonné à 8 s (+ un peu de hasard pour ne pas marteler le serveur)
+      var delay = Math.min(8000, 1000 * Math.pow(2, retry)) + Math.round(Math.random() * 400);
+      retry = Math.min(retry + 1, 10);
+      setStatus('off', 'Déconnecté, reconnexion…');
+      reconnectTimer = setTimeout(connect, delay);
+    };
+  }
+
+  function onMessage(ev) {
+    lastMsgAt = Date.now();
+    if (typeof ev.data !== 'string') {
+      var blob = ev.data;
+      sessionBytes += blob.size;
+      updateMb();
+      var old = curUrl;
+      curUrl = URL.createObjectURL(blob);
+      el.scrImg.src = curUrl;
+      el.scrImg.style.display = 'block';
+      el.scrEmpty.style.display = 'none';
+      if (old) URL.revokeObjectURL(old);
+      return;
+    }
+    var m;
+    try { m = JSON.parse(ev.data); } catch (e) { return; }
+    if (m.t === 'ready') {
+      gotReady = true; failCount = 0; retry = 0;
+      serverViewOnly = !!m.viewOnly;
+      updateLockUi();
+      setStatus('on', serverViewOnly ? 'Connecté (lecture seule)' : 'Connecté');
+    } else if (m.t === 'hb') {
+      /* signal de vie du serveur : lastMsgAt est déjà à jour */
+    } else if (m.t === 'screens') {
+      fillScreens(m.list || []);
+    } else if (m.t === 'error') {
+      if (m.soft) { setStatus('wait', m.message); }
+      else { wantOpen = false; setStatus('off', m.message); el.scrEmpty.style.display = 'flex'; el.scrEmpty.textContent = m.message; }
+    }
+  }
+
+  function fillScreens(list) {
+    var prev = el.scrMon.value;
+    [el.scrMon, el.scrMonFs].forEach(function (sel) {
+      sel.innerHTML = '';
+      list.forEach(function (s) {
+        var opt = document.createElement('option');
+        opt.value = s.i;
+        opt.textContent = 'Écran ' + (s.i + 1) + (s.primary ? ' ★' : '') + ' · ' + s.w + '×' + s.h;
+        sel.appendChild(opt);
+      });
+      if (prev && sel.querySelector('option[value="' + prev + '"]')) sel.value = prev;
+    });
+    el.scrMon.style.display = list.length > 1 ? '' : 'none';
+    el.scrMonFsWrap.style.display = list.length > 1 ? '' : 'none';
+  }
+
+  // ---------- Souris / doigt ----------
+  function frac(e) {
+    var r = el.scrImg.getBoundingClientRect();
+    return { x: r4((e.clientX - r.left) / Math.max(1, r.width)), y: r4((e.clientY - r.top) / Math.max(1, r.height)) };
+  }
+
+  function setupPointer() {
+    var v = el.scrView;
+    var mouseBtn = null;
+    var pts = {};          // doigts posés : id -> { x, y }
+    var pinch = null;      // { d0, s0, mx, my } pendant un pincement
+    var pan = null;        // { t, vx, vy } pendant un déplacement à un doigt
+    var inertia = 0;
+
+    function ids() { return Object.keys(pts); }
+    function stopInertia() { if (inertia) { cancelAnimationFrame(inertia); inertia = 0; } }
+    function startInertia(vx, vy) {
+      stopInertia();
+      var last = performance.now();
+      function step(now) {
+        var dt = Math.min(50, now - last); last = now;
+        var k = Math.pow(0.94, dt / 16);
+        vx *= k; vy *= k;
+        if (Math.abs(vx) < 0.02 && Math.abs(vy) < 0.02) { inertia = 0; return; }
+        v.scrollLeft -= vx * dt; v.scrollTop -= vy * dt;
+        inertia = requestAnimationFrame(step);
+      }
+      inertia = requestAnimationFrame(step);
+    }
+    function killTap() { if (tp && !tp.dead) { cancelTouch(); } }
+
+    v.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+    v.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var n = Math.max(1, Math.round(Math.abs(e.deltaY) / 100));
+      send({ t: 'wheel', d: e.deltaY > 0 ? -n : n });
+    }, { passive: false });
+
+    v.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse') {
+        if (locked || serverViewOnly) return;
+        var f = frac(e);
+        mouseBtn = e.button === 2 ? 'right' : e.button === 1 ? 'middle' : 'left';
+        send({ t: 'down', x: f.x, y: f.y, b: mouseBtn });
+        try { v.setPointerCapture(e.pointerId); } catch (err) {}
+        return;
+      }
+      stopInertia();
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+      var n = ids().length;
+      if (n === 1) {                        // nouveau geste : on repart de zéro
+        killTap(); tp = null; pinch = null; pan = null;
+      }
+      if (isViewLike()) {
+        if (n === 2) {                      // deuxième doigt : pincement
+          killTap();
+          tp = { dead: true };
+          var a = pts[ids()[0]], b = pts[ids()[1]];
+          pinch = { d0: Math.max(10, Math.hypot(a.x - b.x, a.y - b.y)), s0: scale,
+                    mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 };
+          pan = null;
+          return;
+        }
+        if (n > 2) return;
+      } else if (n > 1) {                   // modes Défiler / Glisser : deuxième doigt = on annule
+        cancelTouch(); tp = { dead: true }; return;
+      }
+      var f0 = frac(e);
+      tp = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ly: e.clientY, f0: f0, lastF: f0,
+        moved: false, long: false, dragging: false, acc: 0, timer: null };
+      if (isViewLike()) pan = { t: performance.now(), vx: 0, vy: 0 };
+      tp.timer = setTimeout(function () {
+        if (tp && !tp.dead && !tp.moved && !locked && !serverViewOnly) {
+          tp.long = true;
+          if (navigator.vibrate) navigator.vibrate(30);
+          ripple(tp.x0, tp.y0);
+          send({ t: 'click', x: tp.f0.x, y: tp.f0.y, b: 'right' });
+        }
+      }, 550);
+    });
+
+    v.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'mouse') {
+        if (locked || serverViewOnly) return;
+        var now = performance.now();
+        if (now - lastMoveAt < MOVE_THROTTLE_MS) return;
+        lastMoveAt = now;
+        var f = frac(e);
+        send({ t: 'move', x: f.x, y: f.y });
+        return;
+      }
+      var prev = pts[e.pointerId];
+      if (!prev) return;
+      var ddx = e.clientX - prev.x, ddy = e.clientY - prev.y;
+      pts[e.pointerId] = { x: e.clientX, y: e.clientY };
+
+      if (isViewLike()) {
+        // --- Vue : pincement = zoom, un doigt = déplacement de la vue ---
+        if (pinch && ids().length >= 2) {
+          var a = pts[ids()[0]], b = pts[ids()[1]];
+          var d = Math.hypot(a.x - b.x, a.y - b.y);
+          var mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+          setScale(pinch.s0 * d / pinch.d0, pinch.mx, pinch.my);   // zoom autour des doigts
+          v.scrollLeft -= (mx - pinch.mx);                          // + déplacement des doigts
+          v.scrollTop -= (my - pinch.my);
+          pinch.mx = mx; pinch.my = my;
+          return;
+        }
+        if (!tp || tp.dead || e.pointerId !== tp.id) return;
+        var dx = e.clientX - tp.x0, dy = e.clientY - tp.y0;
+        if (!tp.moved) {
+          if (Math.hypot(dx, dy) <= 8) return;
+          tp.moved = true;
+          clearTimeout(tp.timer);
+          v.scrollLeft -= dx; v.scrollTop -= dy;
+        } else {
+          v.scrollLeft -= ddx; v.scrollTop -= ddy;
+        }
+        if (pan) {
+          var t = performance.now(), dt = t - pan.t;
+          if (dt > 0) { pan.vx = pan.vx * 0.5 + (ddx / dt) * 0.5; pan.vy = pan.vy * 0.5 + (ddy / dt) * 0.5; }
+          pan.t = t;
+        }
+        return;
+      }
+
+      // --- Défiler / Glisser ---
+      if (!tp || tp.dead || e.pointerId !== tp.id) return;
+      var dx2 = e.clientX - tp.x0, dy2 = e.clientY - tp.y0;
+      if (!tp.moved && Math.hypot(dx2, dy2) > 10) {
+        tp.moved = true;
+        clearTimeout(tp.timer);
+        if (mode === 'drag' && !tp.long) {
+          tp.dragging = true;
+          send({ t: 'down', x: tp.f0.x, y: tp.f0.y, b: 'left' });
+        }
+      }
+      if (!tp.moved) return;
+      if (mode === 'scroll') {
+        tp.acc += e.clientY - tp.ly;
+        var n = Math.trunc(tp.acc / SCROLL_PX);
+        if (n) { send({ t: 'wheel', d: n }); tp.acc -= n * SCROLL_PX; }
+      } else if (mode === 'drag' && tp.dragging) {
+        tp.lastF = frac(e);
+        var now2 = performance.now();
+        if (now2 - lastMoveAt >= MOVE_THROTTLE_MS) {
+          lastMoveAt = now2;
+          send({ t: 'move', x: tp.lastF.x, y: tp.lastF.y });
+        }
+      }
+      tp.ly = e.clientY;
+    });
+
+    function up(e) {
+      if (e.pointerType === 'mouse') {
+        if (locked || serverViewOnly) return;
+        if (mouseBtn) { var f = frac(e); send({ t: 'up', x: f.x, y: f.y, b: mouseBtn }); mouseBtn = null; }
+        return;
+      }
+      delete pts[e.pointerId];
+      var left = ids().length;
+      if (pinch) { if (left < 2) pinch = null; if (left > 0) return; }
+      if (!tp) return;
+      if (tp.dead) { if (left === 0) tp = null; return; }
+      if (e.pointerId !== tp.id) return;
+      clearTimeout(tp.timer);
+      var t = tp; tp = null;
+      if (isViewLike()) {
+        if (t.moved) {
+          var p = pan; pan = null;
+          if (p && performance.now() - p.t < 80) startInertia(p.vx, p.vy);   // petit élan au lâcher
+        } else if (!t.long && !locked && !serverViewOnly) {
+          ripple(t.x0, t.y0);
+          send({ t: 'click', x: t.f0.x, y: t.f0.y, b: 'left' });
+        }
+        return;
+      }
+      if (t.dragging) {
+        var f2 = frac(e);
+        send({ t: 'up', x: f2.x, y: f2.y, b: 'left' });
+      } else if (!t.moved && !t.long) {
+        ripple(t.x0, t.y0);
+        send({ t: 'click', x: t.f0.x, y: t.f0.y, b: 'left' });
+      }
+    }
+    v.addEventListener('pointerup', up);
+    v.addEventListener('pointercancel', function (e) {
+      if (e.pointerType === 'mouse') return;
+      delete pts[e.pointerId];
+      var left = ids().length;
+      if (!left) { pinch = null; pan = null; }
+      if (tp && (tp.dead || e.pointerId === tp.id)) {
+        cancelTouch();
+        tp = left ? { dead: true } : null;
+      }
+    });
+  }
+
+  function cancelTouch() {
+    if (!tp || tp.dead) return;
+    clearTimeout(tp.timer);
+    if (tp.dragging) send({ t: 'up', x: tp.lastF.x, y: tp.lastF.y, b: 'left' });
+  }
+
+  // ---------- Clavier ----------
+  // Le champ contient toujours un caractère invisible au début : sans lui, appuyer sur
+  // « retour arrière » dans un champ vide ne déclenche aucun événement sur mobile.
+  // À chaque saisie on compare l'ancien et le nouveau contenu et on envoie la différence
+  // au PC (lettres tapées, ou retours arrière).
+  function resetKbd() { el.scrKbd.value = SENT; kbdPrev = SENT; }
+
+  function setupKeyboard() {
+    var k = el.scrKbd;
+    resetKbd();
+    k.addEventListener('focus', function () { if (!k.value) resetKbd(); });
+    k.addEventListener('input', function () {
+      if (locked || serverViewOnly) { resetKbd(); return; }
+      var a = kbdPrev.split(SENT).join('');
+      var b = k.value.split(SENT).join('');
+      if (a === '' && b === '') { send({ t: 'key', k: 'backspace' }); resetKbd(); return; }
+      var p = 0, max = Math.min(a.length, b.length);
+      while (p < max && a.charAt(p) === b.charAt(p)) p++;
+      var back = a.length - p, add = b.slice(p);
+      if (anyMod() && back === 0 && add.length === 1 && /^[a-z0-9]$/i.test(add)) {   // modificateur + lettre tapée
+        send({ t: 'key', k: withMods(add.toLowerCase()) });
+        resetKbd();
+        return;
+      }
+      for (var i = 0; i < back; i++) send({ t: 'key', k: 'backspace' });
+      if (add) send({ t: 'text', s: add });
+      if (k.value.charAt(0) !== SENT) k.value = SENT + b;
+      kbdPrev = k.value;
+      if (b.length > 80) resetKbd();
+    });
+    k.addEventListener('keydown', function (e) {
+      var map = { Enter: 'enter', Tab: 'tab', Escape: 'esc', ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down', Delete: 'delete' };
+      if (map[e.key]) {
+        e.preventDefault();
+        var base = map[e.key];
+        send({ t: 'key', k: (e.ctrlKey || e.metaKey) ? 'ctrl+' + base : withMods(base) });
+        if (e.key === 'Enter') resetKbd();
+        return;
+      }
+      if ((e.ctrlKey || e.metaKey) && /^[a-z0-9]$/i.test(e.key)) { // clavier physique (navigateur sur PC)
+        e.preventDefault();
+        send({ t: 'key', k: 'ctrl+' + e.key.toLowerCase() });
+      }
+    });
+    k.addEventListener('blur', resetKbd);
+  }
+
+  // ---------- Ouverture / fermeture ----------
+  function open() {
+    build();
+    wantOpen = true; failCount = 0;
+    sessionBytes = 0; updateMb();
+    el.scrOverlay.classList.add('active');
+    el.scrEmpty.style.display = 'flex';
+    el.scrEmpty.textContent = 'Connexion à l\'écran du PC…';
+    document.body.style.overflow = 'hidden';
+    connect();
+  }
+
+  function close() {
+    wantOpen = false;
+    clearTimeout(reconnectTimer);
+    if (ws) { try { ws.onclose = null; ws.close(); } catch (e) {} ws = null; }
+    if (el.scrOverlay) {
+      el.scrOverlay.classList.remove('active', 'min');
+      setFsMenu(false);
+      try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen(); } catch (e) {}
+    }
+    document.body.style.overflow = '';
+    if (curUrl) { URL.revokeObjectURL(curUrl); curUrl = null; }
+    if (el.scrImg) el.scrImg.removeAttribute('src');
+  }
+
+  // ---------- Carte de l'onglet « Écran » ----------
+  function refreshInfo() {
+    var info = document.getElementById('screenInfo');
+    var btn = document.getElementById('screenOpenBtn');
+    if (!info) return;
+    fetch('/api/screen/info', { headers: { 'x-access-key': getKey() } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+      .then(function (d) {
+        if (!d.enabled) {
+          info.textContent = 'Indisponible : ' + d.reason;
+          btn.disabled = true; btn.style.opacity = '.5';
+          return;
+        }
+        btn.disabled = false; btn.style.opacity = '';
+        var txt = 'Prêt' + (d.viewOnly ? ' · lecture seule' : '') + '.';
+        if (d.budgetMB) txt += ' Data écran ce mois-ci : ' + d.usedMB + ' Mo / ' + d.budgetMB + ' Mo.';
+        else txt += ' Data écran ce mois-ci : ' + d.usedMB + ' Mo.';
+        info.textContent = txt;
+      })
+      .catch(function (e) { info.textContent = 'Erreur : ' + e.message; });
+  }
+
+  window.TMScreen = { open: open, close: close, refreshInfo: refreshInfo };
+})();
+
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-client.js ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-helper.ps1 ---
+# screen-helper.ps1
+# Processus long qui tourne sur le PC (Windows) : capture l'ecran et injecte souris/clavier.
+# Lance et pilote par index.js : une commande JSON par ligne sur stdin, reponses sur stdout.
+#   R|ready            -> pret
+#   S|[json]           -> liste des ecrans
+#   F|<base64 jpeg>    -> une image
+#   E|<commande>|<msg> -> erreur
+# Fichier volontairement en ASCII pur (PowerShell 5.1 lit les .ps1 sans BOM en ANSI).
+
+$ErrorActionPreference = 'Stop'
+try { [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false) } catch {}
+
+Add-Type -TypeDefinition @'
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+public static class RC {
+  [StructLayout(LayoutKind.Sequential)]
+  public struct MOUSEINPUT { public int dx; public int dy; public uint mouseData; public uint dwFlags; public uint time; public IntPtr dwExtraInfo; }
+  [StructLayout(LayoutKind.Sequential)]
+  public struct KEYBDINPUT { public ushort wVk; public ushort wScan; public uint dwFlags; public uint time; public IntPtr dwExtraInfo; }
+  [StructLayout(LayoutKind.Explicit)]
+  public struct INPUTUNION { [FieldOffset(0)] public MOUSEINPUT mi; [FieldOffset(0)] public KEYBDINPUT ki; }
+  [StructLayout(LayoutKind.Sequential)]
+  public struct INPUT { public uint type; public INPUTUNION u; }
+
+  [DllImport("user32.dll")] static extern bool SetProcessDPIAware();
+  [DllImport("user32.dll")] static extern bool SetProcessDpiAwarenessContext(IntPtr value);
+  [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
+  [DllImport("user32.dll")] static extern void mouse_event(uint flags, uint dx, uint dy, int data, UIntPtr extra);
+  [DllImport("user32.dll", SetLastError = true)] static extern uint SendInput(uint n, INPUT[] inputs, int size);
+
+  // Coordonnees en pixels reels sur tous les ecrans (meme avec une mise a l'echelle Windows differente par ecran).
+  public static void DpiAware() {
+    try { SetProcessDpiAwarenessContext(new IntPtr(-4)); }
+    catch { try { SetProcessDPIAware(); } catch { } }
+  }
+
+  public static void Btn(string b, bool up) {
+    uint f;
+    if (b == "right") f = up ? 0x10u : 0x8u;
+    else if (b == "middle") f = up ? 0x40u : 0x20u;
+    else f = up ? 0x4u : 0x2u;
+    mouse_event(f, 0, 0, 0, UIntPtr.Zero);
+  }
+
+  public static void Wheel(int delta) { mouse_event(0x800, 0, 0, delta, UIntPtr.Zero); }
+
+  static bool IsExtended(ushort vk) {
+    return (vk >= 0x21 && vk <= 0x28) || vk == 0x2D || vk == 0x2E || vk == 0x5B || vk == 0x5C;
+  }
+
+  static INPUT KeyIn(ushort vk, bool up) {
+    INPUT i = new INPUT();
+    i.type = 1;
+    i.u.ki.wVk = vk;
+    i.u.ki.dwFlags = (up ? 2u : 0u) | (IsExtended(vk) ? 1u : 0u);
+    return i;
+  }
+
+  static INPUT UniIn(char c, bool up) {
+    INPUT i = new INPUT();
+    i.type = 1;
+    i.u.ki.wScan = c;
+    i.u.ki.dwFlags = 4u | (up ? 2u : 0u);
+    return i;
+  }
+
+  // Appuie sur toutes les touches dans l'ordre, puis les relache en sens inverse (ex: Ctrl, C).
+  public static void Press(ushort[] vks) {
+    INPUT[] list = new INPUT[vks.Length * 2];
+    for (int i = 0; i < vks.Length; i++) list[i] = KeyIn(vks[i], false);
+    for (int i = 0; i < vks.Length; i++) list[vks.Length + i] = KeyIn(vks[vks.Length - 1 - i], true);
+    SendInput((uint)list.Length, list, Marshal.SizeOf(typeof(INPUT)));
+  }
+
+  // Tape du texte caractere par caractere en Unicode (accents, emoji... fonctionnent).
+  public static void Text(string s) {
+    List<INPUT> list = new List<INPUT>();
+    foreach (char c in s) {
+      if (c == '\r') continue;
+      if (c == '\n') { list.Add(KeyIn(0x0D, false)); list.Add(KeyIn(0x0D, true)); continue; }
+      if (c == '\t') { list.Add(KeyIn(0x09, false)); list.Add(KeyIn(0x09, true)); continue; }
+      list.Add(UniIn(c, false));
+      list.Add(UniIn(c, true));
+    }
+    if (list.Count == 0) return;
+    INPUT[] arr = list.ToArray();
+    SendInput((uint)arr.Length, arr, Marshal.SizeOf(typeof(INPUT)));
+  }
+}
+'@
+
+[RC]::DpiAware()
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+$script:idx = 0
+$script:sig = ''
+$script:all = @()
+$script:jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' } | Select-Object -First 1
+$script:cursorShape = @(@(0,0), @(0,17), @(4,13), @(8,21), @(11,20), @(7,12), @(12,12))
+
+$script:VK = @{
+  ctrl = 0x11; control = 0x11; shift = 0x10; alt = 0x12; win = 0x5B
+  enter = 0x0D; esc = 0x1B; escape = 0x1B; tab = 0x09; backspace = 0x08
+  delete = 0x2E; del = 0x2E; insert = 0x2D; home = 0x24; end = 0x23
+  pageup = 0x21; pagedown = 0x22; left = 0x25; up = 0x26; right = 0x27; down = 0x28
+  space = 0x20
+}
+for ($n = 1; $n -le 12; $n++) { $script:VK["f$n"] = 0x6F + $n }
+
+function Send-Line([string]$s) {
+  [Console]::Out.WriteLine($s)
+  [Console]::Out.Flush()
+}
+
+function Get-Screens {
+  return @([System.Windows.Forms.Screen]::AllScreens | Sort-Object @{ Expression = { if ($_.Primary) { 0 } else { 1 } } }, @{ Expression = { $_.Bounds.X } })
+}
+
+function Publish-Screens($all) {
+  $list = @()
+  $i = 0
+  foreach ($s in $all) {
+    $list += [pscustomobject]@{ i = $i; primary = [bool]$s.Primary; w = $s.Bounds.Width; h = $s.Bounds.Height }
+    $i++
+  }
+  Send-Line ('S|' + (ConvertTo-Json -InputObject $list -Compress -Depth 3))
+}
+
+function Update-Screens([bool]$force) {
+  $all = Get-Screens
+  $sig = (($all | ForEach-Object { '{0},{1},{2},{3}' -f $_.Bounds.X, $_.Bounds.Y, $_.Bounds.Width, $_.Bounds.Height }) -join ';')
+  $script:all = $all
+  if ($script:idx -ge $all.Count) { $script:idx = 0 }
+  if ($force -or $sig -ne $script:sig) {
+    $script:sig = $sig
+    Publish-Screens $all
+  }
+}
+
+function Get-Frame([int]$maxW, [int]$q) {
+  Update-Screens $false
+  $b = $script:all[$script:idx].Bounds
+  $src = New-Object System.Drawing.Bitmap($b.Width, $b.Height, [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+  $scaled = $null
+  $ms = $null
+  $ep = $null
+  try {
+    $g = [System.Drawing.Graphics]::FromImage($src)
+    try {
+      $g.CopyFromScreen($b.X, $b.Y, 0, 0, $b.Size)
+
+      # CopyFromScreen ne dessine pas le curseur : on en trace un a la main pour voir ou on clique.
+      $p = [System.Windows.Forms.Cursor]::Position
+      $cx = $p.X - $b.X
+      $cy = $p.Y - $b.Y
+      if ($cx -ge 0 -and $cy -ge 0 -and $cx -lt $b.Width -and $cy -lt $b.Height) {
+        $k = [Math]::Max(1.0, $b.Width / [double]$maxW)
+        $shape = $script:cursorShape
+        $pts = New-Object 'System.Drawing.Point[]' $shape.Count
+        for ($i = 0; $i -lt $shape.Count; $i++) {
+          $px = [int]($cx + $shape[$i][0] * $k)
+          $py = [int]($cy + $shape[$i][1] * $k)
+          $pts[$i] = New-Object System.Drawing.Point -ArgumentList $px, $py
+        }
+        $g.FillPolygon([System.Drawing.Brushes]::White, $pts)
+        $pen = New-Object System.Drawing.Pen -ArgumentList ([System.Drawing.Color]::Black), ([single]$k)
+        $g.DrawPolygon($pen, $pts)
+        $pen.Dispose()
+      }
+    } finally { $g.Dispose() }
+
+    $out = $src
+    if ($b.Width -gt $maxW) {
+      $nw = $maxW
+      $nh = [int][Math]::Round($b.Height * $maxW / [double]$b.Width)
+      $scaled = New-Object System.Drawing.Bitmap($nw, $nh, [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+      $g2 = [System.Drawing.Graphics]::FromImage($scaled)
+      try {
+        $g2.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::Bilinear
+        $g2.DrawImage($src, 0, 0, $nw, $nh)
+      } finally { $g2.Dispose() }
+      $out = $scaled
+    }
+
+    $ep = New-Object System.Drawing.Imaging.EncoderParameters -ArgumentList 1
+    $ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter -ArgumentList ([System.Drawing.Imaging.Encoder]::Quality), ([long]$q)
+    $ms = New-Object System.IO.MemoryStream
+    $out.Save($ms, $script:jpeg, $ep)
+    return [Convert]::ToBase64String($ms.ToArray())
+  } finally {
+    if ($ms) { $ms.Dispose() }
+    if ($ep) { $ep.Dispose() }
+    if ($scaled) { $scaled.Dispose() }
+    $src.Dispose()
+  }
+}
+
+function Get-Point($m) {
+  $b = $script:all[$script:idx].Bounds
+  $fx = [Math]::Min(1.0, [Math]::Max(0.0, [double]$m.x))
+  $fy = [Math]::Min(1.0, [Math]::Max(0.0, [double]$m.y))
+  return @([int]($b.X + $fx * ($b.Width - 1)), [int]($b.Y + $fy * ($b.Height - 1)))
+}
+
+function Move-Cursor($m) {
+  $pt = Get-Point $m
+  [void][RC]::SetCursorPos($pt[0], $pt[1])
+}
+
+function Send-Key([string]$k) {
+  $vks = New-Object 'System.Collections.Generic.List[uint16]'
+  foreach ($part in $k.ToLower().Split('+')) {
+    if ($script:VK.ContainsKey($part)) { $vks.Add([uint16]$script:VK[$part]) }
+    elseif ($part -match '^[a-z0-9]$') { $vks.Add([uint16][int][char]$part.ToUpper()) }
+    else { throw "Touche inconnue : $part" }
+  }
+  if ($vks.Count -gt 0) { [RC]::Press($vks.ToArray()) }
+}
+
+Update-Screens $true
+Send-Line 'R|ready'
+
+while ($true) {
+  $line = [Console]::In.ReadLine()
+  if ($null -eq $line) { break }
+  if ($line.Length -eq 0) { continue }
+  $cmd = '?'
+  try {
+    $m = $line | ConvertFrom-Json
+    $cmd = [string]$m.c
+    switch ($cmd) {
+      'shot'    { Send-Line ('F|' + (Get-Frame ([int]$m.w) ([int]$m.q))) }
+      'move'    { Move-Cursor $m }
+      'down'    { Move-Cursor $m; [RC]::Btn([string]$m.b, $false) }
+      'up'      { Move-Cursor $m; [RC]::Btn([string]$m.b, $true) }
+      'click'   { Move-Cursor $m; [RC]::Btn([string]$m.b, $false); [RC]::Btn([string]$m.b, $true) }
+      'wheel'   { [RC]::Wheel([int]$m.d * 120) }
+      'text'    { [RC]::Text([string]$m.s) }
+      'key'     { Send-Key ([string]$m.k) }
+      'screen'  { $script:idx = [int]$m.i; Update-Screens $true }
+      'screens' { Update-Screens $true }
+    }
+  } catch {
+    $msg = ([string]$_.Exception.Message).Replace("`r", ' ').Replace("`n", ' ')
+    Send-Line ('E|' + $cmd + '|' + $msg)
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-helper.ps1 ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-usage.json ---
+{"month":"2026-10","bytes":678527387}
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\screen-usage.json ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\start.bat ---
+@echo off
+cd /d "%~dp0"
+title Tunnel Manager
+echo ============================================
+echo  Tunnel Manager
+echo ============================================
+echo.
+
+where node >nul 2>nul
+if errorlevel 1 (
+  echo [ERREUR] Node.js n'est pas installe.
+  echo Installe-le depuis https://nodejs.org puis relance ce fichier.
+  pause
+  exit /b 1
+)
+
+where cloudflared >nul 2>nul
+if errorlevel 1 (
+  echo [ATTENTION] "cloudflared" n'est pas trouve dans le PATH.
+  echo Le tunnel ne pourra pas demarrer automatiquement.
+  echo.
+)
+
+set NEED_INSTALL=0
+if not exist "node_modules" set NEED_INSTALL=1
+if not exist "node_modules\express" set NEED_INSTALL=1
+if not exist "node_modules\localtunnel" set NEED_INSTALL=1
+if not exist "node_modules\ws" set NEED_INSTALL=1
+if not exist "node_modules\multer" set NEED_INSTALL=1
+
+if %NEED_INSTALL%==1 (
+  echo Installation ou mise a jour des dependances, patiente une minute...
+  call npm install
+  if errorlevel 1 (
+    echo [ERREUR] L'installation a echoue. Verifie ta connexion internet.
+    pause
+    exit /b 1
+  )
+  echo.
+)
+
+echo Demarrage...
+echo (laisse cette fenetre ouverte tant que tu veux garder tes tunnels actifs)
+echo.
+node index.js
+pause
+
+
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\start.bat ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\start.sh ---
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+echo "============================================"
+echo " Tunnel Manager"
+echo "============================================"
+echo
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "[ERREUR] Node.js n'est pas installé."
+  echo "Installe-le depuis https://nodejs.org puis relance ce script."
+  exit 1
+fi
+
+if ! command -v cloudflared >/dev/null 2>&1; then
+  echo "[ATTENTION] 'cloudflared' n'est pas trouvé dans le PATH."
+  echo "Le tunnel ne pourra pas démarrer automatiquement."
+  echo
+fi
+
+NEED_INSTALL=0
+[ ! -d "node_modules" ] && NEED_INSTALL=1
+[ ! -d "node_modules/express" ] && NEED_INSTALL=1
+[ ! -d "node_modules/localtunnel" ] && NEED_INSTALL=1
+[ ! -d "node_modules/ws" ] && NEED_INSTALL=1
+[ ! -d "node_modules/multer" ] && NEED_INSTALL=1
+
+if [ "$NEED_INSTALL" = "1" ]; then
+  echo "Installation ou mise à jour des dépendances, patiente une minute..."
+  npm install
+  echo
+fi
+
+echo "Démarrage..."
+echo "(laisse ce terminal ouvert tant que tu veux garder tes tunnels actifs)"
+echo
+node index.js
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\start.sh ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\tunnel-url.txt ---
+https://fuzzy-make-payroll-evaluate.trycloudflare.com
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\tunnel-url.txt ---
+
+--- DEBUT FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\tunnels.config.json ---
+{
+  "statusServerPort": 4041,
+  "tunnels": [],
+  "fileBrowser": {
+    "enabled": true,
+    "roots": [
+      "*"
+    ]
+  },
+  "screen": {
+    "enabled": true,
+    "viewOnly": false,
+    "monthlyBudgetMB": 0
+  },
+  "power": {
+    "enabled": true
+  },
+  "notify": {
+    "ntfyTopic": "azertyuiopqsdfghjklmwxcvbn1234567890"
+  }
+}
+
+--- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_11\V\tunnels.config.json ---
+
