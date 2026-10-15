@@ -3484,48 +3484,31 @@ server.on('upgrade', (req, socket, head) => {
   var SCROLL_PX = 36;        // pixels de glissement = un cran de molette
   var MOVE_THROTTLE_MS = 40;
   var SENT = '\u200b';       // caractère invisible dans le champ clavier (voir plus bas)
-  // Touches de la télécommande (libellé, touche envoyée). Plus d'onglets : tout tient dans un seul panneau.
-  var PAD_KEYS = [   // croix directionnelle, grille 3 colonnes : null = case vide, Entrée au centre
+  // Touches par onglet (libellé, touche envoyée). 'pad' = flèches en croix + déplacement.
+  var KEY_TABS = [
+    { id: 'arrows', label: '⬍ Flèches', pad: true },
+    { id: 'video', label: '▶ Vidéo', keys: [
+      ['⛶ Plein écran', 'f'], ['🔇 Muet', 'm'], ['⏯ Pause', 'space'], ['⏯ K', 'k'],
+      ['⏪ J −10 s', 'j'], ['L +10 s ⏩', 'l'], ['◀ 5 s', 'left'], ['5 s ▶', 'right'],
+    ] },
+    { id: 'web', label: '🌐 Web', keys: [
+      ['F11', 'f11'], ['F5', 'f5'], ['Adresse', 'ctrl+l'], ['Chercher', 'ctrl+f'],
+      ['Onglet +', 'ctrl+t'], ['Onglet ✕', 'ctrl+w'], ['Onglet →', 'ctrl+tab'],
+      ['← Retour', 'alt+left'], ['Avant →', 'alt+right'],
+    ] },
+    { id: 'edit', label: '✎ Édition', keys: [
+      ['Échap', 'esc'], ['Tab', 'tab'], ['Entrée', 'enter'], ['⌫', 'backspace'], ['Suppr', 'delete'],
+      ['Ctrl+A', 'ctrl+a'], ['Ctrl+C', 'ctrl+c'], ['Ctrl+V', 'ctrl+v'], ['Ctrl+X', 'ctrl+x'], ['Ctrl+Z', 'ctrl+z'],
+    ] },
+    { id: 'win', label: '⊞ Fenêtres', keys: [
+      ['⊞ Windows', 'win'], ['Alt+Tab', 'alt+tab'], ['Win+Tab', 'win+tab'], ['Bureau', 'win+d'],
+    ] },
+  ];
+  var PAD_KEYS = [   // grille 3 colonnes : null = case vide
     [null, ['↑', 'up'], null],
-    [['←', 'left'], ['Entrée', 'enter'], ['→', 'right']],
-    [null, ['↓', 'down'], null],
+    [['←', 'left'], ['↓', 'down'], ['→', 'right']],
   ];
-  var BASIC_KEYS = [  // touches de base, à côté de la croix
-    ['Échap', 'esc'], ['Tab', 'tab'], ['⌫', 'backspace'], ['Suppr', 'delete'],
-    ['Espace', 'space'], ['Début', 'home'], ['Fin', 'end'], ['Pg ↑', 'pageup'], ['Pg ↓', 'pagedown'],
-  ];
-  var REPEAT_KEYS = { up: 1, down: 1, left: 1, right: 1, backspace: 1, delete: 1, pageup: 1, pagedown: 1 }; // maintien = répétition
-  // Raccourcis par thème. Chaque groupe = des lignes centrées ; { fill: true } = les boutons se partagent toute la largeur ;
-  // { split: [gauche, droite] } = un seul gros bouton coupé en deux moitiés.
-  // Clés spéciales : '@back10' / '@fwd10' (±10 s, touches choisies par le sélecteur) et '@seekmode' (le sélecteur lui-même).
-  var KEY_GROUPS = [   // l'ordre ici = l'ordre d'affichage (la croix « Flèches & base » vient juste après Navigateur)
-    { label: 'Navigateur', rows: [
-      { keys: [['F5', 'f5'], ['F11', 'f11'], ['＋ Onglet', 'ctrl+t'], ['✕ Onglet', 'ctrl+w'], ['Adresse', 'ctrl+l'], ['Chercher', 'ctrl+f']], fill: true },
-      { split: [['◀ Onglet précédent', 'ctrl+shift+tab'], ['Onglet suivant ▶', 'ctrl+tab']] },
-      { split: [['← Page précédente', 'alt+left'], ['Page suivante →', 'alt+right']] },
-    ] },
-    { label: 'Fenêtres', rows: [   // Capture en bas, pleine largeur, juste au-dessus d'Édition (copier/coller après une capture)
-      { keys: [['⊞ Windows', 'win'], ['Alt+Tab', 'alt+tab'], ['Win+Tab', 'win+tab']], fill: true },
-      { keys: [['🖥 Bureau', 'win+d'], ['✕ Fermer', 'alt+f4']], fill: true },
-      { keys: [['📸 Capture d\u2019écran', 'win+shift+s']], fill: true, big: true },
-    ] },
-    { label: 'Édition', rows: [
-      { keys: [['Ctrl+A', 'ctrl+a'], ['Ctrl+C', 'ctrl+c'], ['Ctrl+V', 'ctrl+v'], ['Ctrl+X', 'ctrl+x'], ['Ctrl+W', 'ctrl+w']], fill: true },
-      { keys: [['Ctrl+Z', 'ctrl+z'], ['Ctrl+Y', 'ctrl+y'], ['Ctrl+S', 'ctrl+s'], ['Ctrl+U', 'ctrl+u']], fill: true },
-    ] },
-    { label: 'Vidéo', rows: [
-      { keys: [['⛶ Plein écran', 'f'], ['🔇 Muet', 'm'], ['', '@seekmode']], fill: true },
-      { keys: [['⏪ −10 s', '@back10'], ['⏯ Pause', 'space'], ['+10 s ⏩', '@fwd10']], fill: true },
-    ] },
-  ];
-  // ±10 s : J / L = standard YouTube ; flèches = Netflix, Prime, VLC… (là où une flèche = 10 s)
-  var seekMode = localStorage.getItem('tm_scr_seek') === 'arrows' ? 'arrows' : 'jl';
-  function resolveKey(k) {
-    if (k === '@back10') return seekMode === 'jl' ? 'j' : 'left';
-    if (k === '@fwd10') return seekMode === 'jl' ? 'l' : 'right';
-    return k;
-  }
-  function seekLabel() { return seekMode === 'jl' ? '±10 s : J · L' : '±10 s : ← →'; }
+  var PAGE_KEYS = [['Début', 'home'], ['Fin', 'end'], ['Pg ↑', 'pageup'], ['Pg ↓', 'pagedown']];
 
   // ---------- État ----------
   var ws = null, wantOpen = false, reconnectTimer = null, failCount = 0, gotReady = false;
@@ -3565,58 +3548,34 @@ server.on('upgrade', (req, socket, head) => {
       '#scrImg{display:none;flex:none;margin:auto;width:100%;max-width:none;height:auto;-webkit-user-drag:none;pointer-events:auto;}',
       '#scrEmpty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8b93a3;',
       '  padding:1rem;text-align:center;font-size:.9rem;pointer-events:none;}',
-      /* ===== Zone basse : un « dock » de deux lignes + un panneau de touches flottant (sans onglets) ===== */
-      '.scr-bottom{position:relative;display:flex;flex-direction:column;gap:.4rem;border-top:1px solid var(--border,#262b36);padding:.45rem .5rem .5rem;}',
-      '.scr-dock{display:flex;gap:.35rem;align-items:stretch;}',
-      /* Sélecteur de mode : un seul bloc segmenté */
-      '.scr-seg{flex:1;min-width:0;display:flex;gap:2px;padding:2px;background:#161a24;border:1px solid var(--border,#262b36);border-radius:12px;}',
-      '.scr-bottom .scr-seg button{flex:1 1 0;min-width:0;border:0;background:transparent;color:#aab1c0;border-radius:10px;padding:.5rem .15rem;font-size:.78rem;white-space:nowrap;}',
-      '.scr-bottom .scr-seg button.on{background:var(--accent,#4f8cff);color:#fff;}',
-      '.scr-bottom button.sq{flex:0 0 auto;min-width:2.9rem;padding-left:.4rem;padding-right:.4rem;}',
+      '.scr-bottom{border-top:1px solid var(--border,#262b36);padding:.45rem .5rem .5rem;}',
+      '.scr-row{display:flex;gap:.35rem;margin-bottom:.35rem;align-items:center;}',
+      '.scr-row:last-child{margin-bottom:0;}',
+      '.scr-row button{flex:1;}',
       '.scr-bottom button.on{background:var(--accent,#4f8cff);border-color:var(--accent,#4f8cff);color:#fff;}',
-      '#scrKbd{flex:1 1 0;min-width:0;font-size:16px;}', /* 16px : évite le zoom automatique d'iOS */
-      '#scrKeysBtn{flex:0 0 auto;white-space:nowrap;}',
-      /* Panneau des touches : flotte AU-DESSUS de l'écran (ne le rétrécit pas), translucide, une seule zone qui défile */
-      '#scrKeys{display:none;position:absolute;left:0;right:0;bottom:100%;z-index:45;flex-direction:column;gap:.45rem;',
-      '  padding:.5rem;background:rgba(11,13,18,.10);',
-      '  border-top:1px solid rgba(255,255,255,.10);max-height:46vh;}',
-      /* Touches du panneau : fond verre léger, on devine l'écran du PC derrière */
-      '#scrKeys button{background:rgba(28,33,48,var(--ka,.10));border:1px solid rgba(255,255,255,.30);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.95);}',
-      '#scrKeys button.hit,#scrKeys button.on{background:rgba(79,140,255,.80);border-color:#4f8cff;color:#fff;}',
-      '#scrKeys .scr-khead button{border-color:rgba(79,140,255,.75);}',
-      '#scrKeys .scr-khead button.shut{border-color:rgba(255,255,255,.16);}',
+      '#scrKbd{flex:3;min-width:0;font-size:16px;}', /* 16px : évite le zoom automatique d'iOS */
+      '.scr-bottom{position:relative;}',
+      /* Panneau des touches : flotte AU-DESSUS de l'écran (ne le rétrécit pas), compact et translucide */
+      '#scrKeys{display:none;position:absolute;left:0;right:0;bottom:100%;z-index:45;flex-direction:column;gap:.3rem;',
+      '  padding:.35rem .45rem;background:rgba(11,13,18,.9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);',
+      '  border-top:1px solid var(--border,#262b36);max-height:42vh;overflow:auto;}',
       '#scrKeys.open{display:flex;}',
-      '.scr-khead{display:flex;gap:.3rem;flex-shrink:0;}',
-      '.scr-khead button{flex:1 1 0;min-width:0;padding:.45rem .2rem;border-color:#4f8cff;}',
-      '.scr-khead button.shut{flex:0 0 2.6rem;border-color:#262b36;}',
-      '.scr-khint{flex-shrink:0;font-size:.64rem;color:#c3c9d6;margin-top:-.25rem;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.8);}',
-      '.scr-kbody{display:flex;flex-direction:column;gap:.55rem;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;}',
-      '.scr-kgrp{display:flex;flex-direction:column;align-items:center;gap:.3rem;}',
-      '.scr-klbl{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#c3c9d6;text-shadow:0 1px 2px rgba(0,0,0,.8);text-align:center;}',
-      '.scr-kgrp .scr-klbl::before,.scr-kgrp .scr-klbl::after{content:"";display:inline-block;width:1.2rem;height:1px;background:rgba(255,255,255,.25);vertical-align:middle;margin:0 .45rem;}',
-      '.scr-kbox{display:flex;flex-direction:column;align-items:center;gap:.25rem;width:100%;}',
-      '.scr-krow{display:flex;flex-wrap:wrap;justify-content:center;gap:.25rem;width:100%;}',
-      '.scr-krow button{flex:0 0 auto;min-width:2.6rem;padding:.42rem .55rem;font-size:.76rem;}',
-      '.scr-krow.fill button{flex:1 1 auto;min-width:0;padding:.5rem .3rem;font-size:.72rem;white-space:nowrap;}',
-      '.scr-krow.big button{padding:.7rem .3rem;font-size:.82rem;}',
-      '.scr-split{display:flex;width:100%;border:1px solid rgba(255,255,255,.22);border-radius:12px;overflow:hidden;background:rgba(28,33,48,var(--ka,.10));}',
-      '#scrKeys .scr-split button{flex:1 1 0;min-width:0;border:0;border-radius:0;background:transparent;padding:.65rem .3rem;font-size:.76rem;white-space:nowrap;}',
-      '#scrKeys .scr-split button + button{border-left:1px solid rgba(255,255,255,.28);}',
-      '#scrKeys .scr-split button.hit{background:rgba(79,140,255,.80);}',
-      '.scr-nav{display:flex;flex-direction:column;align-items:center;gap:.5rem;width:100%;}',
-      '.scr-dpad{display:grid;grid-template-columns:repeat(3,3.6rem);gap:.25rem;}',
-      '.scr-dpad button{min-width:0;padding:.6rem 0;font-size:.95rem;}',
+      '.scr-krow{display:flex;flex-wrap:wrap;gap:.25rem;}',
+      '#scrKeys button{flex:0 0 auto;min-width:2.6rem;padding:.38rem .5rem;font-size:.76rem;transition:background .08s;}',
+      '#scrKeys button.hit{background:#4f8cff;border-color:#4f8cff;color:#fff;}',
+      '#scrKeys .scr-tabs button{flex:1 1 0;min-width:0;padding:.38rem .2rem;font-size:.7rem;background:transparent;}',
+      '#scrKeys .scr-tabs button.on{background:var(--accent,#4f8cff);color:#fff;}',
+      '.scr-pad{display:flex;flex-wrap:wrap;align-items:flex-start;gap:.7rem;}',
+      '.scr-dpad{display:grid;grid-template-columns:repeat(3,2.9rem);gap:.25rem;}',
+      '.scr-dpad button,.scr-page button{min-width:0 !important;padding-left:0 !important;padding-right:0 !important;}',
       '.scr-dpad .sp{visibility:hidden;}',
-      '.scr-dpad .ent{font-size:.72rem;}',
-      '.scr-bottom button{transition:background .08s;touch-action:manipulation;-webkit-user-select:none;user-select:none;}',
-      '.scr-bottom button.hit{background:#4f8cff;border-color:#4f8cff;color:#fff;}',
+      '.scr-page{display:grid;grid-template-columns:repeat(2,3.4rem);gap:.25rem;}',
       '@media (orientation:landscape) and (max-height:520px){',
       '  .scr-bar{padding:.25rem .5rem;}',
-      '  .scr-bottom{flex-direction:row;align-items:center;gap:.35rem;padding:.25rem .4rem;}',
-      '  .scr-bottom .scr-dock{flex:1 1 0;min-width:0;}',
+      '  .scr-bottom{padding:.25rem .4rem;}',
+      '  .scr-row{margin-bottom:.25rem;}',
       '  .scr-bar select,.scr-bar button,.scr-bottom button,.scr-bottom input{padding:.3rem .5rem;font-size:.74rem;}',
-      '  .scr-bottom .scr-seg button{padding:.32rem .1rem;}',
-      '  #scrKeys{max-height:62vh;}',
+      '  #scrKeys{max-height:60vh;}',
       '}',
       '#scrOverlay.min .scr-bar,#scrOverlay.min .scr-bottom{display:none;}',
       '#scrFab{display:none;position:absolute;top:calc(env(safe-area-inset-top,0px) + 6px);right:calc(env(safe-area-inset-right,0px) + 6px);',
@@ -3658,17 +3617,17 @@ server.on('upgrade', (req, socket, head) => {
       '</div>' +
       '<div id="scrView"><img id="scrImg" alt="" draggable="false"><div id="scrEmpty">Connexion à l\'écran du PC…</div></div>' +
       '<div class="scr-bottom">' +
-      '  <div class="scr-dock">' +
-      '    <div class="scr-seg">' +
-      '      <button data-mode="view" class="on">👁 Vue</button>' +
-      '      <button data-mode="mouse" title="Glisser = défiler · double-toucher puis glisser = cliquer-déplacer · pincer = zoom">🖱 Souris</button>' +
-      '    </div>' +
-      '    <button id="scrFit" class="sq" title="Zoom (toucher = revenir à 100 %). Pincer l\'écran pour zoomer.">100 %</button>' +
-      '    <button id="scrLock" class="sq" title="Verrouiller (lecture seule)">🔓</button>' +
+      '  <div class="scr-row">' +
+      '    <button data-mode="view" class="on">👁 Vue</button>' +
+      '    <button data-mode="scroll">↕ Défiler</button>' +
+      '    <button data-mode="drag">✋ Glisser</button>' +
+      '    <button id="scrZoomOut" style="flex:0 0 2.6rem">−</button>' +
+      '    <button id="scrZoomIn" style="flex:0 0 2.6rem">+</button>' +
       '  </div>' +
-      '  <div class="scr-dock">' +
+      '  <div class="scr-row">' +
       '    <input id="scrKbd" placeholder="⌨ Toucher ici pour écrire" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="enter">' +
-      '    <button id="scrKeysBtn">⌘ Touches</button>' +
+      '    <button id="scrKeysBtn" style="flex:1">Touches</button>' +
+      '    <button id="scrLock" style="flex:0 0 2.6rem" title="Verrouiller (lecture seule)">🔓</button>' +
       '  </div>' +
       '  <div id="scrKeys"></div>' +
       '</div>';
@@ -3688,7 +3647,7 @@ server.on('upgrade', (req, socket, head) => {
     document.body.appendChild(o);
 
     ['scrOverlay', 'scrDot', 'scrStatus', 'scrMb', 'scrMon', 'scrQ', 'scrReload', 'scrClose', 'scrView', 'scrImg',
-      'scrEmpty', 'scrKbd', 'scrKeysBtn', 'scrLock', 'scrKeys', 'scrFit', 'scrFull',
+      'scrEmpty', 'scrKbd', 'scrKeysBtn', 'scrLock', 'scrKeys', 'scrZoomIn', 'scrZoomOut', 'scrFull',
       'scrFsMenu', 'scrMonFsWrap', 'scrMonFs', 'scrQFs', 'scrReloadFs', 'scrExitFs'].forEach(function (id) {
       el[id] = document.getElementById(id);
     });
@@ -3731,11 +3690,16 @@ server.on('upgrade', (req, socket, head) => {
 
     // Modes
     Array.prototype.forEach.call(o.querySelectorAll('[data-mode]'), function (b) {
-      b.onclick = function () { setMode(b.getAttribute('data-mode')); };
+      b.onclick = function () {
+        mode = b.getAttribute('data-mode');
+        Array.prototype.forEach.call(o.querySelectorAll('[data-mode]'), function (x) { x.classList.toggle('on', x === b); });
+        applyTouchAction();
+      };
     });
 
-    // Zoom : pincement à deux doigts ; le bouton « % » ramène à 100 %
-    el.scrFit.onclick = function () { setScale(1); el.scrView.scrollLeft = 0; };
+    // Zoom
+    el.scrZoomIn.onclick = function () { setScale(scale * 1.5); };
+    el.scrZoomOut.onclick = function () { setScale(scale / 1.5); };
     // L'image s'adapte à la taille de la zone (portrait / paysage / clavier ouvert)
     el.scrImg.onload = layoutImg;
     window.addEventListener('resize', layoutImg);
@@ -3749,145 +3713,83 @@ server.on('upgrade', (req, socket, head) => {
       updateLockUi();
     };
 
-    // ----- Panneau des touches (sans onglets) -----
-    // En-tête fixe : modificateurs « collants » (1 appui = pour la prochaine touche, 2 = maintenu « ∞ », 3 = relâché).
-    // Dessous : une seule zone qui défile -> Récents, croix + touches de base, puis les raccourcis par thème.
+    // Touches spéciales
+    // Modificateurs « collants » : 1 appui = la prochaine touche part avec (ex. Win puis →),
+    // 2 appuis = reste maintenu pour enchaîner (affiché « Win ∞ »), 3 appuis = relâché.
     function flash(b) {
       b.classList.add('hit');
       setTimeout(function () { b.classList.remove('hit'); }, 130);
       try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
     }
-    var recents = [];
-    try { recents = JSON.parse(localStorage.getItem('tm_scr_recent') || '[]').filter(function (r) { return r && r.length === 2; }).slice(0, 5); } catch (e) { recents = []; }
-    function pushRecent(k) {
-      if (k[1].charAt(0) === '@' || REPEAT_KEYS[k[1]] || k[1] === 'enter' || BASIC_KEYS.some(function (b) { return b[1] === k[1]; })) return;   // seulement les raccourcis
-      recents = recents.filter(function (r) { return r[1] !== k[1]; });
-      recents.unshift([k[0], k[1]]);
-      recents = recents.slice(0, 5);
-      try { localStorage.setItem('tm_scr_recent', JSON.stringify(recents)); } catch (e) {}
-    }
     function keyBtn(k) {
       var b = document.createElement('button');
       b.textContent = k[0];
-      if (k[1] === '@seekmode') {   // sélecteur des touches ±10 s (J/L ou flèches), mémorisé
-        b.textContent = seekLabel();
-        b.title = 'Touches envoyées pour ±10 s : J / L (YouTube) ou ← / → (Netflix, VLC…). Toucher pour changer.';
-        b.onclick = function () {
-          seekMode = seekMode === 'jl' ? 'arrows' : 'jl';
-          try { localStorage.setItem('tm_scr_seek', seekMode); } catch (e) {}
-          b.textContent = seekLabel();
-          flash(b);
-        };
-        return b;
-      }
-      var fire = function () { flash(b); send({ t: 'key', k: withMods(resolveKey(k[1])) }); pushRecent(k); };
-      if (REPEAT_KEYS[k[1]]) {
-        // flèches, ⌫, Suppr, Pg : un appui = 1 fois, on maintient = ça répète
-        var t1 = null, t2 = null, held = false;
-        var stop = function () { clearTimeout(t1); clearInterval(t2); t1 = t2 = null; held = false; };
-        b.addEventListener('pointerdown', function (e) {
-          e.preventDefault();
-          stop(); held = true; fire();
-          t1 = setTimeout(function () { t2 = setInterval(function () { send({ t: 'key', k: k[1] }); }, 90); }, 380);
-        });
-        ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (n) { b.addEventListener(n, stop); });
-        b.addEventListener('contextmenu', function (e) { e.preventDefault(); });
-      } else {
-        b.onclick = fire;
-      }
+      b.onclick = function () { flash(b); send({ t: 'key', k: withMods(k[1]) }); };
       return b;
     }
-    function rowOf(list, fill, big) {
-      var r = document.createElement('div');
-      r.className = 'scr-krow' + (fill ? ' fill' : '') + (big ? ' big' : '');
-      list.forEach(function (k) { r.appendChild(keyBtn(k)); });
-      return r;
-    }
-    function rowsOf(rows) {   // plusieurs lignes centrées l'une sous l'autre
-      var box = document.createElement('div');
-      box.className = 'scr-kbox';
-      rows.forEach(function (r) {
-        if (r.split) {   // un seul gros bouton, deux moitiés : gauche = précédent, droite = suivant
-          var sp = document.createElement('div');
-          sp.className = 'scr-split';
-          r.split.forEach(function (k) { sp.appendChild(keyBtn(k)); });
-          box.appendChild(sp);
-        } else box.appendChild(rowOf(r.keys, r.fill, r.big));
-      });
-      return box;
-    }
-    function group(label, content) {
-      var g = document.createElement('div');
-      g.className = 'scr-kgrp';
-      var l = document.createElement('div');
-      l.className = 'scr-klbl'; l.textContent = label;
-      g.appendChild(l); g.appendChild(content);
-      return g;
-    }
-
-    // En-tête : Ctrl / Win / Alt / Maj + bouton de fermeture
+    // Ligne 1 : modificateurs collants (1 appui = pour la prochaine touche, 2 = maintenu, 3 = relâché)
     el.modBtns = {};
-    var head = document.createElement('div');
-    head.className = 'scr-khead';
+    var modRow = document.createElement('div');
+    modRow.className = 'scr-krow';
     ['ctrl', 'win', 'alt', 'shift'].forEach(function (n) {
       var mb = document.createElement('button');
       mb.textContent = MOD_LABELS[n];
+      mb.style.borderColor = '#4f8cff';
+      mb.style.flex = '1 1 0';
       mb.onclick = function () { setMod(n, (mods[n] + 1) % 3); };
       el.modBtns[n] = mb;
-      head.appendChild(mb);
+      modRow.appendChild(mb);
     });
-    var shut = document.createElement('button');
-    shut.className = 'shut'; shut.textContent = '▾'; shut.title = 'Fermer le panneau';
-    shut.onclick = function () { setKeysOpen(false); };
-    head.appendChild(shut);
-    el.scrKeys.appendChild(head);
-    var hint = document.createElement('div');
-    hint.className = 'scr-khint';
-    hint.textContent = '1 appui = pour la prochaine touche · 2 = maintenu (∞) · 3 = relâché';
-    el.scrKeys.appendChild(hint);
-
-    // Opacité des boutons fixée à 10 % (plus de curseur)
-    el.scrKeys.style.setProperty('--ka', '0.10');
-
-    // Corps défilant
+    el.scrKeys.appendChild(modRow);
+    // Ligne 2 : onglets
+    var tabRow = document.createElement('div');
+    tabRow.className = 'scr-krow scr-tabs';
     var body = document.createElement('div');
     body.className = 'scr-kbody';
-    var recentBox = document.createElement('div');       // reconstruit à chaque ouverture du panneau (affiché tout en bas)
-    var nav = document.createElement('div');
-    nav.className = 'scr-nav';
-    var dpad = document.createElement('div');
-    dpad.className = 'scr-dpad';
-    PAD_KEYS.forEach(function (row) {
-      row.forEach(function (k) {
-        if (!k) { var sp = document.createElement('button'); sp.className = 'sp'; sp.tabIndex = -1; sp.textContent = '·'; dpad.appendChild(sp); }
-        else {
-          var kb = keyBtn(k);
-          if (k[1] === 'enter') kb.classList.add('ent');
-          dpad.appendChild(kb);
-        }
-      });
+    var curTab = localStorage.getItem('tm_scr_tab') || 'arrows';
+    if (!KEY_TABS.some(function (t) { return t.id === curTab; })) curTab = 'arrows';
+    function fillBody(tab) {
+      body.innerHTML = '';
+      if (tab.pad) {
+        var wrap = document.createElement('div');
+        wrap.className = 'scr-pad';
+        var dpad = document.createElement('div');
+        dpad.className = 'scr-dpad';
+        PAD_KEYS.forEach(function (row) {
+          row.forEach(function (k) {
+            if (!k) { var sp = document.createElement('button'); sp.className = 'sp'; sp.tabIndex = -1; sp.textContent = '·'; dpad.appendChild(sp); }
+            else dpad.appendChild(keyBtn(k));
+          });
+        });
+        var page = document.createElement('div');
+        page.className = 'scr-page';
+        PAGE_KEYS.forEach(function (k) { page.appendChild(keyBtn(k)); });
+        wrap.appendChild(dpad); wrap.appendChild(page);
+        body.appendChild(wrap);
+      } else {
+        var row = document.createElement('div');
+        row.className = 'scr-krow';
+        tab.keys.forEach(function (k) { row.appendChild(keyBtn(k)); });
+        body.appendChild(row);
+      }
+    }
+    var tabBtns = {};
+    KEY_TABS.forEach(function (tab) {
+      var tb = document.createElement('button');
+      tb.textContent = tab.label;
+      tb.onclick = function () {
+        curTab = tab.id;
+        try { localStorage.setItem('tm_scr_tab', curTab); } catch (e) {}
+        Object.keys(tabBtns).forEach(function (id) { tabBtns[id].classList.toggle('on', id === curTab); });
+        fillBody(tab);
+      };
+      tabBtns[tab.id] = tb;
+      tabRow.appendChild(tb);
     });
-    nav.appendChild(dpad);
-    nav.appendChild(rowOf(BASIC_KEYS));   // sous la croix, centrées
-    // Ordre : Navigateur (tout en haut), puis flèches & base, puis Fenêtres/Édition (côte à côte), Vidéo, Récents
-    KEY_GROUPS.forEach(function (g) {
-      body.appendChild(group(g.label, rowsOf(g.rows)));
-      if (g.label === 'Navigateur') body.appendChild(group('Flèches & base', nav));
-    });
-    body.appendChild(recentBox);
+    el.scrKeys.appendChild(tabRow);
     el.scrKeys.appendChild(body);
-
-    function fillRecents() {
-      recentBox.innerHTML = '';
-      if (!recents.length) return;
-      recentBox.appendChild(group('Récents', rowOf(recents)));
-    }
-    function setKeysOpen(on) {
-      if (on) fillRecents();
-      el.scrKeys.classList.toggle('open', !!on);
-      el.scrKeysBtn.classList.toggle('on', !!on);
-    }
-    el.scrKeysBtn.onclick = function () { setKeysOpen(!el.scrKeys.classList.contains('open')); };
+    KEY_TABS.forEach(function (t) { if (t.id === curTab) { tabBtns[t.id].classList.add('on'); fillBody(t); } });
+    el.scrKeysBtn.onclick = function () { el.scrKeysBtn.classList.toggle('on', el.scrKeys.classList.toggle('open')); };
 
     setupKeyboard();
     setupPointer();
@@ -3928,13 +3830,6 @@ server.on('upgrade', (req, socket, head) => {
     el.scrLock.classList.toggle('on', locked || serverViewOnly);
     applyTouchAction();
   }
-  function setMode(m) {
-    mode = m;
-    Array.prototype.forEach.call(el.scrOverlay.querySelectorAll('[data-mode]'), function (x) {
-      x.classList.toggle('on', x.getAttribute('data-mode') === m);
-    });
-    applyTouchAction();
-  }
   function applyTouchAction() {
     // Dans tous les modes, les gestes sont gérés ici (pincement, déplacement, molette, clic).
     el.scrView.style.touchAction = 'none';
@@ -3947,7 +3842,6 @@ server.on('upgrade', (req, socket, head) => {
   }
   function setMin(on) {
     setFsMenu(false);
-    if (on && mode === 'view') setMode('mouse');   // barre du bas masquée : sans ça on ne pourrait plus ni défiler ni piloter
     el.scrOverlay.classList.toggle('min', on);
     try {
       var pr = null;
@@ -3969,7 +3863,6 @@ server.on('upgrade', (req, socket, head) => {
     if (!built) return;
     var w = Math.max(1, Math.round(baseWidth() * scale)) + 'px';
     if (el.scrImg.style.width !== w) el.scrImg.style.width = w;
-    if (el.scrFit) el.scrFit.textContent = Math.round(scale * 100) + ' %';
   }
   // Change le zoom en gardant fixe le point de l'image situé sous (mx, my) (coordonnées écran).
   function setScale(ns, mx, my) {
@@ -4116,7 +4009,6 @@ server.on('upgrade', (req, socket, head) => {
     var pinch = null;      // { d0, s0, mx, my } pendant un pincement
     var pan = null;        // { t, vx, vy } pendant un déplacement à un doigt
     var inertia = 0;
-    var lastTap = null;    // dernier toucher bref : { t, x, y } (pour « double-toucher puis glisser »)
 
     function ids() { return Object.keys(pts); }
     function stopInertia() { if (inertia) { cancelAnimationFrame(inertia); inertia = 0; } }
@@ -4158,8 +4050,8 @@ server.on('upgrade', (req, socket, head) => {
       if (n === 1) {                        // nouveau geste : on repart de zéro
         killTap(); tp = null; pinch = null; pan = null;
       }
-      if (isViewLike() || mode === 'mouse') {
-        if (n === 2) {                      // deuxième doigt : pincement (zoom + déplacement de la vue)
+      if (isViewLike()) {
+        if (n === 2) {                      // deuxième doigt : pincement
           killTap();
           tp = { dead: true };
           var a = pts[ids()[0]], b = pts[ids()[1]];
@@ -4169,11 +4061,12 @@ server.on('upgrade', (req, socket, head) => {
           return;
         }
         if (n > 2) return;
+      } else if (n > 1) {                   // modes Défiler / Glisser : deuxième doigt = on annule
+        cancelTouch(); tp = { dead: true }; return;
       }
       var f0 = frac(e);
       tp = { id: e.pointerId, x0: e.clientX, y0: e.clientY, ly: e.clientY, f0: f0, lastF: f0,
-        moved: false, long: false, dragging: false, acc: 0, timer: null,
-        armed: !!(lastTap && e.timeStamp - lastTap.t < 380 && Math.hypot(e.clientX - lastTap.x, e.clientY - lastTap.y) < 45) };
+        moved: false, long: false, dragging: false, acc: 0, timer: null };
       if (isViewLike()) pan = { t: performance.now(), vx: 0, vy: 0 };
       tp.timer = setTimeout(function () {
         if (tp && !tp.dead && !tp.moved && !locked && !serverViewOnly) {
@@ -4200,8 +4093,8 @@ server.on('upgrade', (req, socket, head) => {
       var ddx = e.clientX - prev.x, ddy = e.clientY - prev.y;
       pts[e.pointerId] = { x: e.clientX, y: e.clientY };
 
-      if (isViewLike() || pinch) {
-        // --- Vue : pincement = zoom, un doigt = déplacement de la vue (le pincement marche aussi en mode Souris) ---
+      if (isViewLike()) {
+        // --- Vue : pincement = zoom, un doigt = déplacement de la vue ---
         if (pinch && ids().length >= 2) {
           var a = pts[ids()[0]], b = pts[ids()[1]];
           var d = Math.hypot(a.x - b.x, a.y - b.y);
@@ -4230,30 +4123,29 @@ server.on('upgrade', (req, socket, head) => {
         return;
       }
 
-      // --- Souris : glisser = molette ; double-toucher puis glisser = cliquer-déplacer ---
+      // --- Défiler / Glisser ---
       if (!tp || tp.dead || e.pointerId !== tp.id) return;
       var dx2 = e.clientX - tp.x0, dy2 = e.clientY - tp.y0;
       if (!tp.moved && Math.hypot(dx2, dy2) > 10) {
         tp.moved = true;
         clearTimeout(tp.timer);
-        if (tp.armed && !tp.long) {
+        if (mode === 'drag' && !tp.long) {
           tp.dragging = true;
-          if (navigator.vibrate) navigator.vibrate(15);
           send({ t: 'down', x: tp.f0.x, y: tp.f0.y, b: 'left' });
         }
       }
       if (!tp.moved) return;
-      if (tp.dragging) {
+      if (mode === 'scroll') {
+        tp.acc += e.clientY - tp.ly;
+        var n = Math.trunc(tp.acc / SCROLL_PX);
+        if (n) { send({ t: 'wheel', d: n }); tp.acc -= n * SCROLL_PX; }
+      } else if (mode === 'drag' && tp.dragging) {
         tp.lastF = frac(e);
         var now2 = performance.now();
         if (now2 - lastMoveAt >= MOVE_THROTTLE_MS) {
           lastMoveAt = now2;
           send({ t: 'move', x: tp.lastF.x, y: tp.lastF.y });
         }
-      } else {
-        tp.acc += e.clientY - tp.ly;
-        var n = Math.trunc(tp.acc / SCROLL_PX);
-        if (n) { send({ t: 'wheel', d: n }); tp.acc -= n * SCROLL_PX; }
       }
       tp.ly = e.clientY;
     });
@@ -4288,9 +4180,6 @@ server.on('upgrade', (req, socket, head) => {
       } else if (!t.moved && !t.long) {
         ripple(t.x0, t.y0);
         send({ t: 'click', x: t.f0.x, y: t.f0.y, b: 'left' });
-        lastTap = t.armed ? null : { t: e.timeStamp, x: t.x0, y: t.y0 };   // 2e toucher d'un double-clic : on repart de zéro
-      } else {
-        lastTap = null;
       }
     }
     v.addEventListener('pointerup', up);
@@ -4409,9 +4298,6 @@ server.on('upgrade', (req, socket, head) => {
 
   window.TMScreen = { open: open, close: close, refreshInfo: refreshInfo };
 })();
-
-
-
 
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\V_12\screen-client.js ---
