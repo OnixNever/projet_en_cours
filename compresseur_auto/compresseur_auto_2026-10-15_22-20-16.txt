@@ -2071,6 +2071,262 @@ error: Please commit or stash them.
 [2026-10-15 22:14:02] [decompresseur/decompresseur_01] Aucun changement détecté.
 [2026-10-15 22:14:02] [decompresseur/decompresseur_02] Aucun changement détecté.
 [2026-10-15 22:14:02] [compresseur_auto] Changement détecté (88 fichier(s)), régénération du contexte...
+[2026-10-15 22:14:03] Ancienne version supprimée : compresseur_auto_2026-10-13_17-54-01.txt
+[2026-10-15 22:14:03] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-10-15_22-14-03.txt (19.6 Mo)
+[2026-10-15 22:14:03] [partage_QR/partage_QR_01] Changement détecté (7 fichier(s)), régénération...
+[2026-10-15 22:14:03] [partage_QR/partage_QR_01] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\partage_QR\partage_QR_01.txt (68.8 Ko)
+[2026-10-15 22:14:03] [partage_QR/partage_QR_02] Changement détecté (7 fichier(s)), régénération...
+[2026-10-15 22:14:03] [partage_QR/partage_QR_02] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\partage_QR\partage_QR_02.txt (72.6 Ko)
+[2026-10-15 22:14:03] [%/%_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_04] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_05] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_06] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_07] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_08] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_09] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_09_1] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_10] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_11] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_12] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_13] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_14] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_15] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_16] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_17] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_18] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_19] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_20] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_22] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_23] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_24] Aucun changement détecté.
+[2026-10-15 22:14:03] [%/%_25] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_04] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_05] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_06] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_07] Aucun changement détecté.
+[2026-10-15 22:14:03] [entrainement_tactique/entrainement-tactique_08] Aucun changement détecté.
+[2026-10-15 22:14:03] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-10-15 22:14:03] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-10-15 22:14:03] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-10-15 22:14:03] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-10-15 22:14:03] [ChronoChess] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_09] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_10] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_11] Aucun changement détecté.
+[2026-10-15 22:14:03] [tunnel_mobile/V_12] Changement détecté (12 fichier(s)), régénération...
+[2026-10-15 22:14:03] [tunnel_mobile/V_12] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\tunnel_mobile\V_12.txt (198.3 Ko)
+[2026-10-15 22:14:03] [tunnel_mobile/V_13] Changement détecté (12 fichier(s)), régénération...
+[2026-10-15 22:14:03] [tunnel_mobile/V_13] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\tunnel_mobile\V_13.txt (203.6 Ko)
+[2026-10-15 22:14:03] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_02] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_03] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_04] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_05] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_06] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_07] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_authentification_gmail_08] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/reseau_local_authentification_ntfy_09] Aucun changement détecté.
+[2026-10-15 22:14:03] [Network/réseau_local_01] Aucun changement détecté.
+[2026-10-15 22:14:03] [gestionnaire_profils] Aucun changement détecté.
+[2026-10-15 22:14:03] [oeil-du-monde] Aucun changement détecté.
+[2026-10-15 22:14:03] [depot] Miroir : aucun changement.
+[2026-10-15 22:14:11] Poussé sur Git.
+[2026-10-15 22:16:54] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [compresseur/compresseur_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [compresseur/compresseur_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [decompresseur/decompresseur_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [decompresseur/decompresseur_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [compresseur_auto] Changement détecté (88 fichier(s)), régénération du contexte...
+[2026-10-15 22:16:54] Ancienne version supprimée : compresseur_auto_2026-10-14_18-42-15.txt
+[2026-10-15 22:16:54] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-10-15_22-16-54.txt (19.6 Mo)
+[2026-10-15 22:16:54] [partage_QR/partage_QR_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [partage_QR/partage_QR_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_06] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_07] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_08] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_09] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_09_1] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_10] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_11] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_12] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_13] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_14] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_15] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_16] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_17] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_18] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_19] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_20] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_22] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_23] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_24] Aucun changement détecté.
+[2026-10-15 22:16:54] [%/%_25] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_06] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_07] Aucun changement détecté.
+[2026-10-15 22:16:54] [entrainement_tactique/entrainement-tactique_08] Aucun changement détecté.
+[2026-10-15 22:16:54] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-10-15 22:16:54] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-10-15 22:16:54] [ChronoChess] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_09] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_10] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_11] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_12] Aucun changement détecté.
+[2026-10-15 22:16:54] [tunnel_mobile/V_13] Aucun changement détecté.
+[2026-10-15 22:16:54] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_02] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_03] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_04] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_05] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_06] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_07] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_authentification_gmail_08] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/reseau_local_authentification_ntfy_09] Aucun changement détecté.
+[2026-10-15 22:16:54] [Network/réseau_local_01] Aucun changement détecté.
+[2026-10-15 22:16:54] [gestionnaire_profils] Aucun changement détecté.
+[2026-10-15 22:16:54] [oeil-du-monde] Aucun changement détecté.
+[2026-10-15 22:16:54] [depot] Miroir : aucun changement.
+[2026-10-15 22:17:00] Poussé sur Git.
+[2026-10-15 22:18:26] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [compresseur/compresseur_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [compresseur/compresseur_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [decompresseur/decompresseur_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [decompresseur/decompresseur_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [compresseur_auto] Changement détecté (88 fichier(s)), régénération du contexte...
+[2026-10-15 22:18:26] Ancienne version supprimée : compresseur_auto_2026-10-15_22-13-59.txt
+[2026-10-15 22:18:26] [compresseur_auto] Fichier généré : C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto/context-sync-repo\compresseur_auto\compresseur_auto_2026-10-15_22-18-26.txt (19.6 Mo)
+[2026-10-15 22:18:26] [partage_QR/partage_QR_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [partage_QR/partage_QR_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_06] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_07] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_08] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_09] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_09_1] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_10] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_11] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_12] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_13] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_14] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_15] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_16] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_17] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_18] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_19] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_20] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_22] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_23] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_24] Aucun changement détecté.
+[2026-10-15 22:18:26] [%/%_25] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_06] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_07] Aucun changement détecté.
+[2026-10-15 22:18:26] [entrainement_tactique/entrainement-tactique_08] Aucun changement détecté.
+[2026-10-15 22:18:26] [pdf_to_audio/pdf2audio_gpu_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [pdf_to_audio/pdf2audio_gpu_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [pdf_to_audio/pdf2audio_gpu_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [pdf_to_audio/pdf2audio_gpu_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [pdf_to_audio/pdf2audio_gpu_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [py_to_starter] Dossier introuvable, ignoré : C:/Users/Oniix/Desktop/mes prog/Python/py_to_starter
+[2026-10-15 22:18:26] [Dictée_vocale_intelligente] Aucun changement détecté.
+[2026-10-15 22:18:26] [ChronoChess] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_06] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_07] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_08] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_09] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_10] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_11] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_12] Aucun changement détecté.
+[2026-10-15 22:18:26] [tunnel_mobile/V_13] Aucun changement détecté.
+[2026-10-15 22:18:26] [assistant_vocal_local/assistant_vocal_local_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [assistant_vocal_local/assistant_vocal_local_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [assistant_vocal_local/assistant_vocal_local_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_02] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_03] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_04] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_05] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_06] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_07] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_authentification_gmail_08] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/reseau_local_authentification_ntfy_09] Aucun changement détecté.
+[2026-10-15 22:18:26] [Network/réseau_local_01] Aucun changement détecté.
+[2026-10-15 22:18:26] [gestionnaire_profils] Aucun changement détecté.
+[2026-10-15 22:18:26] [oeil-du-monde] Aucun changement détecté.
+[2026-10-15 22:18:26] [depot] Miroir : aucun changement.
+[2026-10-15 22:18:32] Poussé sur Git.
+[2026-10-15 22:20:16] [recherche/recherche_01] Aucun changement détecté.
+[2026-10-15 22:20:16] [recherche/recherche_02] Aucun changement détecté.
+[2026-10-15 22:20:16] [recherche/recherche_03] Aucun changement détecté.
+[2026-10-15 22:20:16] [recherche/recherche_04] Aucun changement détecté.
+[2026-10-15 22:20:16] [recherche/recherche_05] Aucun changement détecté.
+[2026-10-15 22:20:16] [compresseur/compresseur_01] Aucun changement détecté.
+[2026-10-15 22:20:16] [compresseur/compresseur_02] Aucun changement détecté.
+[2026-10-15 22:20:16] [decompresseur/decompresseur_01] Aucun changement détecté.
+[2026-10-15 22:20:16] [decompresseur/decompresseur_02] Aucun changement détecté.
+[2026-10-15 22:20:16] [compresseur_auto] Changement détecté (88 fichier(s)), régénération du contexte...
 
 --- FIN FICHIER: C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\compresseur_auto_01\auto_context_sync.log ---
 
@@ -2735,7 +2991,7 @@ if __name__ == "__main__":
       "mode": "classique"
     },
     {
-      "name": "gestionnaire_profils",
+      "name": "gestionnaire profils",
       "path": "C:/Users/Oniix/Desktop/mes prog/Mobile/gestionnaire_profils",
       "mode": "classique"
     },
@@ -2828,11 +3084,11 @@ python auto_context_sync.py
     }
   },
   "compresseur_auto": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "49f0460467fbad6bb5f61b96659c90083d3d85a60125866ea99b88f91859726d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.log": "fc1ad5a4b8104749a4a573f729374a6bed7b8c50f1526f497c0e8ca9e0c562ec",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\auto_context_sync.py": "aa7ad4d4067ae0b8fd86908b094eef2187da9068840be8d510a3467542b86a73",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "424b3c23da2e40c79bffc0ae41f008f6d74df4b56b737342cf70a3a66d83568d",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\config.json": "0fc4ec2e5c34ef4828576a597c349c79689c6b408f4b4f7fb60c8742339c2f66",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\lancer_sync.bat": "bac62a4797e0cf1ca172a9fb51b5b9ab90e3babee439ab85d2936ad6f72c45ec",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "831a74c6f46afd52a968a75721de2309cf2ed06dcd21fc84c6c9126b2a88b337",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\compresseur_auto_01\\state.json": "c9068e989fa54923572d70ee57ce57c966e5c4d5c56dc8376845e1d1634d129e",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_01.txt": "e4ab75a69e366778fbca06fb9f5f54f108e3c241bef99c32492873f823352781",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_02.txt": "609819d210dbd7bd97d4987e12805fbae8463a10c99e68752dabd2362286849e",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\%\\%_03.txt": "7371fab061151c9dab672ac2319cd769b8e881bb18b017d7ebfb979220528a99",
@@ -2888,6 +3144,8 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement-tactique_08.txt": "87443cbd5ca01a9af76affcbe1672ffb1f7ed68d1ad74d5cd9ea5892ff9112b9",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\entrainement_tactique\\entrainement_tactique_2026-09-11_18-03-54.txt": "201ed5ad398aa444f76b0bc13b8d7e28437521df95d83813c41495b2ba7b262a",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\oeil-du-monde\\oeil-du-monde_2026-10-01_06-38-27.txt": "668917b460601a777b807cc423ce19fa31e2ecd0d24cf2ad6011b20e9f6a0f2c",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_01.txt": "72e48473e1794ced2b4b21f409aa2fd61abba2161cbaf62a7a8cab256a1110ed",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_02.txt": "d84c5a9e5e30b91087ac3ea31a039cb12dc254380b3ba6c7e07d80aaac656443",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-09-27_06-58-26.txt": "9968e19ed173d88cf5fb2d23d9800d7b7dde1685a364a0bf2d03ed958f9aa847",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-09-27_13-41-53.txt": "faadb5c400586c3866070d508fe233fe192842e349985959cb0407a572e6371b",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\partage_QR\\partage_QR_2026-10-03_19-22-09.txt": "d43c270758ffbc9d826aaa1b0a95cdc48b97667cf73d9a2245d235687158b1ec",
@@ -2912,23 +3170,28 @@ python auto_context_sync.py
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_09.txt": "e9bbb77c818e2adee8d17bc425ea3502fcd6160635ff28778a276a164cb0cc5b",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_10.txt": "80bba79a359e3fc30714aa986dc77d3b65ddd2182cd051548b8234b39bbbf4ac",
     "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_11.txt": "1da7dca7493b542913a38ce2ec72ad1a03c879816a083f7f178671d7afbfa086",
-    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_12.txt": "1bd841c5e974f4b4f8bc5d2bb1e4c64f13384784938b8ef7ed56639c83b9ebd4"
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_12.txt": "cd4d6116efe529746acc3e56216e42eb59939021d6eedace403d15b08c91b5f1",
+    "C:/Users/Oniix/Desktop/mes prog/Python/compresseur_auto\\context-sync-repo\\tunnel_mobile\\V_13.txt": "7c19f9acbd747aa60e0c41e4880cf244aaae16bae683b912e0933b0e268b30fa"
   },
   "partage_QR": {
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\app.log": "20ef74b3e9703e936c80ab40af4592c71df7c8a9ebb73a5d072beed1bb634d80",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\app.py": "def0aa64cf9be9aa5b49936c6fdbb8fdac7dab72800be6595e822f8b31c4b818",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\lancer_app.bat": "01c09c0f2732331b88a0a74cacac597cc41dd7a8ab6285d187836c331521830a",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR\\requirements.txt": "4db5376aac28502832a4970ffc8cf1f0717f77329f304a71d19a8bb82313ccf1",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\app.log": "20ef74b3e9703e936c80ab40af4592c71df7c8a9ebb73a5d072beed1bb634d80",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\app.py": "def0aa64cf9be9aa5b49936c6fdbb8fdac7dab72800be6595e822f8b31c4b818",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\lancer_app.bat": "01c09c0f2732331b88a0a74cacac597cc41dd7a8ab6285d187836c331521830a",
-    "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\requirements.txt": "4db5376aac28502832a4970ffc8cf1f0717f77329f304a71d19a8bb82313ccf1"
+    "partage_QR_01": {
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\app.log": "20ef74b3e9703e936c80ab40af4592c71df7c8a9ebb73a5d072beed1bb634d80",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\app.py": "def0aa64cf9be9aa5b49936c6fdbb8fdac7dab72800be6595e822f8b31c4b818",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\lancer_app.bat": "01c09c0f2732331b88a0a74cacac597cc41dd7a8ab6285d187836c331521830a",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_01\\requirements.txt": "4db5376aac28502832a4970ffc8cf1f0717f77329f304a71d19a8bb82313ccf1"
+    },
+    "partage_QR_02": {
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\README.md": "4f2fd4f9a66a57602386982ccfe835cce491aa5919c2bfb5dcacf4420fbd7749",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\app.log": "0fcbe43774c49c0f47333784b164b98168bb77c3c9576613c28abad26bb013f1",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\app.py": "ae1f06a4876df48fd27c8bf651ec6826fdd35703022c55c087e0be8265ec1bf7",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\install.bat": "aea502f0582a26b6ce088c0bc8168cd3af06f2da57734b7911cf1860728571c7",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\install.ps1": "bd114f25e82bd1f70e44010973c6b39ec1adf7c5eff4c5755b7369d702cb7aeb",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\lancer_app.bat": "01c09c0f2732331b88a0a74cacac597cc41dd7a8ab6285d187836c331521830a",
+      "C:/Users/Oniix/Desktop/mes prog/Python/partage_QR\\partage_QR_02\\requirements.txt": "4db5376aac28502832a4970ffc8cf1f0717f77329f304a71d19a8bb82313ccf1"
+    }
   },
   "%": {
     "%_01": {
@@ -3563,13 +3826,27 @@ python auto_context_sync.py
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\index.js": "b686b9d80bd72ef833bc3577044677963b2fe254a766d92e8547e3e74fa0a36b",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\package-lock.json": "e82623f594a0c9990afcf78459337b1633053d8edbece5cb5a3f9a299cc252b4",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\package.json": "0a052a157a7c501e7a57a6ad2f5f49c6114e6934331cc291a3623ef9aaac5f11",
-      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\screen-client.js": "5285f3c31d9f5e588848fa496d34819db8a4b99ee91376a36c657833ae66fa35",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\screen-client.js": "b244b6e88b97456c4af0a7d259a0707b425ada63dacb71fd544b2bbebd126086",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\screen-helper.ps1": "59218a1900b7eb76226391c90b329665410670b6b489175cf25592b5b533e205",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\screen-usage.json": "767330e961fc97ed675e104c8bb179f50d48f451e78a9fb7cb02046f6b7ba926",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\start.bat": "add2757887d1b57850e226c46da81e65c7f56678f9209df8ca57fbd8f85c58c5",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\start.sh": "6e8ca61996a10329d9e08559f8f1e78ad632ba705042413b8ad362b429e1b543",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\tunnel-url.txt": "0c608e5b6a09346cdacb8d38ed3ed263695cf01dbd0d636fac53e21c5d728c78",
       "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_12\\tunnels.config.json": "7affac953fca89caaeb67b378d8f1d2f46298017d59629a75b3fcb8decd341b0"
+    },
+    "V_13": {
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\README.md": "a6ae449c834905633630969cff12261e92e4a6ce032d11021a7f4819196a1cec",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\access.key": "af2ed762f7ad035146aa568b8e1ce160b952756097eccfbbfacb7d0ac9ce482b",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\index.js": "b686b9d80bd72ef833bc3577044677963b2fe254a766d92e8547e3e74fa0a36b",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\package-lock.json": "e82623f594a0c9990afcf78459337b1633053d8edbece5cb5a3f9a299cc252b4",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\package.json": "0a052a157a7c501e7a57a6ad2f5f49c6114e6934331cc291a3623ef9aaac5f11",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\screen-client.js": "c57e276093148d23e214b61e4c2773311ff9abc287e681347127ccca859dbecf",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\screen-helper.ps1": "59218a1900b7eb76226391c90b329665410670b6b489175cf25592b5b533e205",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\screen-usage.json": "5f015bfa7fc6765a41ce25dc08df5ebb85a61da26df878f7b2f9d672c0ff278b",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\start.bat": "add2757887d1b57850e226c46da81e65c7f56678f9209df8ca57fbd8f85c58c5",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\start.sh": "6e8ca61996a10329d9e08559f8f1e78ad632ba705042413b8ad362b429e1b543",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\tunnel-url.txt": "34b9bfafb56b05cdf0d138477f9147d487a82bf7d1127c1e57ccbf4fabd58061",
+      "C:/Users/Oniix/Desktop/mes prog/Python/tunnel_loger_mobile\\V_13\\tunnels.config.json": "7affac953fca89caaeb67b378d8f1d2f46298017d59629a75b3fcb8decd341b0"
     }
   },
   "assistant_vocal_local": {
